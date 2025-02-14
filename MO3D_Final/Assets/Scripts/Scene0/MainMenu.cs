@@ -11,4 +11,8 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("SceneGameTpFinal");
     }
 
+    public void Showcredits()
+    {
+        SceneManager.LoadScene("SceneGameCredits");
+    }
 }
