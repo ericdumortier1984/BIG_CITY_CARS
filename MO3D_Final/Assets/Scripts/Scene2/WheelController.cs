@@ -1,0 +1,79 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class WheelController : MonoBehaviour
+{
+
+    [SerializeField] WheelCollider mFrontRight;
+	[SerializeField] WheelCollider mFrontLeft;
+	[SerializeField] WheelCollider mBackRight;
+	[SerializeField] WheelCollider mBackLeft;
+
+	[SerializeField] Transform mFrontRightTransform;
+	[SerializeField] Transform mFrontLeftTransform;
+	[SerializeField] Transform mBackRightTransform;
+	[SerializeField] Transform mBackLeftTransform;
+
+	public float mAcceleration = 1.0f;
+	public float mBreakForce = 1.0f;
+	public float mMaxTurnAngle = 1.0f;
+
+	private float mCurrentAcceleration = 0.0f;
+	private float mCurrentBreakForce = 0.0f;
+	private float mCurrentTurnAngle = 0.0f;
+
+	private void FixedUpdate()
+	{
+
+		// Aceleracion del vehiculo con teclas A y S u flechas arriba y abajo
+		Debug.Log("Acceleration");
+		mCurrentAcceleration = mAcceleration * Input.GetAxis("Vertical");
+
+		// Freno del vehiculo con tecla Espacio
+		if (Input.GetKey(KeyCode.Space))
+		{
+			Debug.Log("Breaking");
+			mCurrentBreakForce = mBreakForce;
+		}
+		else
+		{
+			mCurrentBreakForce = 0.0f;
+		}
+
+		// Aplico velocidad a las ruedas delanteras
+		mFrontRight.motorTorque = mCurrentAcceleration;
+		mFrontLeft.motorTorque = mCurrentAcceleration;
+
+		// Aplico freno a todas las ruedas
+		mFrontRight.brakeTorque = mCurrentBreakForce;
+		mFrontLeft.brakeTorque = mCurrentBreakForce;
+		mBackRight.brakeTorque = mCurrentBreakForce;
+		mBackLeft.brakeTorque = mCurrentBreakForce;
+
+		// Aplico giro a las dos ruedas delanteras con un torque maximo
+		// Uso de teclas A y D u flechas izquierda y derecha para el giro
+		Debug.Log("Turning");
+		mCurrentTurnAngle = mMaxTurnAngle * Input.GetAxis("Horizontal");
+		mFrontRight.steerAngle = mCurrentTurnAngle;
+		mFrontLeft.steerAngle = mCurrentTurnAngle;
+
+		UpdateWheel(mFrontRight, mFrontRightTransform);
+		UpdateWheel(mFrontLeft, mFrontLeftTransform);
+		UpdateWheel(mBackLeft, mBackLeftTransform);
+		UpdateWheel(mBackRight, mBackRightTransform);
+	}
+
+	// Metodo para actualizar el movimiento de las ruedas con el mesh
+	void UpdateWheel(WheelCollider mCollider, Transform mTransform)
+	{
+		 // Getting el estado del collider
+		Vector3 mPosition;
+		Quaternion mRotation;
+		mCollider.GetWorldPose(out mPosition, out mRotation);
+
+		// Setting el estado del transform
+		mTransform.position = mPosition;
+		mTransform.rotation = mRotation;
+	}
+}
