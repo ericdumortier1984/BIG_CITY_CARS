@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
 	IEnumerator mGameCountDown()
 	{
-		yield return new WaitForSeconds(60.0f); // Esperar 5 segundos
+		yield return new WaitForSeconds(180.0f); // Esperar 5 segundos
 
 		EndGame(); // Mostrar puntaje
 	}
