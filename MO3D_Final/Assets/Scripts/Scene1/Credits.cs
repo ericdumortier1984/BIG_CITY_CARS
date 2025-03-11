@@ -6,11 +6,8 @@ using UnityEngine.SceneManagement;
 public class Credits : MonoBehaviour
 {
 
-	void Update()
+	public void BackToMainMenu()
 	{
-		if (Input.GetKeyDown(KeyCode.Escape))
-		{
-			SceneManager.LoadScene("SceneMainMenu");
-		}
+		LoaderScene.Load(LoaderScene.mScene.SceneMainMenu);
 	}
 }
