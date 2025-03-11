@@ -17,8 +17,7 @@ public class IAController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-
-
+		// Actualizando el movimiento de las ruedas
 		UpdateWheel(mFrontRight, mFrontRightTransform);
 		UpdateWheel(mFrontLeft, mFrontLeftTransform);
 		UpdateWheel(mBackLeft, mBackLeftTransform);

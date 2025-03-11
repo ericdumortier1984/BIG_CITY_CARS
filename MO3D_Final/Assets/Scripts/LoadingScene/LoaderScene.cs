@@ -1,0 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public static class LoaderScene
+{
+
+    public enum mScene
+    { 
+      // Enumeramos las escenas a cargar
+      SceneMainMenu,
+      SceneGameCredits,
+	  SceneGameTpFinal,
+	  SceneEndGame,
+      LoadingScene
+    }
+    private static mScene mSceneToload;
+
+    public static void Load(mScene mSceneToLoad)
+    {
+        LoaderScene.mSceneToload = mSceneToLoad;
+        SceneManager.LoadScene(mScene.LoadingScene.ToString());
+    }
+
+    public static void LoaderCallback()
+    {
+        SceneManager.LoadScene(mSceneToload.ToString());
+    }
+}

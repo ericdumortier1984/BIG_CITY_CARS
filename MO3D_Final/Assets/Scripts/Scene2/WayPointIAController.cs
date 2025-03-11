@@ -7,6 +7,18 @@ public class WayPointIAController : MonoBehaviour
     [SerializeField] private List<Transform> mWaypoint;
     [SerializeField] float mSpeed = 1.0f;
     private int mCurrentWayPointIndex = 0;
+    private void Start()
+	{
+		// Desactivar el componente MeshRenderer de los waypoints
+		foreach (Transform waypoint in mWaypoint)
+		{
+			MeshRenderer renderer = waypoint.GetComponent<MeshRenderer>();
+			if (renderer != null)
+			{
+				renderer.enabled = false;
+			}
+		}
+	}
 
 	private void FixedUpdate()
 	{

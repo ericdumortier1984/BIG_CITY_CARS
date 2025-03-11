@@ -8,11 +8,17 @@ public class MainMenu : MonoBehaviour
   
     public void StartGame()
     {
-        SceneManager.LoadScene("SceneGameTpFinal");
+        LoaderScene.Load(LoaderScene.mScene.SceneGameTpFinal);
     }
 
     public void Showcredits()
     {
-        SceneManager.LoadScene("SceneGameCredits");
+        LoaderScene.Load(LoaderScene.mScene.SceneGameCredits);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+        Debug.Log("Quit Game");
     }
 }
