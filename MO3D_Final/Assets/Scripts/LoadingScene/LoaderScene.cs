@@ -10,6 +10,7 @@ public static class LoaderScene
     { 
       // Enumeramos las escenas a cargar
       SceneMainMenu,
+      SceneSettings,
       SceneGameCredits,
 	  SceneGameTpFinal,
 	  SceneEndGame,

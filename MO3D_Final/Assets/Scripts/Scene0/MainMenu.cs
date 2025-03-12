@@ -11,6 +11,11 @@ public class MainMenu : MonoBehaviour
         LoaderScene.Load(LoaderScene.mScene.SceneGameTpFinal);
     }
 
+    public void ShowSettings()
+    {
+        LoaderScene.Load(LoaderScene.mScene.SceneSettings);
+    }
+
     public void Showcredits()
     {
         LoaderScene.Load(LoaderScene.mScene.SceneGameCredits);
