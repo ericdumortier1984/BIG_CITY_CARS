@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class WheelController : MonoBehaviour
 {
-
     [SerializeField] WheelCollider mFrontRight;
 	[SerializeField] WheelCollider mFrontLeft;
 	[SerializeField] WheelCollider mBackRight;
@@ -23,9 +22,28 @@ public class WheelController : MonoBehaviour
 	private float mCurrentBreakForce = 0.0f;
 	private float mCurrentTurnAngle = 0.0f;
 
+	public Vector3 mCenterOfMass;
+
+	private Rigidbody mCarRb;
+
+	private void Start()
+	{
+		mCarRb = GetComponent<Rigidbody>();
+		mCarRb.centerOfMass = mCenterOfMass;
+	}
+
 	private void FixedUpdate()
 	{
+		MoveCar();
 
+		UpdateWheel(mFrontRight, mFrontRightTransform);
+		UpdateWheel(mFrontLeft, mFrontLeftTransform);
+		UpdateWheel(mBackLeft, mBackLeftTransform);
+		UpdateWheel(mBackRight, mBackRightTransform);
+	}
+
+	private void MoveCar()
+	{
 		// Aceleracion del vehiculo con teclas A y S u flechas arriba y abajo
 		Debug.Log("Acceleration");
 		mCurrentAcceleration = mAcceleration * Input.GetAxis("Vertical");
@@ -57,17 +75,12 @@ public class WheelController : MonoBehaviour
 		mCurrentTurnAngle = mMaxTurnAngle * Input.GetAxis("Horizontal");
 		mFrontRight.steerAngle = mCurrentTurnAngle;
 		mFrontLeft.steerAngle = mCurrentTurnAngle;
-
-		UpdateWheel(mFrontRight, mFrontRightTransform);
-		UpdateWheel(mFrontLeft, mFrontLeftTransform);
-		UpdateWheel(mBackLeft, mBackLeftTransform);
-		UpdateWheel(mBackRight, mBackRightTransform);
 	}
 
 	// Metodo para actualizar el movimiento de las ruedas con el mesh
 	void UpdateWheel(WheelCollider mCollider, Transform mTransform)
 	{
-		 // Getting el estado del collider
+		// Getting el estado del collider
 		Vector3 mPosition;
 		Quaternion mRotation;
 		mCollider.GetWorldPose(out mPosition, out mRotation);

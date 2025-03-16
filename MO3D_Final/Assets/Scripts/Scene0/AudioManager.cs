@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -7,25 +8,25 @@ using UnityEngine.SceneManagement;
 public class AudioManager : MonoBehaviour
 {
 	[SerializeField] AudioMixer mMusicMixer;
+	[SerializeField] AudioSource mSfxAudioSource;
+
+	private AudioSource mAudioSource;
+	public static AudioManager mSoundInstance { get; private set; } // Singleton
+
 	public AudioClip mBackgroundMusic;
 	public AudioClip mGameMusic;
 
-	private AudioSource mAudioSource;
-
-	public static AudioManager mMusicInstance;
-
 	private void Awake()
 	{
-		if(mMusicInstance == null)
+		if(mSoundInstance == null)
 		{
-			mMusicInstance = this;
-			DontDestroyOnLoad(gameObject);
+			mSoundInstance = this;
+			DontDestroyOnLoad(gameObject); // Persistencia a cambios de escenas
 		}
 		else
 		{
 			Destroy(gameObject);
 		}
-			
 	}
 
 	private void Start()
@@ -38,6 +39,11 @@ public class AudioManager : MonoBehaviour
 	private void Update()
 	{
 		HandleSceneMusic();
+
+		if (Input.GetKeyDown(KeyCode.M))
+		{
+			ToggleMusic();
+		}
 	}
 
 	private void PlayBackgroundMusic()
@@ -70,5 +76,15 @@ public class AudioManager : MonoBehaviour
 				PlayBackgroundMusic();
 			}
 		}
+	}
+
+	public void PlaySound(AudioClip mClip) // reproductor de sonidos
+	{
+		mSfxAudioSource.PlayOneShot(mClip);
+	}
+
+	private void ToggleMusic() // muteador de musica
+	{
+		mAudioSource.mute = !mAudioSource.mute;
 	}
 }

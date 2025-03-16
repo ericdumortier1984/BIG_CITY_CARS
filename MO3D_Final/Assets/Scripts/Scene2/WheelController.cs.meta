@@ -3,7 +3,16 @@ guid: 057d88ec7ccecfb40bc97393c74d5fed
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - mFrontRight: {instanceID: 0}
+  - mFrontLeft: {instanceID: 0}
+  - mBackRight: {instanceID: 0}
+  - mBackLeft: {instanceID: 0}
+  - mFrontRightTransform: {instanceID: 0}
+  - mFrontLeftTransform: {instanceID: 0}
+  - mBackRightTransform: {instanceID: 0}
+  - mBackLeftTransform: {instanceID: 0}
+  - mHornSound: {fileID: 8300000, guid: be415bc254e5fbe4db4e47e7621d8fbb, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

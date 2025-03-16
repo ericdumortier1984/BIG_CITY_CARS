@@ -3,7 +3,10 @@ guid: b23402a1b104f7d458326b25922aa915
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - mMusicMixer: {fileID: 24100000, guid: ade1de24d6a8c0046821be15d5ca3690, type: 2}
+  - mBackgroundMusic: {fileID: 8300000, guid: 19acbf0820e10b64bb083d5fedcfac52, type: 3}
+  - mGameMusic: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
