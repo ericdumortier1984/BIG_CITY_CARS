@@ -13,13 +13,12 @@ public class CarSound : MonoBehaviour
 	public float mMaxSpeed;
 	private float mCurrentSpeed;
 
-    private Rigidbody mCarRb;
+	private Rigidbody mCarRb;
 	private AudioSource mCarSound;
 
 	public float mMinPitch;
 	public float mMaxPitch;
 	private float mPitchFromCar;
-
 
 	private void Start()
 	{

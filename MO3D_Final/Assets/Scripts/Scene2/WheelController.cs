@@ -14,6 +14,10 @@ public class WheelController : MonoBehaviour
 	[SerializeField] Transform mBackRightTransform;
 	[SerializeField] Transform mBackLeftTransform;
 
+	// Marcas de frenado en ruedas traseras
+	[SerializeField] GameObject mBackRightTrailTire;
+	[SerializeField] GameObject mBackLeftTrailTire;
+
 	public float mAcceleration = 1.0f;
 	public float mBreakForce = 1.0f;
 	public float mMaxTurnAngle = 1.0f;
@@ -40,6 +44,8 @@ public class WheelController : MonoBehaviour
 		UpdateWheel(mFrontLeft, mFrontLeftTransform);
 		UpdateWheel(mBackLeft, mBackLeftTransform);
 		UpdateWheel(mBackRight, mBackRightTransform);
+
+		OnDrawTrailTire();
 	}
 
 	private void MoveCar()
@@ -88,5 +94,21 @@ public class WheelController : MonoBehaviour
 		// Setting el estado del transform
 		mTransform.position = mPosition;
 		mTransform.rotation = mRotation;
+	}
+
+	void OnDrawTrailTire()
+	{
+		// Dibujo las marcas de las llantas
+		if (Input.GetKey(KeyCode.Space))
+		{
+			mBackRightTrailTire.GetComponentInChildren<TrailRenderer>().emitting = true;
+			mBackLeftTrailTire.GetComponentInChildren<TrailRenderer>().emitting = true;
+			Debug.Log("Drawing trail tire");
+		}
+		else 
+		{
+			mBackRightTrailTire.GetComponentInChildren<TrailRenderer>().emitting = false;
+			mBackLeftTrailTire.GetComponentInChildren<TrailRenderer>().emitting = false;
+		}
 	}
 }

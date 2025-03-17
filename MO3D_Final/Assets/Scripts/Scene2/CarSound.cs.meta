@@ -3,9 +3,7 @@ guid: 061dae01933d40546994ec9df539e56e
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - mEngineSound: {fileID: 8300000, guid: ead26fd917a5b064fbd2ecb9e1917d5f, type: 3}
-  - mHornSound: {fileID: 8300000, guid: be415bc254e5fbe4db4e47e7621d8fbb, type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
