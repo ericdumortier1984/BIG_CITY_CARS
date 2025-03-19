@@ -28,12 +28,15 @@ public class WheelController : MonoBehaviour
 
 	public Vector3 mCenterOfMass;
 
-	private Rigidbody mCarRb;
+	private Rigidbody mCarRb; // Referencia al rigidbody del vehiculo
+	private CarLight mCarLight; // Referencia al script de luces
 
 	private void Start()
 	{
 		mCarRb = GetComponent<Rigidbody>();
 		mCarRb.centerOfMass = mCenterOfMass;
+
+		mCarLight = GetComponent<CarLight>();
 	}
 
 	private void FixedUpdate()
@@ -57,12 +60,14 @@ public class WheelController : MonoBehaviour
 		// Freno del vehiculo con tecla Espacio
 		if (Input.GetKey(KeyCode.Space))
 		{
-			Debug.Log("Breaking");
+			Debug.Log("Breaking and show back lights");
 			mCurrentBreakForce = mBreakForce;
+			mCarLight.SetLight(mCarLight.mBackLight, true); // Encender luces traseras
 		}
 		else
 		{
 			mCurrentBreakForce = 0.0f;
+			mCarLight.SetLight(mCarLight.mBackLight, false); // Apagar luces traseras
 		}
 
 		// Aplico velocidad a las ruedas delanteras
