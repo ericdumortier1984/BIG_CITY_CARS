@@ -12,7 +12,8 @@ public class CarSpeedometer : MonoBehaviour
     [SerializeField] private float mMaxNeedleAngle = 0f;
 
     // Velocidad maxima del vehiculo
-    [SerializeField] private float mMaxSpeed = 200f;
+    [SerializeField] private float mMaxSpeed = 0f;
+    [SerializeField] private float mSpeedMultiplicator = 0f;
 
 	private void FixedUpdate()
 	{
@@ -22,7 +23,7 @@ public class CarSpeedometer : MonoBehaviour
     private void UpdateNeedle()
     {
         // Velocidad del vehiculo en km/h
-        float mSpeed = mCarRb.velocity.magnitude * 10f;
+        float mSpeed = mCarRb.velocity.magnitude * mSpeedMultiplicator;
 
         // Angulo de la aguja del velocimetro
         float mNeedleAngle = Mathf.Lerp(mMinNeedleAngle, mMaxNeedleAngle, mSpeed / mMaxSpeed);

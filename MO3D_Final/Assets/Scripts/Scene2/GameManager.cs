@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     public int mScore;
 	public GameObject mPauseMenu;
+	public GameObject mInputCanvas;
 
 	private bool isPaused = false;
 
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
 		if (mPauseMenu != null)
 		{
 			mPauseMenu.SetActive(false);
+			mInputCanvas.SetActive(false);
 		}
 
 		StartCoroutine(mGameCountDown()); // Iniciar coroutine
@@ -43,6 +45,7 @@ public class GameManager : MonoBehaviour
 		isPaused = false;
 		Time.timeScale = 1; // Tiempo corre normal
 		mPauseMenu.SetActive(false); // Menu de pausa desactivado
+		mInputCanvas.SetActive(false); // Canvas de Input desactivado
 	}
 
 	public void PauseGame()
@@ -55,7 +58,19 @@ public class GameManager : MonoBehaviour
 	public void GoToMainMenu()
 	{
 		Time.timeScale = 1;
-		LoaderScene.Load(LoaderScene.mScene.SceneMainMenu);
+		LoaderScene.Load(LoaderScene.mScene.SceneMainMenu); // Cambio de escena a MainMenu
+	}
+
+	public void RestartGame()
+	{
+		Time.timeScale = 1;
+		LoaderScene.Load(LoaderScene.mScene.SceneGameTpFinal); // Reinicio de SceneGameTpFinal
+	}
+
+	public void ShowGameInput()
+	{
+		Time.timeScale = 0;
+		mInputCanvas.SetActive(true); // Canvas de Input activado
 	}
 
 	IEnumerator mGameCountDown()
