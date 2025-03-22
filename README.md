@@ -1,4 +1,4 @@
-DOCUMENTO DE CONCEPTO	
+### <h1>DOCUMENTO DE CONCEPTO	
 
 Autor:	
 Eric Dumortier
@@ -88,7 +88,10 @@ Inspiración &
 
 Concepto Artístico:	
 
-![Cartoon City Lite](https://github.com/user-attachments/assets/a6e11e5b-2cc0-4c73-a5b8-867ffadec9fd)
+![Cartoon City Lite](https://github.com/user-attachments/assets/57f61943-0745-4647-92d7-d9cd72d4ebd2)
+
+Cartoon City Lite
+
 
 
 Paleta de Colores:
