@@ -73,10 +73,21 @@
 *Inspiración &*
 *Concepto Artístico:*	
 
-![Cartoon City Lite](https://github.com/user-attachments/assets/57f61943-0745-4647-92d7-d9cd72d4ebd2)
+<img src="https://github.com/user-attachments/assets/57f61943-0745-4647-92d7-d9cd72d4ebd2" alt="Cartoon City Lite" width="200px">
 <br/>
+
 Cartoon City Lite
 
-*Paleta de Colores:*
+<img src="https://github.com/user-attachments/assets/19576a86-1619-4b9f-b703-104ed3d3dea6" alt="Skybox" width="200px">
+<br/>
+
+Skybox
+
+<img src="https://github.com/user-attachments/assets/a3dceb03-0321-4c73-b131-730e3f605cc8" alt="Modular Low Poly" width="200px">
+<br/>
+
+Modular Low Poly
+
+*Paleta de Colores UI:*
 <br/>
 <img src="https://github.com/user-attachments/assets/0372e810-2058-48f0-89e9-11e3e8465c85" alt="AdobeColor-Gym Icon Set - Hugeicons Pro" width="300px">
