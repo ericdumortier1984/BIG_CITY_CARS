@@ -30,9 +30,13 @@ Simulación de conducción de vehículos, recogiendo items antes de finalizar el
  
 Elementos Únicos del Gameplay:
 Desbloquear vehículos
+
 Upgrade vehículos
+
 Cambiar skins de vehículos
+
 Desafío de obstáculos dinámicos
+
 Eventos especiales
    
 Meta de Diseño:	
@@ -40,14 +44,18 @@ Equilibrar entretenimiento con desafío
 
 Motivación del Jugador	
 Corto Plazo:
+
 Seleccionar vehículo
 Familiarizarse con el input
 
 Mediano Plazo:
+
 Ganar experiencia en el manejo del vehículo
 
-Largo Plazo:	
+Largo Plazo:
+
 Desbloquear vehículos
+
 Upgrade vehículos	
 
 Game Loop	
