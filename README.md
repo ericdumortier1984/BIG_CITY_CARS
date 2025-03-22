@@ -1,31 +1,43 @@
 DOCUMENTO DE CONCEPTO	
+
 Autor:	
+
 Eric Dumortier
 
 1 - Introducción
+
 Titulo:
+
 Big City Cars
 
 Concepto:	
+
 Juego 3D de carreras contrareloj en entornos urbanos con único modo single player
 
 Genero:
+
 Carreras
 
 Público:
+
 Niños, adolescentes y adultos
 
 Plataforma:	
+
 Windows, Mac y Linux
 
 2 – Jugabilidad
+
 Controles:	
+
 Mouse en menu y teclado en juego
 
 Mecánica Central:
+
 Simulación de conducción de vehículos, recogiendo items antes de finalizar el tiempo
  
 Elementos Únicos del Gameplay:
+
 Desbloquear vehículos
 Upgrade vehículos
 Cambiar skins de vehículos
