@@ -1,91 +1,72 @@
 DOCUMENTO DE CONCEPTO	
-By:	
+Autor:	
 Eric Dumortier
 
 1 - Introducción
-Titulo	
+Titulo:
+Big City Cars
 
+Concepto:	
+Juego 3D de carreras contrareloj en entornos urbanos con único modo single player
 
-Concepto	
+Genero:
+Carreras
 
+Público:
+Niños, adolescentes y adultos
 
-Genero	
-
-
-Público	
-
-
-Plataforma	
-
-
-
+Plataforma:	
+Windows, Mac y Linux
 
 2 – Jugabilidad
+Controles:	
+Mouse en menu y teclado en juego
 
-Controles	
+Mecánica Central:
+Simulación de conducción de vehículos, recogiendo items antes de finalizar el tiempo
+ 
+Elementos Únicos del Gameplay:
+Desbloquear vehículos
+Upgrade vehículos
+Cambiar skins de vehículos
+Desafío de obstáculos dinámicos
+Eventos especiales
+   
+Meta de Diseño:	
+Equilibrar entretenimiento con desafío
 
-
-Mecánica Central
-	
-
-
-Elementos Únicos del Gameplay	
-			
-
-
-Meta de Diseño	
-
-
-
-Motivación del Jugador
-	
+Motivación del Jugador	
 Corto Plazo:
+Seleccionar vehículo
+Familiarizarse con el input
 
 Mediano Plazo:
+Ganar experiencia en el manejo del vehículo
 
 Largo Plazo:	
-
-
-Pilares de Diseño	
-
-
+Desbloquear vehículos
+Upgrade vehículos	
 
 Game Loop	
+Inicio:
+Selección del vehículo
 
+Medio:
+Recoger items
+Ganar experiencia
 
-
+Fin:
+Desbloquear nuevos contenidos
 
 3 - Arte y Visuales
-
 Inspiración &
 Concepto Artístico:	
- 
-Referencia
-Aclaración	 
-From Low Poly Farm Pack Lite 
-Cartoon Farm and Food
- 
-From Toony Tiny People Demo
-Funny Enemies	 
-From Low Poly Cartoon Pack Free
-A peaceful neighborhood 
+
+
 
 Paleta de Colores:	
-
-
-
-
-
 Hex code: #fef083	
-
-
-
-
 Hex code: #9f2820	
-
-
-
-
 Hex code: #adcc44
 
 4 – Cronograma de Desarrollo
