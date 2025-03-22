@@ -29,6 +29,7 @@ Mecánica Central:
 Simulación de conducción de vehículos, recogiendo items antes de finalizar el tiempo
  
 Elementos Únicos del Gameplay:
+
 Desbloquear vehículos
 
 Upgrade vehículos
@@ -43,9 +44,11 @@ Meta de Diseño:
 Equilibrar entretenimiento con desafío
 
 Motivación del Jugador	
+
 Corto Plazo:
 
 Seleccionar vehículo
+
 Familiarizarse con el input
 
 Mediano Plazo:
@@ -58,26 +61,35 @@ Desbloquear vehículos
 
 Upgrade vehículos	
 
-Game Loop	
+Game Loop
+
 Inicio:
+
 Selección del vehículo
 
 Medio:
+
 Recoger items
+
 Ganar experiencia
 
 Fin:
+
 Desbloquear nuevos contenidos
 
 3 - Arte y Visuales
 Inspiración &
+
 Concepto Artístico:	
 
 
 
-Paleta de Colores:	
-Hex code: #fef083	
-Hex code: #9f2820	
+Paleta de Colores:
+
+Hex code: #fef083
+
+Hex code: #9f2820
+
 Hex code: #adcc44
 
 4 – Cronograma de Desarrollo
