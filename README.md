@@ -20,6 +20,12 @@ Niños, adolescentes y adultos
 Plataforma:	
 Windows, Mac y Linux
 
+Motor de Videojuegos:
+Unity 
+
+Versión del editor:
+2022.3.44
+
 2 – Jugabilidad
 
 Controles:	
@@ -82,6 +88,7 @@ Inspiración &
 
 Concepto Artístico:	
 
+![Cartoon City Lite](https://github.com/user-attachments/assets/a6e11e5b-2cc0-4c73-a5b8-867ffadec9fd)
 
 
 Paleta de Colores:
