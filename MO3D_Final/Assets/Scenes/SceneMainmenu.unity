@@ -760,6 +760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mMusicMixer: {fileID: 24100000, guid: ade1de24d6a8c0046821be15d5ca3690, type: 2}
+  mSfxAudioSource: {fileID: 0}
   mBackgroundMusic: {fileID: 8300000, guid: 19acbf0820e10b64bb083d5fedcfac52, type: 3}
   mGameMusic: {fileID: 0}
 --- !u!1 &1061328217
@@ -902,7 +903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.79547286, g: 0.93962264, b: 0.16842282, a: 1}
+  m_Color: {r: 0.9490196, g: 0.8784314, b: 0.53333336, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1265,7 +1266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7880168, g: 0.9169811, b: 0.12976135, a: 1}
+  m_Color: {r: 0.9490196, g: 0.8784314, b: 0.53333336, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1596,7 +1597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.826569, g: 0.9547169, b: 0.18553928, a: 1}
+  m_Color: {r: 0.9490196, g: 0.8784314, b: 0.53333336, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1731,7 +1732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.826569, g: 0.9547169, b: 0.18553928, a: 1}
+  m_Color: {r: 0.9490196, g: 0.8784314, b: 0.53333336, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2094,7 +2095,7 @@ GameObject:
   - component: {fileID: 1764818557}
   - component: {fileID: 1764818556}
   m_Layer: 5
-  m_Name: MainTitleGame
+  m_Name: Txt_TitleGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
