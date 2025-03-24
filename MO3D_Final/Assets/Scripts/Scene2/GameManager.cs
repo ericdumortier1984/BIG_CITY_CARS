@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 	public GameObject mInputCanvas;
 
 	private bool isPaused = false;
-
+	
 	private void Start()
 	{
 		// Menu de pausa desactivado
