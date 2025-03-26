@@ -30,6 +30,8 @@ public class WheelController : MonoBehaviour
 
 	private Rigidbody mCarRb; // Referencia al rigidbody del vehiculo
 	private CarLight mCarLight; // Referencia al script de luces
+	private ItemWaypointController mItemWaypointController; // Referencia al script de items waypoints
+	private CarFuelController mCarFuelController; // Referencia al script de combustible
 
 	private void Start()
 	{
@@ -37,6 +39,8 @@ public class WheelController : MonoBehaviour
 		mCarRb.centerOfMass = mCenterOfMass;
 
 		mCarLight = GetComponent<CarLight>();
+		mItemWaypointController = FindObjectOfType<ItemWaypointController>(); // Encontrar el script en la escena
+		mCarFuelController = FindObjectOfType<CarFuelController>(); // Encontrar el script en la escena
 	}
 
 	private void FixedUpdate()
@@ -114,6 +118,25 @@ public class WheelController : MonoBehaviour
 		{
 			mBackRightTrailTire.GetComponentInChildren<TrailRenderer>().emitting = false;
 			mBackLeftTrailTire.GetComponentInChildren<TrailRenderer>().emitting = false;
+		}
+	}
+
+	// Metodo para recoleccion de items waypoints con mi player
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.tag == "ItemWaypoint")
+		{
+			mItemWaypointController.ItemWaypointCounter();
+			mItemWaypointController.ItemWaypointTextCounter();
+			Destroy(other.gameObject);
+			Debug.Log("ItemWaypoint Collected");
+		}
+
+		if (other.tag == "ItemFuel")
+		{
+			mCarFuelController.OnfillingFuel();
+			Destroy(other.gameObject);
+			Debug.Log("ItemFuelCollected");
 		}
 	}
 }

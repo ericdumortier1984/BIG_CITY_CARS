@@ -6,13 +6,14 @@ using UnityEngine.UI;
 public class CarFuelController : MonoBehaviour
 {
 	[SerializeField] private float mFuel; // Combustible inicial
-	private float mMaxFuel = 200f; // Maximo de combustible
+	private float mMaxFuel = 100f; // Maximo de combustible
 	private float mCurrentFuel; // Combustible actual
 	private float mBurnOutFuel = 1f; // Quemamos combustible
 
 	public bool isFuelBurning;
 
 	[SerializeField] private Slider mFuelBar; // Referencia a la barra de combustible
+	[SerializeField] private GameObject mItemFuel; // Referencia al item combustible
 
 	private void Start()
 	{
@@ -39,5 +40,19 @@ public class CarFuelController : MonoBehaviour
 	public void OnBurningFuel()
 	{
 		isFuelBurning = true;
+	}
+
+	public void OnfillingFuel()
+	{
+		mCurrentFuel += 5f; // Incrementar el combustible actual
+		mFuelBar.value = mCurrentFuel; // Actualizar el valor del slider
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if(other.tag == "ItemFuel")
+		{
+			OnfillingFuel();
+		}
 	}
 }
