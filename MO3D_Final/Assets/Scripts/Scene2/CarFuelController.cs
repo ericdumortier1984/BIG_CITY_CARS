@@ -14,6 +14,7 @@ public class CarFuelController : MonoBehaviour
 
 	[SerializeField] private Slider mFuelBar; // Referencia a la barra de combustible
 	[SerializeField] private GameObject mItemFuel; // Referencia al item combustible
+	[SerializeField] private GameObject mFuelPump; // Referencia a la bomba de combustible
 
 	private void Start()
 	{
@@ -48,11 +49,22 @@ public class CarFuelController : MonoBehaviour
 		mFuelBar.value = mCurrentFuel; // Actualizar el valor del slider
 	}
 
+	public void OnUseFuelpump()
+	{
+		mCurrentFuel += mMaxFuel; // Tanque lleno
+		mFuelBar.value = mCurrentFuel;
+	}
+
 	private void OnTriggerEnter(Collider other)
 	{
 		if(other.tag == "ItemFuel")
 		{
 			OnfillingFuel();
+		}
+
+		if (other.tag == "FuelPump")
+		{
+			OnUseFuelpump();
 		}
 	}
 }

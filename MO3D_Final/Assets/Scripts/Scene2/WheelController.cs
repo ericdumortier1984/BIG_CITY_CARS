@@ -32,6 +32,7 @@ public class WheelController : MonoBehaviour
 	private CarLight mCarLight; // Referencia al script de luces
 	private ItemWaypointController mItemWaypointController; // Referencia al script de items waypoints
 	private CarFuelController mCarFuelController; // Referencia al script de combustible
+	private CoinsController mCoinsController; // Referencia al script de coins
 
 	private void Start()
 	{
@@ -40,7 +41,8 @@ public class WheelController : MonoBehaviour
 
 		mCarLight = GetComponent<CarLight>();
 		mItemWaypointController = FindObjectOfType<ItemWaypointController>(); // Encontrar el script en la escena
-		mCarFuelController = FindObjectOfType<CarFuelController>(); // Encontrar el script en la escena
+		mCarFuelController = FindObjectOfType<CarFuelController>();
+		mCoinsController = FindObjectOfType<CoinsController>();
 	}
 
 	private void FixedUpdate()
@@ -137,6 +139,20 @@ public class WheelController : MonoBehaviour
 			mCarFuelController.OnfillingFuel();
 			Destroy(other.gameObject);
 			Debug.Log("ItemFuelCollected");
+		}
+
+		if(other.tag == "FuelPump")
+		{
+			mCarFuelController.OnUseFuelpump();
+			Debug.Log("Full Tank");
+		}
+
+		if(other.tag == "Coins")
+		{
+			mCoinsController.ItemCoinsCounter();
+			mCoinsController.ItemCoinsTextCounter();
+			Destroy(other.gameObject);
+			Debug.Log("Coin Collected");
 		}
 	}
 }
