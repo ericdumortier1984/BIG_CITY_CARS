@@ -16,12 +16,16 @@ public class CarFuelController : MonoBehaviour
 	[SerializeField] private GameObject mItemFuel; // Referencia al item combustible
 	[SerializeField] private GameObject mFuelPump; // Referencia a la bomba de combustible
 
+	private CoinsController mCoinsController; // Referencia al script de item coins
+
 	private void Start()
 	{
 		mCurrentFuel = mFuel; // Iniciamos con maximo de combustible
 		mFuelBar.maxValue = mMaxFuel; // Valor maximo del slider
 		mFuelBar.value = mCurrentFuel; // Valor actual del slider
 		OnBurningFuel();
+
+		mCoinsController = FindObjectOfType<CoinsController>(); // Encontrar el script en la escena
 	}
 
 	private void Update()
@@ -51,8 +55,26 @@ public class CarFuelController : MonoBehaviour
 
 	public void OnUseFuelpump()
 	{
-		mCurrentFuel += mMaxFuel; // Tanque lleno
-		mFuelBar.value = mCurrentFuel;
+		if (mCoinsController.ItemCoinsCollected >= 4) // Si tenemos al menos 4 items coins
+		{
+			mCurrentFuel += mMaxFuel; // Tanque lleno
+			mFuelBar.value = mCurrentFuel;
+
+			mCoinsController.ItemCoinsCollected -= 4; // resto 5 items coins
+			mCoinsController.ItemCoinsTextCounter(); // Actualizo el texto 
+			mCoinsController.mItemCoinsSlider.value -= 4; // Actualizo slider de items coins
+		}
+		else
+		{
+			StartCoroutine(mCoinsController.ShowNoCoinsText()); // Corrutina  texto NO items coins suficientes
+			Debug.Log("Need more coins");
+		}
+	}
+
+	public float CurrentFuel
+	{
+		get { return mCurrentFuel; }
+		set { mCurrentFuel = value; }
 	}
 
 	private void OnTriggerEnter(Collider other)

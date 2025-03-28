@@ -33,6 +33,12 @@ public class ItemWaypointController : MonoBehaviour
 		mItemWaypointText.text = mItemWaypointCollected.ToString() + "/" + mItemWaypointToCollect.ToString(); // Actualiza el texto
 	}
 
+	public int ItemWaypointCollected
+	{
+		get { return mItemWaypointCollected; }
+		set { mItemWaypointCollected = value; }
+	}
+
 	// Metodo trigger para recolectar items waypoints
 	private void OnTriggerEnter(Collider other)
 	{

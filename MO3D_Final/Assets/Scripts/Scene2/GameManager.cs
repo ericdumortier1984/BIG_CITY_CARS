@@ -6,12 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
     public int mScore;
 	public GameObject mPauseMenu;
 	public GameObject mInputCanvas;
+	public GameObject mCarFuel;
+	public GameObject mItemWaypointCollected;
 
 	private bool isPaused = false;
+
+	private CarFuelController mCarFuelController; // Referencia al script de combustible
+	private ItemWaypointController mItemWaypointController;
 	
 	private void Start()
 	{
@@ -22,7 +26,8 @@ public class GameManager : MonoBehaviour
 			mInputCanvas.SetActive(false);
 		}
 
-		StartCoroutine(mGameCountDown()); // Iniciar coroutine
+		mCarFuelController = FindObjectOfType<CarFuelController>();
+		mItemWaypointController = FindObjectOfType<ItemWaypointController>();
 	}
 
 	private void Update()
@@ -37,6 +42,15 @@ public class GameManager : MonoBehaviour
 			{
 				PauseGame();
 			}
+		}
+
+		if (mCarFuelController.CurrentFuel == 0)
+		{
+			EndGame("OutOfFuel");
+		}
+		if (mItemWaypointController.ItemWaypointCollected == 10)
+		{
+			EndGame("AllWaypointsCollected");
 		}
 	}
 
@@ -73,16 +87,21 @@ public class GameManager : MonoBehaviour
 		mInputCanvas.SetActive(true); // Canvas de Input activado
 	}
 
-	IEnumerator mGameCountDown()
+	void EndGame(string mCondition)
 	{
-		yield return new WaitForSeconds(180.0f); // Esperar 5 segundos
+		switch (mCondition)
+		{
+			case "OutOfFuel":
+				PlayerPrefs.SetInt("SCORE", mScore);
+				SceneManager.LoadScene("SceneEndGame");
+				Debug.Log("Out of fuel, try again");
+				break;
 
-		EndGame(); // Mostrar puntaje
+			case "AllWaypointsCollected":
+				PlayerPrefs.SetInt("SCORE", mScore);
+				SceneManager.LoadScene("SceneEndGame");
+				Debug.Log("All waypoints collected, excellent");
+				break;
+		}
 	}
-
-	void EndGame()
-    {
-        PlayerPrefs.SetInt("SCORE", mScore);
-        SceneManager.LoadScene("SceneEndGame");
-    }
 }
