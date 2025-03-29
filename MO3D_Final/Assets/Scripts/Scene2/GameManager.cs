@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public int mScore;
+    //public int mScore;
 	public GameObject mPauseMenu;
 	public GameObject mInputCanvas;
 	public GameObject mCarFuel;
@@ -92,13 +92,13 @@ public class GameManager : MonoBehaviour
 		switch (mCondition)
 		{
 			case "OutOfFuel":
-				PlayerPrefs.SetInt("SCORE", mScore);
+				//PlayerPrefs.SetInt("SCORE", mScore);
 				SceneManager.LoadScene("SceneEndGame");
 				Debug.Log("Out of fuel, try again");
 				break;
 
 			case "AllWaypointsCollected":
-				PlayerPrefs.SetInt("SCORE", mScore);
+				//PlayerPrefs.SetInt("SCORE", mScore);
 				SceneManager.LoadScene("SceneEndGame");
 				Debug.Log("All waypoints collected, excellent");
 				break;
