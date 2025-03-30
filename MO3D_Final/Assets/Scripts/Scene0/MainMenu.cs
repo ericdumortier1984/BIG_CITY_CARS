@@ -5,10 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-
+	public void Awake()
+	{
+        Cursor.visible = true; // Mostrar el cursor
+	}
 	public void StartGame()
     {
-        LoaderScene.Load(LoaderScene.mScene.SceneGameTpFinal);
+		LoaderScene.Load(LoaderScene.mScene.SceneGameTpFinal);
     }
 
     public void ShowSettings()

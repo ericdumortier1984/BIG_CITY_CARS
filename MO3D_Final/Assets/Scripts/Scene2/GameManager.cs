@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
 	private CarFuelController mCarFuelController; // Referencia al script de combustible
 	private ItemWaypointController mItemWaypointController;
-	
+
 	private void Start()
 	{
 		// Menu de pausa desactivado
@@ -28,6 +28,11 @@ public class GameManager : MonoBehaviour
 
 		mCarFuelController = FindObjectOfType<CarFuelController>();
 		mItemWaypointController = FindObjectOfType<ItemWaypointController>();
+
+		if (mCarFuelController == null)
+		{
+			Debug.LogError("CarFuelController no encontrado en la escena.");
+		}
 	}
 
 	private void Update()
@@ -44,7 +49,7 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
-		if (mCarFuelController.CurrentFuel == 0)
+		if (mCarFuelController != null && mCarFuelController.CurrentFuel == 0)
 		{
 			EndGame("OutOfFuel");
 		}
