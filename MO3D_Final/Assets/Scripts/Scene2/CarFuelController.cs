@@ -53,7 +53,7 @@ public class CarFuelController : MonoBehaviour
 		mFuelBar.value = mCurrentFuel; // Actualizar el valor del slider
 	}
 
-	public void OnUseFuelpump()
+	public void OnUseFuelPump()
 	{
 		if (mCoinsController.ItemCoinsCollected >= 4) // Si tenemos al menos 4 items coins
 		{
@@ -86,7 +86,7 @@ public class CarFuelController : MonoBehaviour
 
 		if (other.tag == "FuelPump")
 		{
-			OnUseFuelpump();
+			OnUseFuelPump();
 		}
 	}
 }

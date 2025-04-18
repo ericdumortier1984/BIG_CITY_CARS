@@ -448,7 +448,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 84, y: -450}
+  m_AnchoredPosition: {x: 202, y: -450}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &234220991
@@ -471,7 +471,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 73a188c8c836cd3468de230a62247581, type: 2}
   m_sharedMaterial: {fileID: -1230112104956113559, guid: 73a188c8c836cd3468de230a62247581, type: 2}
@@ -1097,6 +1097,171 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 635305250}
   m_CullTransparentMesh: 1
+--- !u!1 &697342855
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 697342856}
+  - component: {fileID: 697342861}
+  - component: {fileID: 697342860}
+  - component: {fileID: 697342859}
+  - component: {fileID: 697342858}
+  - component: {fileID: 697342857}
+  m_Layer: 5
+  m_Name: BuyButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &697342856
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697342855}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1443460747}
+  m_Father: {fileID: 822999281}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 237, y: -42}
+  m_SizeDelta: {x: 130.3, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &697342857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697342855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
+--- !u!114 &697342858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697342855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: 2}
+  m_UseGraphicAlpha: 1
+--- !u!114 &697342859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697342855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 697342860}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1851401760}
+        m_TargetAssemblyTypeName: CarSelectionController, Assembly-CSharp
+        m_MethodName: BuyCar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &697342860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697342855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9490196, g: 0.8784314, b: 0.53333336, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &697342861
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697342855}
+  m_CullTransparentMesh: 1
 --- !u!1 &720161392
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,29 +1366,29 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 272840593013918169}
-  - {fileID: 6111916678295456439}
   - {fileID: 7406247232993457067}
+  - {fileID: 6111916678295456439}
   - {fileID: 5710273512158037804}
-  - {fileID: 4280237848387090}
   - {fileID: 3522633313967755184}
   - {fileID: 5519298993547764958}
   - {fileID: 703039997248658511}
-  - {fileID: 3513238187732673331}
   - {fileID: 4916610551460174864}
-  - {fileID: 4974218618444049353}
-  - {fileID: 6827011217787752353}
-  - {fileID: 2105001752924001010}
-  - {fileID: 3471322994601896234}
   - {fileID: 6578103289164314375}
   - {fileID: 8488741251690582543}
-  - {fileID: 127934680651822288}
-  - {fileID: 49073208717434096}
-  - {fileID: 7670171743225091497}
   - {fileID: 4332245387250714859}
+  - {fileID: 4633799666344872825}
   - {fileID: 4944395089108225060}
   - {fileID: 4466398173998772848}
   - {fileID: 5538319820819827053}
-  - {fileID: 4633799666344872825}
+  - {fileID: 3471322994601896234}
+  - {fileID: 7670171743225091497}
+  - {fileID: 3513238187732673331}
+  - {fileID: 4280237848387090}
+  - {fileID: 2105001752924001010}
+  - {fileID: 49073208717434096}
+  - {fileID: 4974218618444049353}
+  - {fileID: 127934680651822288}
+  - {fileID: 6827011217787752353}
   m_Father: {fileID: 1851401759}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1261,6 +1426,7 @@ RectTransform:
   m_Children:
   - {fileID: 1249655420}
   - {fileID: 167066096}
+  - {fileID: 697342856}
   m_Father: {fileID: 1851401759}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1644,6 +1810,140 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 877881751}
+  m_CullTransparentMesh: 1
+--- !u!1 &907426354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 907426355}
+  - component: {fileID: 907426357}
+  - component: {fileID: 907426356}
+  m_Layer: 5
+  m_Name: CoinText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &907426355
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907426354}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -338}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1545266646}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 1568, y: -467}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &907426356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907426354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 000
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 1fcf89e9768b2bc45980d9ee9b0cb307, type: 2}
+  m_sharedMaterial: {fileID: 4693053791651585419, guid: 1fcf89e9768b2bc45980d9ee9b0cb307, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 56
+  m_fontSizeBase: 56
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 3
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 0
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &907426357
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907426354}
   m_CullTransparentMesh: 1
 --- !u!1 &966286008
 GameObject:
@@ -3167,7 +3467,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 89, y: -32}
+  m_AnchoredPosition: {x: 202, y: 63}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1298195116
@@ -3903,6 +4203,140 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1407350908}
   m_CullTransparentMesh: 1
+--- !u!1 &1443460746
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1443460747}
+  - component: {fileID: 1443460749}
+  - component: {fileID: 1443460748}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1443460747
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443460746}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 697342856}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1443460748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443460746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: BUY
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 1fcf89e9768b2bc45980d9ee9b0cb307, type: 2}
+  m_sharedMaterial: {fileID: 4693053791651585419, guid: 1fcf89e9768b2bc45980d9ee9b0cb307, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 24
+  m_fontSizeBase: 24
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 0
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1443460749
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443460746}
+  m_CullTransparentMesh: 1
 --- !u!1 &1477554541
 GameObject:
   m_ObjectHideFlags: 0
@@ -4014,6 +4448,90 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1479946064}
   m_CullTransparentMesh: 1
+--- !u!1 &1503798740
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1503798741}
+  - component: {fileID: 1503798742}
+  m_Layer: 8
+  m_Name: BloquedIcon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1503798741
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503798740}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -155, y: -575.5, z: -203}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1545266646}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1503798742
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503798740}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: d8592c9a5f8ed4841afe4987b41ae316, type: 3}
+  m_Color: {r: 0.050980393, g: 0.050980393, b: 0.050980393, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 5.39, y: 5.39}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1509987591
 GameObject:
   m_ObjectHideFlags: 0
@@ -4226,6 +4744,8 @@ RectTransform:
   - {fileID: 6285820019117426423}
   - {fileID: 823152830}
   - {fileID: 838063340}
+  - {fileID: 907426355}
+  - {fileID: 1503798741}
   - {fileID: 1851401759}
   m_Father: {fileID: 867893643}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4520,6 +5040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a93e9b80d3986794582d4fac523b3e15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mCoinText: {fileID: 907426356}
 --- !u!1 &1644475305
 GameObject:
   m_ObjectHideFlags: 0
@@ -5173,42 +5694,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mCarsToSelect:
   - {fileID: 279171598280365399}
-  - {fileID: 6109051746401145391}
   - {fileID: 7404543247620947703}
+  - {fileID: 6109051746401145391}
   - {fileID: 5707469333000998792}
-  - {fileID: 1680941468230984}
   - {fileID: 3524423083556033044}
   - {fileID: 5516088193615330488}
   - {fileID: 708340786300667989}
-  - {fileID: 3515153303359499919}
   - {fileID: 4913950292074983368}
-  - {fileID: 4975651391781234811}
-  - {fileID: 6824883459824687805}
-  - {fileID: 2106577498227853320}
-  - {fileID: 3467860675589120710}
   - {fileID: 6582047069000932467}
   - {fileID: 8486044951794231461}
-  - {fileID: 130907573382951108}
-  - {fileID: 45965121371743604}
-  - {fileID: 7667209702959918093}
   - {fileID: 4326619093247012631}
+  - {fileID: 5405797925592699331}
   - {fileID: 4939315120943854414}
   - {fileID: 4462544870114927270}
   - {fileID: 5536788387605457137}
-  - {fileID: 5405797925592699331}
+  - {fileID: 3467860675589120710}
+  - {fileID: 7667209702959918093}
+  - {fileID: 3515153303359499919}
+  - {fileID: 1680941468230984}
+  - {fileID: 2106577498227853320}
+  - {fileID: 45965121371743604}
+  - {fileID: 4975651391781234811}
+  - {fileID: 130907573382951108}
+  - {fileID: 6824883459824687805}
   mSelectedCarIndex: 0
   mSelectedCarName: 
-  mSelectedCarPrice: 
+  mSelectedCarPriceText: 
+  mSelectedCarPrice: 0
   mSelectedCarSpeed: 0
   mSelectedCarAcceleration: 0
   mSelectedCarBreaking: 0
   mSelectedCarHandling: 0
+  mIsSelectedCarBloqued: 0
   mCarNameText: {fileID: 1298195116}
   mCarPriceText: {fileID: 234220991}
+  mCarPrice: 0
   mCarSpeedSlider: {fileID: 321898273}
   mCarAccelerationSlider: {fileID: 106551168}
   mCarBreakingSlider: {fileID: 234448868}
   mCarHandlingSlider: {fileID: 1014455906}
+  mCarBloquedIcon: {fileID: 1503798740}
 --- !u!1 &1921328865
 GameObject:
   m_ObjectHideFlags: 0
@@ -5793,12 +6318,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4548681f9deb92c4b86d1d36cecc0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCarName: '             JEEP'
-  mCarPrice: '   PURCHASED'
+  mCarName: JEEP
+  mCarPriceText: $105
+  mCarPrice: 105
   mCarSpeed: 65
   mCarAcceleration: 60
   mCarBreaking: 60
   mCarHandling: 65
+  mIsCarBloqued: 0
 --- !u!4 &4328111393509752
 Transform:
   m_ObjectHideFlags: 0
@@ -6438,12 +6965,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4548681f9deb92c4b86d1d36cecc0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCarName: '   POLICE CAR'
-  mCarPrice: '         $90'
+  mCarName: POLICE CAR
+  mCarPriceText: $115
+  mCarPrice: 115
   mCarSpeed: 75
   mCarAcceleration: 70
   mCarBreaking: 65
   mCarHandling: 65
+  mIsCarBloqued: 1
 --- !u!4 &49260323232296732
 Transform:
   m_ObjectHideFlags: 0
@@ -7753,12 +8282,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4548681f9deb92c4b86d1d36cecc0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCarName: '   TUNNING CAR'
-  mCarPrice: '         $110'
+  mCarName: TUNNING CAR
+  mCarPriceText: $125
+  mCarPrice: 125
   mCarSpeed: 85
   mCarAcceleration: 75
   mCarBreaking: 70
   mCarHandling: 85
+  mIsCarBloqued: 1
 --- !u!1 &131102215415051756
 GameObject:
   m_ObjectHideFlags: 0
@@ -8895,12 +9426,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4548681f9deb92c4b86d1d36cecc0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCarName: '          PICKUP'
-  mCarPrice: '   PURCHASED'
+  mCarName: PICKUP
+  mCarPriceText: 
+  mCarPrice: 0
   mCarSpeed: 55
   mCarAcceleration: 45
   mCarBreaking: 45
   mCarHandling: 50
+  mIsCarBloqued: 0
 --- !u!23 &304318264778362602
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9651,11 +10184,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: DELIVERY TRUCK
-  mCarPrice: '         $65'
+  mCarPriceText: $45
+  mCarPrice: 45
   mCarSpeed: 45
   mCarAcceleration: 40
   mCarBreaking: 40
   mCarHandling: 35
+  mIsCarBloqued: 1
 --- !u!1 &708343876096046387
 GameObject:
   m_ObjectHideFlags: 0
@@ -10391,12 +10926,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4548681f9deb92c4b86d1d36cecc0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCarName: '        TAXI'
-  mCarPrice: '        $75'
+  mCarName: TAXI
+  mCarPriceText: $110
+  mCarPrice: 110
   mCarSpeed: 65
   mCarAcceleration: 60
   mCarBreaking: 55
   mCarHandling: 60
+  mIsCarBloqued: 1
 --- !u!1 &2106639961618146566
 GameObject:
   m_ObjectHideFlags: 0
@@ -11583,12 +12120,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4548681f9deb92c4b86d1d36cecc0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCarName: '   DUMP TRUCK'
-  mCarPrice: '         $85'
+  mCarName: DUMP TRUCK
+  mCarPriceText: $90
+  mCarPrice: 90
   mCarSpeed: 60
   mCarAcceleration: 45
   mCarBreaking: 50
   mCarHandling: 50
+  mIsCarBloqued: 1
 --- !u!4 &3471358666231627248
 Transform:
   m_ObjectHideFlags: 0
@@ -13546,12 +14085,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4548681f9deb92c4b86d1d36cecc0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCarName: '  FOOD TRUCK'
-  mCarPrice: '         $75'
+  mCarName: FOOD TRUCK
+  mCarPriceText: $100
+  mCarPrice: 100
   mCarSpeed: 60
   mCarAcceleration: 55
   mCarBreaking: 55
   mCarHandling: 60
+  mIsCarBloqued: 1
 --- !u!1 &3515335787391474331
 GameObject:
   m_ObjectHideFlags: 0
@@ -13911,12 +14452,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4548681f9deb92c4b86d1d36cecc0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCarName: '     TV TRUCK'
-  mCarPrice: '          $ 50'
+  mCarName: TV TRUCK
+  mCarPriceText: $35
+  mCarPrice: 35
   mCarSpeed: 55
   mCarAcceleration: 50
   mCarBreaking: 45
   mCarHandling: 50
+  mIsCarBloqued: 1
 --- !u!1 &3524520701410991770
 GameObject:
   m_ObjectHideFlags: 0
@@ -14477,12 +15020,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4548681f9deb92c4b86d1d36cecc0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCarName: '    SCHOOL BUS'
-  mCarPrice: '          $75'
+  mCarName: SCHOOL BUS
+  mCarPriceText: $65
+  mCarPrice: 65
   mCarSpeed: 55
   mCarAcceleration: 45
   mCarBreaking: 50
   mCarHandling: 50
+  mIsCarBloqued: 1
 --- !u!4 &4332415304356163719
 Transform:
   m_ObjectHideFlags: 0
@@ -15630,11 +16175,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: ICE CREAM TRUCK
-  mCarPrice: '             $65'
+  mCarPriceText: $80
+  mCarPrice: 80
   mCarSpeed: 65
   mCarAcceleration: 55
   mCarBreaking: 55
   mCarHandling: 60
+  mIsCarBloqued: 1
 --- !u!4 &4466403814585470142
 Transform:
   m_ObjectHideFlags: 0
@@ -16260,12 +16807,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4548681f9deb92c4b86d1d36cecc0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCarName: '  BIG TRUCK'
-  mCarPrice: '           85'
+  mCarName: BIG TRUCK
+  mCarPriceText: $50
+  mCarPrice: 50
   mCarSpeed: 50
   mCarAcceleration: 35
   mCarBreaking: 35
   mCarHandling: 30
+  mIsCarBloqued: 1
 --- !u!4 &4916614335428974572
 Transform:
   m_ObjectHideFlags: 0
@@ -17309,12 +17858,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4548681f9deb92c4b86d1d36cecc0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCarName: '        TRACTOR'
-  mCarPrice: '              $65'
+  mCarName: TRACTOR
+  mCarPriceText: $75
+  mCarPrice: 75
   mCarSpeed: 45
   mCarAcceleration: 35
   mCarBreaking: 40
   mCarHandling: 50
+  mIsCarBloqued: 1
 --- !u!4 &4944670770814636748
 Transform:
   m_ObjectHideFlags: 0
@@ -17813,12 +18364,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4548681f9deb92c4b86d1d36cecc0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCarName: '      4X4 TRUCK'
-  mCarPrice: '            $95'
+  mCarName: 4X4 TRUCK
+  mCarPriceText: $120
+  mCarPrice: 120
   mCarSpeed: 70
   mCarAcceleration: 65
   mCarBreaking: 60
   mCarHandling: 65
+  mIsCarBloqued: 1
 --- !u!1 &4975722310865096769
 GameObject:
   m_ObjectHideFlags: 0
@@ -19788,12 +20341,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4548681f9deb92c4b86d1d36cecc0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCarName: '   MINI VAN'
-  mCarPrice: '        $60'
+  mCarName: MINI VAN
+  mCarPriceText: $40
+  mCarPrice: 40
   mCarSpeed: 55
   mCarAcceleration: 50
   mCarBreaking: 50
   mCarHandling: 55
+  mIsCarBloqued: 1
 --- !u!4 &5519607559018349640
 Transform:
   m_ObjectHideFlags: 0
@@ -20784,11 +21339,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: TANKER TRUCK
-  mCarPrice: '           $75'
+  mCarPriceText: $85
+  mCarPrice: 85
   mCarSpeed: 60
   mCarAcceleration: 45
   mCarBreaking: 45
   mCarHandling: 50
+  mIsCarBloqued: 1
 --- !u!4 &5538341503866988641
 Transform:
   m_ObjectHideFlags: 0
@@ -21466,12 +22023,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4548681f9deb92c4b86d1d36cecc0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCarName: '         FURGON'
-  mCarPrice: '  PURCHASED'
+  mCarName: FURGON
+  mCarPriceText: $30
+  mCarPrice: 30
   mCarSpeed: 55
   mCarAcceleration: 50
   mCarBreaking: 50
   mCarHandling: 45
+  mIsCarBloqued: 0
 --- !u!4 &5710337732466431760
 Transform:
   m_ObjectHideFlags: 0
@@ -23054,12 +23613,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4548681f9deb92c4b86d1d36cecc0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCarName: '  SIMPLE CAR'
-  mCarPrice: '  PURCHASED'
+  mCarName: SIMPLE CAR
+  mCarPriceText: $25
+  mCarPrice: 25
   mCarSpeed: 60
   mCarAcceleration: 55
   mCarBreaking: 55
   mCarHandling: 55
+  mIsCarBloqued: 0
 --- !u!4 &6114368707254974224
 Transform:
   m_ObjectHideFlags: 0
@@ -23899,12 +24460,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4548681f9deb92c4b86d1d36cecc0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCarName: '  AMBULANCE'
-  mCarPrice: '        $70'
+  mCarName: AMBULANCE
+  mCarPriceText: $55
+  mCarPrice: 55
   mCarSpeed: 65
   mCarAcceleration: 60
   mCarBreaking: 60
   mCarHandling: 60
+  mIsCarBloqued: 1
 --- !u!1 &6583546242336805157
 GameObject:
   m_ObjectHideFlags: 0
@@ -24659,12 +25222,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4548681f9deb92c4b86d1d36cecc0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCarName: '  MUSCLE CAR'
-  mCarPrice: '         $120'
+  mCarName: MUSCLE CAR
+  mCarPriceText: $150
+  mCarPrice: 150
   mCarSpeed: 90
   mCarAcceleration: 85
   mCarBreaking: 85
   mCarHandling: 90
+  mIsCarBloqued: 1
 --- !u!4 &6827058018698426673
 Transform:
   m_ObjectHideFlags: 0
@@ -26417,12 +26982,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4548681f9deb92c4b86d1d36cecc0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCarName: '       MINI CAR'
-  mCarPrice: '  PURCHASED'
+  mCarName: MINI CAR
+  mCarPriceText: $20
+  mCarPrice: 20
   mCarSpeed: 60
   mCarAcceleration: 55
   mCarBreaking: 55
   mCarHandling: 50
+  mIsCarBloqued: 0
 --- !u!4 &7406255599523627103
 Transform:
   m_ObjectHideFlags: 0
@@ -27464,12 +28031,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4548681f9deb92c4b86d1d36cecc0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCarName: '              BUS'
-  mCarPrice: '             $75'
+  mCarName: BUS
+  mCarPriceText: $95
+  mCarPrice: 95
   mCarSpeed: 65
   mCarAcceleration: 50
   mCarBreaking: 50
   mCarHandling: 50
+  mIsCarBloqued: 1
 --- !u!4 &7861233719170836448
 Transform:
   m_ObjectHideFlags: 0
@@ -28728,12 +29297,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4548681f9deb92c4b86d1d36cecc0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCarName: '   FIRE TRUCK'
-  mCarPrice: '         $100'
+  mCarName: FIRE TRUCK
+  mCarPriceText: $60
+  mCarPrice: 60
   mCarSpeed: 55
   mCarAcceleration: 45
   mCarBreaking: 50
   mCarHandling: 50
+  mIsCarBloqued: 1
 --- !u!4 &8488846105647918843
 Transform:
   m_ObjectHideFlags: 0
@@ -29001,12 +29572,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4548681f9deb92c4b86d1d36cecc0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCarName: '       FORKLIFT'
-  mCarPrice: '           $70'
+  mCarName: FORKLIFT
+  mCarPriceText: $70
+  mCarPrice: 70
   mCarSpeed: 35
   mCarAcceleration: 30
   mCarBreaking: 30
   mCarHandling: 50
+  mIsCarBloqued: 1
 --- !u!146 &8791003359968800649
 WheelCollider:
   m_ObjectHideFlags: 0

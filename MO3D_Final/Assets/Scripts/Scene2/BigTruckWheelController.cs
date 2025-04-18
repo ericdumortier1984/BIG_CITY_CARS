@@ -161,7 +161,7 @@ public class BigTruckWheelController : MonoBehaviour
 
 		if (other.tag == "FuelPump")
 		{
-			mCarFuelController.OnUseFuelpump();
+			mCarFuelController.OnUseFuelPump();
 			Debug.Log("Full Tank");
 		}
 

@@ -9,7 +9,7 @@ public class CoinsController : MonoBehaviour
 	public TMPro.TextMeshProUGUI mItemsNoCoinsText; // Referencia al texto items de NO coins del canvas
 	public Slider mItemCoinsSlider; // Referencia al slider 
 	public int mItemCoinsToCollect; // Referencia a la cantidad de items coins
-	private int mItemCoinsCollected = 0; // Referencia a la cantidad de items coins recolectados
+	public int mItemCoinsCollected = 0; // Referencia a la cantidad de items coins recolectados
 
 	private void Start()
 	{
@@ -49,6 +49,8 @@ public class CoinsController : MonoBehaviour
 		if (other.tag == "Coins")
 		{
 			ItemCoinsCounter(); // Llamado al metodo contador
+			MainMenu.Instance.AddCoin(1); // Llamado al metodo de suma de monedas
+			ItemCoinsTextCounter(); // Llamado al texto para actualizar las monedas
 		}
 	}
 
