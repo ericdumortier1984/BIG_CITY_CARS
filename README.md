@@ -36,8 +36,6 @@
  
 *Elementos Únicos del Gameplay:*
 - Desbloquear vehículos
-- Upgrade vehículos
-- Cambiar skins de vehículos
 - Desafío de obstáculos dinámicos
 - Eventos especiales
    
@@ -55,7 +53,6 @@
 
 *Largo Plazo:*
 - Desbloquear vehículos
-- Upgrade vehículos	
 
 *Game Loop*
 <br/>
@@ -64,10 +61,10 @@
 
 *Medio:*
 - Recoger items
-- Ganar experiencia
+- Ganar experiencia en la conducción.
 
 *Fin:*
-- Desbloquear nuevos contenidos
+- Desbloquear nuevos niveles mediante la obtención de todos los "waypoints" del level.
 
 ### <h2>3 - Arte y Visuales
 *Inspiración &*
