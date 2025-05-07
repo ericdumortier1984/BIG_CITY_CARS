@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,34 +10,24 @@ public class MainMenu : MonoBehaviour
 
 	private void Awake()
 	{
+		/*
+		if (PlayerPrefs.HasKey("Coin"))
+		{
+			PlayerPrefs.DeleteAll();
+		}*/
+
+		// Mostrar el cursor
+		Cursor.visible = true;
+
 		if (Instance != null && Instance != this)
 		{
 			Destroy(gameObject);
 			return;
 		}
 		Instance = this;
-
-		// Monedas por defecto
-		mCoin = PlayerPrefs.GetInt("Coin", 0);
+		
+		PlayerPrefs.GetInt("Coin", mCoin);
 		UpdateCoinUI();
-
-		// Mostrar el cursor
-		Cursor.visible = true; 
-	}
-
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.K))
-		{
-			AddCoin(15000);
-			
-		}
-
-		if ( Input.GetKeyDown(KeyCode.J))
-		{
-			SpendCoin(1);
-			
-		}
 	}
 
 	public void AddCoin(int mCoinAmount)
@@ -71,6 +59,7 @@ public class MainMenu : MonoBehaviour
 	{
 		if (mCoinText != null)
 		{
+			mCoin = PlayerPrefs.GetInt("Coin", 0);
 			mCoinText.text = "Coins: " + mCoin.ToString();
 			Debug.Log("Coins: " + mCoin.ToString());
 		}

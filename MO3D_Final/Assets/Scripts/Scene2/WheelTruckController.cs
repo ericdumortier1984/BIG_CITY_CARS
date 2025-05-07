@@ -147,11 +147,12 @@ public class WheelTruckController : MonoBehaviour
 			Debug.Log("ItemFuelCollected");
 		}
 
+		/*
 		if (other.tag == "FuelPump")
 		{
 			mCarFuelController.OnUseFuelPump();
 			Debug.Log("Full Tank");
-		}
+		}*/
 
 		if (other.tag == "Coins")
 		{

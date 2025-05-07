@@ -8,13 +8,14 @@ public class ItemWaypointController : MonoBehaviour
 	public TMPro.TextMeshProUGUI mItemWaypointText; // Referencia al texto items waypoints del canvas
     public Slider mItemWaypointSlider; // Referencia al slider 
     public int mItemWaypointToCollect; // Referencia a la cantidad de items waypoints
-    private int mItemWaypointCollected = 0; // Referencia a la cantidad de items waypoints recolectados
+    public int mItemWaypointCollected; // Referencia a la cantidad de items waypoints recolectados
 
 	private void Start() 
 	{
 		// Seteo de valores iniciales del slider
 		mItemWaypointSlider.maxValue = mItemWaypointToCollect; // Maximo valor permitido
 		mItemWaypointSlider.value = mItemWaypointCollected; // Valor actual
+		mItemWaypointSlider.interactable = false;
 
 		ItemWaypointTextCounter();
 	}
@@ -40,11 +41,16 @@ public class ItemWaypointController : MonoBehaviour
 	}
 
 	// Metodo trigger para recolectar items waypoints
-	private void OnTriggerEnter(Collider other)
+	/*private void OnTriggerEnter(Collider other)
 	{
 		if (other.tag == "ItemWaypoint")
 		{
 			ItemWaypointCounter(); // Llamado al metodo contador
+			LevelData.WaypointsCollectedInLevel = mItemWaypointCollected; // Actualiza los datos en LevelData
+			Debug.Log("Waypoints recolectados: " + LevelData.WaypointsCollectedInLevel); // Verifica el valor
+			ItemWaypointTextCounter();
+			Destroy(other.gameObject);
+			Debug.Log("Waypoint collected"); // Mensaje de depuración
 		}
-	}
+	}*/
 }

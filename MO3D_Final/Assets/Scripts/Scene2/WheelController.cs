@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class WheelController : MonoBehaviour
 {
+	// Colliders de las ruedas
     [SerializeField] WheelCollider mFrontRight;
 	[SerializeField] WheelCollider mFrontLeft;
 	[SerializeField] WheelCollider mBackRight;
 	[SerializeField] WheelCollider mBackLeft;
 
+	// Meshes de las ruedas
 	[SerializeField] Transform mFrontRightTransform;
 	[SerializeField] Transform mFrontLeftTransform;
 	[SerializeField] Transform mBackRightTransform;
@@ -18,16 +20,21 @@ public class WheelController : MonoBehaviour
 	[SerializeField] GameObject mBackRightTrailTire;
 	[SerializeField] GameObject mBackLeftTrailTire;
 
+	///////////// Variables de configuración del vehículo /////////////
+	///
+	// Iniciales
 	public float mAcceleration = 1.0f;
 	public float mBreakForce = 1.0f;
 	public float mMaxTurnAngle = 1.0f;
+	public Vector3 mCenterOfMass;
 
+	// Actuales
 	private float mCurrentAcceleration = 0.0f;
 	private float mCurrentBreakForce = 0.0f;
 	private float mCurrentTurnAngle = 0.0f;
 
-	public Vector3 mCenterOfMass;
-
+	//////////// Referencias a Rigidbody y otros scripts ///////////
+	///
 	private Rigidbody mCarRb; // Referencia al rigidbody del vehiculo
 	private CarLight mCarLight; // Referencia al script de luces
 	private ItemWaypointController mItemWaypointController; // Referencia al script de items waypoints
@@ -40,7 +47,10 @@ public class WheelController : MonoBehaviour
 		mCarRb.centerOfMass = mCenterOfMass;
 
 		mCarLight = GetComponent<CarLight>();
-		mItemWaypointController = FindObjectOfType<ItemWaypointController>(); // Encontrar el script en la escena
+
+		/////// Encontrar otros scripts en la escena ////////
+		///
+		mItemWaypointController = FindObjectOfType<ItemWaypointController>(); 
 		mCarFuelController = FindObjectOfType<CarFuelController>();
 		mCoinsController = FindObjectOfType<CoinsController>();
 	}
@@ -86,8 +96,10 @@ public class WheelController : MonoBehaviour
 		mBackRight.brakeTorque = mCurrentBreakForce;
 		mBackLeft.brakeTorque = mCurrentBreakForce;
 
-		// Aplico giro a las dos ruedas delanteras con un torque maximo
-		// Uso de teclas A y D u flechas izquierda y derecha para el giro
+		/////////// Aplico giro a las dos ruedas delanteras con un torque maximo /////
+		///
+		////////// Uso de teclas A y D u flechas izquierda y derecha para el giro //////
+		///
 		Debug.Log("Turning");
 		mCurrentTurnAngle = mMaxTurnAngle * Input.GetAxis("Horizontal");
 		mFrontRight.steerAngle = mCurrentTurnAngle;
@@ -123,13 +135,14 @@ public class WheelController : MonoBehaviour
 		}
 	}
 
-	// Metodo para recoleccion de items waypoints con mi player
+	// Metodo para recoleccion de items con mi player
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.tag == "ItemWaypoint")
 		{
 			mItemWaypointController.ItemWaypointCounter();
 			mItemWaypointController.ItemWaypointTextCounter();
+			LevelData.WaypointsCollectedInLevel = mItemWaypointController.ItemWaypointCollected; // Actualiza LevelData
 			Destroy(other.gameObject);
 			Debug.Log("ItemWaypoint Collected");
 		}
@@ -139,12 +152,6 @@ public class WheelController : MonoBehaviour
 			mCarFuelController.OnfillingFuel();
 			Destroy(other.gameObject);
 			Debug.Log("ItemFuelCollected");
-		}
-
-		if(other.tag == "FuelPump")
-		{
-			mCarFuelController.OnUseFuelPump();
-			Debug.Log("Full Tank");
 		}
 
 		if(other.tag == "Coins")

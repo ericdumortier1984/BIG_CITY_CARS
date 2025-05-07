@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class CarSound : MonoBehaviour
 {
-	/* El sonido del motor no funciona adecuadamente si uso el singleton de AudioManager, 
-	   asi que le asigno un AudioSource al GameObject*/
-
-	[SerializeField] private AudioClip mHornSound;
-
 	public float mMinSpeed;
 	public float mMaxSpeed;
 	private float mCurrentSpeed;
 
 	private Rigidbody mCarRb;
-	private AudioSource mCarSound;
+	private AudioSource mCarEngine;
+	private AudioSource mCarHorn;
+	private AudioSource mCarBrakes;
 
 	public float mMinPitch;
 	public float mMaxPitch;
@@ -23,33 +20,42 @@ public class CarSound : MonoBehaviour
 	private void Start()
 	{
 		mCarRb = GetComponent<Rigidbody>();
-		mCarSound = GetComponent<AudioSource>();
+	
+		///////////// Array de AudioSources ////////////
+		///
+		AudioSource[] mAudioSources = GetComponents<AudioSource>();
+		mCarEngine = mAudioSources[0]; // Motor
+		mCarHorn = mAudioSources[1];  // Bocina
+		mCarBrakes = mAudioSources[2]; // Frenos
 	}
 
 	private void FixedUpdate()
 	{
 		SetEngineSound();
 		PlayCarHorn();
+		PlayCarBrakes();
 	}
 
 	private void SetEngineSound()
 	{
+		////// Aumenta el pitch del sonido del motor dependiendo de la velocidad del vehiculo //////
+		///
 		mCurrentSpeed = mCarRb.velocity.magnitude;
 		mPitchFromCar = mCarRb.velocity.magnitude / mMaxSpeed;
 
 		if (mCurrentSpeed < mMinSpeed)
 		{
-			mCarSound.pitch = mMinPitch;
+			mCarEngine.pitch = mMinPitch;
 		}
 
 		if (mCurrentSpeed > mMinSpeed && mCurrentSpeed < mMaxSpeed)
 		{
-			mCarSound.pitch = mMinPitch + mPitchFromCar;
+			mCarEngine.pitch = mMinPitch + mPitchFromCar;
 		}
 
 		if (mCurrentSpeed > mMaxSpeed)
 		{
-			mCarSound.pitch = mMaxPitch;
+			mCarEngine.pitch = mMaxPitch;
 		}
 	}
 
@@ -58,7 +64,19 @@ public class CarSound : MonoBehaviour
 		// Bocina del vehiculo con tecla H
 		if (Input.GetKey(KeyCode.H))
 		{
-			AudioManager.mSoundInstance.PlaySound(mHornSound);
+			mCarHorn.PlayOneShot(mCarHorn.clip);
+		}
+	}
+
+	private void PlayCarBrakes()
+	{
+		// Frenos del vehiculo con tecla Espacio
+		if (Input.GetKey(KeyCode.Space))
+		{
+			if (mCurrentSpeed > mMinSpeed && mCurrentSpeed < mMaxSpeed)
+			{
+				mCarBrakes.PlayOneShot(mCarBrakes.clip);
+			}
 		}
 	}
 }

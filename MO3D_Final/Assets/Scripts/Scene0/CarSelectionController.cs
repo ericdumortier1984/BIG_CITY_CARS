@@ -98,9 +98,13 @@ public class CarSelectionController : MonoBehaviour
 		mCarPriceText.text = mSelectedCarPriceText;
 		mCarPrice = mSelectedCarPrice;
 		mCarSpeedSlider.value = mSelectedCarSpeed;
+		mCarSpeedSlider.interactable = false;
 		mCarAccelerationSlider.value = mSelectedCarAcceleration;
+		mCarAccelerationSlider.interactable = false;
 		mCarBreakingSlider.value = mSelectedCarBreaking;
+		mCarBreakingSlider.interactable = false;
 		mCarHandlingSlider.value = mSelectedCarHandling;
+		mCarHandlingSlider.interactable = false;
 
 		// Mostrar u ocultar candado + precio
 		if (mIsSelectedCarBloqued)

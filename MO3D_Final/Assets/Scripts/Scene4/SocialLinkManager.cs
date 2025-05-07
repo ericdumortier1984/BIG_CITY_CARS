@@ -10,4 +10,14 @@ public class SocialLinkManager : MonoBehaviour
 	{
 		Application.OpenURL(mLink);
 	}
+
+	public void GitHubLink(string mLink)
+	{
+		Application.OpenURL(mLink); 
+	}
+
+	public void Itch_iolink(string mLink)
+	{
+		Application.OpenURL(mLink);
+	}
 }
