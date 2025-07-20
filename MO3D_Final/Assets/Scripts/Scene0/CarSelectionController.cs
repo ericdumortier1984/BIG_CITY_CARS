@@ -30,7 +30,7 @@ public class CarSelectionController : MonoBehaviour
 	public float mSelectedCarAcceleration; // Aceleratcion del auto seleccionado
 	public float mSelectedCarBreaking; // Frenado del auto seleccionado
 	public float mSelectedCarHandling; // Manejo del auto seleccionado
-	public bool mIsSelectedCarBloqued; // Auto bloqueado o no
+	public bool mIsSelectedCarBlocked; // Auto bloqueado o no
 
 	[Header("UI Elements")]
 	public TMPro.TextMeshProUGUI mCarNameText; // Referencia al texto del nombre del auto
@@ -91,7 +91,7 @@ public class CarSelectionController : MonoBehaviour
 		mSelectedCarAcceleration = mCarStats.CarAcceleration;
 		mSelectedCarBreaking = mCarStats.CarBreaking;
 		mSelectedCarHandling = mCarStats.CarHandling;
-		mIsSelectedCarBloqued = mCarStats.IsCarBloqued;
+		mIsSelectedCarBlocked = mCarStats.IsCarBlocked;
 
 		// Actualizar UI de estadisticas del auto seleccionado
 		mCarNameText.text = mSelectedCarName;
@@ -107,7 +107,7 @@ public class CarSelectionController : MonoBehaviour
 		mCarHandlingSlider.interactable = false;
 
 		// Mostrar u ocultar candado + precio
-		if (mIsSelectedCarBloqued)
+		if (mIsSelectedCarBlocked)
 		{
 			mCarBloquedIcon.SetActive(true);
 		}
@@ -123,13 +123,13 @@ public class CarSelectionController : MonoBehaviour
 		// Actualizo estado
 		CarStats mCarStats = mCarsToSelect[mSelectedCarIndex].GetComponent<CarStats>();
 
-		if (mCarStats.IsCarBloqued)
+		if (mCarStats.IsCarBlocked)
 		{
 			int mCarPrice = mCarStats.CarPrice;
 
 			if (MainMenu.Instance.SpendCoin(mCarPrice))
 			{
-				mCarStats.IsCarBloqued = false;
+				mCarStats.IsCarBlocked = false;
 
 				// Actualizo estadisticas e interfaz
 				UpdateCarStats();
