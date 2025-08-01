@@ -8,6 +8,7 @@ TagManager:
   - ItemFuel
   - FuelPump
   - Coins
+  - IACar
   layers:
   - Default
   - TransparentFX

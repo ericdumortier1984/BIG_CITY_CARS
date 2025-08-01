@@ -4,25 +4,17 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-	public static MainMenu Instance { get; private set; } // Instancia Singleton
-	public TMPro.TextMeshProUGUI mCoinText; // Referencia al texto
-	//private int mCoin;
+	public static MainMenu Instance { get; private set; }
+	public TMPro.TextMeshProUGUI mCoinText;
+	private SaveData mCurrentSave = new SaveData(); 
 
-	private bool mIsGameLoaded = false;
-
-	private SaveData mCurrentSave = new SaveData(); // Singleton de save data
+	[Header("Reset Confirmation")]
+	public GameObject mConfirmResetPanel;
+	public Button mYesButton;
+	public Button mNoButton;
 
 	private void Awake()
 	{
-		/*
-		if (PlayerPrefs.HasKey("Coin"))
-		{
-			PlayerPrefs.DeleteAll();
-		}*/
-
-		// Mostrar el cursor
-		Cursor.visible = true;
-
 		if (Instance != null && Instance != this)
 		{
 			Destroy(gameObject);
@@ -30,53 +22,25 @@ public class MainMenu : MonoBehaviour
 		}
 		Instance = this;
 
-		// PlayerPrefs.GetInt("Coin", mCoin);
-		//mCoin = PlayerPrefs.GetInt("Coin", 0);
-
-		// Cargar datos al iniciar
-		///mCurrentSave = SaveSystem.LoadGame(); 
+		Cursor.visible = true;
+		mConfirmResetPanel.SetActive(false);
 		mCurrentSave = new SaveData();
-
-		mCurrentSave.mCoins = 0;
-
-		mCoinText.text = "Coins: -"; // o simplemente dejalo vacío
-
-		//UpdateCoinUI();
+		UpdateCoinUI();
 	}
 
 	public void AddCoin(int mCoinAmount)
 	{
-		if (!mIsGameLoaded)
-		{
-			Debug.Log("Intent add coins");
-			return;
-		}
-
-		//mCoin += mCoinAmount;
 		mCurrentSave.mCoins += mCoinAmount;
 		SaveSystem.SaveGame(mCurrentSave);
-		//PlayerPrefs.SetInt("Coin", mCoin);
-		//PlayerPrefs.Save();
 		UpdateCoinUI();
 	}
 
 	public bool SpendCoin(int mCoinAmount)
 	{
-
-		if (!mIsGameLoaded)
-		{
-			Debug.LogWarning("Intent spend coins");
-			return false;
-		}
-
-		//if (mCoin >= mCoinAmount)
 		if (mCurrentSave.mCoins >= mCoinAmount)
 		{
-			//mCoin -= mCoinAmount;
 			mCurrentSave.mCoins -= mCoinAmount;
 			SaveSystem.SaveGame(mCurrentSave);
-			//PlayerPrefs.SetInt("Coin", mCoin);
-			//PlayerPrefs.Save();
 			UpdateCoinUI();
 			return true;
 		}
@@ -91,8 +55,6 @@ public class MainMenu : MonoBehaviour
 	{
 		if (mCoinText != null)
 		{
-			//mCoin = PlayerPrefs.GetInt("Coin", 0);
-			//mCoinText.text = "Coins: " + mCoin.ToString();
 			mCoinText.text = "Coins: " + mCurrentSave.mCoins;
 			Debug.Log("Coins: " + mCurrentSave.mCoins.ToString());
 		}
@@ -100,7 +62,6 @@ public class MainMenu : MonoBehaviour
 
 	public void StartGame()
     {
-		// Carga escena de nivel si el auto seleccionado no está bloqueado
 		if (CarSelectionController.Instance.mIsSelectedCarBlocked == true)
 		{
 			Debug.Log("Car is Blocked");
@@ -129,25 +90,9 @@ public class MainMenu : MonoBehaviour
     
 	public void LoadGame()
 	{
-
 		mCurrentSave = SaveSystem.LoadGame();
-		mIsGameLoaded = true; // Habilita la edición de monedas
 		UpdateCoinUI();
 		Debug.Log("GameLoaded");
-
-		//for (int i = 1; i < CarSelectionController.Instance.mCarsToSelect.Length; i++)
-		//{
-		//CarStats mCarStats = CarSelectionController.Instance.mCarsToSelect[i].GetComponent<CarStats>();
-
-		//if (PlayerPrefs.HasKey($"CarUnlocked{i}"))
-		//{
-		//mCarStats.IsCarBlocked = PlayerPrefs.GetInt($"CarUnlocked{i}") == 0;
-		//}
-		//else
-		//{
-		//mCarStats.IsCarBlocked = true;
-		//}
-		//}
 
 		// Inicializa los autos desbloqueados según SaveData
 		for (int i = 0; i < CarSelectionController.Instance.mCarsToSelect.Length; i++)
@@ -179,42 +124,37 @@ public class MainMenu : MonoBehaviour
 			mCurrentSave.mUnlockedCars.Add(!mCarStats.IsCarBlocked); // true = desbloqueado
 		}
 
-
 		SaveSystem.SaveGame(mCurrentSave);
-
-		//for (int i = 0; i < CarSelectionController.Instance.mCarsToSelect.Length; i++)
-		//{
-			//CarStats mCarStats = CarSelectionController.Instance.mCarsToSelect[i].GetComponent<CarStats>();
-			//PlayerPrefs.SetInt($"CarUnlocked{i}", mCarStats.IsCarBlocked ? 0 : 1);
-		//}
-		//PlayerPrefs.Save();
-		//Debug.Log("Car Data Saved");
-	}
-
-	public void OnSaveButtonPressed()
-	{
-		SaveGame();
-	}
-
-	public void OnLoadButtonPressed()
-	{
-		LoadGame();
 	}
 
 	public void OnResetButtonPressed()
 	{
-		SaveSystem.ResetGame();
-		mCurrentSave = new SaveData(); // reinicia los datos en memoria
+		OnResetOptions();
+	}
 
-		// Bloquea todos los autos excepto el primero
-		for (int i = 0; i < CarSelectionController.Instance.mCarsToSelect.Length; i++)
-		{
-			var mCarStats = CarSelectionController.Instance.mCarsToSelect[i].GetComponent<CarStats>();
-			mCarStats.IsCarBlocked = i != 0; // primer auto desbloqueado
-		}
+	public void OnResetOptions()
+	{
+		mConfirmResetPanel.SetActive(true);
+		mYesButton.onClick.RemoveAllListeners();
+		mNoButton.onClick.RemoveAllListeners();
 
-		UpdateCoinUI();
-		Debug.Log("Game data reset.");
+		mYesButton.onClick.AddListener(() => {
+			SaveSystem.ResetGame();
+			mCurrentSave = new SaveData(); 
+			
+			for (int i = 0; i < CarSelectionController.Instance.mCarsToSelect.Length; i++)
+			{
+				var mCarStats = CarSelectionController.Instance.mCarsToSelect[i].GetComponent<CarStats>();
+				mCarStats.IsCarBlocked = i != 0; 
+			}
+			UpdateCoinUI();
+			mConfirmResetPanel.SetActive(false);
+			Debug.Log("Game data reset.");
+		});
+
+		mNoButton.onClick.AddListener(() => {
+			mConfirmResetPanel.SetActive(false);
+		});
 	}
 
 	public void ExitGame()
