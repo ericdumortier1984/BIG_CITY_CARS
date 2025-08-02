@@ -26,15 +26,15 @@ public class IAController : MonoBehaviour
 	public bool isStopped { get; private set; } = false;
 
 	[Header("Speeds")]
-	[SerializeField] private float mNormalSpeed = 2f;
+	[SerializeField] private float mNormalSpeed = 0f;
 	[SerializeField] private float mReducedSpeed = 0f;
 
 	[Header("Colllision Detect Range")]
-	[SerializeField] private float mDetectRange = 1f;
+	[SerializeField] private float mDetectRange = 0f;
 
 	[Header("Collision Distances")]
-	[SerializeField] private float stopDistance = 1f;      // Distancia para frenar completamente
-	[SerializeField] private float slowDownDistance = 2f;  // Distancia para empezar a reducir velocidad
+	[SerializeField] private float stopDistance = 0f;      // Distancia para frenar completamente
+	[SerializeField] private float slowDownDistance = 0f;  // Distancia para empezar a reducir velocidad
 
 	private IAController carAhead = null;
 
@@ -190,7 +190,13 @@ public class IAController : MonoBehaviour
 				isStopped = false;
 			}
 
+			//if (!DetectCarAhead())
+			//{
+				//isStopped = false;
+			//}
+
 			mWaypointController.MoveToWaypoint();
+			isStopped = false;
 		}
 	}
 }
