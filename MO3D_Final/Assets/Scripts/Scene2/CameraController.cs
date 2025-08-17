@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
 		}
 	}
 
-	private void FixedUpdate()
+	private void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.C))
 		{

@@ -55,7 +55,7 @@ public class MainMenu : MonoBehaviour
 	{
 		if (mCoinText != null)
 		{
-			mCoinText.text = "Coins: " + mCurrentSave.mCoins;
+			mCoinText.text = "COINS: " + mCurrentSave.mCoins;
 			Debug.Log("Coins: " + mCurrentSave.mCoins.ToString());
 		}
 	}
@@ -85,7 +85,8 @@ public class MainMenu : MonoBehaviour
 
     public void ShowMainMenu()
     {
-        LoaderScene.Load(LoaderScene.mScene.SceneMainMenu);
+		SaveGame();
+		LoaderScene.Load(LoaderScene.mScene.SceneMainMenu);
     }
     
 	public void LoadGame()
@@ -112,7 +113,7 @@ public class MainMenu : MonoBehaviour
 		//Debug.Log("Car Data Loaded");
 	}
 
-	public void SaveGame()
+	/*public void SaveGame()
 	{
 
 		// Asegura que la lista tenga la misma cantidad de autos
@@ -125,7 +126,22 @@ public class MainMenu : MonoBehaviour
 		}
 
 		SaveSystem.SaveGame(mCurrentSave);
+	}*/
+
+
+	public void SaveGame()
+	{
+		mCurrentSave.mUnlockedCars.Clear();
+
+		for (int i = 0; i < CarSelectionController.Instance.mCarsToSelect.Length; i++) // INCLUIR EL ÍNDICE 0
+		{
+			var mCarStats = CarSelectionController.Instance.mCarsToSelect[i].GetComponent<CarStats>();
+			mCurrentSave.mUnlockedCars.Add(!mCarStats.IsCarBlocked); // true = desbloqueado
+		}
+
+		SaveSystem.SaveGame(mCurrentSave);
 	}
+
 
 	public void OnResetButtonPressed()
 	{

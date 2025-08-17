@@ -6,7 +6,7 @@ using TMPro;
 
 public class CarSelectionController : MonoBehaviour
 {
-	public static CarSelectionController Instance { get; private set; } // Instancia Singleton
+	public static CarSelectionController Instance { get; private set; } // Singleton
 
 	public void Awake()
 	{
@@ -19,28 +19,29 @@ public class CarSelectionController : MonoBehaviour
 	}
 
 	[Header("Car Selection")]
-    public GameObject[] mCarsToSelect; // Array de autos seleccionables
-    public int mSelectedCarIndex = 0; // Indice de autos seleccionados
+    public GameObject[] mCarsToSelect; 
+    public int mSelectedCarIndex = 0; 
 
 	[Header("Selected Car Stats")]
-	public string mSelectedCarName; // Nombre del auto seleccionado
-	public string mSelectedCarPriceText; // Texto del precio del auto seleccionado
-	public int mSelectedCarPrice; // Precio del auto seleccionado
-	public float mSelectedCarSpeed; // Velocidad del auto seleccionado
-	public float mSelectedCarAcceleration; // Aceleratcion del auto seleccionado
-	public float mSelectedCarBreaking; // Frenado del auto seleccionado
-	public float mSelectedCarHandling; // Manejo del auto seleccionado
-	public bool mIsSelectedCarBlocked; // Auto bloqueado o no
+	public string mSelectedCarName; 
+	public string mSelectedCarPriceText; 
+	public int mSelectedCarPrice; 
+	public float mSelectedCarSpeed; 
+	public float mSelectedCarAcceleration; 
+	public float mSelectedCarBreaking; 
+	public float mSelectedCarHandling; 
+	public bool mIsSelectedCarBlocked; 
 
 	[Header("UI Elements")]
-	public TMPro.TextMeshProUGUI mCarNameText; // Referencia al texto del nombre del auto
-	public TMPro.TextMeshProUGUI mCarPriceText; // Referencia al texto del precio del auto
-	public int mCarPrice; // Referencia al precio del auto
-	public Slider mCarSpeedSlider; // Referencia al slider de velocidad
-	public Slider mCarAccelerationSlider; // Referencia al slider de aceleración
-	public Slider mCarBreakingSlider; // Referencia al slider de frenado
-	public Slider mCarHandlingSlider; // Referencia al slider de manejo
-	public GameObject mCarBloquedIcon; // Referencia a la imagen de auto bloqueado
+	public TMPro.TextMeshProUGUI mCarNameText; 
+	public TMPro.TextMeshProUGUI mCarPriceText; 
+	public int mCarPrice; 
+	public Slider mCarSpeedSlider; 
+	public Slider mCarAccelerationSlider;
+	public Slider mCarBreakingSlider; 
+	public Slider mCarHandlingSlider; 
+	public GameObject mCarBloquedIcon; 
+	public GameObject mMedalIcon; 
 
 	private void Start()
 	{
@@ -115,6 +116,16 @@ public class CarSelectionController : MonoBehaviour
 		{
 			mCarBloquedIcon.SetActive(false);
 			mCarPriceText.text = "READY";
+		}
+
+		if (mCarStats.MedalEarned)
+		{
+			mMedalIcon.SetActive(true);
+		}
+		else 
+		{
+
+			mMedalIcon.SetActive(false);
 		}
 	}
 

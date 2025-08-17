@@ -6,20 +6,25 @@ public class CarLight : MonoBehaviour
 {
     [SerializeField] public Light[] mFrontLight;
     [SerializeField] public Light[] mBackLight;
+	[SerializeField] public Light[] mBrakeLight;
 
 	private void Start()
 	{
-		// Luces delanteras apagadas al inicio
+		// Luces apagadas al inicio
 		SetLight(mFrontLight, false);
+		SetLight(mBackLight, false);
+		SetLight(mBrakeLight, false);
 	}
 
-	private void FixedUpdate()
+	private void Update()
 	{
-		// Encender luces delanteras con tecla L
+		// Encender delanteras con tecla L
 		if (Input.GetKeyDown(KeyCode.L))
 		{
 			ToggleLight(mFrontLight);
-			Debug.Log("Front Lights On");
+			ToggleLight(mBackLight);
+			Debug.Log("Lights On");
+
 		}
 	}
 

@@ -9,6 +9,7 @@ TagManager:
   - FuelPump
   - Coins
   - IACar
+  - FarmCar
   layers:
   - Default
   - TransparentFX

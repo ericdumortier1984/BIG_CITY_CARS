@@ -78,12 +78,12 @@ public class WheelController : MonoBehaviour
 		{
 			Debug.Log("Breaking and show back lights");
 			mCurrentBreakForce = mBreakForce;
-			mCarLight.SetLight(mCarLight.mBackLight, true); // Encender luces traseras
+			mCarLight.SetLight(mCarLight.mBrakeLight, true); // Encender luces traseras
 		}
 		else
 		{
 			mCurrentBreakForce = 0.0f;
-			mCarLight.SetLight(mCarLight.mBackLight, false); // Apagar luces traseras
+			mCarLight.SetLight(mCarLight.mBrakeLight, false); // Apagar luces traseras
 		}
 
 		// Aplico velocidad a las ruedas delanteras
