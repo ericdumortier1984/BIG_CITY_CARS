@@ -39,7 +39,6 @@ public class AudioManager : MonoBehaviour
 	private void Update()
 	{
 		HandleSceneMusic();
-		ToggleMusic();
 	}
 
 	private void PlayBackgroundMusic()
@@ -86,13 +85,5 @@ public class AudioManager : MonoBehaviour
 	public void PlaySound(AudioClip mClip) // reproductor de sonidos
 	{
 		mSfxAudioSource.PlayOneShot(mClip);
-	}
-
-	private void ToggleMusic() // muteador de musica
-	{
-		if (Input.GetKeyDown(KeyCode.M))
-		{
-			mAudioSource.mute = !mAudioSource.mute;
-		}
 	}
 }

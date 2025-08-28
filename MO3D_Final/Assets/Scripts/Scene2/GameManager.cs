@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour
 	private bool isPaused = false;
 	private bool isInputCanvas = false;
 
-	private CarFuelController mCarFuelController; // Referencia al script de combustible
-	private ItemWaypointController mItemWaypointController; // Referencia al script de waypoints
+	private CarFuelController mCarFuelController; 
+	private ItemWaypointController mItemWaypointController;
 
 	private void Start()
 	{
@@ -30,14 +30,10 @@ public class GameManager : MonoBehaviour
 		mCarFuelController = FindObjectOfType<CarFuelController>();
 		mItemWaypointController = FindObjectOfType<ItemWaypointController>();
 
-		if (mCarFuelController == null)
-		{
-			Debug.Log("CarFuelController no encontrado en la escena.");
-		}
-
 		// Reinicia los valores de LevelData al inicio del nivel
 		LevelData.CoinsCollectedInLevel = 0;
 		LevelData.WaypointsCollectedInLevel = 0;
+		LevelData.MedalCollectedInLevel = 0;
 	}
 
 	private void Update()

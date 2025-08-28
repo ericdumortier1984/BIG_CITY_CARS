@@ -5,40 +5,39 @@ using UnityEngine.UI;
 
 public class CarFuelController : MonoBehaviour
 {
-	[SerializeField] private float mFuel; // Combustible inicial
-	private float mMaxFuel = 100f; // Maximo de combustible
-	private float mCurrentFuel; // Combustible actual
-	private float mBurnOutFuel = 1f; // Quemamos combustible
+	[Header("Fuel Settings")]
+	[SerializeField] private float fuel; 
+	[SerializeField] private float maxFuel; 
+	[SerializeField] private float burnOutFuel; 
+	[SerializeField] private Slider fuelBar; 
+	[SerializeField] private GameObject itemFuel; 
 
 	public bool isFuelBurning;
+	private float currentFuel; 
+	private CoinsController coinsController; 
 
-	[SerializeField] private Slider mFuelBar; // Referencia a la barra de combustible
-	[SerializeField] private GameObject mItemFuel; // Referencia al item combustible
-
-	private CoinsController mCoinsController; // Referencia al script de item coins
+	public float CurrentFuel { get { return currentFuel; }set { currentFuel = value; } }
 
 	private void Start()
 	{
-		mCurrentFuel = mFuel; // Iniciamos con maximo de combustible
-		mFuelBar.maxValue = mMaxFuel; // Valor maximo del slider
-		mFuelBar.value = mCurrentFuel; // Valor actual del slider
-		mFuelBar.interactable = false;
+		currentFuel = fuel; 
+		fuelBar.maxValue = maxFuel; 
+		fuelBar.value = currentFuel; 
+		fuelBar.interactable = false;
 		OnBurningFuel();
-
-		//mCoinsController = FindObjectOfType<CoinsController>(); // Encontrar el script en la escena
 	}
 
 	private void Update()
 	{
-		if (isFuelBurning && mCurrentFuel > 0)
+		if (isFuelBurning && currentFuel > 0)
 		{
-			mCurrentFuel -= mBurnOutFuel * Time.deltaTime; // Quemamos combustible
-			mCurrentFuel = Mathf.Clamp(mCurrentFuel, 0, mMaxFuel); // Limite del valor entre 0 y maximo
-			mFuelBar.value = mCurrentFuel; // Actualizamos valor del slider
+			currentFuel -= burnOutFuel * Time.deltaTime;
+			currentFuel = Mathf.Clamp(currentFuel, 0, maxFuel); 
+			fuelBar.value = currentFuel; 
 		}
 		else
 		{
-			mCurrentFuel = 0;
+			currentFuel = 0;
 		}
 	}
 
@@ -49,14 +48,8 @@ public class CarFuelController : MonoBehaviour
 
 	public void OnfillingFuel()
 	{
-		mCurrentFuel += 5f; // Incrementar el combustible actual
-		mFuelBar.value = mCurrentFuel; // Actualizar el valor del slider
-	}
-
-	public float CurrentFuel
-	{
-		get { return mCurrentFuel; }
-		set { mCurrentFuel = value; }
+		currentFuel += 5f; 
+		fuelBar.value = currentFuel; 
 	}
 
 	private void OnTriggerEnter(Collider other)

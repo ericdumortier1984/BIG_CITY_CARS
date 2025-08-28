@@ -5,8 +5,11 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
 	public static MainMenu Instance { get; private set; }
+	private SaveData mCurrentSave = new SaveData();
+
+	[Header("TMP UI")]
 	public TMPro.TextMeshProUGUI mCoinText;
-	private SaveData mCurrentSave = new SaveData(); 
+	public TMPro.TextMeshProUGUI medalText;
 
 	[Header("Reset Confirmation")]
 	public GameObject mConfirmResetPanel;
@@ -24,8 +27,17 @@ public class MainMenu : MonoBehaviour
 
 		Cursor.visible = true;
 		mConfirmResetPanel.SetActive(false);
-		mCurrentSave = new SaveData();
+		//mCurrentSave = new SaveData();
+		mCurrentSave = SaveSystem.LoadGame();
 		UpdateCoinUI();
+		UpdateMedalUI();
+	}
+
+	public void AddMedal(int medalAmount)
+	{
+		mCurrentSave.medals += medalAmount;
+		SaveSystem.SaveGame(mCurrentSave);
+		UpdateMedalUI();
 	}
 
 	public void AddCoin(int mCoinAmount)
@@ -33,6 +45,11 @@ public class MainMenu : MonoBehaviour
 		mCurrentSave.mCoins += mCoinAmount;
 		SaveSystem.SaveGame(mCurrentSave);
 		UpdateCoinUI();
+	}
+
+	public void UpdateMedalUI()
+	{
+		medalText.text = "MEDALS: " + mCurrentSave.medals + " /24 ";
 	}
 
 	public bool SpendCoin(int mCoinAmount)
@@ -46,7 +63,7 @@ public class MainMenu : MonoBehaviour
 		}
 		else 
 		{
-			Debug.Log("Not enough coins");
+			//Debug.Log("Not enough coins");
 			return false;
 		}
 	}
@@ -56,7 +73,7 @@ public class MainMenu : MonoBehaviour
 		if (mCoinText != null)
 		{
 			mCoinText.text = "COINS: " + mCurrentSave.mCoins;
-			Debug.Log("Coins: " + mCurrentSave.mCoins.ToString());
+			//Debug.Log("Coins: " + mCurrentSave.mCoins.ToString());
 		}
 	}
 
@@ -64,7 +81,7 @@ public class MainMenu : MonoBehaviour
     {
 		if (CarSelectionController.Instance.mIsSelectedCarBlocked == true)
 		{
-			Debug.Log("Car is Blocked");
+			//Debug.Log("Car is Blocked");
 			return;
 		}
 		else
@@ -93,7 +110,8 @@ public class MainMenu : MonoBehaviour
 	{
 		mCurrentSave = SaveSystem.LoadGame();
 		UpdateCoinUI();
-		Debug.Log("GameLoaded");
+		UpdateMedalUI();
+		//Debug.Log("GameLoaded");
 
 		// Inicializa los autos desbloqueados según SaveData
 		for (int i = 0; i < CarSelectionController.Instance.mCarsToSelect.Length; i++)
@@ -112,22 +130,6 @@ public class MainMenu : MonoBehaviour
 		}
 		//Debug.Log("Car Data Loaded");
 	}
-
-	/*public void SaveGame()
-	{
-
-		// Asegura que la lista tenga la misma cantidad de autos
-		mCurrentSave.mUnlockedCars.Clear();
-
-		for (int i = 1; i < CarSelectionController.Instance.mCarsToSelect.Length; i++)
-		{
-			var mCarStats = CarSelectionController.Instance.mCarsToSelect[i].GetComponent<CarStats>();
-			mCurrentSave.mUnlockedCars.Add(!mCarStats.IsCarBlocked); // true = desbloqueado
-		}
-
-		SaveSystem.SaveGame(mCurrentSave);
-	}*/
-
 
 	public void SaveGame()
 	{
@@ -163,9 +165,11 @@ public class MainMenu : MonoBehaviour
 				var mCarStats = CarSelectionController.Instance.mCarsToSelect[i].GetComponent<CarStats>();
 				mCarStats.IsCarBlocked = i != 0; 
 			}
+
 			UpdateCoinUI();
+			UpdateMedalUI();
 			mConfirmResetPanel.SetActive(false);
-			Debug.Log("Game data reset.");
+			//Debug.Log("Game data reset");
 		});
 
 		mNoButton.onClick.AddListener(() => {

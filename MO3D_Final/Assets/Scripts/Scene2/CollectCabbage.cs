@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
 
-public class CollectHay : MonoBehaviour
+public class CollectCabbage : MonoBehaviour
 {
 	[Header("Spawn Settings")]
 	[SerializeField] private GameObject cabbagePrefab;
@@ -18,22 +18,23 @@ public class CollectHay : MonoBehaviour
 	[Header("Mission Manager")]
 	[SerializeField] private MissionManager missionManager;
 
-	private static int spawnCount = 0;
+	public int spawnCount = 0;
+	private static bool isMedal = false;
 
 	private void Start()
 	{
 		if (spawnCount == 0)
 		{
 			UIMissionManager.Instance.ShowMissionText("COLLECT ALL CABBAGES", textDuration);
-			UIMissionManager.Instance.SetCounter(spawnCount, maxSpawn);
 		}
+		UIMissionManager.Instance.SetCounter(spawnCount, maxSpawn);
 	}
 
 	public void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("FarmCar"))
 		{
-			spawnCount++;
+			spawnCount++; 
 			UIMissionManager.Instance.SetCounter(spawnCount, maxSpawn);
 
 			if (spawnCount < maxSpawn)
@@ -43,9 +44,20 @@ public class CollectHay : MonoBehaviour
 
 			if (spawnCount == maxSpawn)
 			{
-				UIMissionManager.Instance.ShowMissionText("ALL CABBAGES COLLECTED", textDuration);
+				UIMissionManager.Instance.ShowMissionText("ALL CABBAGES COLLECTED\n + 5 COINS", textDuration);
 				UIMissionManager.Instance.HideCounter();
 
+				if(!isMedal)
+				{
+					MainMenu.Instance.AddMedal(1);
+					LevelData.MedalCollectedInLevel += 1;
+					MainMenu.Instance.AddCoin(5);
+					LevelData.CoinsCollectedInLevel += 5;
+					SaveData saveData = SaveSystem.LoadGame();
+					saveData.missionCompleted[0] = true;
+					SaveSystem.SaveGame(saveData);
+					isMedal = true;
+				}
 				missionManager.EndMission();
 			}
 

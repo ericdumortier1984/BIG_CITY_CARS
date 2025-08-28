@@ -19,10 +19,12 @@ public class HarvestMission : MonoBehaviour
 	[SerializeField] private MissionManager missionManager;
 
 	private static int prefabCount = 0;
-	private static int prefabTotalCount = 50;
+	private static int prefabTotalCount = 98;
+	private static bool isMedal = false;
 
 	private void Start()
 	{
+		
 		prefabCount = 0;
 		prefabTotalCount = FindObjectsOfType<HarvestMission>().Length;
 		harvestMapIcon.SetActive(true);
@@ -39,7 +41,19 @@ public class HarvestMission : MonoBehaviour
 			
 			if (prefabCount == prefabTotalCount)
 			{
-				UIMissionManager.Instance.ShowMissionText("ALL HARVEST IS RAISED", textDuration);
+				UIMissionManager.Instance.ShowMissionText("ALL HARVEST IS RAISED\n + 5 COINS", textDuration);
+
+				if (!isMedal)
+				{
+					MainMenu.Instance.AddMedal(1);
+					LevelData.MedalCollectedInLevel += 1;
+					MainMenu.Instance.AddCoin(5);
+					LevelData.CoinsCollectedInLevel += 5;
+					SaveData saveData = SaveSystem.LoadGame();
+					saveData.missionCompleted[1] = true;
+					SaveSystem.SaveGame(saveData);
+					isMedal = true;
+				}
 				missionManager.EndMission();
 				harvestMapIcon.SetActive(false);
 			}

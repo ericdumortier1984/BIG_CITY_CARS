@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CarStats : MonoBehaviour
 {
-	// Script que uso para guardar las estadistica de los autos
 	[SerializeField] private string mCarName;
 	[SerializeField] private string mCarPriceText;
 	[SerializeField] private int mCarPrice;
@@ -12,9 +11,7 @@ public class CarStats : MonoBehaviour
 	[SerializeField] private float mCarAcceleration;
 	[SerializeField] private float mCarBreaking;
 	[SerializeField] private float mCarHandling;
-	[SerializeField] private string mMissionName;
 	[SerializeField] private bool mIsCarBlocked = false;
-	[SerializeField] private bool mMedalEarned = false;
 
 	public string CarName { get => mCarName; set => mCarName = value; }
 	public string CarPriceText { get => mCarPriceText; set => mCarPriceText = value; }
@@ -23,7 +20,5 @@ public class CarStats : MonoBehaviour
 	public float CarAcceleration { get => mCarAcceleration; set => mCarAcceleration = value; }
 	public float CarBreaking { get => mCarBreaking; set => mCarBreaking = value; }
 	public float CarHandling { get => mCarHandling; set => mCarHandling = value; }
-	public string MissionName { get => mMissionName; set => mMissionName = value; }
 	public bool IsCarBlocked { get => mIsCarBlocked; set => mIsCarBlocked = value; }
-	public bool MedalEarned { get => mMedalEarned; set => mMedalEarned = value; }
 }

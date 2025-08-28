@@ -5,44 +5,57 @@ using UnityEngine.UI;
 
 public class CoinsController : MonoBehaviour
 {
-	public TMPro.TextMeshProUGUI mItemCoinsText; // Referencia al texto items coins del canvas
-	public Slider mItemCoinsSlider; // Referencia al slider 
-	public int mItemCoinsToCollect; // Referencia a la cantidad de items coins
-	public int mItemCoinsCollected; // Referencia a la cantidad de items coins recolectados
+	[Header("UI")]
+	public TMPro.TextMeshProUGUI mItemCoinsText;
+	public Slider mItemCoinsSlider;
+
+	[Header("Settings")]
+	public int mItemCoinsToCollect;
+	public int mItemCoinsCollected;
 
 	private void Start()
 	{
-		// Seteo de valores iniciales del slider
-		mItemCoinsSlider.maxValue = mItemCoinsToCollect; // Maximo valor permitido
-		mItemCoinsSlider.value = mItemCoinsCollected; // Valor actual
+		mItemCoinsCollected = LevelData.CoinsCollectedInLevel;
+
+		mItemCoinsSlider.maxValue = mItemCoinsToCollect;
+		mItemCoinsSlider.value = mItemCoinsCollected;
 		mItemCoinsSlider.interactable = false;
 
-		ItemCoinsTextCounter();
+		UpdateHUD();
 	}
 
-	// Metodo contador para cantidad items coins recolectados en slider
 	public void ItemCoinsCounter()
 	{
-		mItemCoinsCollected++; // Incremento del contador
-		mItemCoinsCollected = Mathf.Clamp(mItemCoinsCollected, 0, mItemCoinsToCollect); // No excede limite recolectado
-		mItemCoinsSlider.value = mItemCoinsCollected; // Actualiza slider
+		AddItemCoins(1);
 	}
 
-	// Metodo para actualizar cantidad de items coins recolectados en texto
-	public void ItemCoinsTextCounter()
+	public void AddItemCoins(int amount)
 	{
-		mItemCoinsText.text = mItemCoinsCollected.ToString() + "/" + mItemCoinsToCollect.ToString(); // Actualiza el texto
+		mItemCoinsCollected += amount;
+		mItemCoinsCollected = Mathf.Clamp(mItemCoinsCollected, 0, mItemCoinsToCollect);
+
+		// Actualizar HUD
+		mItemCoinsSlider.value = mItemCoinsCollected;
+		UpdateHUD();
+
+		SaveData saveData = SaveSystem.LoadGame();
+		saveData.mCoins += amount;  // solo sumamos monedas
+		SaveSystem.SaveGame(saveData);
+
+		LevelData.CoinsCollectedInLevel = mItemCoinsCollected;
 	}
 
-	// Metodo trigger para recolectar items coins
+	public void UpdateHUD()
+	{
+		mItemCoinsText.text = mItemCoinsCollected.ToString() + " / " + mItemCoinsToCollect.ToString();
+	}
+
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.tag == "Coins")
+		if (other.CompareTag("Coins"))
 		{
-			ItemCoinsCounter(); // Llamado al metodo contador
-			MainMenu.Instance.AddCoin(1); // Llamado al metodo de suma de monedas
-			LevelData.CoinsCollectedInLevel = mItemCoinsCollected; // Actualiza los datos en LevelData
-			ItemCoinsTextCounter(); // Llamado al texto para actualizar las monedas
+			AddItemCoins(1);
+			Destroy(other.gameObject);
 		}
 	}
 }

@@ -66,7 +66,7 @@ public class WheelTruckController : MonoBehaviour
 	private void MoveCar()
 	{
 		// Aceleracion del vehiculo con teclas A y S u flechas arriba y abajo
-		Debug.Log("Acceleration");
+		//Debug.Log("Acceleration");
 		mCurrentAcceleration = mAcceleration * Input.GetAxis("Vertical");
 
 		// Freno del vehiculo con tecla Espacio
@@ -94,7 +94,7 @@ public class WheelTruckController : MonoBehaviour
 
 		// Aplico giro a las dos ruedas delanteras con un torque maximo
 		// Uso de teclas A y D u flechas izquierda y derecha para el giro
-		Debug.Log("Turning");
+		//Debug.Log("Turning");
 		mCurrentTurnAngle = mMaxTurnAngle * Input.GetAxis("Horizontal");
 		mFrontRight.steerAngle = mCurrentTurnAngle;
 		mFrontLeft.steerAngle = mCurrentTurnAngle;
@@ -120,7 +120,7 @@ public class WheelTruckController : MonoBehaviour
 		{
 			mBackRightTrailTire.GetComponentInChildren<TrailRenderer>().emitting = true;
 			mBackLeftTrailTire.GetComponentInChildren<TrailRenderer>().emitting = true;
-			Debug.Log("Drawing trail tire");
+			//Debug.Log("Drawing trail tire");
 		}
 		else
 		{
@@ -147,19 +147,9 @@ public class WheelTruckController : MonoBehaviour
 			Debug.Log("ItemFuelCollected");
 		}
 
-		/*
-		if (other.tag == "FuelPump")
-		{
-			mCarFuelController.OnUseFuelPump();
-			Debug.Log("Full Tank");
-		}*/
-
 		if (other.tag == "Coins")
 		{
-			mCoinsController.ItemCoinsCounter();
-			mCoinsController.ItemCoinsTextCounter();
 			Destroy(other.gameObject);
-			Debug.Log("Coin Collected");
 		}
 	}
 }

@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class MissionManager : MonoBehaviour
 {
 	[SerializeField] private GameObject collectableItem;
-	//[SerializeField] private GameObject collectableItem2;
 	[SerializeField] private List<GameObject> collectableItem2;
 
 	private bool IsMissionActive = false;
@@ -18,21 +17,14 @@ public class MissionManager : MonoBehaviour
 
 	public void StartMissionCabagge(MissionData missionData)
 	{
-		if (IsMissionActive)
-		{
-			return;
-		}
+		if (IsMissionActive){ return; }
 		collectableItem.SetActive(true);
 		IsMissionActive = true;
 	}
 
 	public void StartMissionHarvest(MissionData missionData)
 	{
-		if (IsMissionActive)
-		{
-			return;
-		}
-		//collectableItem2.SetActive(true);
+		if (IsMissionActive){ return;}
 
 		foreach (GameObject item in collectableItem2)
 		{

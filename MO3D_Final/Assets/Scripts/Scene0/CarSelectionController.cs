@@ -6,17 +6,7 @@ using TMPro;
 
 public class CarSelectionController : MonoBehaviour
 {
-	public static CarSelectionController Instance { get; private set; } // Singleton
-
-	public void Awake()
-	{
-		if (Instance != null && Instance != this)
-		{
-			Destroy(gameObject);
-			return;
-		}
-		Instance = this;
-	}
+	public static CarSelectionController Instance { get; private set; } 
 
 	[Header("Car Selection")]
     public GameObject[] mCarsToSelect; 
@@ -40,8 +30,17 @@ public class CarSelectionController : MonoBehaviour
 	public Slider mCarAccelerationSlider;
 	public Slider mCarBreakingSlider; 
 	public Slider mCarHandlingSlider; 
-	public GameObject mCarBloquedIcon; 
-	public GameObject mMedalIcon; 
+	public GameObject mCarBloquedIcon;
+
+	public void Awake()
+	{
+		if (Instance != null && Instance != this)
+		{
+			Destroy(gameObject);
+			return;
+		}
+		Instance = this;
+	}
 
 	private void Start()
 	{
@@ -116,16 +115,6 @@ public class CarSelectionController : MonoBehaviour
 		{
 			mCarBloquedIcon.SetActive(false);
 			mCarPriceText.text = "READY";
-		}
-
-		if (mCarStats.MedalEarned)
-		{
-			mMedalIcon.SetActive(true);
-		}
-		else 
-		{
-
-			mMedalIcon.SetActive(false);
 		}
 	}
 

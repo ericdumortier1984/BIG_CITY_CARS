@@ -159,19 +159,9 @@ public class BigTruckWheelController : MonoBehaviour
 			Debug.Log("ItemFuelCollected");
 		}
 
-		/*
-		if (other.tag == "FuelPump")
-		{
-			mCarFuelController.OnUseFuelPump();
-			Debug.Log("Full Tank");
-		}*/
-
 		if (other.tag == "Coins")
 		{
-			mCoinsController.ItemCoinsCounter();
-			mCoinsController.ItemCoinsTextCounter();
 			Destroy(other.gameObject);
-			Debug.Log("Coin Collected");
 		}
 	}
 }
