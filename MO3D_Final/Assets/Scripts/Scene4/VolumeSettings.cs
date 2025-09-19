@@ -7,8 +7,9 @@ using TMPro;
 
 public class VolumeSettings : MonoBehaviour
 {
-    public Slider mMusicVolume;
-    public AudioMixer mAudioMixer;
+	[Header("Audio Settings")]
+    [SerializeField] private Slider mMusicVolume;
+    [SerializeField] private AudioMixer mAudioMixer;
 
 	private void Start()
 	{

@@ -9,10 +9,10 @@ public class TextOnOff : MonoBehaviour
 	public enum TextMode { Timed, Blinking, Delayed }
 	private bool mIsTextOn = true;
 	private SaveData saveData;
-
+	
 	[Header("References")]
-	public TextMeshProUGUI mTMP_Text;
-	public Image icon = null;
+	[SerializeField] private TextMeshProUGUI mTMP_Text;
+	[SerializeField] private Image icon;
 
 	[Header("One-Time Settings")]
 	[SerializeField] private bool isOneTime = false;

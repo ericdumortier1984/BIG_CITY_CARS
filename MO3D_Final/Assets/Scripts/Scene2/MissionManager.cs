@@ -5,37 +5,49 @@ using UnityEngine.UI;
 
 public class MissionManager : MonoBehaviour
 {
+	[Header("Cabbage Mission")]
 	[SerializeField] private GameObject collectableItem;
+	[Header("Harvest Mission")]
 	[SerializeField] private List<GameObject> collectableItem2;
+	[Header("Taxi mission")]
+	[SerializeField] private GameObject taxiRacer;
 
-	private bool IsMissionActive = false;
+	private bool isMissionActive = false;
+	public bool IsMissionActive => isMissionActive;
 
 	public bool CanStartMission()
 	{
-		return !IsMissionActive;
+		return !isMissionActive;
 	}
 
 	public void StartMissionCabagge(MissionData missionData)
 	{
-		if (IsMissionActive){ return; }
+		if (isMissionActive) { return; }
 		collectableItem.SetActive(true);
-		IsMissionActive = true;
+		isMissionActive = true;
 	}
 
 	public void StartMissionHarvest(MissionData missionData)
 	{
-		if (IsMissionActive){ return;}
+		if (isMissionActive) { return;}
 
 		foreach (GameObject item in collectableItem2)
 		{
 			item.SetActive(true);
 		}
 
-		IsMissionActive = true;
+		isMissionActive = true;
+	}
+
+	public void StartMisionTaxiRace(MissionData missionData)
+	{
+		if (isMissionActive) { return; }
+		taxiRacer.SetActive(true);
+		isMissionActive = true;
 	}
 
 	public void EndMission()
 	{
-		IsMissionActive = false;
+		isMissionActive = false;
 	}
 }

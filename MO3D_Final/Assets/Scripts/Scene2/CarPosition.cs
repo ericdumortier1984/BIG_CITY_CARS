@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CarPosition : MonoBehaviour
 {
-    public GameObject mCar; // Refeerncia al auto
-	private Vector3 mInitialPosition; // Posicion Inicial del auto;
-	private Quaternion mInitialRotation; // Rotacion inicial del auto;
+    public GameObject mCar; 
+	private Vector3 mInitialPosition; 
+	private Quaternion mInitialRotation;
 
 	void Start()
     {
@@ -14,7 +14,6 @@ public class CarPosition : MonoBehaviour
         mInitialRotation = mCar.transform.rotation;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))

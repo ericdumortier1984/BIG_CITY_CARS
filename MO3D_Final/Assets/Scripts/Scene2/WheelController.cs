@@ -5,30 +5,27 @@ using UnityEngine;
 public class WheelController : MonoBehaviour
 {
 	[Header("Wheel Colliders")]
-    [SerializeField] WheelCollider mFrontRight;
-	[SerializeField] WheelCollider mFrontLeft;
-	[SerializeField] WheelCollider mBackRight;
-	[SerializeField] WheelCollider mBackLeft;
+    [SerializeField] private WheelCollider mFrontRight;
+	[SerializeField] private WheelCollider mFrontLeft;
+	[SerializeField] private WheelCollider mBackRight;
+	[SerializeField] private WheelCollider mBackLeft;
 
 	[Header("Wheel Meshes")]
-	[SerializeField] Transform mFrontRightTransform;
-	[SerializeField] Transform mFrontLeftTransform;
-	[SerializeField] Transform mBackRightTransform;
-	[SerializeField] Transform mBackLeftTransform;
+	[SerializeField] private Transform mFrontRightTransform;
+	[SerializeField] private Transform mFrontLeftTransform;
+	[SerializeField] private Transform mBackRightTransform;
+	[SerializeField] private Transform mBackLeftTransform;
 
 	[Header("Wheel Trails")]
-	[SerializeField] GameObject mBackRightTrailTire;
-	[SerializeField] GameObject mBackLeftTrailTire;
+	[SerializeField] private TrailRenderer mBackRightTrailTire;
+	[SerializeField] private TrailRenderer mBackLeftTrailTire;
 
-	///////////// Variables de configuración del vehículo /////////////
-	///
-	// Iniciales
-	public float mAcceleration = 1.0f;
-	public float mBreakForce = 1.0f;
-	public float mMaxTurnAngle = 1.0f;
-	public Vector3 mCenterOfMass;
+	[Header("Car Settings")]
+	[SerializeField] private float mAcceleration = 0.0f;
+	[SerializeField] private float mBreakForce = 0.0f;
+	[SerializeField] private float mMaxTurnAngle = 0.0f;
+	[SerializeField] private Vector3 mCenterOfMass;
 
-	// Actuales
 	private float mCurrentAcceleration = 0.0f;
 	private float mCurrentBreakForce = 0.0f;
 	private float mCurrentTurnAngle = 0.0f;
@@ -67,20 +64,19 @@ public class WheelController : MonoBehaviour
 
 	private void MoveCar()
 	{
-		if (!vehicleIntro.IsPlayingIntro)
-		{
+		//if (!vehicleIntro.IsPlayingIntro)
+		//{
 			mCurrentAcceleration = mAcceleration * Input.GetAxis("Vertical");
 
 			if (Input.GetKey(KeyCode.Space))
 			{
-				//Debug.Log("Breaking and show back lights");
 				mCurrentBreakForce = mBreakForce;
-				mCarLight.SetLight(mCarLight.mBrakeLight, true);
+				mCarLight.BackLightOn = true;
 			}
 			else
 			{
 				mCurrentBreakForce = 0.0f;
-				mCarLight.SetLight(mCarLight.mBrakeLight, false);
+				mCarLight.BackLightOn = false;
 			}
 
 			// Aplico velocidad a las ruedas delanteras
@@ -93,10 +89,11 @@ public class WheelController : MonoBehaviour
 			mBackRight.brakeTorque = mCurrentBreakForce;
 			mBackLeft.brakeTorque = mCurrentBreakForce;
 
+			// Giro
 			mCurrentTurnAngle = mMaxTurnAngle * Input.GetAxis("Horizontal");
 			mFrontRight.steerAngle = mCurrentTurnAngle;
 			mFrontLeft.steerAngle = mCurrentTurnAngle;
-		}
+		//}
 	}
 
 	void UpdateWheel(WheelCollider mCollider, Transform mTransform)
@@ -115,7 +112,6 @@ public class WheelController : MonoBehaviour
 		{
 			mBackRightTrailTire.GetComponentInChildren<TrailRenderer>().emitting = true;
 			mBackLeftTrailTire.GetComponentInChildren<TrailRenderer>().emitting = true;
-			//Debug.Log("Drawing trail tire");
 		}
 		else 
 		{

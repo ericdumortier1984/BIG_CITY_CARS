@@ -4,47 +4,49 @@ using UnityEngine;
 
 public class BigTruckWheelController : MonoBehaviour
 {
-	[SerializeField] WheelCollider mFrontRight;
-	[SerializeField] WheelCollider mFrontLeft;
-	[SerializeField] WheelCollider mBackRight;
-	[SerializeField] WheelCollider mBackLeft;
-	[SerializeField] WheelCollider mMiddleLeft;
-	[SerializeField] WheelCollider mMiddleRight;
-	[SerializeField] WheelCollider mCenterMiddleLeft;
-	[SerializeField] WheelCollider mCenterMiddleRight;
-	[SerializeField] WheelCollider mLastMiddleLeft;
-	[SerializeField] WheelCollider mLastMiddleRight;
+	[Header("Wheel Colliders")]
+	[SerializeField] private WheelCollider mFrontRight;
+	[SerializeField] private WheelCollider mFrontLeft;
+	[SerializeField] private WheelCollider mBackRight;
+	[SerializeField] private WheelCollider mBackLeft;
+	[SerializeField] private WheelCollider mMiddleLeft;
+	[SerializeField] private WheelCollider mMiddleRight;
+	[SerializeField] private WheelCollider mCenterMiddleLeft;
+	[SerializeField] private WheelCollider mCenterMiddleRight;
+	[SerializeField] private WheelCollider mLastMiddleLeft;
+	[SerializeField] private WheelCollider mLastMiddleRight;
 
-	[SerializeField] Transform mFrontRightTransform;
-	[SerializeField] Transform mFrontLeftTransform;
-	[SerializeField] Transform mBackRightTransform;
-	[SerializeField] Transform mBackLeftTransform;
-	[SerializeField] Transform mMiddleLeftTransform;
-	[SerializeField] Transform mMiddleRightTrandform;
-	[SerializeField] Transform mCenterMiddleLeftTransform;
-	[SerializeField] Transform mCenterMiddleRightTransform;
-	[SerializeField] Transform mLastMiddleLeftTransform;
-	[SerializeField] Transform mLastMiddleRightTrandform;
+	[Header("Wheel Meshes")]
+	[SerializeField] private Transform mFrontRightTransform;
+	[SerializeField] private Transform mFrontLeftTransform;
+	[SerializeField] private Transform mBackRightTransform;
+	[SerializeField] private Transform mBackLeftTransform;
+	[SerializeField] private Transform mMiddleLeftTransform;
+	[SerializeField] private Transform mMiddleRightTrandform;
+	[SerializeField] private Transform mCenterMiddleLeftTransform;
+	[SerializeField] private Transform mCenterMiddleRightTransform;
+	[SerializeField] private Transform mLastMiddleLeftTransform;
+	[SerializeField] private Transform mLastMiddleRightTrandform;
 
-	// Marcas de frenado en ruedas traseras
-	[SerializeField] GameObject mBackRightTrailTire;
-	[SerializeField] GameObject mBackLeftTrailTire;
+	[Header("Wheel Trails")]
+	[SerializeField] private GameObject mBackRightTrailTire;
+	[SerializeField] private GameObject mBackLeftTrailTire;
 
-	public float mAcceleration = 1.0f;
-	public float mBreakForce = 1.0f;
-	public float mMaxTurnAngle = 1.0f;
+	[Header("Car Settings")]
+	[SerializeField] private float mAcceleration = 0.0f;
+	[SerializeField] private float mBreakForce = 0.0f;
+	[SerializeField] private float mMaxTurnAngle = 0.0f;
+	[SerializeField] private Vector3 mCenterOfMass;
 
 	private float mCurrentAcceleration = 0.0f;
 	private float mCurrentBreakForce = 0.0f;
 	private float mCurrentTurnAngle = 0.0f;
 
-	public Vector3 mCenterOfMass;
-
-	private Rigidbody mCarRb; // Referencia al rigidbody del vehiculo
-	private CarLight mCarLight; // Referencia al script de luces
-	private ItemWaypointController mItemWaypointController; // Referencia al script de items waypoints
-	private CarFuelController mCarFuelController; // Referencia al script de combustible
-	private CoinsController mCoinsController; // Referencia al script de coins
+	private Rigidbody mCarRb; 
+	private CarLight mCarLight; 
+	private ItemWaypointController mItemWaypointController; 
+	private CarFuelController mCarFuelController; 
+	private CoinsController mCoinsController; 
 
 	private void Start()
 	{
@@ -52,7 +54,7 @@ public class BigTruckWheelController : MonoBehaviour
 		mCarRb.centerOfMass = mCenterOfMass;
 
 		mCarLight = GetComponent<CarLight>();
-		mItemWaypointController = FindObjectOfType<ItemWaypointController>(); // Encontrar el script en la escena
+		mItemWaypointController = FindObjectOfType<ItemWaypointController>();
 		mCarFuelController = FindObjectOfType<CarFuelController>();
 		mCoinsController = FindObjectOfType<CoinsController>();
 	}
@@ -77,21 +79,17 @@ public class BigTruckWheelController : MonoBehaviour
 
 	private void MoveCar()
 	{
-		// Aceleracion del vehiculo con teclas A y S u flechas arriba y abajo
-		Debug.Log("Acceleration");
 		mCurrentAcceleration = mAcceleration * Input.GetAxis("Vertical");
 
-		// Freno del vehiculo con tecla Espacio
 		if (Input.GetKey(KeyCode.Space))
 		{
-			Debug.Log("Breaking and show back lights");
 			mCurrentBreakForce = mBreakForce;
-			mCarLight.SetLight(mCarLight.mBackLight, true); // Encender luces traseras
+			mCarLight.BackLightOn = true; // Encender luces traseras
 		}
 		else
 		{
 			mCurrentBreakForce = 0.0f;
-			mCarLight.SetLight(mCarLight.mBackLight, false); // Apagar luces traseras
+			mCarLight.BackLightOn = false; // Apagar luces traseras
 		}
 
 		// Aplico velocidad a las ruedas delanteras
@@ -104,9 +102,7 @@ public class BigTruckWheelController : MonoBehaviour
 		mBackRight.brakeTorque = mCurrentBreakForce;
 		mBackLeft.brakeTorque = mCurrentBreakForce;
 
-		// Aplico giro a las dos ruedas delanteras con un torque maximo
-		// Uso de teclas A y D u flechas izquierda y derecha para el giro
-		Debug.Log("Turning");
+		// Giro
 		mCurrentTurnAngle = mMaxTurnAngle * Input.GetAxis("Horizontal");
 		mFrontRight.steerAngle = mCurrentTurnAngle;
 		mFrontLeft.steerAngle = mCurrentTurnAngle;
@@ -127,7 +123,6 @@ public class BigTruckWheelController : MonoBehaviour
 
 	void OnDrawTrailTire()
 	{
-		// Dibujo las marcas de las llantas
 		if (Input.GetKey(KeyCode.Space))
 		{
 			mBackRightTrailTire.GetComponentInChildren<TrailRenderer>().emitting = true;
@@ -141,7 +136,6 @@ public class BigTruckWheelController : MonoBehaviour
 		}
 	}
 
-	// Metodo para recoleccion de items waypoints con mi player
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.tag == "ItemWaypoint")

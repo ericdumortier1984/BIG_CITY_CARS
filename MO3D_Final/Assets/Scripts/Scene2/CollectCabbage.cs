@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
 
@@ -17,6 +16,7 @@ public class CollectCabbage : MonoBehaviour
 
 	[Header("Mission Manager")]
 	[SerializeField] private MissionManager missionManager;
+	[SerializeField] private ParticleSystem collectParticle;
 
 	public int spawnCount = 0;
 	private static bool isMedal = false;
@@ -25,6 +25,7 @@ public class CollectCabbage : MonoBehaviour
 	{
 		if (spawnCount == 0)
 		{
+			collectParticle.Play();
 			UIMissionManager.Instance.ShowMissionText("COLLECT ALL CABBAGES", textDuration);
 		}
 		UIMissionManager.Instance.SetCounter(spawnCount, maxSpawn);
@@ -34,7 +35,7 @@ public class CollectCabbage : MonoBehaviour
 	{
 		if (other.CompareTag("FarmCar"))
 		{
-			spawnCount++; 
+			spawnCount++;
 			UIMissionManager.Instance.SetCounter(spawnCount, maxSpawn);
 
 			if (spawnCount < maxSpawn)
@@ -44,20 +45,7 @@ public class CollectCabbage : MonoBehaviour
 
 			if (spawnCount == maxSpawn)
 			{
-				UIMissionManager.Instance.ShowMissionText("ALL CABBAGES COLLECTED\n + 5 COINS", textDuration);
-				UIMissionManager.Instance.HideCounter();
-
-				if(!isMedal)
-				{
-					MainMenu.Instance.AddMedal(1);
-					LevelData.MedalCollectedInLevel += 1;
-					MainMenu.Instance.AddCoin(5);
-					LevelData.CoinsCollectedInLevel += 5;
-					SaveData saveData = SaveSystem.LoadGame();
-					saveData.missionCompleted[0] = true;
-					SaveSystem.SaveGame(saveData);
-					isMedal = true;
-				}
+				WinMission();
 				missionManager.EndMission();
 			}
 
@@ -71,5 +59,23 @@ public class CollectCabbage : MonoBehaviour
 			Random.Range(-spawnRadius, spawnRadius));
 
 		GameObject newCabbage = Instantiate(cabbagePrefab, newPos, Quaternion.identity);
+	}
+
+	private void WinMission()
+	{
+		UIMissionManager.Instance.ShowMissionText("ALL CABBAGES COLLECTED\n + 5 COINS", textDuration);
+		UIMissionManager.Instance.HideCounter();
+
+		if (!isMedal)
+		{
+			MainMenu.Instance.AddMedal(1);
+			LevelData.MedalCollectedInLevel += 1;
+			MainMenu.Instance.AddCoin(5);
+			LevelData.CoinsCollectedInLevel += 5;
+			SaveData saveData = SaveSystem.LoadGame();
+			saveData.missionCompleted[0] = true;
+			SaveSystem.SaveGame(saveData);
+			isMedal = true;
+		}
 	}
 }

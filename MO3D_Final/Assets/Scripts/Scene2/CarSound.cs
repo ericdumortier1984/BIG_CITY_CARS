@@ -4,32 +4,30 @@ using UnityEngine;
 
 public class CarSound : MonoBehaviour
 {
-	public float mMinSpeed;
-	public float mMaxSpeed;
-	private float mCurrentSpeed;
+	[Header("Car Sound Settings")]
+	[SerializeField] private float mMinSpeed;
+	[SerializeField] private float mMaxSpeed;
+	[SerializeField] private float mMinPitch;
+	[SerializeField] private float mMaxPitch;
+	private float currentSpeed;
+	private float pitchFromCar;
 
-	private Rigidbody mCarRb;
-	private AudioSource mCarEngine;
-	private AudioSource mCarHorn;
-	private AudioSource mCarBrakes;
-
-	public float mMinPitch;
-	public float mMaxPitch;
-	private float mPitchFromCar;
+	private Rigidbody carRb;
+	private AudioSource carEngine;
+	private AudioSource carHorn;
+	private AudioSource carBrakes;
 
 	private void Start()
 	{
-		mCarRb = GetComponent<Rigidbody>();
-	
-		///////////// Array de AudioSources ////////////
-		///
+		carRb = GetComponent<Rigidbody>();
+
 		AudioSource[] mAudioSources = GetComponents<AudioSource>();
-		mCarEngine = mAudioSources[0]; // Motor
-		mCarHorn = mAudioSources[1];  // Bocina
-		mCarBrakes = mAudioSources[2]; // Frenos
+		carEngine = mAudioSources[0]; // Motor
+		carHorn = mAudioSources[1];  // Bocina
+		carBrakes = mAudioSources[2]; // Frenos
 	}
 
-	private void FixedUpdate()
+	private void Update()
 	{
 		SetEngineSound();
 		PlayCarHorn();
@@ -38,44 +36,40 @@ public class CarSound : MonoBehaviour
 
 	private void SetEngineSound()
 	{
-		////// Aumenta el pitch del sonido del motor dependiendo de la velocidad del vehiculo //////
-		///
-		mCurrentSpeed = mCarRb.velocity.magnitude;
-		mPitchFromCar = mCarRb.velocity.magnitude / mMaxSpeed;
+		currentSpeed = carRb.velocity.magnitude;
+		pitchFromCar = carRb.velocity.magnitude / mMaxSpeed;
 
-		if (mCurrentSpeed < mMinSpeed)
+		if (currentSpeed < mMinSpeed)
 		{
-			mCarEngine.pitch = mMinPitch;
+			carEngine.pitch = mMinPitch;
 		}
 
-		if (mCurrentSpeed > mMinSpeed && mCurrentSpeed < mMaxSpeed)
+		if (currentSpeed > mMinSpeed && currentSpeed < mMaxSpeed)
 		{
-			mCarEngine.pitch = mMinPitch + mPitchFromCar;
+			carEngine.pitch = mMinPitch + pitchFromCar;
 		}
 
-		if (mCurrentSpeed > mMaxSpeed)
+		if (currentSpeed > mMaxSpeed)
 		{
-			mCarEngine.pitch = mMaxPitch;
+			carEngine.pitch = mMaxPitch;
 		}
 	}
 
 	private void PlayCarHorn()
 	{
-		// Bocina del vehiculo con tecla H
 		if (Input.GetKey(KeyCode.H))
 		{
-			mCarHorn.PlayOneShot(mCarHorn.clip);
+			carHorn.PlayOneShot(carHorn.clip);
 		}
 	}
 
 	private void PlayCarBrakes()
 	{
-		// Frenos del vehiculo con tecla Espacio
 		if (Input.GetKey(KeyCode.Space))
 		{
-			if (mCurrentSpeed > mMinSpeed && mCurrentSpeed < mMaxSpeed)
+			if (currentSpeed > mMinSpeed && currentSpeed < mMaxSpeed)
 			{
-				mCarBrakes.PlayOneShot(mCarBrakes.clip);
+				carBrakes.PlayOneShot(carBrakes.clip);
 			}
 		}
 	}

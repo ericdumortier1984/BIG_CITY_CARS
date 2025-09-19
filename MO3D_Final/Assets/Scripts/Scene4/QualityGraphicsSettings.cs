@@ -7,7 +7,8 @@ using TMPro;
 
 public class QualityGraphicsSettings : MonoBehaviour
 {
-	public TMP_Dropdown mGraphicsDropdown;
+	[Header("Quality Settings")]
+	[SerializeField] private TMP_Dropdown mGraphicsDropdown;
 
 	private void Start()
 	{

@@ -6,6 +6,7 @@ public enum MissionType
 {
     Collect,
     Deliver,
+    Racer,
 }
 
 [CreateAssetMenu(fileName = "New Mission", menuName = "Mission Data")]
@@ -34,4 +35,11 @@ public class MissionData : ScriptableObject
     public GameObject DeliveryItem { get { return deliveryItem; } }
     public Transform DeliveryLocation { get { return deliveryLocation; } }
     public int DeliveryAmount { get { return deliveryAmount; } }
+
+    [Header("Racer")]
+    [SerializeField] private GameObject racer;
+    [SerializeField] private List<Transform> waypoints;
+
+    public GameObject GameObject { get { return racer; } }
+    public List<Transform> Waypoints { get { return waypoints; } }
 }

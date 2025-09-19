@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class Credits : MonoBehaviour
 {
-
 	public void BackToMainMenu()
 	{
 		LoaderScene.Load(LoaderScene.mScene.SceneMainMenu);

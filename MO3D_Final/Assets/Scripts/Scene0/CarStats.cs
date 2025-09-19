@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CarStats : MonoBehaviour
 {
+	[Header("Car Stats")]
 	[SerializeField] private string mCarName;
 	[SerializeField] private string mCarPriceText;
 	[SerializeField] private int mCarPrice;

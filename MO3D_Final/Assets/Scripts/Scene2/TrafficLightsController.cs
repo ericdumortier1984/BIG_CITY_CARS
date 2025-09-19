@@ -4,27 +4,21 @@ using UnityEngine;
 
 public class TrafficLightsController : MonoBehaviour
 {
-    public enum TrafficLightState
-    {
-        Red, 
-        Green
-    }
-
-	[Header("Config Start")]
-	public bool startWithRed = true; 
-
-	[Header("Config Time")]
-    public float mRedDuration = 5f;
-    public float mGreenDuration = 5f;
-
-    [Header("Visual")]
-	public Transform mRedLight;
-	public Transform mGreenLight;
+    public enum TrafficLightState { Red, Green }
 	public TrafficLightState mCurrentState { get; private set; }
 
-    private float timer;
+	[Header("Time Settings")]
+    [SerializeField] private float mRedDuration = 5f;
+    [SerializeField] private float mGreenDuration = 5f;
 
-    private void Start()
+    [Header("Visual Settings")]
+	[SerializeField] private Transform mRedLight;
+	[SerializeField] private Transform mGreenLight;
+	
+    private float timer;
+	private bool startWithRed = true;
+
+	private void Start()
     {
         timer = 0f;
 		mCurrentState = startWithRed ? TrafficLightState.Red : TrafficLightState.Green;

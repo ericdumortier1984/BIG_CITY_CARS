@@ -7,23 +7,16 @@ using UnityEngine;
 public class IAController : MonoBehaviour
 {
 	[Header("Wheel Colliders")]
-	[SerializeField] WheelCollider mFrontRight;
-	[SerializeField] WheelCollider mFrontLeft;
-	[SerializeField] WheelCollider mBackRight;
-	[SerializeField] WheelCollider mBackLeft;
+	[SerializeField] private WheelCollider mFrontRight;
+	[SerializeField] private WheelCollider mFrontLeft;
+	[SerializeField] private WheelCollider mBackRight;
+	[SerializeField] private WheelCollider mBackLeft;
 
 	[Header("Transforms")]
-	[SerializeField] Transform mFrontRightTransform;
-	[SerializeField] Transform mFrontLeftTransform;
-	[SerializeField] Transform mBackRightTransform;
-	[SerializeField] Transform mBackLeftTransform;
- 
-	private WayPointIAController mWaypointController;
-	private IntersectionZone mCurrentIntersectionZone;
-
-	private bool shouldStop = false;
-	private bool isSlowingDown = false;
-	public bool isStopped { get; private set; } = false;
+	[SerializeField] private Transform mFrontRightTransform;
+	[SerializeField] private Transform mFrontLeftTransform;
+	[SerializeField] private Transform mBackRightTransform;
+	[SerializeField] private Transform mBackLeftTransform;
 
 	[Header("Speeds")]
 	[SerializeField] private float mNormalSpeed = 0f;
@@ -37,6 +30,12 @@ public class IAController : MonoBehaviour
 	[SerializeField] private float slowDownDistance = 0f;  // Distancia para empezar a reducir velocidad
 
 	private IAController carAhead = null;
+	private bool shouldStop = false;
+	private bool isSlowingDown = false;
+	public bool isStopped { get; private set; } = false;
+
+	private WayPointIAController mWaypointController;
+	private IntersectionZone mCurrentIntersectionZone;
 
 	private void Start()
 	{
@@ -92,7 +91,6 @@ public class IAController : MonoBehaviour
 		{
 			if (zone.IsRedLight())
 			{
-				//SlowDown();
 				mWaypointController.SetSpeed(0f);
 				isStopped = true;
 				mCurrentIntersectionZone = zone;
@@ -105,9 +103,6 @@ public class IAController : MonoBehaviour
 	{
 		if (other.TryGetComponent<IntersectionZone>(out var zone))
 		{
-			//if (mWaypointController != null)
-			//mWaypointController.SetSpeed(mNormalSpeed);
-			//isStopped = false;
 			if (mCurrentIntersectionZone == zone)
 			{
 				mCurrentIntersectionZone = null;
@@ -156,7 +151,6 @@ public class IAController : MonoBehaviour
 		return null;
 	}
 
-
 	private void UpdateIACar()
 	{
 		if (shouldStop || isStopped) // Auto frenado por semáforo
@@ -189,11 +183,6 @@ public class IAController : MonoBehaviour
 				mWaypointController.SetSpeed(mNormalSpeed);
 				isStopped = false;
 			}
-
-			//if (!DetectCarAhead())
-			//{
-				//isStopped = false;
-			//}
 
 			mWaypointController.MoveToWaypoint();
 			isStopped = false;

@@ -8,13 +8,14 @@ public class AudioManager : MonoBehaviour
 {
 	public static AudioManager mSoundInstance { get; private set; } // Utilizo el singleton para acceder al sonido desde mi menu Game Settings
 
-	[SerializeField] AudioMixer mMusicMixer;
-	[SerializeField] AudioSource mSfxAudioSource;
+	[Header("Sound Settings")]
+	[SerializeField] private AudioMixer mMusicMixer;
+	[SerializeField] private AudioSource mSfxAudioSource;
+	[SerializeField] private AudioClip mBackgroundMusic;
+	[SerializeField] private AudioClip mLevelMusic;
 
 	private AudioSource mAudioSource;
-	public AudioClip mBackgroundMusic;
-	public AudioClip mLevelMusic;
-
+	
 	private void Awake()
 	{
 		if(mSoundInstance == null)

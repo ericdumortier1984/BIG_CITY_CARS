@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class EndLevel : MonoBehaviour
 {
+	[Header("Texts")]
+	[SerializeField] private TMPro.TextMeshProUGUI mCoinsCollectedText;
+	[SerializeField] private TMPro.TextMeshProUGUI mWaypointsCollectedText;
+	[SerializeField] private TMPro.TextMeshProUGUI medalCollectedText;
+
 	private CoinsController mCoinsController;
 	private ItemWaypointController mItemWayController;
-
-	public TMPro.TextMeshProUGUI mCoinsCollectedText; 
-	public TMPro.TextMeshProUGUI mWaypointsCollectedText; 
-	public TMPro.TextMeshProUGUI medalCollectedText; 
 
 	private void Start()
 	{

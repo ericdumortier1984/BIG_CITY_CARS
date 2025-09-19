@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class CoinsController : MonoBehaviour
 {
-	[Header("UI")]
-	public TMPro.TextMeshProUGUI mItemCoinsText;
-	public Slider mItemCoinsSlider;
+	[Header("Coins UI")]
+	[SerializeField] private TMPro.TextMeshProUGUI mItemCoinsText;
+	[SerializeField] private Slider mItemCoinsSlider;
 
-	[Header("Settings")]
-	public int mItemCoinsToCollect;
-	public int mItemCoinsCollected;
+	[Header("Coins Settings")]
+	[SerializeField] private int mItemCoinsToCollect;
+	private int mItemCoinsCollected;
 
 	private void Start()
 	{

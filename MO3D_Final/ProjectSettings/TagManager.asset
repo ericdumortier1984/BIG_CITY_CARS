@@ -10,6 +10,9 @@ TagManager:
   - Coins
   - IACar
   - FarmCar
+  - FxTemporaire
+  - Taxi
+  - Police
   layers:
   - Default
   - TransparentFX

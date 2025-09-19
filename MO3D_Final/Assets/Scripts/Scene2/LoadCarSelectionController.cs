@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class LoadCarSelectionController : MonoBehaviour
 {
-	public GameObject[] mCarsToSelect; // Array de autos seleccionables
+	[Header("Cars")]
+	[SerializeField] private GameObject[] mCarsToSelect;
 
 	private CarSelectionController mCarSelectionController;
 	private CarFuelController mCarFuelController;

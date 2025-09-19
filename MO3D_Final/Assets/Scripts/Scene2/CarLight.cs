@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class CarLight : MonoBehaviour
 {
-    [SerializeField] public Light[] mFrontLight;
-    [SerializeField] public Light[] mBackLight;
-	[SerializeField] public Light[] mBrakeLight;
+	[SerializeField] private Light[] mFrontLight;
+	[SerializeField] private Light[] mBackLight;
+	[SerializeField] private Light[] mBrakeLight;
+
+	public bool FrontLightOn { set { SetLight(mFrontLight, value); }}
+	public bool BackLightOn { set { SetLight(mBackLight, value); }}
+	public bool BrakeLightOn { set { SetLight(mBrakeLight, value); }}
 
 	private void Start()
 	{
-		// Luces apagadas al inicio
 		SetLight(mFrontLight, false);
 		SetLight(mBackLight, false);
 		SetLight(mBrakeLight, false);
@@ -18,13 +21,11 @@ public class CarLight : MonoBehaviour
 
 	private void Update()
 	{
-		// Encender delanteras con tecla L
 		if (Input.GetKeyDown(KeyCode.L))
 		{
 			ToggleLight(mFrontLight);
 			ToggleLight(mBackLight);
 			Debug.Log("Lights On");
-
 		}
 	}
 

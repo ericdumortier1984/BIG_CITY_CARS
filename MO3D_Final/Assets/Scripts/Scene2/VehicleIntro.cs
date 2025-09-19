@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Playables;
 using Cinemachine;
+using TMPro;
 
 public class VehicleIntro : MonoBehaviour
 {

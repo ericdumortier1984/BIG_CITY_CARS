@@ -24,7 +24,6 @@ public class HarvestMission : MonoBehaviour
 
 	private void Start()
 	{
-		
 		prefabCount = 0;
 		prefabTotalCount = FindObjectsOfType<HarvestMission>().Length;
 		harvestMapIcon.SetActive(true);
@@ -36,7 +35,6 @@ public class HarvestMission : MonoBehaviour
 		if (other.CompareTag("FarmCar"))
 		{
 			prefabCount++;
-
 			Destroy(gameObject);
 			
 			if (prefabCount == prefabTotalCount)
