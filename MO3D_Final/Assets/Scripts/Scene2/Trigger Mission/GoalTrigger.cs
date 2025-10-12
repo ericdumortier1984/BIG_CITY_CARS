@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GoalTrigger : MonoBehaviour
 {
+	[Header("Settings")]
+	[SerializeField] private GameObject triggerMission;
 	private TaxiRace taxiRace;
 
 	private void Start()
@@ -13,11 +15,14 @@ public class GoalTrigger : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.CompareTag("Taxi"))
+		if (other.CompareTag("Taxi") && taxiRace.IsCheckpointCompleted())
 		{
 			taxiRace.WinMission();
 		}
-		//else if (other.gameObject == taxiRacer)
+		else if (other.CompareTag("Taxi") && !taxiRace.IsCheckpointCompleted())
+		{
+			UIMissionManager.Instance.ShowMissionText("YOU MISSED A CHECKPOINT", 2.0f);
+		}
 		else if (other.gameObject == taxiRace.GetTaxiRacer())
 		{
 			taxiRace.LoseMission();

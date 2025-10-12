@@ -7,17 +7,16 @@ public class ArrowBounce : MonoBehaviour
 	[Header("Settings")]
 	[SerializeField] private float amplitude = 0.5f; 
 	[SerializeField] private float frequency = 2f; 
-
 	private Vector3 startPos;
 
 	void Start()
 	{
-		startPos = transform.localPosition;
+		startPos = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
 	}
 
 	void Update()
 	{
-		float bounce = startPos.y + 1 + Mathf.Sin(Time.time * frequency) * amplitude;
+		float bounce = startPos.z + Mathf.Sin(Time.time * frequency) * amplitude;
 		transform.localPosition = new Vector3(startPos.x, startPos.y, bounce);
 	}
 }

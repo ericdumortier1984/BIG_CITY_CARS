@@ -6,24 +6,26 @@ using UnityEngine.UI;
 public class CarFuelController : MonoBehaviour
 {
 	[Header("Fuel Settings")]
-	[SerializeField] private float fuel; 
-	[SerializeField] private float maxFuel; 
-	[SerializeField] private float burnOutFuel; 
+	[SerializeField] private float totalGameTime;
 	[SerializeField] private Slider fuelBar; 
-	[SerializeField] private GameObject itemFuel; 
+	[SerializeField] private GameObject itemFuel;
 
-	public bool isFuelBurning;
-	private float currentFuel; 
+	private float currentFuel;
+	private float burnOutFuel = 1f; 
+	public bool isFuelBurning = true;
+
 	private CoinsController coinsController; 
 
 	public float CurrentFuel { get { return currentFuel; }set { currentFuel = value; } }
 
 	private void Start()
 	{
-		currentFuel = fuel; 
-		fuelBar.maxValue = maxFuel; 
-		fuelBar.value = currentFuel; 
+		currentFuel = totalGameTime;
+
+		fuelBar.maxValue = totalGameTime;
+		fuelBar.value = currentFuel;
 		fuelBar.interactable = false;
+
 		OnBurningFuel();
 	}
 
@@ -32,10 +34,10 @@ public class CarFuelController : MonoBehaviour
 		if (isFuelBurning && currentFuel > 0)
 		{
 			currentFuel -= burnOutFuel * Time.deltaTime;
-			currentFuel = Mathf.Clamp(currentFuel, 0, maxFuel); 
-			fuelBar.value = currentFuel; 
+			currentFuel = Mathf.Clamp(currentFuel, 0, totalGameTime);
+			fuelBar.value = currentFuel;
 		}
-		else
+		else if (currentFuel <= 0)
 		{
 			currentFuel = 0;
 		}
@@ -48,8 +50,9 @@ public class CarFuelController : MonoBehaviour
 
 	public void OnfillingFuel()
 	{
-		currentFuel += 5f; 
-		fuelBar.value = currentFuel; 
+		currentFuel += 5f;
+		currentFuel = Mathf.Clamp(currentFuel, 0, totalGameTime);
+		fuelBar.value = currentFuel;
 	}
 
 	private void OnTriggerEnter(Collider other)
@@ -57,6 +60,7 @@ public class CarFuelController : MonoBehaviour
 		if (other.tag == "ItemFuel")
 		{
 			OnfillingFuel();
+			Destroy(other.gameObject);
 		}
 	}
 }

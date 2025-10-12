@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class TaxiTrigger : MonoBehaviour
 {
-	public MissionData missionData;
 	public MissionManager missionManager;
 
 	[Header("Settings")]
 	[SerializeField] private Cinemachine.CinemachineVirtualCamera missionVCam;
 	[SerializeField] private int missionIndex;
+	[SerializeField] private RouteDrawer routeDrawer;
 
 	private void Start()
 	{
@@ -26,8 +26,9 @@ public class TaxiTrigger : MonoBehaviour
 		{
 			if (!missionManager.CanStartMission()) { return; }
 			missionVCam.Priority = 20;
-			missionManager.StartMisionTaxiRace(missionData);
+			missionManager.StartMissionTaxiRace();
 			gameObject.SetActive(false);
+			routeDrawer.gameObject.SetActive(true);
 		}
 		else if (other.CompareTag("IACar"))
 		{

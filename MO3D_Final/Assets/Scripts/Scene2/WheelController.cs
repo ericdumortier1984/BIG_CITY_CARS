@@ -24,7 +24,8 @@ public class WheelController : MonoBehaviour
 	[SerializeField] private float mAcceleration = 0.0f;
 	[SerializeField] private float mBreakForce = 0.0f;
 	[SerializeField] private float mMaxTurnAngle = 0.0f;
-	[SerializeField] private Vector3 mCenterOfMass;
+	[SerializeField] private float offRoadForce = 0.0f;
+	private Vector3 mCenterOfMass;
 
 	private float mCurrentAcceleration = 0.0f;
 	private float mCurrentBreakForce = 0.0f;
@@ -60,40 +61,47 @@ public class WheelController : MonoBehaviour
 		UpdateWheel(mBackRight, mBackRightTransform);
 
 		OnDrawTrailTire();
+		OffRoadForce();
 	}
 
 	private void MoveCar()
 	{
-		//if (!vehicleIntro.IsPlayingIntro)
-		//{
-			mCurrentAcceleration = mAcceleration * Input.GetAxis("Vertical");
+		mCurrentAcceleration = mAcceleration * Input.GetAxis("Vertical");
 
-			if (Input.GetKey(KeyCode.Space))
-			{
-				mCurrentBreakForce = mBreakForce;
-				mCarLight.BackLightOn = true;
-			}
-			else
-			{
-				mCurrentBreakForce = 0.0f;
-				mCarLight.BackLightOn = false;
-			}
+		if (Input.GetKey(KeyCode.Space))
+		{
+			mCurrentBreakForce = mBreakForce;
+			mCarLight.BackLightOn = true;
+		}
+		else
+		{
+			mCurrentBreakForce = 0.0f;
+			mCarLight.BackLightOn = false;
+		}
 
-			// Aplico velocidad a las ruedas delanteras
-			mFrontRight.motorTorque = mCurrentAcceleration;
-			mFrontLeft.motorTorque = mCurrentAcceleration;
+		// Aplico velocidad a las ruedas delanteras
+		mFrontRight.motorTorque = mCurrentAcceleration;
+		mFrontLeft.motorTorque = mCurrentAcceleration;
 
-			// Aplico freno a todas las ruedas
-			mFrontRight.brakeTorque = mCurrentBreakForce;
-			mFrontLeft.brakeTorque = mCurrentBreakForce;
-			mBackRight.brakeTorque = mCurrentBreakForce;
-			mBackLeft.brakeTorque = mCurrentBreakForce;
+		// Aplico freno a todas las ruedas
+		mFrontRight.brakeTorque = mCurrentBreakForce;
+		mFrontLeft.brakeTorque = mCurrentBreakForce;
+		mBackRight.brakeTorque = mCurrentBreakForce;
+		mBackLeft.brakeTorque = mCurrentBreakForce;
 
-			// Giro
-			mCurrentTurnAngle = mMaxTurnAngle * Input.GetAxis("Horizontal");
-			mFrontRight.steerAngle = mCurrentTurnAngle;
-			mFrontLeft.steerAngle = mCurrentTurnAngle;
-		//}
+		// Giro
+		mCurrentTurnAngle = mMaxTurnAngle * Input.GetAxis("Horizontal");
+		mFrontRight.steerAngle = mCurrentTurnAngle;
+		mFrontLeft.steerAngle = mCurrentTurnAngle;
+	}
+
+	private void OffRoadForce()
+	{
+		if (Input.GetAxis("Vertical") > 0 && mCarRb.velocity.magnitude < 5f 
+			&& CompareTag("Off Road"))
+		{
+			mCarRb.AddForce(transform.forward * offRoadForce, ForceMode.Acceleration);
+		}
 	}
 
 	void UpdateWheel(WheelCollider mCollider, Transform mTransform)

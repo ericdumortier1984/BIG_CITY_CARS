@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MissionTrigger : MonoBehaviour
 {
-	public MissionData missionData;
 	public MissionManager missionManager;
 
 	[Header("Settings")]
@@ -29,7 +28,7 @@ public class MissionTrigger : MonoBehaviour
 				return;
 			}
 			missionVCam.Priority = 20;
-			missionManager.StartMissionCabagge(missionData);
+			missionManager.StartMissionCabagge();
 			gameObject.SetActive(false);
 		}
 		else

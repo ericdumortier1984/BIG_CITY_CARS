@@ -53,7 +53,8 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
-		if (mCarFuelController != null && mCarFuelController.CurrentFuel == 0)
+		if (mCarFuelController != null && mCarFuelController.CurrentFuel <= 0.01f)
+
 		{
 			EndGame("OutOfFuel");
 		}

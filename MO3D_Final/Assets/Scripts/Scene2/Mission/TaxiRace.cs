@@ -11,16 +11,15 @@ public class TaxiRace : MonoBehaviour
 	[Header("UI")]
 	[SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private float textDuration;
+	[SerializeField] private RouteDrawer routeDrawer;
 
 	[Header("Mission Manager")]
 	[SerializeField] private MissionManager missionManager;
 
-	[Header("Mission Data")]
-	[SerializeField] private MissionData missionData;
-
 	[Header("Race Settings")]
 	[SerializeField] private GameObject player;
 	[SerializeField] private List<Transform> waypoints;
+	[SerializeField] private List<GameObject> playerWaypoints;
 	[SerializeField] private float taxiSpeed = 0f;
 	[SerializeField] private float waypointThreshold = 0f;
 	[SerializeField] private GameObject goal;
@@ -30,14 +29,17 @@ public class TaxiRace : MonoBehaviour
 	[SerializeField] private ParticleSystem spawnParticle;
 
 	private int currentWaypointIndex = 0;
+	private int currentPlayerWaypointIndex = 0;
 	private static bool isMedal = false;
 
 	void Start()
     {
 		goal.SetActive(false);
 		triggermission.SetActive(false);
-		UIMissionManager.Instance.ShowMissionText("TAXI RACE", textDuration);
+
 		SpawnTaxiRacer();
+		SetPlayerCheckpoint();
+		SetLineRenderer();
 	}
 
     void Update()
@@ -47,6 +49,10 @@ public class TaxiRace : MonoBehaviour
 
 	private void SpawnTaxiRacer()
 	{
+		UIMissionManager.Instance.ShowMissionText("TAXI RACE", textDuration);
+
+		taxiRacer.SetActive(true);
+
 		spawnParticle.transform.position = taxiRacer.transform.position;
 		spawnParticle.Play();
 		goal.SetActive(true);
@@ -72,6 +78,14 @@ public class TaxiRace : MonoBehaviour
 		}
 	}
 
+	private void SetLineRenderer()
+	{
+		if (playerWaypoints.Count > 0)
+		{
+			routeDrawer.SetTarget(playerWaypoints[0].transform);
+		}
+	}
+
 	public void WinMission()
 	{
 		if(!isMedal)
@@ -88,6 +102,7 @@ public class TaxiRace : MonoBehaviour
 			missionManager.EndMission();
 			taxiRacer.SetActive(false);
 			goal.SetActive(false);
+			routeDrawer.gameObject.SetActive(false);
 		}
 		
 	}
@@ -98,10 +113,45 @@ public class TaxiRace : MonoBehaviour
 		missionManager.EndMission();
 		taxiRacer.SetActive(false);
 		goal.SetActive(false);
+		playerWaypoints[currentPlayerWaypointIndex].SetActive(false);
+		routeDrawer.gameObject.SetActive(false);
 	}
 
 	public GameObject GetTaxiRacer()
 	{
 		return taxiRacer;
+	}
+
+	private void SetPlayerCheckpoint()
+	{
+		for (int i = 0; i < playerWaypoints.Count; i++)
+		{
+			playerWaypoints[i].SetActive(i == 0);
+		}
+	}
+
+	public void UpdatePlayerCheckpoints(GameObject checkpoint)
+	{
+		if (playerWaypoints[currentPlayerWaypointIndex] == checkpoint)
+		{
+			playerWaypoints[currentPlayerWaypointIndex].SetActive(false);
+			currentPlayerWaypointIndex++;
+
+			if (currentPlayerWaypointIndex < playerWaypoints.Count)
+			{
+				playerWaypoints[currentPlayerWaypointIndex].SetActive(true);
+				routeDrawer.SetTarget(playerWaypoints[currentPlayerWaypointIndex].transform);
+			}
+			else 
+			{
+				routeDrawer.ClearRoute();
+				//Debug.Log("All Checkpoint passed");
+			}
+		}
+	}
+
+	public bool IsCheckpointCompleted()
+	{
+		return currentPlayerWaypointIndex >= playerWaypoints.Count;
 	}
 }

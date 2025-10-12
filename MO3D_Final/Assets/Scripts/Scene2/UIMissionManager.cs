@@ -11,6 +11,9 @@ public class UIMissionManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private TextMeshProUGUI counterText;
 
+	[Header("Timer Reference")]
+	[SerializeField] private CountdownTimer CountdownTimerInstance;
+
 	private int current;
 	private int total;
 
@@ -34,14 +37,44 @@ public class UIMissionManager : MonoBehaviour
 		UpdateCounter();
 	}
 
+	public void SetPackageCounter(int currentValue, int totalValue)
+	{
+		current = currentValue;
+		total = totalValue;
+		counterText.gameObject.SetActive(true);
+		UpdatePackageCounter();
+	}
+
+	public void SetPassengerCounter(int currentValue, int totalValue)
+	{
+		current = currentValue;
+		total = totalValue;
+		counterText.gameObject.SetActive(true);
+		UpdatePassengerCounter();
+	}
+
 	public void UpdateCounter()
 	{
 		counterText.text = current + " / " + total;
+	}
+	public void UpdatePackageCounter()
+	{
+		counterText.text = "PACKAGE: " + current + " / " + total;
+	}
+
+	public void UpdatePassengerCounter()
+	{
+		counterText.text = "    PASSENGER: " + current + " / " + total;
 	}
 
 	public void HideCounter()
 	{
 		counterText.gameObject.SetActive(false);
+	}
+
+	public void ShowTimer(bool show)
+	{
+		CountdownTimerInstance.gameObject.SetActive(show);
 	}
 
 	private IEnumerator HideMissionText(float time)

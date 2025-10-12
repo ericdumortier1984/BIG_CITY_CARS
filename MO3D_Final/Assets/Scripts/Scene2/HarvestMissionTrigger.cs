@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HarvestMissionTrigger : MonoBehaviour
 {
-	public MissionData missionData;
 	public MissionManager missionManager;
 
 	[Header("Settings")]
@@ -30,7 +29,7 @@ public class HarvestMissionTrigger : MonoBehaviour
 				return;
 			}
 			missionVCam.Priority = 20;
-			missionManager.StartMissionHarvest(missionData);
+			missionManager.StartMissionHarvest();
 			gameObject.SetActive(false);
 			harvestMapPos.SetActive(true);
 		}
