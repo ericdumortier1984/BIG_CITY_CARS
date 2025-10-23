@@ -80,7 +80,7 @@ public class TaxiCab : MonoBehaviour
 	private void EnableUIElements()
 	{
 		countdownTimer.StartTimer();
-		UIMissionManager.Instance.ShowMissionText("PASSENGER IS WAITING", textDuration);
+		UIMissionManager.Instance.ShowMissionText("PASSENGER IS WAITING", textDuration, 50);
 		UIMissionManager.Instance.ShowTimer(true);
 		UIMissionManager.Instance.SetPassengerCounter(safePassenger, totalPassenger);
 	}
@@ -113,8 +113,6 @@ public class TaxiCab : MonoBehaviour
 	{
 		if (!stressedOut && !countdownTimer.IsTimeUp)
 			return;
-
-		//if (!countdownTimer.IsTimeUp) return;
 
 		foreach (GameObject passenger in passengerPrefab)
 			passenger.SetActive(false);
@@ -178,7 +176,7 @@ public class TaxiCab : MonoBehaviour
 			routeDrawer.SetTarget(dropOffLocation[current]);
 		}
 
-		UIMissionManager.Instance.ShowMissionText("TAKE PASSENGER SAFELY", textDuration);
+		UIMissionManager.Instance.ShowMissionText("TAKE PASSENGER SAFELY", textDuration, 50);
 	}
 
 	public void DropOffPassenger(DropOffPassengerPoint dropOffPoint)
@@ -202,7 +200,7 @@ public class TaxiCab : MonoBehaviour
 		if (passengerIndex < passengerPrefab.Count)
 		{
 			SetElements();
-			UIMissionManager.Instance.ShowMissionText("NEXT PASSENGER IS WAITING", textDuration);
+			UIMissionManager.Instance.ShowMissionText("NEXT PASSENGER IS WAITING", textDuration, 50);
 		}
 		else
 		{
@@ -221,7 +219,7 @@ public class TaxiCab : MonoBehaviour
 
 	private IEnumerator ShowTimeUpMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("TIME UP", textDuration);
+		UIMissionManager.Instance.ShowMissionText("TIME UP", textDuration, 50);
 		UIMissionManager.Instance.HideCounter(); 
 		UIMissionManager.Instance.ShowTimer(false);
 
@@ -230,7 +228,7 @@ public class TaxiCab : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("ALL PASSENGER DROPPED OFF\n + 15 COINS", textDuration);
+		UIMissionManager.Instance.ShowMissionText("ALL PASSENGER DROPPED OFF\n + 15 COINS", textDuration, 50);
 		UIMissionManager.Instance.HideCounter();
 		UIMissionManager.Instance.ShowTimer(false);
 
@@ -239,7 +237,7 @@ public class TaxiCab : MonoBehaviour
 
 	private IEnumerator ShowStressOutMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("PASSENGER STRESSED OUT", textDuration);
+		UIMissionManager.Instance.ShowMissionText("PASSENGER STRESSED OUT", textDuration, 50);
 		UIMissionManager.Instance.HideCounter();
 		UIMissionManager.Instance.ShowTimer(false);
 

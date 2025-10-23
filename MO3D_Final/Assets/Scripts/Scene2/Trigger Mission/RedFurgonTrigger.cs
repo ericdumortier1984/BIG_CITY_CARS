@@ -32,11 +32,11 @@ public class RedFurgonTrigger : MonoBehaviour
 		}
 		else if (other.CompareTag("IACar"))
 		{
-			UIMissionManager.Instance.ShowMissionText("", 1.0f);
+			UIMissionManager.Instance.ShowMissionText("", 1.0f, 50);
 		}
 		else
 		{
-			UIMissionManager.Instance.ShowMissionText("ONLY RED FURGON", 1.0f);
+			UIMissionManager.Instance.ShowMissionText("ONLY RED FURGON", 1.0f, 50);
 		}
 	}
 }

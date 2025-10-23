@@ -21,7 +21,7 @@ public class GoalTrigger : MonoBehaviour
 		}
 		else if (other.CompareTag("Taxi") && !taxiRace.IsCheckpointCompleted())
 		{
-			UIMissionManager.Instance.ShowMissionText("YOU MISSED A CHECKPOINT", 2.0f);
+			UIMissionManager.Instance.ShowMissionText("YOU MISSED A CHECKPOINT", 2.0f, 50);
 		}
 		else if (other.gameObject == taxiRace.GetTaxiRacer())
 		{

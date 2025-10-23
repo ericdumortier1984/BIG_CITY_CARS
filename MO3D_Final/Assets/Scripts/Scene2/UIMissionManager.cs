@@ -22,9 +22,10 @@ public class UIMissionManager : MonoBehaviour
 		Instance = this;
 	}
 
-	public void ShowMissionText(string message, float duration)
+	public void ShowMissionText(string message, float duration, int fontSize)
 	{
 		StopAllCoroutines();
+		missionText.fontSize = fontSize;
 		missionText.text = message;
 		missionText.gameObject.SetActive(true);
 		StartCoroutine(HideMissionText(duration));

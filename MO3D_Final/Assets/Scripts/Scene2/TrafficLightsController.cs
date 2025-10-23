@@ -53,14 +53,14 @@ public class TrafficLightsController : MonoBehaviour
         return mCurrentState == TrafficLightState.Red;
     }
 
-    private void SwitchToRed()
+    public void SwitchToRed()
     {
         mCurrentState = TrafficLightState.Red;
         timer = 0f;
         UpdateLights();
     }
 
-    private void SwitchToGreen()
+    public void SwitchToGreen()
     {
         mCurrentState = TrafficLightState.Green;
         timer = 0f;

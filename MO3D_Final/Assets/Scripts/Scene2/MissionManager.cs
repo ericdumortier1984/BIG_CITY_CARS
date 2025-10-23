@@ -18,6 +18,9 @@ public class MissionManager : MonoBehaviour
 	[SerializeField] private List<GameObject> passenger;
 	[Header("Red Furgon Mission")]
 	[SerializeField] private List<GameObject> redFurgonItems;
+	[Header("Tunning Car Mission")]
+	[SerializeField] private AlmostFerrari almostFerrari;
+	[SerializeField] private List<GameObject> otherRacers;
 
 	private bool isMissionActive = false;
 	public bool IsMissionActive => isMissionActive;
@@ -71,6 +74,18 @@ public class MissionManager : MonoBehaviour
 		{
 			item.SetActive(true);
 		}
+		SetWorldState(false);
+		isMissionActive = true;
+	}
+
+	public void StartMissionTunningCar()
+	{
+		if (isMissionActive) { return; }
+		foreach (GameObject others in otherRacers)
+		{
+			others.SetActive(true);
+		}
+		almostFerrari.BeginAlmostFerrari();
 		SetWorldState(false);
 		isMissionActive = true;
 	}

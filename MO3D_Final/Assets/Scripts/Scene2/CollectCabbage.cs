@@ -26,7 +26,7 @@ public class CollectCabbage : MonoBehaviour
 		if (spawnCount == 0)
 		{
 			collectParticle.Play();
-			UIMissionManager.Instance.ShowMissionText("COLLECT ALL CABBAGES", textDuration);
+			UIMissionManager.Instance.ShowMissionText("COLLECT ALL CABBAGES", textDuration, 50);
 		}
 		UIMissionManager.Instance.SetCounter(spawnCount, maxSpawn);
 	}
@@ -63,7 +63,7 @@ public class CollectCabbage : MonoBehaviour
 
 	private void WinMission()
 	{
-		UIMissionManager.Instance.ShowMissionText("ALL CABBAGES COLLECTED\n + 5 COINS", textDuration);
+		UIMissionManager.Instance.ShowMissionText("ALL CABBAGES COLLECTED\n + 5 COINS", textDuration, 50);
 		UIMissionManager.Instance.HideCounter();
 
 		if (!isMedal)

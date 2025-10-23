@@ -5,7 +5,7 @@ using UnityEngine;
 public class WheelController : MonoBehaviour
 {
 	[Header("Wheel Colliders")]
-    [SerializeField] private WheelCollider mFrontRight;
+	[SerializeField] private WheelCollider mFrontRight;
 	[SerializeField] private WheelCollider mFrontLeft;
 	[SerializeField] private WheelCollider mBackRight;
 	[SerializeField] private WheelCollider mBackLeft;
@@ -31,12 +31,14 @@ public class WheelController : MonoBehaviour
 	private float mCurrentBreakForce = 0.0f;
 	private float mCurrentTurnAngle = 0.0f;
 
-	private Rigidbody mCarRb; 
-	private CarLight mCarLight; 
-	private ItemWaypointController mItemWaypointController; 
-	private CarFuelController mCarFuelController; 
+	private Rigidbody mCarRb;
+	private CarLight mCarLight;
+	private ItemWaypointController mItemWaypointController;
+	private CarFuelController mCarFuelController;
 	private CoinsController mCoinsController;
 	private VehicleIntro vehicleIntro;
+
+	public float Acceleration { get => mAcceleration; set => mAcceleration = value; } 
 
 	private void Start()
 	{

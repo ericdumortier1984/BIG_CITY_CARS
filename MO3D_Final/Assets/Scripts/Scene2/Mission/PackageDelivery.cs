@@ -82,7 +82,7 @@ public class PackageDelivery : MonoBehaviour
 	private void EnableUIElements()
 	{
 		countdownTimer.StartTimer();
-		UIMissionManager.Instance.ShowMissionText("DELIVER ALL PACKAGE", textDuration);
+		UIMissionManager.Instance.ShowMissionText("DELIVER ALL PACKAGE", textDuration, 50);
 		UIMissionManager.Instance.ShowTimer(true);
 		UIMissionManager.Instance.SetPackageCounter(deliveredPackage, totalPackage);
 	}
@@ -95,7 +95,7 @@ public class PackageDelivery : MonoBehaviour
 		countdownTimer.StopTimer();
 		routeDrawer.gameObject.SetActive(false);
 
-		UIMissionManager.Instance.ShowMissionText("ALL PACKAGE DELIVERED\n + 15 COINS", textDuration);
+		UIMissionManager.Instance.ShowMissionText("ALL PACKAGE DELIVERED\n + 15 COINS", textDuration, 50);
 		UIMissionManager.Instance.HideCounter();
 		UIMissionManager.Instance.ShowTimer(false);
 
@@ -124,7 +124,7 @@ public class PackageDelivery : MonoBehaviour
 			countdownTimer.StopTimer();
 			routeDrawer.gameObject.SetActive(false);
 
-			UIMissionManager.Instance.ShowMissionText("TIME UP", textDuration);
+			UIMissionManager.Instance.ShowMissionText("TIME UP", textDuration, 50);
 			UIMissionManager.Instance.HideCounter();
 			UIMissionManager.Instance.ShowTimer(false);
 

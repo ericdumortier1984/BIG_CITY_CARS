@@ -33,7 +33,7 @@ public class MissionTrigger : MonoBehaviour
 		}
 		else
 		{
-			UIMissionManager.Instance.ShowMissionText("ONLY FARM VEHICLES", 1.0f);
+			UIMissionManager.Instance.ShowMissionText("ONLY FARM VEHICLES", 1.0f, 50);
 		}
 	}
 }

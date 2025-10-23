@@ -49,7 +49,7 @@ public class TaxiRace : MonoBehaviour
 
 	private void SpawnTaxiRacer()
 	{
-		UIMissionManager.Instance.ShowMissionText("TAXI RACE", textDuration);
+		UIMissionManager.Instance.ShowMissionText("TAXI RACE", textDuration, 50);
 
 		taxiRacer.SetActive(true);
 
@@ -90,7 +90,7 @@ public class TaxiRace : MonoBehaviour
 	{
 		if(!isMedal)
 		{
-			UIMissionManager.Instance.ShowMissionText("WINNER!!\n + 15 COINS", textDuration);
+			UIMissionManager.Instance.ShowMissionText("WINNER!!\n + 15 COINS", textDuration, 50);
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
 			MainMenu.Instance.AddCoin(15);
@@ -109,7 +109,7 @@ public class TaxiRace : MonoBehaviour
 
 	public void LoseMission()
 	{
-		UIMissionManager.Instance.ShowMissionText("TOO SLOWN!!", textDuration);
+		UIMissionManager.Instance.ShowMissionText("TOO SLOWN!!", textDuration, 50);
 		missionManager.EndMission();
 		taxiRacer.SetActive(false);
 		goal.SetActive(false);
@@ -145,7 +145,6 @@ public class TaxiRace : MonoBehaviour
 			else 
 			{
 				routeDrawer.ClearRoute();
-				//Debug.Log("All Checkpoint passed");
 			}
 		}
 	}

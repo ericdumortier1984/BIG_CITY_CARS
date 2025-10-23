@@ -27,7 +27,7 @@ public class HarvestMission : MonoBehaviour
 		prefabCount = 0;
 		prefabTotalCount = FindObjectsOfType<HarvestMission>().Length;
 		harvestMapIcon.SetActive(true);
-		UIMissionManager.Instance.ShowMissionText("RAISE THE HARVEST", textDuration);
+		UIMissionManager.Instance.ShowMissionText("RAISE THE HARVEST", textDuration, 50);
 	}
 
 	public void OnTriggerEnter(Collider other)
@@ -39,7 +39,7 @@ public class HarvestMission : MonoBehaviour
 			
 			if (prefabCount == prefabTotalCount)
 			{
-				UIMissionManager.Instance.ShowMissionText("ALL HARVEST IS RAISED\n + 5 COINS", textDuration);
+				UIMissionManager.Instance.ShowMissionText("ALL HARVEST IS RAISED\n + 5 COINS", textDuration, 50);
 
 				if (!isMedal)
 				{
