@@ -18,6 +18,11 @@ public class VehicleIntro : MonoBehaviour
 
 	private void Start()
 	{
+		PlayIntro();
+	}
+
+	public void PlayIntro()
+	{
 		mainVcam.Priority = 0;
 		introVcam.Priority = 21;
 		introTimeline.stopped += OnIntroFinished;

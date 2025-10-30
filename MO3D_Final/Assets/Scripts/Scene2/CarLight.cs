@@ -25,7 +25,6 @@ public class CarLight : MonoBehaviour
 		{
 			ToggleLight(mFrontLight);
 			ToggleLight(mBackLight);
-			Debug.Log("Lights On");
 		}
 	}
 

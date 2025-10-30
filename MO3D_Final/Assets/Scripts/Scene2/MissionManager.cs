@@ -21,6 +21,11 @@ public class MissionManager : MonoBehaviour
 	[Header("Tunning Car Mission")]
 	[SerializeField] private AlmostFerrari almostFerrari;
 	[SerializeField] private List<GameObject> otherRacers;
+	[Header("Stop Robber Bank Mission")]
+	[SerializeField] private StopRobberBank stopRobberBank;
+	[SerializeField] private VehicleIntro missionIntro;
+	[SerializeField] private GameObject theftFurgon;
+	[Header("Chasing Theft Mission")]
 
 	private bool isMissionActive = false;
 	public bool IsMissionActive => isMissionActive;
@@ -86,6 +91,23 @@ public class MissionManager : MonoBehaviour
 			others.SetActive(true);
 		}
 		almostFerrari.BeginAlmostFerrari();
+		SetWorldState(false);
+		isMissionActive = true;
+	}
+
+	public void StartMissionRobberBank()
+	{
+		if (isMissionActive) { return; }
+		theftFurgon.SetActive(true);
+		missionIntro.PlayIntro();
+		stopRobberBank.BeginStopRobberBank();
+		SetWorldState(false);
+		isMissionActive = true;
+	}
+
+	public void StartMissionChasingTheft()
+	{
+		if (isMissionActive) { return; }
 		SetWorldState(false);
 		isMissionActive = true;
 	}
