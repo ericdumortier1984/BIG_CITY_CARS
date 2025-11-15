@@ -16,6 +16,10 @@ TagManager:
   - Off Road
   - Red Furgon
   - Tunning Car
+  - Fire Truck
+  - Water Stream
+  - Mini Car
+  - Grown Capsule
   layers:
   - Default
   - TransparentFX

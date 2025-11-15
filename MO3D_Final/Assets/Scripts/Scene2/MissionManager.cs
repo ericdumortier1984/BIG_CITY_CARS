@@ -25,7 +25,18 @@ public class MissionManager : MonoBehaviour
 	[SerializeField] private StopRobberBank stopRobberBank;
 	[SerializeField] private VehicleIntro missionIntro;
 	[SerializeField] private GameObject theftFurgon;
-	[Header("Chasing Theft Mission")]
+	[Header("More Donuts Mission")]
+	[SerializeField] private MoreDonuts moreDonuts;
+	[SerializeField] private VehicleIntro missionIntroMoreDonuts;
+	[SerializeField] private List<GameObject> donuts;
+	[Header("Too Hot! Mission")]
+	[SerializeField] private TooHot tooHot;
+	[SerializeField] private List<GameObject> fires;
+	[Header("Little and Furious Mission")]
+	[SerializeField] private VehicleIntro missionIntroLittleAndFurious;
+	[SerializeField] private LittleAndFurious littleAndFurious;
+	[SerializeField] private List<GameObject> growthPill;
+
 
 	private bool isMissionActive = false;
 	public bool IsMissionActive => isMissionActive;
@@ -105,9 +116,40 @@ public class MissionManager : MonoBehaviour
 		isMissionActive = true;
 	}
 
-	public void StartMissionChasingTheft()
+	public void StartMissionMoreDonuts()
 	{
 		if (isMissionActive) { return; }
+		foreach (GameObject donut in donuts)
+		{
+			donut.SetActive(true);
+		}
+		missionIntroMoreDonuts.PlayIntro();
+		moreDonuts.BeginMoreDonuts();
+		SetWorldState(false);
+		isMissionActive = true;
+	}
+
+	public void StartMissionTooHot()
+	{
+		if (isMissionActive) { return; }
+		foreach (GameObject fire in fires)
+		{
+			fire.SetActive(true);
+		}
+		tooHot.BeginTooHot();
+		SetWorldState(false);
+		isMissionActive = true;
+	}
+
+	public void StartMissionLittleAndFurious()
+	{
+		if (isMissionActive) { return; }
+		foreach (GameObject pill in growthPill)
+		{
+			pill.SetActive(true);
+		}
+		missionIntroLittleAndFurious.PlayIntro();
+		littleAndFurious.BeginLittlendFurious();
 		SetWorldState(false);
 		isMissionActive = true;
 	}

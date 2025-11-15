@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class AnchorageRotationMiniMap : MonoBehaviour
 {
+	[Header("Settings")]
 	[SerializeField] private GameObject carPlayer;
+	[SerializeField] private float positionY;
 
 	private void LateUpdate()
 	{
-		transform.position = new Vector3(carPlayer.transform.position.x, 20.0f, carPlayer.transform.position.z);
+		transform.position = new Vector3(carPlayer.transform.position.x, positionY, carPlayer.transform.position.z);
 	}
 }

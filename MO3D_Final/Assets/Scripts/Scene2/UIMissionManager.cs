@@ -54,6 +54,24 @@ public class UIMissionManager : MonoBehaviour
 		UpdatePassengerCounter();
 	}
 
+	public void SetDonutsCounter(int currentValue, int totalValue)
+	{
+		current = currentValue;
+		total = totalValue;
+		counterText.gameObject.SetActive(true);
+		counterText.fontSize = 36;
+		UpdateDonutsCounter();
+	}
+
+	public void SetFiresCounter(int currentValue, int totalValue)
+	{
+		current = currentValue;
+		total = totalValue;
+		counterText.gameObject.SetActive(true);
+		counterText.fontSize = 36;
+		UpdateFiresCounter();
+	}
+
 	public void UpdateCounter()
 	{
 		counterText.text = current + " / " + total;
@@ -66,6 +84,16 @@ public class UIMissionManager : MonoBehaviour
 	public void UpdatePassengerCounter()
 	{
 		counterText.text = "    PASSENGER: " + current + " / " + total;
+	}
+
+	public void UpdateDonutsCounter()
+	{
+		counterText.text = "DONUTS: " + current + " / " + total;
+	}
+
+	public void UpdateFiresCounter()
+	{
+		counterText.text = "FIRES: " + current + " / " + total;
 	}
 
 	public void HideCounter()
