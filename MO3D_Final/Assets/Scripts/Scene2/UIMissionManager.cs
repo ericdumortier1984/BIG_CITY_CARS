@@ -43,6 +43,13 @@ public class UIMissionManager : MonoBehaviour
 		current = currentValue;
 		total = totalValue;
 		counterText.gameObject.SetActive(true);
+
+		counterText.fontSize = 36;
+		counterText.fontWeight = FontWeight.Regular;
+		counterText.outlineWidth = 0.25f;
+		counterText.outlineColor = new Color32(242, 224, 136, 255);
+		counterText.faceColor = new Color32(242, 224, 136, 255);
+
 		UpdatePackageCounter();
 	}
 
@@ -51,6 +58,12 @@ public class UIMissionManager : MonoBehaviour
 		current = currentValue;
 		total = totalValue;
 		counterText.gameObject.SetActive(true);
+		counterText.fontSize = 36;
+		counterText.fontWeight = FontWeight.Regular;
+		counterText.outlineWidth = 0.25f;
+		counterText.outlineColor = new Color32(242, 224, 136, 255);
+		counterText.faceColor = new Color32(242, 224, 136, 255);
+
 		UpdatePassengerCounter();
 	}
 
@@ -59,7 +72,13 @@ public class UIMissionManager : MonoBehaviour
 		current = currentValue;
 		total = totalValue;
 		counterText.gameObject.SetActive(true);
+
 		counterText.fontSize = 36;
+		counterText.fontWeight = FontWeight.Regular;
+		counterText.outlineWidth = 0.25f;
+		counterText.outlineColor = new Color32(242, 224, 136, 255);
+		counterText.faceColor = new Color32(242, 224, 136, 255);
+
 		UpdateDonutsCounter();
 	}
 
@@ -68,8 +87,89 @@ public class UIMissionManager : MonoBehaviour
 		current = currentValue;
 		total = totalValue;
 		counterText.gameObject.SetActive(true);
+
 		counterText.fontSize = 36;
+		counterText.fontWeight = FontWeight.Regular;
+		counterText.outlineWidth = 0.25f;
+		counterText.outlineColor = new Color32(242, 224, 136, 255);
+		counterText.faceColor = new Color32(242, 224, 136, 255);
+
 		UpdateFiresCounter();
+	}
+
+	public void SetProvisionCounter(int currentValue, int totalValue)
+	{
+		current = currentValue;
+		total = totalValue;
+		counterText.gameObject.SetActive(true);
+
+		counterText.fontSize = 36;
+		counterText.fontWeight = FontWeight.Regular;
+		counterText.outlineWidth = 0.25f;
+		counterText.outlineColor = new Color32(242, 224, 136, 255);
+		counterText.faceColor = new Color32(242, 224, 136, 255);
+
+		UpdateProvisionCounter();
+	}
+
+	public void SetPalletsCounter(int currentValue, int totalValue)
+	{
+		current = currentValue;
+		total = totalValue;
+		counterText.gameObject.SetActive(true);
+
+		counterText.fontSize = 36;
+		counterText.fontWeight = FontWeight.Regular;
+		counterText.outlineWidth = 0.25f;
+		counterText.outlineColor = new Color32(242, 224, 136, 255);
+		counterText.faceColor = new Color32(242, 224, 136, 255);
+
+		UpdatePalletsCounter();
+	}
+
+	public void SetCheckpointCounter(int currentValue, int totalValue)
+	{
+		current = currentValue;
+		total = totalValue;
+		counterText.gameObject.SetActive(true);
+
+		counterText.fontSize = 36;
+		counterText.fontWeight = FontWeight.Heavy;    
+		counterText.outlineWidth = 0.25f;           
+		counterText.outlineColor = new Color32(242, 224, 136, 255);
+		counterText.faceColor = new Color32(242, 224, 136, 255);
+
+		UpdateCheckpointCounter();
+	}
+
+	public void SetFlagsCounter(int currentValue, int totalValue)
+	{
+		current = currentValue;
+		total = totalValue;
+		counterText.gameObject.SetActive(true);
+
+		counterText.fontSize = 36;
+		counterText.fontWeight = FontWeight.Heavy;
+		counterText.outlineWidth = 0.25f;
+		counterText.outlineColor = new Color32(242, 224, 136, 255);
+		counterText.faceColor = new Color32(242, 224, 136, 255);
+
+		UpdateFlagsCounter();
+	}
+
+	public void SetAutopartsCounter(int currentValue, int totalValue)
+	{
+		current = currentValue;
+		total = totalValue;
+		counterText.gameObject.SetActive(true);
+
+		counterText.fontSize = 36;
+		counterText.fontWeight = FontWeight.Heavy;
+		counterText.outlineWidth = 0.25f;
+		counterText.outlineColor = new Color32(242, 224, 136, 255);
+		counterText.faceColor = new Color32(242, 224, 136, 255);
+
+		UpdateAutopartsCounter();
 	}
 
 	public void UpdateCounter()
@@ -94,6 +194,30 @@ public class UIMissionManager : MonoBehaviour
 	public void UpdateFiresCounter()
 	{
 		counterText.text = "FIRES: " + current + " / " + total;
+	}
+
+	public void UpdateProvisionCounter()
+	{
+		counterText.text = "PROVISIONS: " + current + " / " + total;
+	}
+
+	public void UpdatePalletsCounter()
+	{
+		counterText.text = "PALLETS: " + current + " / " + total;
+	}
+	public void UpdateCheckpointCounter()
+	{
+		counterText.text = "CHECKPOINTS: " + current + " / " + total;
+	}
+
+	public void UpdateFlagsCounter()
+	{
+		counterText.text = "FLAGS: " + current + " / " + total;
+	}
+
+	public void UpdateAutopartsCounter()
+	{
+		counterText.text = "AUTOPARTS: " + current + " / " + total;
 	}
 
 	public void HideCounter()

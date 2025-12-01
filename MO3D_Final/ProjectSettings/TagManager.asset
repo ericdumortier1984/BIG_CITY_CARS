@@ -20,6 +20,13 @@ TagManager:
   - Water Stream
   - Mini Car
   - Grown Capsule
+  - Simple Car
+  - Forklift
+  - Pallet
+  - Muscle Car
+  - Mini Van
+  - Cigarette
+  - 4x4
   layers:
   - Default
   - TransparentFX

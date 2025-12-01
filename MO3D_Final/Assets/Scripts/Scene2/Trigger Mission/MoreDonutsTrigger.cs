@@ -34,7 +34,7 @@ public class MoreDonutsTrigger : MonoBehaviour
 			radioMessagesController.gameObject.SetActive(true);
 			routeDrawer.gameObject.SetActive(true);
 		}
-		else if (other.CompareTag("IA Car"))
+		else if (other.CompareTag("IACar"))
 		{
 			UIMissionManager.Instance.ShowMissionText("", 1.0f, 50);
 		}

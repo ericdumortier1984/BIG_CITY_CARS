@@ -36,7 +36,6 @@ public class WheelController : MonoBehaviour
 	private ItemWaypointController mItemWaypointController;
 	private CarFuelController mCarFuelController;
 	private CoinsController mCoinsController;
-	private VehicleIntro vehicleIntro;
 
 	public float Acceleration { get => mAcceleration; set => mAcceleration = value; } 
 
@@ -50,7 +49,6 @@ public class WheelController : MonoBehaviour
 		mItemWaypointController = FindObjectOfType<ItemWaypointController>(); 
 		mCarFuelController = FindObjectOfType<CarFuelController>();
 		mCoinsController = FindObjectOfType<CoinsController>();
-		vehicleIntro = FindObjectOfType<VehicleIntro>();
 	}
 
 	private void Update()
@@ -138,14 +136,12 @@ public class WheelController : MonoBehaviour
 			mItemWaypointController.ItemWaypointTextCounter();
 			LevelData.WaypointsCollectedInLevel = mItemWaypointController.ItemWaypointCollected; // Actualiza LevelData
 			Destroy(other.gameObject);
-			//Debug.Log("ItemWaypoint Collected");
 		}
 
 		if (other.tag == "ItemFuel")
 		{
 			mCarFuelController.OnfillingFuel();
 			Destroy(other.gameObject);
-			//Debug.Log("ItemFuelCollected");
 		}
 
 		if(other.tag == "Coins")

@@ -56,7 +56,7 @@ public class LittleAndFurious : MonoBehaviour
 		sliderSize.value = miniCar.transform.localScale.x;
 		sliderSize.gameObject.SetActive(true);
 
-		//SLIDER TEXTS
+		// SLIDER TEXTS
 		minSizeText.gameObject.SetActive(true);
 		maxSizeText.gameObject.SetActive(true);
 	}

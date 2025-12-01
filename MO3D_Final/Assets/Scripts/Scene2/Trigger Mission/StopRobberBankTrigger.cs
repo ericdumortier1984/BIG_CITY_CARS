@@ -28,7 +28,7 @@ public class StopRobberBankTrigger : MonoBehaviour
 			missionManager.StartMissionRobberBank();
 			gameObject.SetActive(false);
 		}
-		else if (other.CompareTag("IA Car"))
+		else if (other.CompareTag("IACar"))
 		{
 			UIMissionManager.Instance.ShowMissionText("", 1.0f, 50);
 		}

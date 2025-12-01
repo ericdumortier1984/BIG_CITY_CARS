@@ -11,6 +11,7 @@ public class VehicleIntro : MonoBehaviour
 
 	[Header("Gameplay")]
 	[SerializeField] private GameObject vehicleController;
+	[SerializeField] private Rigidbody playerRigidbody;
 	[SerializeField] private CinemachineVirtualCamera mainVcam;
 	[SerializeField] private CinemachineSwitcher camSwitcher;
 
@@ -23,6 +24,7 @@ public class VehicleIntro : MonoBehaviour
 
 	public void PlayIntro()
 	{
+		playerRigidbody.constraints = RigidbodyConstraints.FreezeAll;
 		mainVcam.Priority = 0;
 		introVcam.Priority = 21;
 		introTimeline.stopped += OnIntroFinished;
@@ -31,6 +33,7 @@ public class VehicleIntro : MonoBehaviour
 
 	private void OnIntroFinished(PlayableDirector director)
 	{
+		playerRigidbody.constraints = RigidbodyConstraints.None;
 		mainVcam.Priority = 20;
 		introVcam.Priority = 0;
 		camSwitcher.enabled = true;

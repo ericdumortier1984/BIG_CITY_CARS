@@ -32,7 +32,7 @@ public class TooHotTrigger : MonoBehaviour
 			tooHot.SetActive(true);
 			routeDrawer.gameObject.SetActive(true);
 		}
-		else if (other.CompareTag("IA Car"))
+		else if (other.CompareTag("IACar"))
 		{
 			UIMissionManager.Instance.ShowMissionText("", 1.0f, 50);
 		}

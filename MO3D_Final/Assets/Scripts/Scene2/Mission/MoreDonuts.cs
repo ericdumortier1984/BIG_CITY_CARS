@@ -24,7 +24,6 @@ public class MoreDonuts : MonoBehaviour
 	[SerializeField] private RadioMessagesController radioController;
 
 	//BOOL 
-	private bool CanMovePoliceCar = false;
 	private bool isAllDonutsCollected = false;
 	private bool hasLost = false;
 
@@ -156,13 +155,6 @@ public class MoreDonuts : MonoBehaviour
 		radioController.StopRadio();
 		radioController.gameObject.SetActive(false);
 		UIMissionManager.Instance.HideCounter();
-	}
-
-	private IEnumerator NoMovePoliceCar()
-	{
-		CanMovePoliceCar = false;
-		yield return new WaitForSeconds(5f);
-		CanMovePoliceCar = true;
 	}
 
 	private IEnumerator ShowWinMessage()

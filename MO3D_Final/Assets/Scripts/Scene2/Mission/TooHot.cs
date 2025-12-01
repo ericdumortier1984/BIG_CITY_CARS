@@ -113,7 +113,6 @@ public class TooHot : MonoBehaviour
 	public void ExitWaterMode()
 	{
 		isShootMode = false;
-		//fireZoneTrigger = null;
 		shootCamera.Priority = 19;
 		fireTruckTurret.EnableTurret(false);
 		crosshair.gameObject.SetActive(false);

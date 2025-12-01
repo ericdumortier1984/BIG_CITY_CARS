@@ -50,7 +50,7 @@ public class CarFuelController : MonoBehaviour
 
 	public void OnfillingFuel()
 	{
-		currentFuel += 5f;
+		currentFuel += 15f;
 		currentFuel = Mathf.Clamp(currentFuel, 0, totalGameTime);
 		fuelBar.value = currentFuel;
 	}
