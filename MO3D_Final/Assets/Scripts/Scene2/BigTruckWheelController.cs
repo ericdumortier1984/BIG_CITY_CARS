@@ -127,7 +127,7 @@ public class BigTruckWheelController : MonoBehaviour
 		{
 			mBackRightTrailTire.GetComponentInChildren<TrailRenderer>().emitting = true;
 			mBackLeftTrailTire.GetComponentInChildren<TrailRenderer>().emitting = true;
-			Debug.Log("Drawing trail tire");
+			//Debug.Log("Drawing trail tire");
 		}
 		else
 		{
@@ -143,14 +143,14 @@ public class BigTruckWheelController : MonoBehaviour
 			mItemWaypointController.ItemWaypointCounter();
 			mItemWaypointController.ItemWaypointTextCounter();
 			Destroy(other.gameObject);
-			Debug.Log("ItemWaypoint Collected");
+			//Debug.Log("ItemWaypoint Collected");
 		}
 
 		if (other.tag == "ItemFuel")
 		{
 			mCarFuelController.OnfillingFuel();
 			Destroy(other.gameObject);
-			Debug.Log("ItemFuelCollected");
+			//Debug.Log("ItemFuelCollected");
 		}
 
 		if (other.tag == "Coins")

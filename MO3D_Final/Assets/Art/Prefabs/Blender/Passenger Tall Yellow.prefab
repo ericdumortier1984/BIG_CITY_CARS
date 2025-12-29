@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 4874126678125670354, guid: 93e179323fa519347bc58e680c3f4ee4, type: 3}
     - target: {fileID: 919132149155446097, guid: 1b88082f9915c644bba3847d15bea2b3, type: 3}
       propertyPath: m_Name
-      value: Untitled
+      value: Passenger Tall Yellow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

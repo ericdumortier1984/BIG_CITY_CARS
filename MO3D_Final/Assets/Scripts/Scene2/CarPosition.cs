@@ -8,15 +8,21 @@ public class CarPosition : MonoBehaviour
 	private Vector3 mInitialPosition; 
 	private Quaternion mInitialRotation;
 
+	private FastFood fastFood;
+
 	void Start()
     {
         mInitialPosition = mCar.transform.position; 
         mInitialRotation = mCar.transform.rotation;
-    }
+
+		fastFood = FindObjectOfType<FastFood>();
+	}
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+		if (fastFood != null && fastFood.IsCooking) { return; }
+
+		if (Input.GetKeyDown(KeyCode.R))
         {
             ResetPosition();
         }

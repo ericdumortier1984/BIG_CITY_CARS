@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ public class MoreDonutsTrigger : MonoBehaviour
 	[SerializeField] private GameObject moreDonuts;
 	[SerializeField] private RouteDrawer routeDrawer;
 	[SerializeField] private RadioMessagesController radioMessagesController;
-	[SerializeField] private Cinemachine.CinemachineVirtualCamera missionVcam;
+	[SerializeField] private CinemachineVirtualCamera missionVcam;
 	[SerializeField] private int missionIndex;
 
 	private void Start()

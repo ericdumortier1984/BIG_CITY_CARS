@@ -34,7 +34,7 @@ public class VehicleIntro : MonoBehaviour
 	private void OnIntroFinished(PlayableDirector director)
 	{
 		playerRigidbody.constraints = RigidbodyConstraints.None;
-		mainVcam.Priority = 20;
+		mainVcam.Priority = 19;
 		introVcam.Priority = 0;
 		camSwitcher.enabled = true;
 		IsPlayingIntro = false;

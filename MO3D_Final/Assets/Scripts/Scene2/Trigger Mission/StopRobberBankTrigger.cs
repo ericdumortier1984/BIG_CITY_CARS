@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ public class StopRobberBankTrigger : MonoBehaviour
     public MissionManager missionManager;
 
     [Header("Settings")]
-    [SerializeField] private Cinemachine.CinemachineVirtualCamera missionVcam;
+    [SerializeField] private CinemachineVirtualCamera missionVcam;
     [SerializeField] private int missionIndex;
 
 	private void Start()

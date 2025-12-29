@@ -25,12 +25,17 @@ public class CarFuelController : MonoBehaviour
 		fuelBar.maxValue = totalGameTime;
 		fuelBar.value = currentFuel;
 		fuelBar.interactable = false;
-
-		OnBurningFuel();
 	}
 
 	private void Update()
 	{
+		OnBurningFuel();
+	}
+
+	private void OnBurningFuel()
+	{
+		isFuelBurning = true;
+
 		if (isFuelBurning && currentFuel > 0)
 		{
 			currentFuel -= burnOutFuel * Time.deltaTime;
@@ -43,17 +48,13 @@ public class CarFuelController : MonoBehaviour
 		}
 	}
 
-	public void OnBurningFuel()
-	{
-		isFuelBurning = true;
-	}
-
 	public void OnfillingFuel()
 	{
 		currentFuel += 15f;
 		currentFuel = Mathf.Clamp(currentFuel, 0, totalGameTime);
 		fuelBar.value = currentFuel;
 	}
+
 
 	private void OnTriggerEnter(Collider other)
 	{

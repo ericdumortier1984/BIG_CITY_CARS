@@ -89,6 +89,7 @@ public class TaxiCab : MonoBehaviour
 	{
 		countdownTimer.StopTimer();
 		routeDrawer.gameObject.SetActive(false);
+		stressBar.gameObject.SetActive(false);
 
 		StartCoroutine(ShowWinMessage());
 
@@ -125,6 +126,7 @@ public class TaxiCab : MonoBehaviour
 
 		countdownTimer.StopTimer();
 		routeDrawer.ClearRoute();
+		stressBar.gameObject.SetActive(false);
 		if (stressedOut)
 		{
 			StartCoroutine(ShowStressOutMessage());

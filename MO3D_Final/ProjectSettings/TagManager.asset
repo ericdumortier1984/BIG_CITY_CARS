@@ -27,6 +27,15 @@ TagManager:
   - Mini Van
   - Cigarette
   - 4x4
+  - Fast Food Truck
+  - Food
+  - TV Truck
+  - Delivery Truck
+  - Big Truck
+  - Red Truck
+  - Tanker Truck
+  - School Bus
+  - Bus
   layers:
   - Default
   - TransparentFX

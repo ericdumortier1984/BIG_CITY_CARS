@@ -13569,7 +13569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4548681f9deb92c4b86d1d36cecc0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCarName: DUMP TRUCK
+  mCarName: RED TRUCK
   mCarPriceText: $90
   mCarPrice: 90
   mCarSpeed: 60

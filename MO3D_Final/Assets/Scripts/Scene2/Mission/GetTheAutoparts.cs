@@ -139,6 +139,8 @@ public class GetTheAutoparts : MonoBehaviour
 		{
 			autopart.SetActive(false);
 		}
+
+		routeDrawer.gameObject.SetActive(false);
 		instructionPanel.SetActive(false);
 		constructionPanel.SetActive(false);
 		UIMissionManager.Instance.HideCounter();

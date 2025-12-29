@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -62,6 +63,29 @@ public class MissionManager : MonoBehaviour
 	[SerializeField] private GetTheAutoparts getAutoparts;
 	[SerializeField] private VehicleIntro missionIntroGetAutoparts;
 	[SerializeField] private List<GameObject> autoparts;
+	[Header("Fast Food Mission")]
+	[SerializeField] private FastFood fastFood;
+	[SerializeField] private List<GameObject> foodItems;
+	[SerializeField] private List<GameObject> hungryPeoples;
+	[Header("Low Signal Mission")]
+	[SerializeField] private LowSignal lowSignal;
+	[SerializeField] private VehicleIntro missionIntroLowSignal;
+	[SerializeField] private List<GameObject> tvAntennas;
+	[Header("Supply Delivery Mission")]
+	[SerializeField] private SupplyDelivery supplyDelivery;
+	[SerializeField] private VehicleIntro missionIntroSupplyDelivery;
+	[SerializeField] private List<GameObject> supplys;
+	[Header("Parking Odyssey Mission")]
+	[SerializeField] private ParkingOdyssey parkingOdyssey;
+	[Header("Heavy Load Mission")]
+	[SerializeField] private HeavyLoad heavyLoad;
+	[SerializeField] private VehicleIntro missionIntroHeavyLoad;
+	[Header("Fuel Up Mission")]
+	[SerializeField] private FuelUp fuelUp;
+	[Header("School Sucks! Mission")]
+	[SerializeField] private SchoolSucks schoolSucks;
+	[Header("City Tour Mission")]
+	[SerializeField] private CityTour cityTour;
 
 	private bool isMissionActive = false;
 	public bool IsMissionActive => isMissionActive;
@@ -267,6 +291,81 @@ public class MissionManager : MonoBehaviour
 		}
 		missionIntroGetAutoparts.PlayIntro();
 		getAutoparts.BeginGetTheAutoparts();
+		SetWorldState(false);
+		isMissionActive = true;
+	}
+
+	public void StartFastFood()
+	{
+		if (isMissionActive) { return; }
+		foreach (GameObject foodItem in foodItems)
+		{
+			foodItem.SetActive(true);
+		}
+		fastFood.BeginFastFood();
+		SetWorldState(false);
+		isMissionActive = true;
+	}
+
+	public void StartLowSignal()
+	{
+		if (isMissionActive) { return; }
+		foreach (GameObject tvAntenna in tvAntennas)
+		{
+			tvAntenna.SetActive(true);
+		}
+		missionIntroLowSignal.PlayIntro();
+		lowSignal.BeginLowSignal();
+		SetWorldState(false);
+		isMissionActive = true;
+	}
+
+	public void StartSupplyDelivery()
+	{
+		if (isMissionActive) { return; }
+		missionIntroSupplyDelivery.PlayIntro();
+		supplyDelivery.BeginSupplyDelivery();
+		SetWorldState(false);
+		isMissionActive = true;
+	}
+
+	public void StartParkingOdyssey()
+	{
+		if (isMissionActive) { return; }
+		parkingOdyssey.BeginParkingOdyssey();
+		SetWorldState(false);
+		isMissionActive = true;
+	}
+
+	public void StartHeavyLoad()
+	{
+		if (isMissionActive) { return; }
+		missionIntroHeavyLoad.PlayIntro();
+		heavyLoad.BeginHeavyLoad();
+		SetWorldState(false);
+		isMissionActive = true;
+	}
+
+	public void StartFuelUp()
+	{
+		if (isMissionActive) { return; }
+		fuelUp.BeginFuelUp();
+		SetWorldState(false);
+		isMissionActive = true;
+	}
+
+	public void StartSchoolSucks()
+	{
+		if (isMissionActive) { return; }
+		schoolSucks.BeginSchoolSucks();
+		SetWorldState(false);
+		isMissionActive = true;
+	}
+
+	public void StartCityTour()
+	{
+		if (isMissionActive) { return; }
+		cityTour.BeginCityTour();
 		SetWorldState(false);
 		isMissionActive = true;
 	}

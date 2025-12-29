@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class UIMissionManager : MonoBehaviour
 {
@@ -35,6 +36,14 @@ public class UIMissionManager : MonoBehaviour
 	{
 		current = currentValue;
 		total = totalValue;
+		counterText.gameObject.SetActive(true);
+
+		counterText.fontSize = 72;
+		counterText.fontWeight = FontWeight.Regular;
+		counterText.outlineWidth = 0.25f;
+		counterText.outlineColor = new Color32(242, 224, 136, 255);
+		counterText.faceColor = new Color32(242, 224, 136, 255);
+
 		UpdateCounter();
 	}
 
@@ -172,6 +181,81 @@ public class UIMissionManager : MonoBehaviour
 		UpdateAutopartsCounter();
 	}
 
+	public void SetSuppliesCounter(int currentValue, int totalValue)
+	{
+		current = currentValue;
+		total = totalValue;
+		counterText.gameObject.SetActive(true);
+
+		counterText.fontSize = 36;
+		counterText.fontWeight = FontWeight.Heavy;
+		counterText.outlineWidth = 0.25f;
+		counterText.outlineColor = new Color32(242, 224, 136, 255);
+		counterText.faceColor = new Color32(242, 224, 136, 255);
+
+		UpdateSuppliesCounter();
+	}
+
+	public void SetParkingCounter(int currentValue, int totalValue)
+	{
+		current = currentValue;
+		total = totalValue;
+		counterText.gameObject.SetActive(true);
+
+		counterText.fontSize = 36;
+		counterText.fontWeight = FontWeight.Heavy;
+		counterText.outlineWidth = 0.25f;
+		counterText.outlineColor = new Color32(242, 224, 136, 255);
+		counterText.faceColor = new Color32(242, 224, 136, 255);
+
+		UpdateParkingCounter();
+	}
+
+	public void SetFuelPumpCounter(int currentValue, int totalValue)
+	{
+		current = currentValue;
+		total = totalValue;
+		counterText.gameObject.SetActive(true);
+
+		counterText.fontSize = 36;
+		counterText.fontWeight = FontWeight.Heavy;
+		counterText.outlineWidth = 0.25f;
+		counterText.outlineColor = new Color32(242, 224, 136, 255);
+		counterText.faceColor = new Color32(242, 224, 136, 255);
+
+		UpdateFuelPumpCounter();
+	}
+
+	public void SetBusStopCounter(int currentValue, int totalValue)
+	{
+		current = currentValue;
+		total = totalValue;
+		counterText.gameObject.SetActive(true);
+
+		counterText.fontSize = 36;
+		counterText.fontWeight = FontWeight.Heavy;
+		counterText.outlineWidth = 0.25f;
+		counterText.outlineColor = new Color32(242, 224, 136, 255);
+		counterText.faceColor = new Color32(242, 224, 136, 255);
+
+		UpdateBusStopCounter();
+	}
+
+	public void SetPhotoCounter(int currentValue, int totalValue)
+	{
+		current = currentValue;
+		total = totalValue;
+		counterText.gameObject.SetActive(true);
+
+		counterText.fontSize = 36;
+		counterText.fontWeight = FontWeight.Heavy;
+		counterText.outlineWidth = 0.25f;
+		counterText.outlineColor = new Color32(242, 224, 136, 255);
+		counterText.faceColor = new Color32(242, 224, 136, 255);
+
+		UpdatePhotoCounter();
+	}
+
 	public void UpdateCounter()
 	{
 		counterText.text = current + " / " + total;
@@ -218,6 +302,31 @@ public class UIMissionManager : MonoBehaviour
 	public void UpdateAutopartsCounter()
 	{
 		counterText.text = "AUTOPARTS: " + current + " / " + total;
+	}
+
+	public void UpdateSuppliesCounter()
+	{
+		counterText.text = "UNLOAD: " + current + " / " + total;
+	}
+
+	public void UpdateParkingCounter()
+	{
+		counterText.text = "PARKED: " + current + " / " + total;
+	}
+
+	public void UpdateFuelPumpCounter()
+	{
+		counterText.text = "FUEL TANKS: " + current + " / " + total;
+	}
+
+	public void UpdateBusStopCounter()
+	{
+		counterText.text = "BUS STOPS: " + current + " / " + total;
+	}
+
+	public void UpdatePhotoCounter()
+	{
+		counterText.text = "PHOTOS: " + current + " / " + total;
 	}
 
 	public void HideCounter()

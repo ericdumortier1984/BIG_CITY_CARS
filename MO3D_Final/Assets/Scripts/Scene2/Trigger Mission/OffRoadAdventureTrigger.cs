@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ public class OffRoadAdventureTrigger : MonoBehaviour
 
 	[Header("Settings")]
 	[SerializeField] private GameObject offRoadAventureMission;
-	[SerializeField] private Cinemachine.CinemachineVirtualCamera missionVcam;
+	[SerializeField] private CinemachineVirtualCamera missionVcam;
 	[SerializeField] private int missionIndex;
 
 	private void Start()

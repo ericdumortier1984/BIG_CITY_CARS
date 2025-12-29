@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ public class TunningCarTrigger : MonoBehaviour
 	public MissionManager missionManager;
 
 	[Header("Settings")]
-	[SerializeField] private Cinemachine.CinemachineVirtualCamera missionVCam;
+	[SerializeField] private CinemachineVirtualCamera missionVCam;
 	[SerializeField] private int missionIndex;
 
 	private void Start()
