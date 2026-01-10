@@ -32,6 +32,9 @@ public class CarSelectionController : MonoBehaviour
 	public Slider mCarHandlingSlider; 
 	public GameObject mCarBloquedIcon;
 
+	[Header("SFX")]
+	[SerializeField] private AudioClip backSFX;
+
 	public void Awake()
 	{
 		if (Instance != null && Instance != this)
@@ -50,7 +53,9 @@ public class CarSelectionController : MonoBehaviour
 
 	public void NextCarSelection() // Metodo para seleccionar siguiente auto del array
     {
-        mCarsToSelect[mSelectedCarIndex].SetActive(false); // seteamos falso al principio
+		AudioManager.Instance.PlaySFX(backSFX);
+
+		mCarsToSelect[mSelectedCarIndex].SetActive(false); // seteamos falso al principio
         mSelectedCarIndex = (mSelectedCarIndex + 1) % mCarsToSelect.Length; // Calculamos por la cantidad de autos 
         mCarsToSelect[mSelectedCarIndex].SetActive(true); // Luego seteamos verdadero
         Debug.Log("Car selected: " + mSelectedCarIndex);
@@ -64,6 +69,8 @@ public class CarSelectionController : MonoBehaviour
 
 	public void PreviousCarSelection() // Metodo para seleccionar el anterior auto del array
     {
+		AudioManager.Instance.PlaySFX(backSFX);
+
 		mCarsToSelect[mSelectedCarIndex].SetActive(false); // seteamos falso al principio
         mSelectedCarIndex--; // Restamos el indice
         if (mSelectedCarIndex < 0) // Si el indice es menor a cero
@@ -120,6 +127,7 @@ public class CarSelectionController : MonoBehaviour
 
 	public void BuyCar()
 	{
+		AudioManager.Instance.PlaySFX(backSFX);
 		// Actualizo estado
 		CarStats mCarStats = mCarsToSelect[mSelectedCarIndex].GetComponent<CarStats>();
 

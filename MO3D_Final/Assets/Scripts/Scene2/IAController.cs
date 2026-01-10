@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 
 public class IAController : MonoBehaviour
@@ -29,11 +27,15 @@ public class IAController : MonoBehaviour
 	[SerializeField] private float stopDistance = 0f;      // Distancia para frenar completamente
 	[SerializeField] private float slowDownDistance = 0f;  // Distancia para empezar a reducir velocidad
 
-	private IAController carAhead = null;
+	// BOOL
+	private bool stoppedByAccident = false;
 	private bool shouldStop = false;
 	private bool isSlowingDown = false;
 	public bool isStopped { get; private set; } = false;
 
+	// REFERENCES
+	private IAController carAhead = null;
+	private IAController detectedCarAhead;
 	private WayPointIAController mWaypointController;
 	private IntersectionZone mCurrentIntersectionZone;
 
@@ -60,7 +62,7 @@ public class IAController : MonoBehaviour
 		UpdateWheel(mBackRight, mBackRightTransform);
 
 		UpdateIACar();
-		DetectCarAhead();
+		//DetectCarAhead();
 		
 	}
 
@@ -114,78 +116,106 @@ public class IAController : MonoBehaviour
 			}
 		}
 	}
-	
-	private bool DetectCarAhead()
+
+	private IAController DetectCarAhead()
 	{
-		RaycastHit mHit;
-		Vector3 mOrigin = transform.position + Vector3.up * 0.15f;
-		Vector3 mDirection = transform.forward;
+		float sideOffset = 0.2f;
 
-		Debug.DrawRay(mOrigin, mDirection * mDetectRange, Color.red, 0.1f);
+		Vector3 center = transform.position + Vector3.up * 0.1f;
+		Vector3 left = center - transform.right * sideOffset;
+		Vector3 right = center + transform.right * sideOffset;
 
-		if (Physics.Raycast(mOrigin, mDirection, out mHit, mDetectRange))
+		Debug.DrawRay(center, transform.forward * mDetectRange, Color.red);
+		Debug.DrawRay(left, transform.forward * mDetectRange, Color.red);
+		Debug.DrawRay(right, transform.forward * mDetectRange, Color.red);
+
+		if (RayHitCar(center)) return detectedCarAhead;
+		if (RayHitCar(left)) return detectedCarAhead;
+		if (RayHitCar(right)) return detectedCarAhead;
+
+		return null;
+	}
+
+	private bool RayHitCar(Vector3 origin)
+	{
+		if (Physics.Raycast(origin, transform.forward, out RaycastHit hit, mDetectRange))
 		{
-			// Verificamos que el coche detectado no sea uno mismo
-			return mHit.collider.CompareTag("IACar") && mHit.collider.gameObject != gameObject;
+			if (hit.collider.CompareTag("IACar") && hit.collider.gameObject != gameObject)
+			{
+				detectedCarAhead = hit.collider.GetComponent<IAController>();
+				return true;
+			}
+		}
+		return false;
+	}
 
+
+	private bool DetectAccidentAhead()
+	{
+		RaycastHit hit;
+		Vector3 origin = transform.position + Vector3.up * 0.1f;
+		Vector3 direction = transform.forward;
+
+		Debug.DrawRay(origin, direction * mDetectRange, Color.yellow, 0.1f);
+
+		if (Physics.Raycast(origin, direction, out hit, mDetectRange))
+		{
+			if (hit.collider.CompareTag("AccidentScene"))
+			{
+				return true;
+			}
 		}
 
 		return false;
 	}
 
-	private IAController GetCarAhead()
-	{
-		RaycastHit mHit;
-		Vector3 mOrigin = transform.position + Vector3.up * 0.15f;
-		Vector3 mDirection = transform.forward;
-
-		if (Physics.Raycast(mOrigin, mDirection, out mHit, mDetectRange))
-		{
-			if (mHit.collider.CompareTag("IACar") && mHit.collider.gameObject != gameObject)
-			{
-				mWaypointController.SetSpeed(mNormalSpeed);
-				return mHit.collider.GetComponent<IAController>();
-			}
-		}
-
-		return null;
-	}
-
 	private void UpdateIACar()
 	{
-		if (shouldStop || isStopped) // Auto frenado por semáforo
-			return;
-
 		if (mWaypointController == null)
 			return;
 
-		if (!shouldStop && mWaypointController != null)
+		if (mCurrentIntersectionZone != null && mCurrentIntersectionZone.IsRedLight())
 		{
-			IAController carAhead = GetCarAhead();
+			mWaypointController.SetSpeed(0f);
+			isStopped = true;
+			return;
+		}
 
-			if (carAhead != null)
+		if (DetectAccidentAhead())
+		{
+			mWaypointController.SetSpeed(0f);
+			isStopped = true;
+			return;
+		}
+
+		IAController carAhead = DetectCarAhead();
+
+		if (carAhead != null)
+		{
+			float distance = Vector3.Distance(transform.position, carAhead.transform.position);
+
+			if (carAhead.isStopped || distance < stopDistance)
 			{
-				float distance = Vector3.Distance(transform.position, carAhead.transform.position);
-
-				if (carAhead.isStopped || distance < stopDistance)
-				{
-					mWaypointController.SetSpeed(0f);
-					isStopped = true;
-				}
-				else if (distance < slowDownDistance)
-				{
-					mWaypointController.SetSpeed(mReducedSpeed);
-					isStopped = false;
-				}
+				mWaypointController.SetSpeed(0f);
+				isStopped = true;
+			}
+			else if (distance < slowDownDistance)
+			{
+				mWaypointController.SetSpeed(mReducedSpeed);
+				isStopped = false;
 			}
 			else
 			{
 				mWaypointController.SetSpeed(mNormalSpeed);
 				isStopped = false;
 			}
-
-			mWaypointController.MoveToWaypoint();
+		}
+		else
+		{
+			mWaypointController.SetSpeed(mNormalSpeed);
 			isStopped = false;
 		}
+
+		mWaypointController.MoveToWaypoint();
 	}
 }

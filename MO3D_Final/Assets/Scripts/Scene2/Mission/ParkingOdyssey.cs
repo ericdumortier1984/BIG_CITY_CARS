@@ -20,8 +20,14 @@ public class ParkingOdyssey : MonoBehaviour
 	[Header("Time")]
 	[SerializeField] private CountdownTimer countdownTimer;
 
-    // BOOL
-    private bool hasLost = false;
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip parkingOdisseyMusic;
+	[SerializeField] private AudioClip parkedSFX;
+	[SerializeField] private AudioClip winSFX;
+	[SerializeField] private AudioClip loseSFX;
+
+	// BOOL
+	private bool hasLost = false;
 
 	// INT
 	private int parkingIndex = 0;
@@ -30,7 +36,10 @@ public class ParkingOdyssey : MonoBehaviour
     // MEDAL
     private static bool isMedal = false;
 
-    public void BeginParkingOdyssey()
+	// MUSIC MISSION START
+	private static bool missionMusicStarted = false;
+
+	public void BeginParkingOdyssey()
     {
         SetElements();
     }
@@ -40,6 +49,13 @@ public class ParkingOdyssey : MonoBehaviour
 		// INSTRUCTIONS
 		UIMissionManager.Instance.ShowMissionText("PUT THE TRUCK IN REVERSE TO UNLOAD", textDuration, 40);
 		instructionPanel.SetActive(true);
+
+		// MUSIC
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(parkingOdisseyMusic);
+			missionMusicStarted = true;
+		}
 
 		// PARKING POINTS
 		foreach (Transform parkingPoint in parkingPoints)
@@ -69,6 +85,7 @@ public class ParkingOdyssey : MonoBehaviour
 
 	public void TruckParked(ParkingZoneController parkingZone)
 	{
+		AudioManager.Instance.PlaySFX(parkedSFX);
 		parkingPoints[parkingIndex].gameObject.SetActive(false);
 		NextParkingZone();
 	}
@@ -115,6 +132,10 @@ public class ParkingOdyssey : MonoBehaviour
 
 	private void WinMission()
 	{
+		AudioManager.Instance.PlaySFX(winSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		missionManager.EndMission();
 		StartCoroutine(ShowWinMessage());
 		DisableElements();
@@ -140,6 +161,10 @@ public class ParkingOdyssey : MonoBehaviour
 
 		if (countdownTimer.IsTimeUp && !hasLost)
 		{
+			AudioManager.Instance.PlaySFX(loseSFX);
+			AudioManager.Instance.PlayGameplayMusic();
+			missionMusicStarted = false;
+
 			hasLost = true;
 			StartCoroutine(ShowLoseMessage());
 			DisableElements();

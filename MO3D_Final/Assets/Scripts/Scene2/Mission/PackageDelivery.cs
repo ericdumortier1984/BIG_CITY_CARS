@@ -9,6 +9,7 @@ public class PackageDelivery : MonoBehaviour
 	[SerializeField] private List<GameObject> packagePrefab;
 	[SerializeField] Vector3 packageOffset;
 	[SerializeField] private ParticleSystem packageParticle;
+	[SerializeField] private ParticleSystem deliveryParticle;
 	[SerializeField] private CountdownTimer countdownTimer;
 
 	[Header("References")]
@@ -21,18 +22,31 @@ public class PackageDelivery : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI packageCounterText;
 	[SerializeField] private TextMeshProUGUI timeCounterText;
 	[SerializeField] private RouteDrawer routeDrawer;
+	[SerializeField] private GameObject InstructionPanel;
 
 	[Header("Mission Manager")]
 	[SerializeField] private MissionManager missionManager;
 
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip deliveryMissionMusic;
+	[SerializeField] private AudioClip deliverySFX;
+	[SerializeField] private AudioClip winSFX;
+	[SerializeField] private AudioClip loseSFX;
 
 	private int totalPackage = 6;
 	private int deliveredPackage = 0;
 	private int deliveryIndex = 0;
 	private static bool isMedal = false;
+	private static bool missionMusicStarted = false;
 
 	private void Start()
 	{
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(deliveryMissionMusic);
+			missionMusicStarted = true;
+		}
+
 		SpawnPackage();
 		SpawnLocation();
 		EnableUIElements();
@@ -85,6 +99,7 @@ public class PackageDelivery : MonoBehaviour
 		UIMissionManager.Instance.ShowMissionText("DELIVER ALL PACKAGE", textDuration, 50);
 		UIMissionManager.Instance.ShowTimer(true);
 		UIMissionManager.Instance.SetPackageCounter(deliveredPackage, totalPackage);
+		InstructionPanel.SetActive(true);
 	}
 
 	private void WinMission()
@@ -92,8 +107,13 @@ public class PackageDelivery : MonoBehaviour
 		foreach (GameObject package in packagePrefab)
 			package.SetActive(false);
 
+		AudioManager.Instance.PlaySFX(winSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		countdownTimer.StopTimer();
 		routeDrawer.gameObject.SetActive(false);
+		InstructionPanel.SetActive(false);
 
 		UIMissionManager.Instance.ShowMissionText("ALL PACKAGE DELIVERED\n + 15 COINS", textDuration, 50);
 		UIMissionManager.Instance.HideCounter();
@@ -123,6 +143,11 @@ public class PackageDelivery : MonoBehaviour
 
 			countdownTimer.StopTimer();
 			routeDrawer.gameObject.SetActive(false);
+			InstructionPanel.SetActive(false);
+
+			AudioManager.Instance.PlaySFX(loseSFX);
+			AudioManager.Instance.PlayGameplayMusic();
+			missionMusicStarted = false;
 
 			UIMissionManager.Instance.ShowMissionText("TIME UP", textDuration, 50);
 			UIMissionManager.Instance.HideCounter();
@@ -151,7 +176,12 @@ public class PackageDelivery : MonoBehaviour
 	{
 		if (deliveredPackage >= totalPackage) return;
 
+		deliveryParticle.transform.position = transform.position;
+		deliveryParticle.Play();
+
 		point.gameObject.SetActive(false);
+
+		AudioManager.Instance.PlaySFX(deliverySFX);
 
 		deliveredPackage++;
 		UpdatePackageCounter();

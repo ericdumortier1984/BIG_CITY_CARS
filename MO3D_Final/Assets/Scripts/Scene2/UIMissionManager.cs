@@ -38,7 +38,7 @@ public class UIMissionManager : MonoBehaviour
 		total = totalValue;
 		counterText.gameObject.SetActive(true);
 
-		counterText.fontSize = 72;
+		counterText.fontSize = 36;
 		counterText.fontWeight = FontWeight.Regular;
 		counterText.outlineWidth = 0.25f;
 		counterText.outlineColor = new Color32(242, 224, 136, 255);
@@ -256,9 +256,54 @@ public class UIMissionManager : MonoBehaviour
 		UpdatePhotoCounter();
 	}
 
+	public void SetAccidentSceneCounter(int currentValue, int totalValue)
+	{
+		current = currentValue;
+		total = totalValue;
+		counterText.gameObject.SetActive(true);
+
+		counterText.fontSize = 36;
+		counterText.fontWeight = FontWeight.Heavy;
+		counterText.outlineWidth = 0.25f;
+		counterText.outlineColor = new Color32(242, 224, 136, 255);
+		counterText.faceColor = new Color32(242, 224, 136, 255);
+
+		UpdateAccidentSceneCounter();
+	}
+
+	public void SetIceCreamCounter(int currentValue, int totalValue)
+	{
+		current = currentValue;
+		total = totalValue;
+		counterText.gameObject.SetActive(true);
+
+		counterText.fontSize = 36;
+		counterText.fontWeight = FontWeight.Heavy;
+		counterText.outlineWidth = 0.25f;
+		counterText.outlineColor = new Color32(242, 224, 136, 255);
+		counterText.faceColor = new Color32(242, 224, 136, 255);
+
+		UpdateIceCreamCounter();
+	}
+
+	public void SetMaterialIceCreamCounter(int currentValue, int totalValue)
+	{
+		current = currentValue;
+		total = totalValue;
+		counterText.gameObject.SetActive(true);
+
+		counterText.fontSize = 36;
+		counterText.fontWeight = FontWeight.Heavy;
+		counterText.outlineWidth = 0.25f;
+		counterText.outlineColor = new Color32(242, 224, 136, 255);
+		counterText.faceColor = new Color32(242, 224, 136, 255);
+
+		UpdateMaterialIceCreamCounter();
+	}
+
 	public void UpdateCounter()
 	{
-		counterText.text = current + " / " + total;
+		counterText.text = "CABAGGE: " + current + " / " + total;
 	}
 	public void UpdatePackageCounter()
 	{
@@ -327,6 +372,21 @@ public class UIMissionManager : MonoBehaviour
 	public void UpdatePhotoCounter()
 	{
 		counterText.text = "PHOTOS: " + current + " / " + total;
+	}
+
+	public void UpdateAccidentSceneCounter()
+	{
+		counterText.text = "ACCIDENTS: " + current + " / " + total;
+	}
+
+	public void UpdateIceCreamCounter()
+	{
+		counterText.text = "ICE CREAMS: " + current + " / " + total;
+	}
+
+	public void UpdateMaterialIceCreamCounter()
+	{
+		counterText.text = "INGREDIENTS: " + current + " / " + total;
 	}
 
 	public void HideCounter()

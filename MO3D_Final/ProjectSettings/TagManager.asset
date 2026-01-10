@@ -36,6 +36,11 @@ TagManager:
   - Tanker Truck
   - School Bus
   - Bus
+  - Ambulance
+  - Patient
+  - AccidentScene
+  - Ice Cream Truck
+  - Tractor
   layers:
   - Default
   - TransparentFX

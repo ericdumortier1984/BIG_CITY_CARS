@@ -22,6 +22,12 @@ public class SupplyDelivery : MonoBehaviour
 	[Header("Time")]
 	[SerializeField] private CountdownTimer countdownTimer;
 
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip supplyDeliveryMusic;
+	[SerializeField] private AudioClip collectSFX;
+	[SerializeField] private AudioClip winSFX;
+	[SerializeField] private AudioClip loseSFX;
+
 	// BOOL 
 	private bool hasLost = false;
 
@@ -31,6 +37,9 @@ public class SupplyDelivery : MonoBehaviour
 
 	// MEDAL
 	private static bool isMedal = false;
+
+	// MUSIC MISSION START
+	private static bool missionMusicStarted = false;
 
 	public void BeginSupplyDelivery()
 	{
@@ -42,6 +51,13 @@ public class SupplyDelivery : MonoBehaviour
 		// INSTRUCTIONS
 		UIMissionManager.Instance.ShowMissionText("SUPPLY DELIVERY", textDuration, 40);
 		instructionPanel.SetActive(true);
+
+		// MUSIC
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(supplyDeliveryMusic);
+			missionMusicStarted = true;
+		}
 
 		// LOAD AND UNLOAD POSITION
 		foreach (Transform loadPosition in loadSupplyPosition)
@@ -76,6 +92,7 @@ public class SupplyDelivery : MonoBehaviour
 
 	public void Load(LoadSupply loadSupply)
 	{
+		AudioManager.Instance.PlaySFX(collectSFX);
 		loadSupplyPosition[supplyIndex].gameObject.SetActive(false);
 		unloadSupplyPosition[supplyIndex].gameObject.SetActive(true);
 		routeDrawer.SetTarget(unloadSupplyPosition[supplyIndex]);
@@ -84,6 +101,7 @@ public class SupplyDelivery : MonoBehaviour
 
 	public void Unload(UnloadSupply unloadSupply)
 	{
+		AudioManager.Instance.PlaySFX(collectSFX);
 		unloadSupplyPosition[supplyIndex].gameObject.SetActive(false);
 		NextSupply();
 	}
@@ -130,6 +148,10 @@ public class SupplyDelivery : MonoBehaviour
 
 	private void WinMission()
 	{
+		AudioManager.Instance.PlaySFX(winSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		missionManager.EndMission();
 		StartCoroutine(ShowWinMessage());
 		DisableElements();
@@ -155,6 +177,10 @@ public class SupplyDelivery : MonoBehaviour
 
 		if (countdownTimer.IsTimeUp && !hasLost)
 		{
+			AudioManager.Instance.PlaySFX(loseSFX);
+			AudioManager.Instance.PlayGameplayMusic();
+			missionMusicStarted = false;
+
 			hasLost = true;
 			StartCoroutine(ShowLoseMessage());
 			DisableElements();

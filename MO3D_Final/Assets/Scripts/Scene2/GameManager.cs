@@ -1,124 +1,144 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum EndGameReason
+{
+	OutOfFuel,
+	AllWaypointsCollected
+}
 
 public class GameManager : MonoBehaviour
 {
-	[Header("Canvas")]
-	[SerializeField] private GameObject mPauseMenu;
-	[SerializeField] private GameObject mInputCanvas;
+	[Header("UI")]
+	[SerializeField] private GameObject pauseMenu;
+	[SerializeField] private GameObject inputCanvas;
+	[SerializeField] private List<GameObject> hudGameObjects;
 
-	private GameObject mCarFuel;
-	private GameObject mItemWaypointCollected;
+	private CarFuelController carFuelController;
+	private ItemWaypointController itemWaypointController;
 
-	private bool isPaused = false;
-	private bool isInputCanvas = false;
-
-	private CarFuelController mCarFuelController; 
-	private ItemWaypointController mItemWaypointController;
+	private bool isPaused;
+	private bool isInputOpen;
 
 	private void Start()
 	{
-		mPauseMenu.SetActive(false);
-		mInputCanvas.SetActive(false);
-		Cursor.visible = false;
+		InitializeUI();
+		ResetLevelValues();
 
-		mCarFuelController = FindObjectOfType<CarFuelController>();
-		mItemWaypointController = FindObjectOfType<ItemWaypointController>();
-
-		ResetValues();
+		carFuelController = FindObjectOfType<CarFuelController>();
+		itemWaypointController = FindObjectOfType<ItemWaypointController>();
 	}
 
 	private void Update()
 	{
-
-		if (Input.GetKeyDown(KeyCode.Escape))
-		{
-			if (isPaused)
-			{
-				ResumeGame();
-			}
-			if (isInputCanvas)
-			{
-				Cursor.visible = true;
-				PauseGame(); 
-				
-			}
-			else
-			{
-				Cursor.visible = true;
-				PauseGame();
-			}
-		}
-
-		if (mCarFuelController != null && mCarFuelController.CurrentFuel <= 0.01f)
-
-		{
-			EndGame("OutOfFuel");
-		}
-		if (mItemWaypointController.ItemWaypointCollected == 10)
-		{
-			EndGame("AllWaypointsCollected");
-		}
+		HandlePauseInput();
+		CheckGameConditions();
 	}
 
-	private void ResetValues()
+	private void InitializeUI()
 	{
-		// Reinicia los valores de LevelData al inicio del nivel
+		pauseMenu.SetActive(false);
+		inputCanvas.SetActive(false);
+		Cursor.visible = false;
+		Time.timeScale = 1f;
+	}
+
+	private void ResetLevelValues()
+	{
 		LevelData.CoinsCollectedInLevel = 0;
 		LevelData.WaypointsCollectedInLevel = 0;
 		LevelData.MedalCollectedInLevel = 0;
 	}
 
-	public void ResumeGame()
+	private void HandlePauseInput()
 	{
-		isPaused = false;
-		Time.timeScale = 1; 
-		mPauseMenu.SetActive(false); 
-		mInputCanvas.SetActive(false); 
+		if (!Input.GetKeyDown(KeyCode.Escape)) return;
+
+		if (isPaused)
+			ResumeGame();
+		else
+			PauseGame();
 	}
 
 	public void PauseGame()
 	{
 		isPaused = true;
-		Time.timeScale = 0; 
-		mPauseMenu.SetActive(true); 
-	}
+		Time.timeScale = 0f;
+		Cursor.visible = true;
+		pauseMenu.SetActive(true);
 
-	public void GoToMainMenu()
-	{
-		Time.timeScale = 1;
-		LoaderScene.Load(LoaderScene.mScene.SceneMainMenu); 
-	}
-
-	public void RestartGame()
-	{
-		Time.timeScale = 1;
-		LoaderScene.Load(LoaderScene.mScene.SceneGameTpFinal); 
-	}
-
-	public void ShowGameInput()
-	{
-		isInputCanvas = true;
-		Time.timeScale = 0;
-		mInputCanvas.SetActive(true); 
-	}
-	
-	void EndGame(string mCondition)
-	{
-		switch (mCondition)
+		foreach (GameObject hudGameObject in hudGameObjects)
 		{
-			case "OutOfFuel":
-				SceneManager.LoadScene("SceneEndGame");
+			hudGameObject.SetActive(false);
+		}
+
+		AudioManager.Instance.SetPaused(true);
+	}
+
+	public void ResumeGame()
+	{
+		isPaused = false;
+		Time.timeScale = 1f;
+		Cursor.visible = false;
+		pauseMenu.SetActive(false);
+		inputCanvas.SetActive(false);
+
+		foreach (GameObject hudGameObject in hudGameObjects)
+		{
+			hudGameObject.SetActive(true);
+		}
+
+		AudioManager.Instance.SetPaused(false);
+	}
+
+	private void CheckGameConditions()
+	{
+		if (carFuelController != null && carFuelController.CurrentFuel <= 0.01f)
+		{
+			EndGame(EndGameReason.OutOfFuel);
+		}
+
+		if (itemWaypointController != null &&
+			itemWaypointController.ItemWaypointCollected >= 10)
+		{
+			EndGame(EndGameReason.AllWaypointsCollected);
+		}
+	}
+
+	private void EndGame(EndGameReason reason)
+	{
+		SceneManager.LoadScene("SceneEndGame");
+
+		switch (reason)
+		{
+			case EndGameReason.OutOfFuel:
 				Debug.Log("Out of fuel");
 				break;
 
-			case "AllWaypointsCollected":
-				SceneManager.LoadScene("SceneEndGame");
+			case EndGameReason.AllWaypointsCollected:
 				Debug.Log("All waypoints collected");
 				break;
 		}
 	}
+
+	public void GoToMainMenu()
+	{
+		Time.timeScale = 1f;
+		LoaderScene.Load(LoaderScene.mScene.SceneMainMenu);
+	}
+
+	public void RestartGame()
+	{
+		Time.timeScale = 1f;
+		LoaderScene.Load(LoaderScene.mScene.SceneGameTpFinal);
+	}
+
+	public void ShowGameInput()
+	{
+		isInputOpen = true;
+		Time.timeScale = 0f;
+		inputCanvas.SetActive(true);
+	}
 }
+

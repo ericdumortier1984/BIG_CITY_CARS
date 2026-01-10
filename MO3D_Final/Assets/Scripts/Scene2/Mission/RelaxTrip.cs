@@ -27,12 +27,21 @@ public class RelaxTrip : MonoBehaviour
 	[Header("References")]
 	[SerializeField] private MissionManager missionManager;
 	[SerializeField] private List<GameObject> cigarettes;
-	
+
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip relaxTripMusic;
+	[SerializeField] private AudioClip collectSFX;
+	[SerializeField] private AudioClip winSFX;
+	[SerializeField] private AudioClip loseSFX;
+
 	//BOOL
 	private bool hasLost = false;
 
 	// MEDAL
 	private static bool isMedal = false;
+
+	// MUSIC MISSION START
+	private static bool missionMusicStarted = false;
 
 	public void BeginRelaxTrip()
 	{
@@ -44,6 +53,13 @@ public class RelaxTrip : MonoBehaviour
 		// INSTRUCTIONS
 		UIMissionManager.Instance.ShowMissionText("GET THE CIGARETTES TO FILL THAT BAR", textDuration, 40);
 		missionManager.StartCoroutine(DelayInstructionPanel());
+
+		// MUSIC
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(relaxTripMusic);
+			missionMusicStarted = true;
+		}
 
 		// SLIDER SIZE
 		relaxSlider.gameObject.SetActive(true);
@@ -80,6 +96,8 @@ public class RelaxTrip : MonoBehaviour
 
 	public void CollectCigarettes(CollectCigarette cigarette)
 	{
+		AudioManager.Instance.PlaySFX(collectSFX);
+
 		cigarette.gameObject.SetActive(false);
 
 		relaxSlider.value += relaxTimeRatioUp;
@@ -93,6 +111,10 @@ public class RelaxTrip : MonoBehaviour
 
 	private void WinMission()
 	{
+		AudioManager.Instance.PlaySFX(winSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		missionManager.EndMission();
 		StartCoroutine(ShowWinMessage());
 		DisableElements();
@@ -117,6 +139,10 @@ public class RelaxTrip : MonoBehaviour
 		if (hasLost) { return; }
 		if (relaxSlider.value <= minRelax)
 		{
+			AudioManager.Instance.PlaySFX(loseSFX);
+			AudioManager.Instance.PlayGameplayMusic();
+			missionMusicStarted = false;
+
 			hasLost = true;
 			StartCoroutine(ShowLoseMessage());
 			DisableElements();

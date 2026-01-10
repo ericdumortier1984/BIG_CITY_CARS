@@ -71,11 +71,6 @@ public class CityTour : MonoBehaviour
 		routeDrawer.SetTarget(photoSpots[photosIndex]);
 	}
 
-	private void Update()
-	{
-		
-	}
-
 	private void SetTourist()
 	{
 		foreach (TouristController tourist in tourists)
@@ -153,16 +148,6 @@ public class CityTour : MonoBehaviour
 		}
 	}
 
-	private void LoseMission()
-	{
-		if (hasLost) { return; }
-
-		hasLost = true;
-		StartCoroutine(ShowLoseMessage());
-		DisableElements();
-		missionManager.EndMission();
-	}
-
 	private void DisableElements()
 	{
 		instructionPanel.SetActive(false);
@@ -179,12 +164,6 @@ public class CityTour : MonoBehaviour
 	private IEnumerator ShowWinMessage()
 	{
 		UIMissionManager.Instance.ShowMissionText("NICE PHOTOS! \n + 15 COINS", textDuration, 50);
-		yield return new WaitForSeconds(textDuration);
-	}
-
-	private IEnumerator ShowLoseMessage()
-	{
-		UIMissionManager.Instance.ShowMissionText("OUT OF FUEL!", textDuration, 50);
 		yield return new WaitForSeconds(textDuration);
 	}
 

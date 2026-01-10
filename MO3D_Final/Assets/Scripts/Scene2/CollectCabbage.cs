@@ -11,6 +11,7 @@ public class CollectCabbage : MonoBehaviour
 	[SerializeField] private float spawnRadius = 0f;
 
 	[Header("UI")]
+	[SerializeField] private GameObject instructionPanel;
 	[SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private float textDuration;
 
@@ -18,16 +19,35 @@ public class CollectCabbage : MonoBehaviour
 	[SerializeField] private MissionManager missionManager;
 	[SerializeField] private ParticleSystem collectParticle;
 
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip cabbageMissionMusic;     
+	[SerializeField] private AudioClip collectSFX;         
+	[SerializeField] private AudioClip winSFX;           
+
 	public int spawnCount = 0;
 	private static bool isMedal = false;
+	private static bool missionMusicStarted = false;
 
 	private void Start()
+	{
+		SetElements();
+	}
+
+	private void SetElements()
 	{
 		if (spawnCount == 0)
 		{
 			collectParticle.Play();
 			UIMissionManager.Instance.ShowMissionText("COLLECT ALL CABBAGES", textDuration, 50);
 		}
+
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(cabbageMissionMusic);
+			missionMusicStarted = true;
+		}
+
+		instructionPanel.SetActive(true);
 		UIMissionManager.Instance.SetCounter(spawnCount, maxSpawn);
 	}
 
@@ -35,16 +55,20 @@ public class CollectCabbage : MonoBehaviour
 	{
 		if (other.CompareTag("FarmCar"))
 		{
+			AudioManager.Instance.PlaySFX(collectSFX);
 			spawnCount++;
 			UIMissionManager.Instance.SetCounter(spawnCount, maxSpawn);
 
 			if (spawnCount < maxSpawn)
 			{
+				collectParticle.transform.position = transform.position;
+				collectParticle.Play();
 				SpawnCabbage();
 			}
 
 			if (spawnCount == maxSpawn)
 			{
+				instructionPanel.SetActive(false);
 				WinMission();
 				missionManager.EndMission();
 			}
@@ -63,6 +87,9 @@ public class CollectCabbage : MonoBehaviour
 
 	private void WinMission()
 	{
+		AudioManager.Instance.PlaySFX(winSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
 		UIMissionManager.Instance.ShowMissionText("ALL CABBAGES COLLECTED\n + 5 COINS", textDuration, 50);
 		UIMissionManager.Instance.HideCounter();
 

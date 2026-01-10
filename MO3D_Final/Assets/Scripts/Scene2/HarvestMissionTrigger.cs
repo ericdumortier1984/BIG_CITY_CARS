@@ -23,7 +23,7 @@ public class HarvestMissionTrigger : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.CompareTag("FarmCar"))
+		if (other.CompareTag("Tractor"))
 		{
 			if (!missionManager.CanStartMission())
 			{
@@ -36,7 +36,7 @@ public class HarvestMissionTrigger : MonoBehaviour
 		}
 		else
 		{
-			UIMissionManager.Instance.ShowMissionText("ONLY FARM VEHICLES", 1.0f, 50);
+			UIMissionManager.Instance.ShowMissionText("ONLY TRACTOR", 1.0f, 50);
 		}
 	}
 }

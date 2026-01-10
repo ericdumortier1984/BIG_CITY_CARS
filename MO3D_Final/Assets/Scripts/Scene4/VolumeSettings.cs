@@ -1,28 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Audio;
-using TMPro;
+using UnityEngine.UI;
 
 public class VolumeSettings : MonoBehaviour
 {
-	[Header("Audio Settings")]
-    [SerializeField] private Slider mMusicVolume;
-    [SerializeField] private AudioMixer mAudioMixer;
+	[Header("Settings")]
+	[SerializeField] private Slider musicSlider;
 
 	private void Start()
 	{
-		// Guardo el volumen de la musica
-		float mSavedVolume = PlayerPrefs.GetFloat("musicVolume", 1f);
-		mMusicVolume.value = mSavedVolume;
-		mAudioMixer.SetFloat("musicVolume", mSavedVolume);
-	}
+		musicSlider.minValue = 0.05f;
+		musicSlider.maxValue = 1f;
 
-	public void ChangeMusicVolume(float mValue)
-	{
-		float mVolume = mMusicVolume.value;
-		mAudioMixer.SetFloat("musicVolume", mVolume);
-		PlayerPrefs.SetFloat("musicVolume", mVolume); // musica guardada
+		musicSlider.value = AudioManager.Instance.GetMusicVolume();
+		musicSlider.onValueChanged.AddListener(AudioManager.Instance.SetMusicVolume);
 	}
 }

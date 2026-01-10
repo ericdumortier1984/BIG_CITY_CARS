@@ -25,6 +25,12 @@ public class LittleAndFurious : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI minSizeText;
 	[SerializeField] private TextMeshProUGUI maxSizeText;
 
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip littleAndFuriousMusic;
+	[SerializeField] private AudioClip collectSFX;
+	[SerializeField] private AudioClip winSFX;
+	[SerializeField] private AudioClip loseSFX;
+
 	// BOOL
 	private bool startDecreasing = false;
 	private bool hasLost = false;
@@ -34,6 +40,9 @@ public class LittleAndFurious : MonoBehaviour
 
 	// MEDAL
 	private static bool isMedal = false;
+	 
+	// MUSIC MISSION START
+	private static bool missionMusicStarted = false;
 
 	public void BeginLittlendFurious()
 	{
@@ -45,6 +54,13 @@ public class LittleAndFurious : MonoBehaviour
 		// INSTRUCTIONS
 		UIMissionManager.Instance.ShowMissionText("TAKE THE GROWTH PILLS, YOU ARE GETTING SMALLER", textDuration, 40);
 		missionManager.StartCoroutine(DelayInstructionPanel());
+
+		// MUSIC
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(littleAndFuriousMusic);
+			missionMusicStarted = true;
+		}
 
 		// SCALE
 		startDecreasing = true;
@@ -75,6 +91,8 @@ public class LittleAndFurious : MonoBehaviour
 
 	public void GrowthPillCollected(CollectCapsuleTrigger growthPill)
 	{
+		AudioManager.Instance.PlaySFX(collectSFX);
+
 		growthPill.gameObject.SetActive(false);
 		miniCar.transform.localScale += Vector3.one * grownScale;
 
@@ -102,6 +120,10 @@ public class LittleAndFurious : MonoBehaviour
 
 	private void WinMission()
 	{
+		AudioManager.Instance.PlaySFX(winSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		missionManager.EndMission();
 		StartCoroutine(ShowWinMessage());
 		DisableElements();
@@ -126,6 +148,10 @@ public class LittleAndFurious : MonoBehaviour
 		if (hasLost) { return; }
 		if (miniCar.transform.localScale.x <= minScale)
 		{
+			AudioManager.Instance.PlaySFX(loseSFX);
+			AudioManager.Instance.PlayGameplayMusic();
+			missionMusicStarted = false;
+
 			hasLost = true;
 			StartCoroutine(ShowLoseMessage());
 			DisableElements();

@@ -22,6 +22,12 @@ public class LowSignal : MonoBehaviour
 	[Header("Time")]
 	[SerializeField] private CountdownTimer countdownTimer;
 
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip lowSignalMusic;
+	[SerializeField] private AudioClip fixedSFX;
+	[SerializeField] private AudioClip winSFX;
+	[SerializeField] private AudioClip loseSFX;
+
 	// BOOL 
 	private bool hasLost = false;
 
@@ -31,6 +37,9 @@ public class LowSignal : MonoBehaviour
 
 	// MEDAL
 	private static bool isMedal = false;
+
+	// MUSIC MISSION START
+	private static bool missionMusicStarted = false;
 
 	public void BeginLowSignal()
     {
@@ -43,6 +52,13 @@ public class LowSignal : MonoBehaviour
 		Invoke(nameof(StartDistorsionView), 5f);
 		instructionPanel.SetActive(true);
 		UIMissionManager.Instance.ShowMissionText("FIX THOSE TV ANTENNAS", textDuration, 40);
+
+		// MUSIC
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(lowSignalMusic);
+			missionMusicStarted = true;
+		}
 
 		// SLIDERS
 		foreach (Slider channel in signalChannels)
@@ -97,11 +113,16 @@ public class LowSignal : MonoBehaviour
 		if (indexTvAntennas - 1 < signalChannels.Count)
 		{
 			signalChannels[indexTvAntennas - 1].value = 1f;
+			AudioManager.Instance.PlaySFX(fixedSFX);
 		}
 	}
 
 	private void WinMission()
 	{
+		AudioManager.Instance.PlaySFX(winSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		missionManager.EndMission();
 		StartCoroutine(ShowWinMessage());
 		DisableElements();
@@ -127,6 +148,10 @@ public class LowSignal : MonoBehaviour
 
 		if (countdownTimer.IsTimeUp && !hasLost)
 		{
+			AudioManager.Instance.PlaySFX(loseSFX);
+			AudioManager.Instance.PlayGameplayMusic();
+			missionMusicStarted = false;
+
 			hasLost = true;
 			StartCoroutine(ShowLoseMessage());
 			DisableElements();

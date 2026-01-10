@@ -8,7 +8,8 @@ public class TrafficLightsController : MonoBehaviour
 	public TrafficLightState mCurrentState { get; private set; }
 
 	[Header("Time Settings")]
-    [SerializeField] private float mRedDuration = 5f;
+    [SerializeField] private bool startWithRed;
+	[SerializeField] private float mRedDuration = 5f;
     [SerializeField] private float mGreenDuration = 5f;
 
     [Header("Visual Settings")]
@@ -16,8 +17,7 @@ public class TrafficLightsController : MonoBehaviour
 	[SerializeField] private Transform mGreenLight;
 	
     private float timer;
-	private bool startWithRed = true;
-
+	
 	private void Start()
     {
         timer = 0f;
@@ -27,25 +27,7 @@ public class TrafficLightsController : MonoBehaviour
 
 	private void Update()
 	{
-        timer += Time.deltaTime;
-
-        switch (mCurrentState)
-        {
-            case TrafficLightState.Red:
-                if (timer >= mRedDuration)
-                {
-                    SwitchToGreen();
-                    //Debug.Log("is green");
-                }
-                break;
-            case TrafficLightState.Green:
-                if (timer >= mGreenDuration)
-                {
-                    SwitchToRed();
-                    //Debug.Log("is red");
-                }
-                break;
-        }
+        UpdateTime();
 	}
 
     public bool IsRed()
@@ -78,4 +60,25 @@ public class TrafficLightsController : MonoBehaviour
             mGreenLight.gameObject.SetActive(mCurrentState == TrafficLightState.Green);
         }
     }
+
+    private void UpdateTime()
+    {
+		timer += Time.deltaTime;
+
+		switch (mCurrentState)
+		{
+			case TrafficLightState.Red:
+				if (timer >= mRedDuration)
+				{
+					SwitchToGreen();
+				}
+				break;
+			case TrafficLightState.Green:
+				if (timer >= mGreenDuration)
+				{
+					SwitchToRed();
+				}
+				break;
+		}
+	}
 }

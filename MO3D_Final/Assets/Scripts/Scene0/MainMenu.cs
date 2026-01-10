@@ -16,6 +16,9 @@ public class MainMenu : MonoBehaviour
 	public Button mYesButton;
 	public Button mNoButton;
 
+	[Header("SFX")]
+	[SerializeField] private AudioClip backSFX;
+
 	private void Awake()
 	{
 		if (Instance != null && Instance != this)
@@ -86,18 +89,21 @@ public class MainMenu : MonoBehaviour
 		}
 		else
 		{
+			AudioManager.Instance.PlaySFX(backSFX);
 			LoaderScene.Load(LoaderScene.mScene.SceneGameTpFinal);
 		}
     }
 
     public void ShowSettings()
     {
-        LoaderScene.Load(LoaderScene.mScene.SceneSettings);
+		AudioManager.Instance.PlaySFX(backSFX);
+		LoaderScene.Load(LoaderScene.mScene.SceneSettings);
     }
 
     public void Showcredits()
     {
-        LoaderScene.Load(LoaderScene.mScene.SceneGameCredits);
+		AudioManager.Instance.PlaySFX(backSFX);
+		LoaderScene.Load(LoaderScene.mScene.SceneGameCredits);
     }
 
     public void ShowMainMenu()
@@ -147,6 +153,7 @@ public class MainMenu : MonoBehaviour
 
 	public void OnResetButtonPressed()
 	{
+		AudioManager.Instance.PlaySFX(backSFX);
 		OnResetOptions();
 	}
 
@@ -157,6 +164,7 @@ public class MainMenu : MonoBehaviour
 		mNoButton.onClick.RemoveAllListeners();
 
 		mYesButton.onClick.AddListener(() => {
+			AudioManager.Instance.PlaySFX(backSFX);
 			SaveSystem.ResetGame();
 			mCurrentSave = new SaveData(); 
 			
@@ -173,13 +181,15 @@ public class MainMenu : MonoBehaviour
 		});
 
 		mNoButton.onClick.AddListener(() => {
+			AudioManager.Instance.PlaySFX(backSFX);
 			mConfirmResetPanel.SetActive(false);
 		});
 	}
 
 	public void ExitGame()
     {
-        Application.Quit();
+		AudioManager.Instance.PlaySFX(backSFX);
+		Application.Quit();
         Debug.Log("Quit Game");
     }
 }

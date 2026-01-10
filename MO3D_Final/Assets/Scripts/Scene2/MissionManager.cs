@@ -86,6 +86,10 @@ public class MissionManager : MonoBehaviour
 	[SerializeField] private SchoolSucks schoolSucks;
 	[Header("City Tour Mission")]
 	[SerializeField] private CityTour cityTour;
+	[Header("Call 911 Mission")]
+	[SerializeField] private Call911 call911;
+	[Header("Ice Ice Cream Baby Mission")]
+	[SerializeField] private IceIceCreamBaby iceIceCreamBaby;
 
 	private bool isMissionActive = false;
 	public bool IsMissionActive => isMissionActive;
@@ -366,6 +370,22 @@ public class MissionManager : MonoBehaviour
 	{
 		if (isMissionActive) { return; }
 		cityTour.BeginCityTour();
+		SetWorldState(false);
+		isMissionActive = true;
+	}
+
+	public void StartCall911Mission()
+	{
+		if (isMissionActive) { return; }
+		call911.BeginCall911();
+		SetWorldState(false);
+		isMissionActive = true;
+	}
+
+	public void StartIceIceCreamBabyMission()
+	{
+		if (isMissionActive) { return; }
+		iceIceCreamBaby.BeginIceIceCreamBaby();
 		SetWorldState(false);
 		isMissionActive = true;
 	}

@@ -23,6 +23,12 @@ public class HomeShopping : MonoBehaviour
 	[SerializeField] private Transform simpleCar;
 	[SerializeField] private MissionManager missionManager;
 
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip HomeShoppingMusic;
+	[SerializeField] private AudioClip purchasedSFX;
+	[SerializeField] private AudioClip winSFX;
+	[SerializeField] private AudioClip loseSFX;
+
 	// BOOL 
 	private bool isAllProvisions = false;
 	private bool hasLost = false;
@@ -34,6 +40,9 @@ public class HomeShopping : MonoBehaviour
 
 	// MEDAL
 	private static bool isMedal = false;
+
+	// MUSIC MISSION START
+	private static bool missionMusicStarted = false;
 
 	public void BeginHomeShopping()
     {
@@ -48,6 +57,13 @@ public class HomeShopping : MonoBehaviour
 		// INSTRUCTIONS
 		UIMissionManager.Instance.ShowMissionText("GET ALL THE HOME STUFFS", 10, 60);
 		InstructionPanel.SetActive(true);
+
+		// MUSIC
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(HomeShoppingMusic);
+			missionMusicStarted = true;
+		}
 
 		// TIMER AND COUNTER
 		countdownTimer.StartTimer();
@@ -66,6 +82,8 @@ public class HomeShopping : MonoBehaviour
 
 	public void OnProvisionPurchased(CollectProvisionsTrigger provisionCollected)
 	{
+		AudioManager.Instance.PlaySFX(purchasedSFX);
+
 		provisions[provisionIndex].SetActive(false);
 
 		if (purchasedIndex < provisionsPurchased.Count) // COMPRADO
@@ -95,6 +113,10 @@ public class HomeShopping : MonoBehaviour
 
 	public void WinMission()
 	{
+		AudioManager.Instance.PlaySFX(winSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		isAllProvisions = true;
 		missionManager.EndMission();
 		StartCoroutine(ShowWinMessage());
@@ -120,6 +142,10 @@ public class HomeShopping : MonoBehaviour
 	{
 		if (countdownTimer.IsTimeUp && !hasLost)
 		{
+			AudioManager.Instance.PlaySFX(loseSFX);
+			AudioManager.Instance.PlayGameplayMusic();
+			missionMusicStarted = false;
+
 			hasLost = true;
 			StartCoroutine(ShowLoseMessage());
 			DisableElements();

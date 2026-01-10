@@ -3184,8 +3184,9 @@ GameObject:
   - component: {fileID: 1130944595}
   - component: {fileID: 1130944594}
   - component: {fileID: 1130944593}
-  - component: {fileID: 1130944592}
   - component: {fileID: 1130944591}
+  - component: {fileID: 1130944592}
+  - component: {fileID: 1130944596}
   m_Layer: 5
   m_Name: Button_Back
   m_TagString: Untagged
@@ -3287,9 +3288,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1679570464}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: GoToMainMenu
+      - m_Target: {fileID: 1130944596}
+        m_TargetAssemblyTypeName: BackButton, Assembly-CSharp
+        m_MethodName: BackToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3337,6 +3338,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1130944589}
   m_CullTransparentMesh: 1
+--- !u!114 &1130944596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130944589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d1475182feb44b47852bb55732096ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backSFX: {fileID: 8300000, guid: cdefe670d9516e9489e1c355ad1203db, type: 3}
 --- !u!1 &1167496513
 GameObject:
   m_ObjectHideFlags: 0
@@ -4378,10 +4392,9 @@ GameObject:
   - component: {fileID: 1679570461}
   - component: {fileID: 1679570460}
   - component: {fileID: 1679570459}
-  - component: {fileID: 1679570464}
   - component: {fileID: 1679570466}
-  - component: {fileID: 1679570465}
   - component: {fileID: 1679570467}
+  - component: {fileID: 1679570468}
   m_Layer: 5
   m_Name: Canvas_Settings
   m_TagString: Untagged
@@ -4472,36 +4485,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1679570464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1679570458}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 961fe67a4dcbfc8408ce82b4e3cea0b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mPauseMenu: {fileID: 0}
-  mInputCanvas: {fileID: 0}
-  mCarFuel: {fileID: 0}
-  mItemWaypointCollected: {fileID: 0}
---- !u!114 &1679570465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1679570458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c41f183f129a5642acd226c95356594, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mMusicVolume: {fileID: 1833211865}
-  mAudioMixer: {fileID: 24100000, guid: ade1de24d6a8c0046821be15d5ca3690, type: 2}
 --- !u!114 &1679570466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4527,6 +4510,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a3dba5ec6993c3488d751951acc119e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1679570468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679570458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c41f183f129a5642acd226c95356594, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSlider: {fileID: 1833211865}
 --- !u!1 &1685673549
 GameObject:
   m_ObjectHideFlags: 0
@@ -5316,7 +5312,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1679570465}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: VolumeSettings, Assembly-CSharp
         m_MethodName: ChangeMusicVolume
         m_Mode: 4
