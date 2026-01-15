@@ -27,6 +27,12 @@ public class GetTheAutoparts : MonoBehaviour
 	[Header("Time")]
 	[SerializeField] private CountdownTimer countdownTimer;
 
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip getTheAutopartsMusic;
+	[SerializeField] private AudioClip collectSFX;
+	[SerializeField] private AudioClip winSFX;
+	[SerializeField] private AudioClip loseSFX;
+
 	// BOOL 
 	private bool hasLost = false;
 
@@ -36,6 +42,9 @@ public class GetTheAutoparts : MonoBehaviour
 
 	// MEDAL
 	private static bool isMedal = false;
+
+	// MUSIC MISSION START
+	private bool missionMusicStarted = false;
 
 	public void BeginGetTheAutoparts()
     {
@@ -48,6 +57,13 @@ public class GetTheAutoparts : MonoBehaviour
         UIMissionManager.Instance.ShowMissionText("GET THE AUTOPARTS", textDuration, 40);
 		instructionPanel.SetActive(true);
 		constructionPanel.SetActive(true);
+
+		// MUSIC
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(getTheAutopartsMusic);
+			missionMusicStarted = true;
+		}
 
 		// TIMER AND COUNTER
 		countdownTimer.StartTimer();
@@ -72,6 +88,10 @@ public class GetTheAutoparts : MonoBehaviour
 
 	private void WinMission()
 	{
+		AudioManager.Instance.PlaySFX(winSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		car.SetActive(true);
 		missionManager.EndMission();
 		StartCoroutine(ShowWinMessage());
@@ -81,8 +101,8 @@ public class GetTheAutoparts : MonoBehaviour
 		{
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(15);
-			LevelData.CoinsCollectedInLevel += 15;
+			MainMenu.Instance.AddCoin(11000);
+			LevelData.CoinsCollectedInLevel += 11000;
 
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[15] = true;
@@ -97,6 +117,10 @@ public class GetTheAutoparts : MonoBehaviour
 		if (hasLost) { return; }
 		if (countdownTimer.IsTimeUp && !hasLost)
 		{
+			AudioManager.Instance.PlaySFX(loseSFX);
+			AudioManager.Instance.PlayGameplayMusic();
+			missionMusicStarted = false;
+
 			hasLost = true;
 			StartCoroutine(ShowLoseMessage());
 			DisableElements();
@@ -106,6 +130,8 @@ public class GetTheAutoparts : MonoBehaviour
 
 	public void CollectAutopart(GetAutopart getAutopart)
 	{
+		AudioManager.Instance.PlaySFX(collectSFX);
+
 		autopartsIndex++;
 		UIMissionManager.Instance.SetAutopartsCounter(autopartsIndex, totalAutoparts);
 
@@ -149,7 +175,7 @@ public class GetTheAutoparts : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("DONE, GO CHECKOUT THE CAR IN THE SERVICE SHOP \n + 15 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("DONE, GO CHECKOUT THE CAR IN THE SERVICE SHOP \n + 11000 COINS", textDuration, 50);
 		yield return new WaitForSeconds(textDuration);
 	}
 

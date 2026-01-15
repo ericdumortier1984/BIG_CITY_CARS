@@ -90,15 +90,15 @@ public class CollectCabbage : MonoBehaviour
 		AudioManager.Instance.PlaySFX(winSFX);
 		AudioManager.Instance.PlayGameplayMusic();
 		missionMusicStarted = false;
-		UIMissionManager.Instance.ShowMissionText("ALL CABBAGES COLLECTED\n + 5 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("ALL CABBAGES COLLECTED\n + 500 COINS", textDuration, 50);
 		UIMissionManager.Instance.HideCounter();
 
 		if (!isMedal)
 		{
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(5);
-			LevelData.CoinsCollectedInLevel += 5;
+			MainMenu.Instance.AddCoin(500);
+			LevelData.CoinsCollectedInLevel += 500;
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[0] = true;
 			SaveSystem.SaveGame(saveData);

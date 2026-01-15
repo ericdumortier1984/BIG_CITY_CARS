@@ -59,7 +59,7 @@ public class HarvestMission : MonoBehaviour
 			
 			if (prefabCount == prefabTotalCount)
 			{
-				UIMissionManager.Instance.ShowMissionText("ALL HARVEST IS RAISED\n + 5 COINS", textDuration, 50);
+				UIMissionManager.Instance.ShowMissionText("ALL HARVEST IS RAISED\n + 6500 COINS", textDuration, 50);
 				instructionPanel.SetActive(false);
 
 				AudioManager.Instance.PlaySFX(winSFX);
@@ -70,8 +70,8 @@ public class HarvestMission : MonoBehaviour
 				{
 					MainMenu.Instance.AddMedal(1);
 					LevelData.MedalCollectedInLevel += 1;
-					MainMenu.Instance.AddCoin(5);
-					LevelData.CoinsCollectedInLevel += 5;
+					MainMenu.Instance.AddCoin(6500);
+					LevelData.CoinsCollectedInLevel += 6500;
 					SaveData saveData = SaveSystem.LoadGame();
 					saveData.missionCompleted[1] = true;
 					SaveSystem.SaveGame(saveData);

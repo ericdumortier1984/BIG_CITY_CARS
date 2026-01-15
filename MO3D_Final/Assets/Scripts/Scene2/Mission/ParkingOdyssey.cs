@@ -37,7 +37,7 @@ public class ParkingOdyssey : MonoBehaviour
     private static bool isMedal = false;
 
 	// MUSIC MISSION START
-	private static bool missionMusicStarted = false;
+	private bool missionMusicStarted = false;
 
 	public void BeginParkingOdyssey()
     {
@@ -144,8 +144,8 @@ public class ParkingOdyssey : MonoBehaviour
 		{
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(15);
-			LevelData.CoinsCollectedInLevel += 15;
+			MainMenu.Instance.AddCoin(4000);
+			LevelData.CoinsCollectedInLevel += 4000;
 
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[19] = true;
@@ -183,7 +183,7 @@ public class ParkingOdyssey : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("YOUR THE BEST! \n + 15 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("YOUR THE BEST! \n + 4000 COINS", textDuration, 50);
 		yield return new WaitForSeconds(textDuration);
 	}
 

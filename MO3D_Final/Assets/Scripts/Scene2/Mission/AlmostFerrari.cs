@@ -38,6 +38,13 @@ public class AlmostFerrari : MonoBehaviour
 	[Header("FX")]
 	[SerializeField] private List<ParticleSystem> spawnParticle;
 
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip almostFerrariMusic;
+	[SerializeField] private AudioClip collectSFX;
+	[SerializeField] private AudioClip beepCounter;
+	[SerializeField] private AudioClip winSFX;
+	[SerializeField] private AudioClip loseSFX;
+
 	// BOOL
 	private bool raceStarted = false;
 	private bool raceFinished = false;
@@ -57,6 +64,9 @@ public class AlmostFerrari : MonoBehaviour
 
 	// MEDAL
 	private static bool isMedal = false;
+
+	// MUSIC MISSION START
+	private bool missionMusicStarted = false;
 
 	private void Start()
 	{
@@ -145,6 +155,10 @@ public class AlmostFerrari : MonoBehaviour
 
 	public void WinMission()
 	{
+		AudioManager.Instance.PlaySFX(winSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		missionManager.EndMission();
 		DisableElements();
 		StartCoroutine(ShowWinMessage());
@@ -158,8 +172,8 @@ public class AlmostFerrari : MonoBehaviour
 		{
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(15);
-			LevelData.CoinsCollectedInLevel += 15;
+			MainMenu.Instance.AddCoin(11500);
+			LevelData.CoinsCollectedInLevel += 11500;
 
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[5] = true;
@@ -171,6 +185,10 @@ public class AlmostFerrari : MonoBehaviour
 
 	public void LoseMission()
 	{
+		AudioManager.Instance.PlaySFX(loseSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		raceFinished = true;
 		DisableElements();
 		StartCoroutine(ShowLoseMessage());
@@ -237,6 +255,8 @@ public class AlmostFerrari : MonoBehaviour
 	{
 		if (currentLap < totalLaps)
 		{
+			AudioManager.Instance.PlaySFX(collectSFX);
+
 			currentLap++;
 			SetLapCounter();
 			UIMissionManager.Instance.ShowMissionText("LAP " + currentLap + " / " + totalLaps, 1.0f, 50);
@@ -292,14 +312,17 @@ public class AlmostFerrari : MonoBehaviour
 		wheelController.enabled = false;
 		playerRb.constraints = RigidbodyConstraints.FreezeAll;
 
+		AudioManager.Instance.PlaySFX(beepCounter);
 		UIMissionManager.Instance.ShowMissionText("READY", 1.0f, 150);
 		yield return new WaitForSeconds(1.0f);
 
+		AudioManager.Instance.PlaySFX(beepCounter);
 		UIMissionManager.Instance.ShowMissionText("SET", 1.0f, 150);
 		yield return new WaitForSeconds(1.0f);
 
 		raceLightController.SwitchToGreen();
 
+		AudioManager.Instance.PlaySFX(beepCounter);
 		UIMissionManager.Instance.ShowMissionText("GO!!", 1.0f, 150);
 		yield return new WaitForSeconds(1.0f);
 
@@ -309,11 +332,18 @@ public class AlmostFerrari : MonoBehaviour
 		leaderboardPanel.SetActive(true);
 
 		raceStarted = true;
+
+		// MUSIC
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(almostFerrariMusic);
+			missionMusicStarted = true;
+		}
 	}
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("NUMBER ONE! \n + 15 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("NUMBER ONE! \n + 11500 COINS", textDuration, 50);
 		missionText.gameObject.SetActive(false);
 		yield return new WaitForSeconds(textDuration);
 	}

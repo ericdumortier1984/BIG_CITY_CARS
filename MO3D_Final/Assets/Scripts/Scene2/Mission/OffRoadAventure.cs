@@ -22,6 +22,12 @@ public class OffRoadAventure : MonoBehaviour
 	[Header("Time")]
 	[SerializeField] private CountdownTimer countdownTimer;
 
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip fastFoodMusic;
+	[SerializeField] private AudioClip collectSFX;
+	[SerializeField] private AudioClip winSFX;
+	[SerializeField] private AudioClip loseSFX;
+
 	// BOOL
 	private bool hasLost = false;
 
@@ -31,6 +37,9 @@ public class OffRoadAventure : MonoBehaviour
 
 	// MEDAL
 	private static bool isMedal = false;
+
+	// MUSIC MISSION START
+	private bool missionMusicStarted = false;
 
 	public void BeginOffRoadAdventure()
     {
@@ -42,6 +51,13 @@ public class OffRoadAventure : MonoBehaviour
 		// INSTRUCTIONS
 		UIMissionManager.Instance.ShowMissionText("GET THOSE FLAGS", textDuration, 40);
 		instructionPanel.SetActive(true);
+
+		// MUSIC
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(fastFoodMusic);
+			missionMusicStarted = true;
+		}
 
 		// PARTICLES
 		for (int i = 0; i < startParticle.Count; i++)
@@ -63,6 +79,8 @@ public class OffRoadAventure : MonoBehaviour
 
 	public void GetFlag(GetOffRoadFlag flag)
 	{
+		AudioManager.Instance.PlaySFX(collectSFX);
+
 		flagsIndex++;
 		UIMissionManager.Instance.SetFlagsCounter(flagsIndex, totalFlags);
 		flag.gameObject.SetActive(false);
@@ -75,6 +93,10 @@ public class OffRoadAventure : MonoBehaviour
 
 	private void WinMission()
 	{
+		AudioManager.Instance.PlaySFX(winSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		missionManager.EndMission();
 		StartCoroutine(ShowWinMessage());
 		DisableElements();
@@ -83,8 +105,8 @@ public class OffRoadAventure : MonoBehaviour
 		{
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(15);
-			LevelData.CoinsCollectedInLevel += 15;
+			MainMenu.Instance.AddCoin(9500);
+			LevelData.CoinsCollectedInLevel += 9500;
 
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[14] = true;
@@ -99,6 +121,10 @@ public class OffRoadAventure : MonoBehaviour
 		if (hasLost) { return; }
 		if (countdownTimer.IsTimeUp && !hasLost)
 		{
+			AudioManager.Instance.PlaySFX(loseSFX);
+			AudioManager.Instance.PlayGameplayMusic();
+			missionMusicStarted = false;
+
 			hasLost = true;
 			StartCoroutine(ShowLoseMessage());
 			DisableElements();
@@ -119,7 +145,7 @@ public class OffRoadAventure : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("YOUR A BEAST!  \n + 15 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("YOUR A BEAST!  \n + 9500 COINS", textDuration, 50);
 		yield return new WaitForSeconds(textDuration);
 	}
 

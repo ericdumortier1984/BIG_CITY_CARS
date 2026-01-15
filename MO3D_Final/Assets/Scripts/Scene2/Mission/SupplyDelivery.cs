@@ -39,7 +39,7 @@ public class SupplyDelivery : MonoBehaviour
 	private static bool isMedal = false;
 
 	// MUSIC MISSION START
-	private static bool missionMusicStarted = false;
+	private bool missionMusicStarted = false;
 
 	public void BeginSupplyDelivery()
 	{
@@ -160,8 +160,8 @@ public class SupplyDelivery : MonoBehaviour
 		{
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(15);
-			LevelData.CoinsCollectedInLevel += 15;
+			MainMenu.Instance.AddCoin(3500);
+			LevelData.CoinsCollectedInLevel += 3500;
 
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[18] = true;
@@ -199,7 +199,7 @@ public class SupplyDelivery : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("ALL SUPPLIES DELIVERED! \n + 15 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("ALL SUPPLIES DELIVERED! \n + 3500 COINS", textDuration, 50);
 		yield return new WaitForSeconds(textDuration);
 	}
 

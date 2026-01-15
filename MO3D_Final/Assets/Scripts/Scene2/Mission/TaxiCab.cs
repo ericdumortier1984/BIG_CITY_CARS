@@ -24,20 +24,31 @@ public class TaxiCab : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI timeCounterText;
 	[SerializeField] private RouteDrawer routeDrawer;
 	[SerializeField] private StressManager stressBar;
+	[SerializeField] private GameObject instructionPanel;
 
 	[Header("Mission Manager")]
 	[SerializeField] private MissionManager missionManager;
+
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip taxiCabMusic;
+	[SerializeField] private AudioClip collectSFX;
+	[SerializeField] private AudioClip winSFX;
+	[SerializeField] private AudioClip loseSFX;
 
 	private int totalPassenger = 5;
 	private int safePassenger = 0;
 	private int passengerIndex = 0;
 	private static bool isMedal = false;
 
+	// MUSIC MISSION START
+	private bool missionMusicStarted = false;
+
 	public bool IsPassengerOnTaxi { get; private set; } = false;
 
 	public void BeginTaxiCabMission()
 	{
 		EnableUIElements();
+		EnableMusicMission();
 		SpawnPassenger();
 	}
 
@@ -79,17 +90,33 @@ public class TaxiCab : MonoBehaviour
 
 	private void EnableUIElements()
 	{
+		instructionPanel.gameObject.SetActive(true);
 		countdownTimer.StartTimer();
 		UIMissionManager.Instance.ShowMissionText("PASSENGER IS WAITING", textDuration, 50);
 		UIMissionManager.Instance.ShowTimer(true);
 		UIMissionManager.Instance.SetPassengerCounter(safePassenger, totalPassenger);
 	}
 
+	private void EnableMusicMission()
+	{
+		// MUSIC
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(taxiCabMusic);
+			missionMusicStarted = true;
+		}
+	}
+
 	private void WinMission()
 	{
+		AudioManager.Instance.PlaySFX(winSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		countdownTimer.StopTimer();
 		routeDrawer.gameObject.SetActive(false);
 		stressBar.gameObject.SetActive(false);
+		instructionPanel.SetActive(false);
 
 		StartCoroutine(ShowWinMessage());
 
@@ -99,8 +126,8 @@ public class TaxiCab : MonoBehaviour
 		{
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(15);
-			LevelData.CoinsCollectedInLevel += 15;
+			MainMenu.Instance.AddCoin(5000);
+			LevelData.CoinsCollectedInLevel += 5000;
 
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[4] = true;
@@ -124,8 +151,14 @@ public class TaxiCab : MonoBehaviour
 		foreach (Transform drop in dropOffLocation)
 			drop.gameObject.SetActive(false);
 
+		AudioManager.Instance.PlaySFX(loseSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		countdownTimer.StopTimer();
 		routeDrawer.ClearRoute();
+		routeDrawer.gameObject.SetActive(false);
+		instructionPanel.SetActive(false);
 		stressBar.gameObject.SetActive(false);
 		if (stressedOut)
 		{
@@ -162,6 +195,8 @@ public class TaxiCab : MonoBehaviour
 		passengerParticle.transform.position = passengerPrefab[current].transform.position;
 		passengerParticle.Play();
 
+		AudioManager.Instance.PlaySFX(collectSFX);
+
 		passengerPrefab[current].transform.position = passengerSitPoint.position + passengerOffset;
 		passengerPrefab[current].transform.rotation = taxiPos.rotation;
 		passengerPrefab[current].transform.SetParent(taxiPos);
@@ -193,6 +228,8 @@ public class TaxiCab : MonoBehaviour
 
 		passengerParticle.transform.position = dropOffPoint.transform.position;
 		passengerParticle.Play();
+
+		AudioManager.Instance.PlaySFX(collectSFX);
 
 		IsPassengerOnTaxi = false;
 		safePassenger++;
@@ -230,7 +267,7 @@ public class TaxiCab : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("ALL PASSENGER DROPPED OFF\n + 15 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("ALL PASSENGER DROPPED OFF\n + 5000 COINS", textDuration, 50);
 		UIMissionManager.Instance.HideCounter();
 		UIMissionManager.Instance.ShowTimer(false);
 

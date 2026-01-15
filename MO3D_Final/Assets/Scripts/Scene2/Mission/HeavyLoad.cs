@@ -35,6 +35,12 @@ public class HeavyLoad : MonoBehaviour
 	[SerializeField] private Camera deliveryPointCamera;
 	[SerializeField] private float cameraShowTime;
 
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip heavyLoadMusic;
+	[SerializeField] private AudioClip collectSFX;
+	[SerializeField] private AudioClip winSFX;
+	[SerializeField] private AudioClip loseSFX;
+
 	// BOOL
 	private bool hasLost = false;
 	private bool hasMaterial = false;
@@ -47,6 +53,9 @@ public class HeavyLoad : MonoBehaviour
 	// MEDAL
 	private static bool isMedal = false;
 
+	// MUSIC MISSION START
+	private bool missionMusicStarted = false;
+
 	public void BeginHeavyLoad()
     {
         SetElements();
@@ -57,6 +66,13 @@ public class HeavyLoad : MonoBehaviour
         // INSTRUCTIONS
 		introSequence.SetActive(true);
 		UIMissionManager.Instance.ShowMissionText("LOAD IN THIS POINT", textDuration, 40);
+
+		// MUSIC
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(heavyLoadMusic);
+			missionMusicStarted = true;
+		}
 
 		// PANEL AND TOGGLES
 		materialPanel.SetActive(true);
@@ -104,6 +120,8 @@ public class HeavyLoad : MonoBehaviour
 	{
 		if (!hasMaterial) { return; }
 
+		AudioManager.Instance.PlaySFX(collectSFX);
+
 		constructionMaterials[materialIndex].SetActive(false);
 		houseStructure[materialIndex].SetActive(true);
 
@@ -130,6 +148,10 @@ public class HeavyLoad : MonoBehaviour
 
     private void WinMission()
     {
+		AudioManager.Instance.PlaySFX(loseSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		missionManager.EndMission();
 		StartCoroutine(ShowWinMessage());
 		DisableElements();
@@ -138,8 +160,8 @@ public class HeavyLoad : MonoBehaviour
 		{
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(15);
-			LevelData.CoinsCollectedInLevel += 15;
+			MainMenu.Instance.AddCoin(8000);
+			LevelData.CoinsCollectedInLevel += 8000;
 
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[20] = true;
@@ -155,6 +177,10 @@ public class HeavyLoad : MonoBehaviour
 
 		if (countdownTimer.IsTimeUp && !hasLost)
 		{
+			AudioManager.Instance.PlaySFX(loseSFX);
+			AudioManager.Instance.PlayGameplayMusic();
+			missionMusicStarted = false;
+
 			hasLost = true;
 			StartCoroutine(ShowLoseMessage());
 			DisableElements();
@@ -174,7 +200,7 @@ public class HeavyLoad : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("CONSTRUCTION COMPLETE! \n + 15 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("CONSTRUCTION COMPLETE! \n + 8000 COINS", textDuration, 50);
 		yield return new WaitForSeconds(textDuration);
 	}
 

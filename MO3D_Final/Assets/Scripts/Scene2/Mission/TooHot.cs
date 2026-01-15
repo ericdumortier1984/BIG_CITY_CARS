@@ -32,6 +32,11 @@ public class TooHot : MonoBehaviour
 	[SerializeField] private Transform shootView;
 	[SerializeField] private FireTruckTurret fireTruckTurret;
 
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip tooHotMusic;
+	[SerializeField] private AudioClip collectSFX;
+	[SerializeField] private AudioClip winSFX;
+	[SerializeField] private AudioClip loseSFX;
 
 	// BOOL 
 	private bool isShootMode = false;
@@ -44,6 +49,9 @@ public class TooHot : MonoBehaviour
 
 	// MEDAL
 	private static bool isMedal = false;
+
+	// MUSIC MISSION START
+	private bool missionMusicStarted = false;
 
 	public void BeginTooHot()
     {
@@ -60,6 +68,13 @@ public class TooHot : MonoBehaviour
 		// INSTRUCTIONS
 		UIMissionManager.Instance.ShowMissionText("EXTINGUE FIRES", 10, 70);
 		InstructionPanel.SetActive(true);
+
+		// MUSIC
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(tooHotMusic);
+			missionMusicStarted = true;
+		}
 
 		// FIRE ZONE TRIGGERS
 		foreach (var fireZone in fireZoneTrigger)
@@ -120,6 +135,8 @@ public class TooHot : MonoBehaviour
 
 	public void OnFireExtinguished()
 	{
+		AudioManager.Instance.PlaySFX(collectSFX);
+
 		firesIndex++;
 		UIMissionManager.Instance.SetFiresCounter(firesIndex, totalFires);
 
@@ -138,6 +155,10 @@ public class TooHot : MonoBehaviour
 
 	public void WinMission()
 	{
+		AudioManager.Instance.PlaySFX(winSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		isAllFireExtingued = true;
 		missionManager.EndMission();
 		StartCoroutine(ShowWinMessage());
@@ -148,8 +169,8 @@ public class TooHot : MonoBehaviour
 		{
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(15);
-			LevelData.CoinsCollectedInLevel += 15;
+			MainMenu.Instance.AddCoin(5000);
+			LevelData.CoinsCollectedInLevel += 5000;
 
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[8] = true;
@@ -163,6 +184,10 @@ public class TooHot : MonoBehaviour
 	{
 		if (countdownTimer.IsTimeUp && !hasLost)
 		{
+			AudioManager.Instance.PlaySFX(loseSFX);
+			AudioManager.Instance.PlayGameplayMusic();
+			missionMusicStarted = false;
+
 			hasLost = true;
 			StartCoroutine(ShowLoseMessage());
 			DisableElements();
@@ -193,7 +218,7 @@ public class TooHot : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("ALL FIRE EXTINGUISHED! \n + 15 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("ALL FIRE EXTINGUISHED! \n + 5000 COINS", textDuration, 50);
 		missionText.gameObject.SetActive(false);
 		yield return new WaitForSeconds(textDuration);
 	}

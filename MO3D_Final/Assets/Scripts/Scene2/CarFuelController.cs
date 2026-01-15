@@ -10,6 +10,9 @@ public class CarFuelController : MonoBehaviour
 	[SerializeField] private Slider fuelBar; 
 	[SerializeField] private GameObject itemFuel;
 
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip collectSFX;
+
 	private float currentFuel;
 	private float burnOutFuel = 1f; 
 	public bool isFuelBurning = true;
@@ -60,6 +63,7 @@ public class CarFuelController : MonoBehaviour
 	{
 		if (other.tag == "ItemFuel")
 		{
+			AudioManager.Instance.PlaySFX(collectSFX);
 			OnfillingFuel();
 			Destroy(other.gameObject);
 		}

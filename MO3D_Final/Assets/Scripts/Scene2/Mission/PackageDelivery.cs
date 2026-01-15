@@ -37,7 +37,7 @@ public class PackageDelivery : MonoBehaviour
 	private int deliveredPackage = 0;
 	private int deliveryIndex = 0;
 	private static bool isMedal = false;
-	private static bool missionMusicStarted = false;
+	private bool missionMusicStarted = false;
 
 	private void Start()
 	{
@@ -115,7 +115,7 @@ public class PackageDelivery : MonoBehaviour
 		routeDrawer.gameObject.SetActive(false);
 		InstructionPanel.SetActive(false);
 
-		UIMissionManager.Instance.ShowMissionText("ALL PACKAGE DELIVERED\n + 15 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("ALL PACKAGE DELIVERED\n + 2000 COINS", textDuration, 50);
 		UIMissionManager.Instance.HideCounter();
 		UIMissionManager.Instance.ShowTimer(false);
 
@@ -125,8 +125,8 @@ public class PackageDelivery : MonoBehaviour
 		{
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(15);
-			LevelData.CoinsCollectedInLevel += 15;
+			MainMenu.Instance.AddCoin(2000);
+			LevelData.CoinsCollectedInLevel += 2000;
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[3] = true;
 			SaveSystem.SaveGame(saveData);

@@ -8,8 +8,9 @@ public class ItemWaypointController : MonoBehaviour
 	[Header("Waypoints Settings")]
 	[SerializeField] private TMPro.TextMeshProUGUI mItemWaypointText; 
     [SerializeField] private Slider mItemWaypointSlider; 
-    [SerializeField] private int mItemWaypointToCollect; 
-    private int mItemWaypointCollected; 
+    [SerializeField] private int mItemWaypointToCollect;
+
+	private int mItemWaypointCollected; 
 
 	public int ItemWaypointCollected { get { return mItemWaypointCollected; } set { mItemWaypointCollected = value; } }
 

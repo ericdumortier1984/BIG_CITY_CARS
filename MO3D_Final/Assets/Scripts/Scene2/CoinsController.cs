@@ -11,6 +11,10 @@ public class CoinsController : MonoBehaviour
 
 	[Header("Coins Settings")]
 	[SerializeField] private int mItemCoinsToCollect;
+
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip collectSFX;
+
 	private int mItemCoinsCollected;
 
 	private void Start()
@@ -54,6 +58,7 @@ public class CoinsController : MonoBehaviour
 	{
 		if (other.CompareTag("Coins"))
 		{
+			AudioManager.Instance.PlaySFX(collectSFX);
 			AddItemCoins(1);
 			Destroy(other.gameObject);
 		}

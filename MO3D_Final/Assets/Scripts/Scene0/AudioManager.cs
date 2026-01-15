@@ -97,6 +97,12 @@ public class AudioManager : MonoBehaviour
 		sfxSource.PlayOneShot(clip, volume);
 	}
 
+	public void StopSFX(AudioClip clip)
+	{
+		if (clip == null) return;
+		sfxSource.Stop();
+	}
+
 	// ================= PAUSE =================
 
 	public void SetPaused(bool paused)

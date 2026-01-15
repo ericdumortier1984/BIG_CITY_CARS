@@ -32,6 +32,10 @@ public class CarSelectionController : MonoBehaviour
 	public Slider mCarHandlingSlider; 
 	public GameObject mCarBloquedIcon;
 
+	[Header("Select / Buy Button")]
+	[SerializeField] private Button selectBuyButton;
+	[SerializeField] private TextMeshProUGUI selectBuyButtonText;
+
 	[Header("SFX")]
 	[SerializeField] private AudioClip backSFX;
 
@@ -51,36 +55,34 @@ public class CarSelectionController : MonoBehaviour
 		UpdateCarStats();
 	}
 
-	public void NextCarSelection() // Metodo para seleccionar siguiente auto del array
+	public void NextCarSelection() 
     {
 		AudioManager.Instance.PlaySFX(backSFX);
 
-		mCarsToSelect[mSelectedCarIndex].SetActive(false); // seteamos falso al principio
-        mSelectedCarIndex = (mSelectedCarIndex + 1) % mCarsToSelect.Length; // Calculamos por la cantidad de autos 
-        mCarsToSelect[mSelectedCarIndex].SetActive(true); // Luego seteamos verdadero
+		mCarsToSelect[mSelectedCarIndex].SetActive(false); 
+        mSelectedCarIndex = (mSelectedCarIndex + 1) % mCarsToSelect.Length;  
+        mCarsToSelect[mSelectedCarIndex].SetActive(true); 
         Debug.Log("Car selected: " + mSelectedCarIndex);
 
-		// Guardamos el índice seleccionado
 		PlayerPrefs.SetInt("mSelectedCarIndex", mSelectedCarIndex);
 		PlayerPrefs.Save();
 
 		UpdateCarStats();
 	}
 
-	public void PreviousCarSelection() // Metodo para seleccionar el anterior auto del array
+	public void PreviousCarSelection() 
     {
 		AudioManager.Instance.PlaySFX(backSFX);
 
-		mCarsToSelect[mSelectedCarIndex].SetActive(false); // seteamos falso al principio
-        mSelectedCarIndex--; // Restamos el indice
-        if (mSelectedCarIndex < 0) // Si el indice es menor a cero
+		mCarsToSelect[mSelectedCarIndex].SetActive(false); 
+        mSelectedCarIndex--; 
+        if (mSelectedCarIndex < 0) 
 		{
-			mSelectedCarIndex += mCarsToSelect.Length; // Comienza el ciclo nuevamente
+			mSelectedCarIndex += mCarsToSelect.Length; 
 		}
-		mCarsToSelect[mSelectedCarIndex].SetActive(true); // Luego seteamos verdadero
+		mCarsToSelect[mSelectedCarIndex].SetActive(true); 
 		Debug.Log("Car selected: " + mSelectedCarIndex);
 
-		// Guardamos el índice seleccionado
 		PlayerPrefs.SetInt("mSelectedCarIndex", mSelectedCarIndex);
 		PlayerPrefs.Save();
 
@@ -89,7 +91,7 @@ public class CarSelectionController : MonoBehaviour
 
 	private void UpdateCarStats()
 	{
-		CarStats mCarStats = mCarsToSelect[mSelectedCarIndex].GetComponent<CarStats>(); // Referencia al script de las estadisticas de los autos
+		CarStats mCarStats = mCarsToSelect[mSelectedCarIndex].GetComponent<CarStats>(); 
 
 		mSelectedCarName = mCarStats.CarName;
 		mSelectedCarPriceText = mCarStats.CarPriceText;
@@ -100,7 +102,7 @@ public class CarSelectionController : MonoBehaviour
 		mSelectedCarHandling = mCarStats.CarHandling;
 		mIsSelectedCarBlocked = mCarStats.IsCarBlocked;
 
-		// Actualizar UI de estadisticas del auto seleccionado
+		
 		mCarNameText.text = mSelectedCarName;
 		mCarPriceText.text = mSelectedCarPriceText;
 		mCarPrice = mSelectedCarPrice;
@@ -113,22 +115,23 @@ public class CarSelectionController : MonoBehaviour
 		mCarHandlingSlider.value = mSelectedCarHandling;
 		mCarHandlingSlider.interactable = false;
 
-		// Mostrar u ocultar candado + precio
 		if (mIsSelectedCarBlocked)
 		{
 			mCarBloquedIcon.SetActive(true);
+			selectBuyButtonText.text = "BUY";
 		}
 		else
 		{
 			mCarBloquedIcon.SetActive(false);
 			mCarPriceText.text = "READY";
+			selectBuyButtonText.text = "SELECT";
 		}
 	}
 
 	public void BuyCar()
 	{
 		AudioManager.Instance.PlaySFX(backSFX);
-		// Actualizo estado
+	
 		CarStats mCarStats = mCarsToSelect[mSelectedCarIndex].GetComponent<CarStats>();
 
 		if (mCarStats.IsCarBlocked)
@@ -139,14 +142,9 @@ public class CarSelectionController : MonoBehaviour
 			{
 				mCarStats.IsCarBlocked = false;
 
-				// Actualizo estadisticas e interfaz
 				UpdateCarStats();
 
-				// Guardar datos
 				MainMenu.Instance.SaveGame();
-
-				// Debug
-				Debug.Log("Car Unlocked: " + mSelectedCarName);
 			}
 		}
 	}			

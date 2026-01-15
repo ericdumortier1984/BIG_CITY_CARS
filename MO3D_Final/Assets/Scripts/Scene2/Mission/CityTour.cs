@@ -25,7 +25,12 @@ public class CityTour : MonoBehaviour
 
 	[Header("Photo Mode")]
 	[SerializeField] private Camera mainCamera;
-	
+
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip cityTourMusic;
+	[SerializeField] private AudioClip collectSFX;
+	[SerializeField] private AudioClip winSFX;
+
 	// BOOL
 	private bool hasLost = false;
 	private bool isPhotoMode = false;
@@ -40,7 +45,10 @@ public class CityTour : MonoBehaviour
 	private PhotoCameraController currentPhotoController;
 
 	// MEDAL
-	private static bool isMedal = false;
+	private bool isMedal = false;
+
+	// MUSIC MISSION START
+	private static bool missionMusicStarted = false;
 
 	public void BeginCityTour()
 	{
@@ -53,6 +61,13 @@ public class CityTour : MonoBehaviour
 		UIMissionManager.Instance.ShowMissionText("LOOK FOR PHOTO SPOTS", textDuration, 40);
 		instructionPanel.SetActive(true);
 		targetPanel.SetActive(true);
+
+		// MUSIC
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(cityTourMusic);
+			missionMusicStarted = true;
+		}
 
 		// TOURISTS
 		SetTourist();
@@ -110,6 +125,8 @@ public class CityTour : MonoBehaviour
 	{
 		photoSpot.DisableSpot();
 
+		AudioManager.Instance.PlaySFX(collectSFX);
+
 		photosIndex++;
 		UIMissionManager.Instance.SetPhotoCounter(photosIndex, totalPhotos);
 
@@ -129,6 +146,10 @@ public class CityTour : MonoBehaviour
 
 	private void WinMission()
 	{
+		AudioManager.Instance.PlaySFX(winSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		missionManager.EndMission();
 		StartCoroutine(ShowWinMessage());
 		DisableElements();
@@ -137,8 +158,8 @@ public class CityTour : MonoBehaviour
 		{
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(15);
-			LevelData.CoinsCollectedInLevel += 15;
+			MainMenu.Instance.AddCoin(8500);
+			LevelData.CoinsCollectedInLevel += 8500;
 
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[23] = true;
@@ -163,7 +184,7 @@ public class CityTour : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("NICE PHOTOS! \n + 15 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("NICE PHOTOS! \n + 8500 COINS", textDuration, 50);
 		yield return new WaitForSeconds(textDuration);
 	}
 

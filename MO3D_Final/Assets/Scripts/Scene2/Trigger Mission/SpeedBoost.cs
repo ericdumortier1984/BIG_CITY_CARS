@@ -10,10 +10,14 @@ public class SpeedBoost : MonoBehaviour
 	[SerializeField] private float boostVelocity;
 	[SerializeField] private float boostingTime;
 
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip collectSFX;
+
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("Tunning Car"))
 		{
+			AudioManager.Instance.PlaySFX(collectSFX);
 			WheelController carEngine = other.GetComponent<WheelController>();
 			StartCoroutine(BoostUp(carEngine));
 		}

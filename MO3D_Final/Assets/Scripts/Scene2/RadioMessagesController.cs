@@ -15,6 +15,9 @@ public class RadioMessagesController : MonoBehaviour
 	[TextArea]
 	[SerializeField] private string[] messages;
 
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip typpingSFX;
+
 	private int currentMessageIndex = 0;
 
 	public void StartRadio()
@@ -46,6 +49,7 @@ public class RadioMessagesController : MonoBehaviour
 		foreach (char letter in message)
 		{
 			radioText.text += letter;
+			AudioManager.Instance.PlaySFX(typpingSFX);
 			yield return new WaitForSeconds(typeSpeed);
 		}
 

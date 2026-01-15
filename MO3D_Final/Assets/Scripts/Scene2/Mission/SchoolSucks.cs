@@ -32,6 +32,12 @@ public class SchoolSucks : MonoBehaviour
 	[SerializeField] private Camera introCamera;
 	[SerializeField] private float cameraShowTime;
 
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip schoolSucksMusic;
+	[SerializeField] private AudioClip collectSFX;
+	[SerializeField] private AudioClip winSFX;
+	[SerializeField] private AudioClip loseSFX;
+
 	// BOOL
 	private bool hasLost = false;
 	private bool sliderOn = false;
@@ -51,9 +57,12 @@ public class SchoolSucks : MonoBehaviour
 	private List<Transform> bookThrowPos = new List<Transform>();
 
 	// MEDAL
-	private static bool isMedal = false;
+	private bool isMedal = false;
 
-    public void BeginSchoolSucks()
+	// MUSIC MISSION START
+	private static bool missionMusicStarted = false;
+
+	public void BeginSchoolSucks()
     {
         SetElements();
     }
@@ -65,6 +74,13 @@ public class SchoolSucks : MonoBehaviour
 		StartCoroutine(ShowIntroCamera());
 		UIMissionManager.Instance.ShowMissionText("PICKUP ALL SCHOOL BOYS", textDuration, 40);
 		instructionPanel.SetActive(true);
+
+		// MUSIC
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(schoolSucksMusic);
+			missionMusicStarted = true;
+		}
 
 		// BUS STOPS
 		foreach (Transform busStop in busStops)
@@ -97,6 +113,8 @@ public class SchoolSucks : MonoBehaviour
 
 	public void PickUpPassenger(PickUpSchoolBoy schoolBoy)
 	{
+		AudioManager.Instance.PlaySFX(collectSFX);
+
 		if (busStopIndex == 0)
 		{
 			UIMissionManager.Instance.ShowMissionText("DONT LET THROW AWAY ALL BOOKS", textDuration, 40);
@@ -182,6 +200,10 @@ public class SchoolSucks : MonoBehaviour
 
 	private void WinMission()
     {
+		AudioManager.Instance.PlaySFX(winSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		missionManager.EndMission();
 		StartCoroutine(ShowWinMessage());
 		DisableElements();
@@ -190,8 +212,8 @@ public class SchoolSucks : MonoBehaviour
 		{
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(15);
-			LevelData.CoinsCollectedInLevel += 15;
+			MainMenu.Instance.AddCoin(5500);
+			LevelData.CoinsCollectedInLevel += 5500;
 
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[22] = true;
@@ -204,6 +226,10 @@ public class SchoolSucks : MonoBehaviour
     private void LoseMission()
     {
 		if (hasLost) { return; }
+
+		AudioManager.Instance.PlaySFX(loseSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
 
 		hasLost = true;
 		StartCoroutine(ShowLoseMessage());
@@ -233,7 +259,7 @@ public class SchoolSucks : MonoBehaviour
 
     private IEnumerator ShowWinMessage()
     {
-		UIMissionManager.Instance.ShowMissionText("GO STUDY, CHILDRENS! \n + 15 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("GO STUDY, CHILDRENS! \n + 5500 COINS", textDuration, 50);
 		yield return new WaitForSeconds(textDuration);
 	}
 

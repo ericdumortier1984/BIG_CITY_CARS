@@ -26,6 +26,12 @@ public class MaxSpeedPlease : MonoBehaviour
     [Header("References")]
     [SerializeField] private MissionManager missionManager;
 
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip maxSpeedPleaseMusic;
+	[SerializeField] private AudioClip collectSFX;
+	[SerializeField] private AudioClip winSFX;
+	[SerializeField] private AudioClip loseSFX;
+
 	//BOOL
 	private bool hasLost = false;
     private bool isSpeeding = false;
@@ -40,6 +46,9 @@ public class MaxSpeedPlease : MonoBehaviour
 	// MEDAL
 	private static bool isMedal = false;
 
+	// MUSIC MISSION START
+	private bool missionMusicStarted = false;
+
 	public void BeginMission()
     {
 		SetElements();
@@ -53,6 +62,13 @@ public class MaxSpeedPlease : MonoBehaviour
 		// INSTRUCTIONS
 		UIMissionManager.Instance.ShowMissionText("SPEED UP MAN!", 15, 45);
 		instructionPanel.SetActive(true);
+
+		// MUSIC
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(maxSpeedPleaseMusic);
+			missionMusicStarted = true;
+		}
 
 		// TIMER AND COUNTER
 		countdownTimer.StartTimer();
@@ -91,6 +107,7 @@ public class MaxSpeedPlease : MonoBehaviour
 
 	public void OnCheckpoint(GetCheckpointMuscleCar checkpoint)
 	{
+		AudioManager.Instance.PlaySFX(collectSFX);
 		checkpointIndex++;
 		UIMissionManager.Instance.SetCheckpointCounter(checkpointIndex, totalCheckpoint);
 
@@ -106,6 +123,10 @@ public class MaxSpeedPlease : MonoBehaviour
 
 	public void WinMission()
 	{
+		AudioManager.Instance.PlaySFX(loseSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		missionManager.EndMission();
 		StartCoroutine(ShowWinMessage());
 		countdownTimer.StopTimer();
@@ -115,8 +136,8 @@ public class MaxSpeedPlease : MonoBehaviour
 		{
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(15);
-			LevelData.CoinsCollectedInLevel += 15;
+			MainMenu.Instance.AddCoin(12000);
+			LevelData.CoinsCollectedInLevel += 12000;
 
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[12] = true;
@@ -130,6 +151,10 @@ public class MaxSpeedPlease : MonoBehaviour
 	{
 		if (countdownTimer.IsTimeUp && !hasLost)
 		{
+			AudioManager.Instance.PlaySFX(loseSFX);
+			AudioManager.Instance.PlayGameplayMusic();
+			missionMusicStarted = false;
+
 			hasLost = true;
 			StartCoroutine(ShowLoseMessage());
 			DisableElements();
@@ -151,7 +176,7 @@ public class MaxSpeedPlease : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("THATS A REAL MUSCLE CAR! \n + 15 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("THATS A REAL MUSCLE CAR! \n + 12000 COINS", textDuration, 50);
 		missionText.gameObject.SetActive(false);
 		yield return new WaitForSeconds(textDuration);
 	}

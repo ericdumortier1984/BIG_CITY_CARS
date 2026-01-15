@@ -35,8 +35,14 @@ public class StopRobberBank : MonoBehaviour
     [SerializeField] private ParticleSystem spawnTheftFurgonParticle;
 	[SerializeField] private ParticleSystem destroyTheftFurgonParticle;
 
-    // BOOL 
-    private bool canMoveTheftFurgon = false;
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip robberBankMusic;
+	[SerializeField] private AudioClip alarmSFX;
+	[SerializeField] private AudioClip winSFX;
+	[SerializeField] private AudioClip loseSFX;
+
+	// BOOL 
+	private bool canMoveTheftFurgon = false;
     private bool isTheftFurgonEscape = false;
 
     // WAYPOINT
@@ -45,6 +51,9 @@ public class StopRobberBank : MonoBehaviour
     // MEDAL
     private static bool isMedal = false;
 
+	// MUSIC MISSION START
+	private bool missionMusicStarted = false;
+
 	public void BeginStopRobberBank()
     {
         SetElements();
@@ -52,6 +61,8 @@ public class StopRobberBank : MonoBehaviour
 
     private void SetElements()
     {
+		AudioManager.Instance.PlaySFX(alarmSFX);
+
         spawnTheftFurgonParticle.gameObject.SetActive(true);
 
 		foreach (Transform wp in TheftFurgonWaypoints)
@@ -73,6 +84,13 @@ public class StopRobberBank : MonoBehaviour
 		UIMissionManager.Instance.ShowMissionText("STOP THE ROBBERY BANK", textDuration, 60);
 		InstructionPanel.SetActive(true);
 		MiniMapInstructionPanel.SetActive(true);
+
+		// MUSIC
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(robberBankMusic);
+			missionMusicStarted = true;
+		}
 	}
 
 	private void Update()
@@ -112,6 +130,10 @@ public class StopRobberBank : MonoBehaviour
 
 	private void WinMission()
     {
+		AudioManager.Instance.PlaySFX(winSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		destroyTheftFurgonParticle.Play();
 		healthTheftFurgon.OnGameObjectDestroyed -= WinMission;
 
@@ -123,8 +145,8 @@ public class StopRobberBank : MonoBehaviour
 		{
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(15);
-			LevelData.CoinsCollectedInLevel += 15;
+			MainMenu.Instance.AddCoin(5250);
+			LevelData.CoinsCollectedInLevel += 5250;
 
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[6] = true;
@@ -136,7 +158,11 @@ public class StopRobberBank : MonoBehaviour
 
     private void LoseMission()
     {
-        isTheftFurgonEscape = true;
+		AudioManager.Instance.PlaySFX(loseSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
+		isTheftFurgonEscape = true;
 		StartCoroutine(ShowLoseMessage());
 		DisableElements();
 		missionManager.EndMission();
@@ -176,7 +202,7 @@ public class StopRobberBank : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("YOU ARE A TOUGH COP! \n + 15 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("YOU ARE A TOUGH COP! \n + 5250 COINS", textDuration, 50);
 		missionText.gameObject.SetActive(false);
 		yield return new WaitForSeconds(textDuration);
 	}

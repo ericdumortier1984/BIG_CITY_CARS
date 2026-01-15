@@ -12,6 +12,7 @@ public class TaxiRace : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private float textDuration;
 	[SerializeField] private RouteDrawer routeDrawer;
+	[SerializeField] private GameObject instructionPanel;
 
 	[Header("Mission Manager")]
 	[SerializeField] private MissionManager missionManager;
@@ -28,9 +29,18 @@ public class TaxiRace : MonoBehaviour
 	[Header("FX")]
 	[SerializeField] private ParticleSystem spawnParticle;
 
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip taxiRaceMusic;
+	[SerializeField] private AudioClip collectSFX;
+	[SerializeField] private AudioClip winSFX;
+	[SerializeField] private AudioClip loseSFX;
+
 	private int currentWaypointIndex = 0;
 	private int currentPlayerWaypointIndex = 0;
 	private static bool isMedal = false;
+
+	// MUSIC MISSION START
+	private bool missionMusicStarted = false;
 
 	void Start()
     {
@@ -38,6 +48,7 @@ public class TaxiRace : MonoBehaviour
 		triggermission.SetActive(false);
 
 		SpawnTaxiRacer();
+		EnableMusicMission();
 		SetPlayerCheckpoint();
 		SetLineRenderer();
 	}
@@ -52,10 +63,21 @@ public class TaxiRace : MonoBehaviour
 		UIMissionManager.Instance.ShowMissionText("TAXI RACE", textDuration, 50);
 
 		taxiRacer.SetActive(true);
+		instructionPanel.SetActive(true);
 
 		spawnParticle.transform.position = taxiRacer.transform.position;
 		spawnParticle.Play();
 		goal.SetActive(true);
+	}
+
+	private void EnableMusicMission()
+	{
+		// MUSIC
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(taxiRaceMusic);
+			missionMusicStarted = true;
+		}
 	}
 
 	private void MoveTaxiRacer()
@@ -90,11 +112,15 @@ public class TaxiRace : MonoBehaviour
 	{
 		if(!isMedal)
 		{
-			UIMissionManager.Instance.ShowMissionText("WINNER!!\n + 15 COINS", textDuration, 50);
+			AudioManager.Instance.PlaySFX(winSFX);
+			AudioManager.Instance.PlayGameplayMusic();
+			missionMusicStarted = false;
+
+			UIMissionManager.Instance.ShowMissionText("WINNER!!\n + 5000 COINS", textDuration, 50);
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(15);
-			LevelData.CoinsCollectedInLevel += 15;
+			MainMenu.Instance.AddCoin(5000);
+			LevelData.CoinsCollectedInLevel += 5000;
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[2] = true;
 			SaveSystem.SaveGame(saveData);
@@ -103,18 +129,24 @@ public class TaxiRace : MonoBehaviour
 			taxiRacer.SetActive(false);
 			goal.SetActive(false);
 			routeDrawer.gameObject.SetActive(false);
+			instructionPanel.SetActive(false);
 		}
 		
 	}
 
 	public void LoseMission()
 	{
+		AudioManager.Instance.PlaySFX(loseSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		UIMissionManager.Instance.ShowMissionText("TOO SLOWN!!", textDuration, 50);
 		missionManager.EndMission();
 		taxiRacer.SetActive(false);
 		goal.SetActive(false);
 		playerWaypoints[currentPlayerWaypointIndex].SetActive(false);
 		routeDrawer.gameObject.SetActive(false);
+		instructionPanel.SetActive(false);
 	}
 
 	public GameObject GetTaxiRacer()
@@ -134,6 +166,8 @@ public class TaxiRace : MonoBehaviour
 	{
 		if (playerWaypoints[currentPlayerWaypointIndex] == checkpoint)
 		{
+			AudioManager.Instance.PlaySFX(collectSFX);
+
 			playerWaypoints[currentPlayerWaypointIndex].SetActive(false);
 			currentPlayerWaypointIndex++;
 

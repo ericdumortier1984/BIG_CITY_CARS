@@ -29,18 +29,6 @@ public class TextOnOff : MonoBehaviour
 	{
 		saveData = SaveSystem.LoadGame();
 
-		if (isOneTime && OneTimeID >= 0 && saveData.infoGame[OneTimeID])
-		{
-			gameObject.SetActive(false);
-			return;
-		}
-
-		if (isOneTime && OneTimeID >= 0)
-		{
-			saveData.infoGame[OneTimeID] = true;
-			SaveSystem.SaveGame(saveData);
-		}
-
 		mTMP_Text.enabled = false;
 
 		if (icon != null)

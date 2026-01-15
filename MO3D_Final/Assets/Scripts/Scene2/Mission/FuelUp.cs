@@ -25,6 +25,12 @@ public class FuelUp : MonoBehaviour
 	[SerializeField] private Camera introCamera;
 	[SerializeField] private float cameraShowTime;
 
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip fuelUpMusic;
+	[SerializeField] private AudioClip collectSFX;
+	[SerializeField] private AudioClip winSFX;
+	[SerializeField] private AudioClip loseSFX;
+
 	// BOOL
 	private bool hasLost = false;
 	private bool sliderOn = false;
@@ -43,6 +49,9 @@ public class FuelUp : MonoBehaviour
 	// MEDAL
 	private static bool isMedal = false;
 
+	// MUSIC MISSION START
+	private bool missionMusicStarted = false;
+
 	public void BeginFuelUp()
 	{
 		SetElements();
@@ -55,6 +64,13 @@ public class FuelUp : MonoBehaviour
 		StartCoroutine(ShowIntroCamera());
 		UIMissionManager.Instance.ShowMissionText("GAS STATION NEEDS TO REFUEL", textDuration, 40);
 		instructionPanel.SetActive(true);
+
+		// MUSIC
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(fuelUpMusic);
+			missionMusicStarted = true;
+		}
 
 		// FUEL PUMPS POINTS
 		foreach (Transform fuelPumpPoint in fuelPumpPoints)
@@ -89,6 +105,7 @@ public class FuelUp : MonoBehaviour
 
 	public void FillTankFuelTruck(CollectFuelPump fuelPump)
 	{
+		AudioManager.Instance.PlaySFX(collectSFX);
 		fuelPumpPoints[fuelPumpIndex].gameObject.SetActive(false);
 		fuelPumpIndex++;
 		UIMissionManager.Instance.SetFuelPumpCounter(fuelPumpIndex, totalFuelPump);
@@ -149,6 +166,10 @@ public class FuelUp : MonoBehaviour
 
 	private void WinMission()
 	{
+		AudioManager.Instance.PlaySFX(winSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		missionManager.EndMission();
 		StartCoroutine(ShowWinMessage());
 		DisableElements();
@@ -157,8 +178,8 @@ public class FuelUp : MonoBehaviour
 		{
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(15);
-			LevelData.CoinsCollectedInLevel += 15;
+			MainMenu.Instance.AddCoin(7500);
+			LevelData.CoinsCollectedInLevel += 7500;
 
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[21] = true;
@@ -171,6 +192,10 @@ public class FuelUp : MonoBehaviour
 	private void LoseMission()
 	{
 		if (hasLost) { return; }
+
+		AudioManager.Instance.PlaySFX(loseSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
 
 		hasLost = true;
 		StartCoroutine(ShowLoseMessage());
@@ -196,7 +221,7 @@ public class FuelUp : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("GAS STATION IS REFUEL! \n + 15 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("GAS STATION IS REFUEL! \n + 7500 COINS", textDuration, 50);
 		yield return new WaitForSeconds(textDuration);
 	}
 

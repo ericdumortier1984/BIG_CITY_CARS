@@ -30,7 +30,6 @@ public class MainMenu : MonoBehaviour
 
 		Cursor.visible = true;
 		mConfirmResetPanel.SetActive(false);
-		//mCurrentSave = new SaveData();
 		mCurrentSave = SaveSystem.LoadGame();
 		UpdateCoinUI();
 		UpdateMedalUI();
@@ -66,7 +65,6 @@ public class MainMenu : MonoBehaviour
 		}
 		else 
 		{
-			//Debug.Log("Not enough coins");
 			return false;
 		}
 	}
@@ -76,7 +74,6 @@ public class MainMenu : MonoBehaviour
 		if (mCoinText != null)
 		{
 			mCoinText.text = "COINS: " + mCurrentSave.mCoins;
-			//Debug.Log("Coins: " + mCurrentSave.mCoins.ToString());
 		}
 	}
 
@@ -84,7 +81,6 @@ public class MainMenu : MonoBehaviour
     {
 		if (CarSelectionController.Instance.mIsSelectedCarBlocked == true)
 		{
-			//Debug.Log("Car is Blocked");
 			return;
 		}
 		else
@@ -117,9 +113,7 @@ public class MainMenu : MonoBehaviour
 		mCurrentSave = SaveSystem.LoadGame();
 		UpdateCoinUI();
 		UpdateMedalUI();
-		//Debug.Log("GameLoaded");
 
-		// Inicializa los autos desbloqueados según SaveData
 		for (int i = 0; i < CarSelectionController.Instance.mCarsToSelect.Length; i++)
 		{
 			var mCarStats = CarSelectionController.Instance.mCarsToSelect[i].GetComponent<CarStats>();
@@ -130,21 +124,19 @@ public class MainMenu : MonoBehaviour
 			}
 			else
 			{
-				// Por defecto bloqueado si no hay dato guardado
 				mCarStats.IsCarBlocked = true;
 			}
 		}
-		//Debug.Log("Car Data Loaded");
 	}
 
 	public void SaveGame()
 	{
 		mCurrentSave.mUnlockedCars.Clear();
 
-		for (int i = 0; i < CarSelectionController.Instance.mCarsToSelect.Length; i++) // INCLUIR EL ÍNDICE 0
+		for (int i = 0; i < CarSelectionController.Instance.mCarsToSelect.Length; i++) 
 		{
 			var mCarStats = CarSelectionController.Instance.mCarsToSelect[i].GetComponent<CarStats>();
-			mCurrentSave.mUnlockedCars.Add(!mCarStats.IsCarBlocked); // true = desbloqueado
+			mCurrentSave.mUnlockedCars.Add(!mCarStats.IsCarBlocked); 
 		}
 
 		SaveSystem.SaveGame(mCurrentSave);
@@ -177,7 +169,6 @@ public class MainMenu : MonoBehaviour
 			UpdateCoinUI();
 			UpdateMedalUI();
 			mConfirmResetPanel.SetActive(false);
-			//Debug.Log("Game data reset");
 		});
 
 		mNoButton.onClick.AddListener(() => {
@@ -190,6 +181,5 @@ public class MainMenu : MonoBehaviour
     {
 		AudioManager.Instance.PlaySFX(backSFX);
 		Application.Quit();
-        Debug.Log("Quit Game");
     }
 }

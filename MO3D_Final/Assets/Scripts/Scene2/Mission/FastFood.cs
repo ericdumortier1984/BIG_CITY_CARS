@@ -34,6 +34,13 @@ public class FastFood : MonoBehaviour
 	[SerializeField] private Transform salesPointTrigger;
 	[SerializeField] private List<HungryController> hungryController;
 
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip fastFoodMusic;
+	[SerializeField] private AudioClip collectSFX;
+	[SerializeField] private AudioClip deliverySFX;
+	[SerializeField] private AudioClip winSFX;
+	[SerializeField] private AudioClip loseSFX;
+
 	// BOOL 
 	private bool hasLost = false;
 	private bool isCooking = false;
@@ -45,6 +52,9 @@ public class FastFood : MonoBehaviour
 
 	// MEDAL
 	private static bool isMedal = false;
+
+	// MUSIC MISSION START
+	private bool missionMusicStarted = false;
 
 	public bool IsCooking => isCooking;
 
@@ -58,6 +68,13 @@ public class FastFood : MonoBehaviour
         // INSTRUCTIONS
         UIMissionManager.Instance.ShowMissionText("GO TO THE STADIUM TO SALE SOME FOOD", textDuration, 40);
         instructionPanel.SetActive(true);
+
+		// MUSIC
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(fastFoodMusic);
+			missionMusicStarted = true;
+		}
 
 		// SALES POINT TRIGGER
 		salesPointTrigger.gameObject.SetActive(true);
@@ -74,6 +91,10 @@ public class FastFood : MonoBehaviour
 
 	private void WinMission()
 	{
+		AudioManager.Instance.PlaySFX(winSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		missionManager.EndMission();
 		StartCoroutine(ShowWinMessage());
 		DisableElements();
@@ -82,8 +103,8 @@ public class FastFood : MonoBehaviour
 		{
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(15);
-			LevelData.CoinsCollectedInLevel += 15;
+			MainMenu.Instance.AddCoin(9000);
+			LevelData.CoinsCollectedInLevel += 9000;
 
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[16] = true;
@@ -96,7 +117,11 @@ public class FastFood : MonoBehaviour
 	public void LoseMission()
 	{
 		if (hasLost) { return; }
-		
+
+		AudioManager.Instance.PlaySFX(loseSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		hasLost = true;
 		StartCoroutine(ShowLoseMessage());
 		DisableElements();
@@ -159,6 +184,8 @@ public class FastFood : MonoBehaviour
 
 	public void NextHungryPeople()
 	{
+		AudioManager.Instance.PlaySFX(deliverySFX);
+
 		currentHungryPeopleIndex++;
 
 		if (currentHungryPeopleIndex >= hungryPeoples.Count)
@@ -192,6 +219,7 @@ public class FastFood : MonoBehaviour
 
 			if (Input.GetMouseButtonDown(0))
 			{
+				AudioManager.Instance.PlaySFX(collectSFX);
 				GetFood();
 			}
 		}
@@ -245,7 +273,7 @@ public class FastFood : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("THATS FAST! \n + 15 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("THATS FAST! \n + 9000 COINS", textDuration, 50);
 		yield return new WaitForSeconds(textDuration);
 	}
 

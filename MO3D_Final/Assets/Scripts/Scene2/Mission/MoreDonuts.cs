@@ -23,6 +23,12 @@ public class MoreDonuts : MonoBehaviour
 	[SerializeField] private GameObject deliveryPoint;
 	[SerializeField] private RadioMessagesController radioController;
 
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip moreDonutsMusic;
+	[SerializeField] private AudioClip collectSFX;
+	[SerializeField] private AudioClip winSFX;
+	[SerializeField] private AudioClip loseSFX;
+
 	//BOOL 
 	private bool isAllDonutsCollected = false;
 	private bool hasLost = false;
@@ -33,6 +39,9 @@ public class MoreDonuts : MonoBehaviour
 
 	//MEDAL
 	private static bool isMedal = false;
+
+	// MUSIC MISSION START
+	private bool missionMusicStarted = false;
 
 	public void BeginMoreDonuts()
 	{
@@ -49,6 +58,13 @@ public class MoreDonuts : MonoBehaviour
 		// INSTRUCTIONS
 		UIMissionManager.Instance.ShowMissionText("COLLECT ALL DONUTS", 10, 70);
 		InstructionPanel.SetActive(true);
+
+		// MUSIC
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(moreDonutsMusic);
+			missionMusicStarted = true;
+		}
 
 		// TIMER AND COUNTER
 		countdownTimer.StartTimer();
@@ -67,6 +83,8 @@ public class MoreDonuts : MonoBehaviour
 
 	public void DonutCollected(CollectDonutsTrigger donut)
 	{
+		AudioManager.Instance.PlaySFX(collectSFX);
+
 		donutsIndex++;
 		UIMissionManager.Instance.SetDonutsCounter(donutsIndex, totalDonuts);
 
@@ -111,6 +129,10 @@ public class MoreDonuts : MonoBehaviour
 
 	public void WinMission()
 	{
+		AudioManager.Instance.PlaySFX(winSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		missionManager.EndMission();
 		StartCoroutine(ShowWinMessage());
 		countdownTimer.StopTimer();
@@ -120,8 +142,8 @@ public class MoreDonuts : MonoBehaviour
 		{
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(15);
-			LevelData.CoinsCollectedInLevel += 15;
+			MainMenu.Instance.AddCoin(5250);
+			LevelData.CoinsCollectedInLevel += 5250;
 
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[7] = true;
@@ -135,6 +157,10 @@ public class MoreDonuts : MonoBehaviour
 	{
 		if (countdownTimer.IsTimeUp && !hasLost)
 		{
+			AudioManager.Instance.PlaySFX(loseSFX);
+			AudioManager.Instance.PlayGameplayMusic();
+			missionMusicStarted = false;
+
 			hasLost = true;
 			StartCoroutine(ShowLoseMessage());
 			DisableElements();
@@ -159,7 +185,7 @@ public class MoreDonuts : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("YOU WILL BE DECORATED! \n + 15 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("YOU WILL BE DECORATED! \n + 5250 COINS", textDuration, 50);
 		missionText.gameObject.SetActive(false);
 		yield return new WaitForSeconds(textDuration);
 	}

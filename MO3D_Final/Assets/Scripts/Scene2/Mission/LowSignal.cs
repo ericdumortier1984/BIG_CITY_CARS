@@ -39,7 +39,7 @@ public class LowSignal : MonoBehaviour
 	private static bool isMedal = false;
 
 	// MUSIC MISSION START
-	private static bool missionMusicStarted = false;
+	private bool missionMusicStarted = false;
 
 	public void BeginLowSignal()
     {
@@ -131,8 +131,8 @@ public class LowSignal : MonoBehaviour
 		{
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(15);
-			LevelData.CoinsCollectedInLevel += 15;
+			MainMenu.Instance.AddCoin(2500);
+			LevelData.CoinsCollectedInLevel += 2500;
 
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[17] = true;
@@ -175,7 +175,7 @@ public class LowSignal : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("GREAT, GET POPCORN! \n + 15 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("GREAT, GET POPCORN! \n + 2500 COINS", textDuration, 50);
 		yield return new WaitForSeconds(textDuration);
 	}
 

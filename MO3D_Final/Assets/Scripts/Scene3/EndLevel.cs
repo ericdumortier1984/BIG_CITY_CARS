@@ -10,11 +10,15 @@ public class EndLevel : MonoBehaviour
 	[SerializeField] private TMPro.TextMeshProUGUI mWaypointsCollectedText;
 	[SerializeField] private TMPro.TextMeshProUGUI medalCollectedText;
 
+	[Header("SFX")]
+	[SerializeField] private AudioClip backSFX;
+
 	private CoinsController mCoinsController;
 	private ItemWaypointController mItemWayController;
 
 	private void Start()
 	{
+		Cursor.visible = true;
 		mCoinsController = FindObjectOfType<CoinsController>();
 		mItemWayController = FindObjectOfType<ItemWaypointController>();
 	}
@@ -41,6 +45,13 @@ public class EndLevel : MonoBehaviour
 
 	public void OnClickMainMenu()
 	{
+		AudioManager.Instance.PlaySFX(backSFX);
 		LoaderScene.Load(LoaderScene.mScene.SceneMainMenu);
+	}
+
+	public void ExitGame()
+	{
+		AudioManager.Instance.PlaySFX(backSFX);
+		Application.Quit();
 	}
 }

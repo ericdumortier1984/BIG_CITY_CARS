@@ -39,7 +39,7 @@ public class HomeShopping : MonoBehaviour
 	private int totalProvision = 10;
 
 	// MEDAL
-	private static bool isMedal = false;
+	private bool isMedal = false;
 
 	// MUSIC MISSION START
 	private static bool missionMusicStarted = false;
@@ -127,8 +127,8 @@ public class HomeShopping : MonoBehaviour
 		{
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(15);
-			LevelData.CoinsCollectedInLevel += 15;
+			MainMenu.Instance.AddCoin(1500);
+			LevelData.CoinsCollectedInLevel += 1500;
 
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[10] = true;
@@ -173,7 +173,7 @@ public class HomeShopping : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("ALL HOME STUFF PURCHASED! \n + 15 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("ALL HOME STUFF PURCHASED! \n + 1500 COINS", textDuration, 50);
 		missionText.gameObject.SetActive(false);
 		yield return new WaitForSeconds(textDuration);
 	}

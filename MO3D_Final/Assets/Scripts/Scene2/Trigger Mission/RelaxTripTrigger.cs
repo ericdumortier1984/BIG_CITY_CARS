@@ -23,21 +23,14 @@ public class RelaxTripTrigger : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
+		if (!missionManager.CanStartMission()) return;
+
 		if (other.CompareTag("Mini Van"))
 		{
-			if (!missionManager.CanStartMission()) { return; }
-			missionVcam.Priority = 21;
+			missionVcam.Priority = 20;
 			missionManager.StartMissionRelaxTrip();
 			gameObject.SetActive(false);
 			relaxTripMission.SetActive(true);
-		}
-		else if (other.CompareTag("IACar"))
-		{
-			UIMissionManager.Instance.ShowMissionText("", 1.0f, 50);
-		}
-		else
-		{
-			UIMissionManager.Instance.ShowMissionText("ONLY MINIVAN", 1.0F, 50);
 		}
 	}
 }

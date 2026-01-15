@@ -44,6 +44,12 @@ public class IceIceCreamBaby : MonoBehaviour
 	[SerializeField] private Camera deliverCamera;
 	[SerializeField] private float cameraShowTime;
 
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip iceCreamMusic;
+	[SerializeField] private AudioClip collectSFX;
+	[SerializeField] private AudioClip winSFX;
+	[SerializeField] private AudioClip loseSFX;
+
 	// BOOL
 	private bool sliderOn = false;
 	private bool isCollectingMaterials = false;
@@ -62,6 +68,9 @@ public class IceIceCreamBaby : MonoBehaviour
 	// MEDAL
 	private static bool isMedal = false;
 
+	// MUSIC MISSION START
+	private bool missionMusicStarted = false;
+
 	public void BeginIceIceCreamBaby()
 	{
 		SetElements();
@@ -75,6 +84,13 @@ public class IceIceCreamBaby : MonoBehaviour
 		UIMissionManager.Instance.ShowMissionText("LOOK FOR ALL ICE CREAM INGREDIENTS", textDuration, 40);
 		instructionPanel.SetActive(true);
 		ingredientsPanel.SetActive(true);
+
+		// MUSIC
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(iceCreamMusic);
+			missionMusicStarted = true;
+		}
 
 		// COUNTER
 		UIMissionManager.Instance.SetIceCreamCounter(iceCreamIndex, totalIceCream);
@@ -109,6 +125,8 @@ public class IceIceCreamBaby : MonoBehaviour
 	public void CollectMaterial()
 	{
 		if (!isCollectingMaterials || hasLost) { return; }
+
+		AudioManager.Instance.PlaySFX(collectSFX);
 
 		materialsIndex++;
 		UIMissionManager.Instance.SetMaterialIceCreamCounter(materialsIndex, totalMaterials);
@@ -178,6 +196,7 @@ public class IceIceCreamBaby : MonoBehaviour
 
 		if (fabricationSlider.value >= fabricationSlider.maxValue)
 		{
+			AudioManager.Instance.PlaySFX(collectSFX);
 			StopUpdateFabricationSlider();
 			fabricationSlider.gameObject.SetActive(false);
 			fabricationSpot.gameObject.SetActive(false);
@@ -210,6 +229,8 @@ public class IceIceCreamBaby : MonoBehaviour
 	{
 		if (!canDeliver || hasLost) { return; }
 
+		AudioManager.Instance.PlaySFX(collectSFX);
+
 		iceCreamIndex++;
 		UIMissionManager.Instance.SetIceCreamCounter(iceCreamIndex, totalIceCream);
 
@@ -229,6 +250,10 @@ public class IceIceCreamBaby : MonoBehaviour
 
 	private void WinMission()
 	{
+		AudioManager.Instance.PlaySFX(winSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		missionManager.EndMission();
 		StartCoroutine(ShowWinMessage());
 		DisableElements();
@@ -237,8 +262,8 @@ public class IceIceCreamBaby : MonoBehaviour
 		{
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(15);
-			LevelData.CoinsCollectedInLevel += 15;
+			MainMenu.Instance.AddCoin(7000);
+			LevelData.CoinsCollectedInLevel += 7000;
 
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[25] = true;
@@ -250,6 +275,10 @@ public class IceIceCreamBaby : MonoBehaviour
 
 	private void LoseMission()
 	{
+		AudioManager.Instance.PlaySFX(loseSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		hasLost = true;
 		missionManager.EndMission();
 		StartCoroutine(ShowLoseMessage());
@@ -277,7 +306,7 @@ public class IceIceCreamBaby : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("THAT IS REFRESHING! \n + 15 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("THAT IS REFRESHING! \n + 7000 COINS", textDuration, 50);
 		yield return new WaitForSeconds(textDuration);
 	}
 

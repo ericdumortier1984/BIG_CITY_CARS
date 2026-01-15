@@ -2753,7 +2753,7 @@ MonoBehaviour:
   sfxSource: {fileID: 887832731}
   audioMixer: {fileID: 24100000, guid: f3c669fd556efb541910286be3eae385, type: 2}
   mainMenuMusic: {fileID: 8300000, guid: 19acbf0820e10b64bb083d5fedcfac52, type: 3}
-  gameplayMusic: {fileID: 8300000, guid: c9a6ccd9387f697488cf5d1410dde299, type: 3}
+  gameplayMusic: {fileID: 8300000, guid: ffed00d2811b57e48be66ddd751a5ceb, type: 3}
 --- !u!1 &907426354
 GameObject:
   m_ObjectHideFlags: 0
@@ -7197,6 +7197,8 @@ MonoBehaviour:
   mCarBreakingSlider: {fileID: 234448868}
   mCarHandlingSlider: {fileID: 1014455906}
   mCarBloquedIcon: {fileID: 1503798740}
+  selectBuyButton: {fileID: 697342859}
+  selectBuyButtonText: {fileID: 1443460748}
   backSFX: {fileID: 8300000, guid: cdefe670d9516e9489e1c355ad1203db, type: 3}
 --- !u!1 &1921328865
 GameObject:
@@ -7783,8 +7785,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: JEEP
-  mCarPriceText: $105
-  mCarPrice: 105
+  mCarPriceText: $9000
+  mCarPrice: 9000
   mCarSpeed: 65
   mCarAcceleration: 60
   mCarBreaking: 60
@@ -8430,8 +8432,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: POLICE CAR
-  mCarPriceText: $115
-  mCarPrice: 115
+  mCarPriceText: $10000
+  mCarPrice: 10000
   mCarSpeed: 75
   mCarAcceleration: 70
   mCarBreaking: 65
@@ -9747,8 +9749,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: TUNNING CAR
-  mCarPriceText: $125
-  mCarPrice: 125
+  mCarPriceText: $11000
+  mCarPrice: 11000
   mCarSpeed: 85
   mCarAcceleration: 75
   mCarBreaking: 70
@@ -11648,8 +11650,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: DELIVERY TRUCK
-  mCarPriceText: $45
-  mCarPrice: 45
+  mCarPriceText: $3000
+  mCarPrice: 3000
   mCarSpeed: 45
   mCarAcceleration: 40
   mCarBreaking: 40
@@ -12391,8 +12393,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: TAXI
-  mCarPriceText: $110
-  mCarPrice: 110
+  mCarPriceText: $9500
+  mCarPrice: 9500
   mCarSpeed: 65
   mCarAcceleration: 60
   mCarBreaking: 55
@@ -13585,8 +13587,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: RED TRUCK
-  mCarPriceText: $90
-  mCarPrice: 90
+  mCarPriceText: $7500
+  mCarPrice: 7500
   mCarSpeed: 60
   mCarAcceleration: 45
   mCarBreaking: 50
@@ -15550,8 +15552,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: FOOD TRUCK
-  mCarPriceText: $100
-  mCarPrice: 100
+  mCarPriceText: $8500
+  mCarPrice: 8500
   mCarSpeed: 60
   mCarAcceleration: 55
   mCarBreaking: 55
@@ -15917,8 +15919,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: TV TRUCK
-  mCarPriceText: $35
-  mCarPrice: 35
+  mCarPriceText: $2000
+  mCarPrice: 2000
   mCarSpeed: 55
   mCarAcceleration: 50
   mCarBreaking: 45
@@ -16485,8 +16487,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: SCHOOL BUS
-  mCarPriceText: $65
-  mCarPrice: 65
+  mCarPriceText: $5000
+  mCarPrice: 5000
   mCarSpeed: 55
   mCarAcceleration: 45
   mCarBreaking: 50
@@ -17639,8 +17641,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: ICE CREAM TRUCK
-  mCarPriceText: $80
-  mCarPrice: 80
+  mCarPriceText: $6500
+  mCarPrice: 6500
   mCarSpeed: 65
   mCarAcceleration: 55
   mCarBreaking: 55
@@ -18272,8 +18274,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: BIG TRUCK
-  mCarPriceText: $50
-  mCarPrice: 50
+  mCarPriceText: $3500
+  mCarPrice: 3500
   mCarSpeed: 50
   mCarAcceleration: 35
   mCarBreaking: 35
@@ -19323,8 +19325,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: TRACTOR
-  mCarPriceText: $75
-  mCarPrice: 75
+  mCarPriceText: $6000
+  mCarPrice: 6000
   mCarSpeed: 45
   mCarAcceleration: 35
   mCarBreaking: 40
@@ -19829,8 +19831,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: 4X4 TRUCK
-  mCarPriceText: $120
-  mCarPrice: 120
+  mCarPriceText: $10500
+  mCarPrice: 10500
   mCarSpeed: 70
   mCarAcceleration: 65
   mCarBreaking: 60
@@ -21806,8 +21808,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: MINI VAN
-  mCarPriceText: $40
-  mCarPrice: 40
+  mCarPriceText: $2500
+  mCarPrice: 2500
   mCarSpeed: 55
   mCarAcceleration: 50
   mCarBreaking: 50
@@ -22803,8 +22805,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: TANKER TRUCK
-  mCarPriceText: $85
-  mCarPrice: 85
+  mCarPriceText: $7000
+  mCarPrice: 7000
   mCarSpeed: 60
   mCarAcceleration: 45
   mCarBreaking: 45
@@ -23488,8 +23490,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: FURGON
-  mCarPriceText: $30
-  mCarPrice: 30
+  mCarPriceText: $1500
+  mCarPrice: 1500
   mCarSpeed: 55
   mCarAcceleration: 50
   mCarBreaking: 50
@@ -25078,8 +25080,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: SIMPLE CAR
-  mCarPriceText: $25
-  mCarPrice: 25
+  mCarPriceText: $1000
+  mCarPrice: 1000
   mCarSpeed: 60
   mCarAcceleration: 55
   mCarBreaking: 55
@@ -25925,8 +25927,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: AMBULANCE
-  mCarPriceText: $55
-  mCarPrice: 55
+  mCarPriceText: $4000
+  mCarPrice: 4000
   mCarSpeed: 65
   mCarAcceleration: 60
   mCarBreaking: 60
@@ -26687,8 +26689,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: MUSCLE CAR
-  mCarPriceText: $150
-  mCarPrice: 150
+  mCarPriceText: $11500
+  mCarPrice: 11500
   mCarSpeed: 90
   mCarAcceleration: 85
   mCarBreaking: 85
@@ -28447,8 +28449,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: MINI CAR
-  mCarPriceText: $20
-  mCarPrice: 20
+  mCarPriceText: $500
+  mCarPrice: 500
   mCarSpeed: 60
   mCarAcceleration: 55
   mCarBreaking: 55
@@ -29496,8 +29498,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: BUS
-  mCarPriceText: $95
-  mCarPrice: 95
+  mCarPriceText: $8000
+  mCarPrice: 8000
   mCarSpeed: 65
   mCarAcceleration: 50
   mCarBreaking: 50
@@ -30762,8 +30764,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: FIRE TRUCK
-  mCarPriceText: $60
-  mCarPrice: 60
+  mCarPriceText: $4500
+  mCarPrice: 4500
   mCarSpeed: 55
   mCarAcceleration: 45
   mCarBreaking: 50
@@ -31037,8 +31039,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCarName: FORKLIFT
-  mCarPriceText: $70
-  mCarPrice: 70
+  mCarPriceText: $5500
+  mCarPrice: 5500
   mCarSpeed: 35
   mCarAcceleration: 30
   mCarBreaking: 30

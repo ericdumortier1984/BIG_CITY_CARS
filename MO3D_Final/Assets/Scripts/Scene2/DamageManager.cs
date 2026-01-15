@@ -18,12 +18,13 @@ public class DamageManager : MonoBehaviour
 
 	[Header("FX")]
 	[SerializeField] private ParticleSystem destroyedParticle;
-	//[SerializeField] private AudioSource hitSound;
-	//[SerializeField] private AudioSource destroyedSound;
 
 	[Header("References")]
 	[SerializeField] private Rigidbody carRb;
 	[SerializeField] private MissionManager missionManager;
+
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip damageSFX;
 
 	// FLOATS
 	private float currentHealth;
@@ -92,8 +93,6 @@ public class DamageManager : MonoBehaviour
 		currentHealth = Mathf.Clamp(currentHealth - damageAmount, 0f, maxHealth);
 		UpdateHealthUI();
 
-		//hitSound.Play();
-
 		if (currentHealth <= 0f)
 		{
 			DestroyGameObject();
@@ -109,9 +108,8 @@ public class DamageManager : MonoBehaviour
 	{
 		isDestroyed = true;
 		destroyedParticle.Play();
-		//destroyedSound.Play();
-
 		OnGameObjectDestroyed?.Invoke();
+		AudioManager.Instance.PlaySFX(damageSFX);
 		StopDamageSystem();
 	}
 }

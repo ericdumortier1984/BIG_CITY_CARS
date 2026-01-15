@@ -37,7 +37,7 @@ public class TaxiTrigger : MonoBehaviour
 		}
 		else
 		{
-			UIMissionManager.Instance.ShowMissionText("ONLY TAXI VEHICLES", 1.0f, 50);
+			UIMissionManager.Instance.ShowMissionText("ONLY TAXI", 1.0f, 50);
 		}
 	}
 }

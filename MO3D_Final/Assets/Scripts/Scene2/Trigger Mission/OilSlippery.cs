@@ -9,10 +9,14 @@ public class OilSlippery : MonoBehaviour
 	[SerializeField] private float slipForce;
 	[SerializeField] private float slippingTime;
 
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip collectSFX;
+
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("Tunning Car"))
 		{
+			AudioManager.Instance.PlaySFX(collectSFX);
 			Rigidbody carRb = other.GetComponent<Rigidbody>();
 			StartCoroutine(Slip(carRb));
 		}

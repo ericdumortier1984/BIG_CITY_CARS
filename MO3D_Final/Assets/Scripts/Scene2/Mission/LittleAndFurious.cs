@@ -42,7 +42,7 @@ public class LittleAndFurious : MonoBehaviour
 	private static bool isMedal = false;
 	 
 	// MUSIC MISSION START
-	private static bool missionMusicStarted = false;
+	private bool missionMusicStarted = false;
 
 	public void BeginLittlendFurious()
 	{
@@ -132,8 +132,8 @@ public class LittleAndFurious : MonoBehaviour
 		{
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(15);
-			LevelData.CoinsCollectedInLevel += 15;
+			MainMenu.Instance.AddCoin(1000);
+			LevelData.CoinsCollectedInLevel += 1000;
 
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[9] = true;
@@ -174,7 +174,7 @@ public class LittleAndFurious : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("LIKE A MONSTER TRUCK  \n + 15 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("LIKE A MONSTER TRUCK  \n + 1000 COINS", textDuration, 50);
 		yield return new WaitForSeconds(textDuration);
 	}
 

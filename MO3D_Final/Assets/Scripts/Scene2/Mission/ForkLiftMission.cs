@@ -25,6 +25,12 @@ public class ForkLiftMission : MonoBehaviour
 	[Header("References")]
 	[SerializeField] private MissionManager missionManager;
 
+	[Header("SFX Clips")]
+	[SerializeField] private AudioClip forkliftMusic;
+	[SerializeField] private AudioClip collectSFX;
+	[SerializeField] private AudioClip winSFX;
+	[SerializeField] private AudioClip loseSFX;
+
 	//BOOL
 	private bool hasLost = false;
 
@@ -35,6 +41,9 @@ public class ForkLiftMission : MonoBehaviour
 	// MEDAL
 	private static bool isMedal = false;
 
+	// MUSIC MISSION START
+	private bool missionMusicStarted = false;
+
 	public void BeginForkLiftMission()
     {
 		SetElements();
@@ -42,6 +51,13 @@ public class ForkLiftMission : MonoBehaviour
 
 	private void SetElements()
 	{
+		// MUSIC
+		if (!missionMusicStarted)
+		{
+			AudioManager.Instance.PlayMissionMusic(forkliftMusic);
+			missionMusicStarted = true;
+		}
+
 		// COUNT
 		totalPallets = pallets.Count;
 
@@ -68,6 +84,7 @@ public class ForkLiftMission : MonoBehaviour
 
 	public void OnSetPallet()
 	{
+		AudioManager.Instance.PlaySFX(collectSFX);
 		palletIndex++;
 		UIMissionManager.Instance.SetPalletsCounter(palletIndex, totalPallets);
 
@@ -79,6 +96,10 @@ public class ForkLiftMission : MonoBehaviour
 
 	public void WinMission()
 	{
+		AudioManager.Instance.PlaySFX(winSFX);
+		AudioManager.Instance.PlayGameplayMusic();
+		missionMusicStarted = false;
+
 		missionManager.EndMission();
 		StartCoroutine(ShowWinMessage());
 		countdownTimer.StopTimer();
@@ -88,8 +109,8 @@ public class ForkLiftMission : MonoBehaviour
 		{
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(15);
-			LevelData.CoinsCollectedInLevel += 15;
+			MainMenu.Instance.AddCoin(6000);
+			LevelData.CoinsCollectedInLevel += 6000;
 
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[11] = true;
@@ -103,6 +124,10 @@ public class ForkLiftMission : MonoBehaviour
 	{
 		if (countdownTimer.IsTimeUp && !hasLost)
 		{
+			AudioManager.Instance.PlaySFX(loseSFX);
+			AudioManager.Instance.PlayGameplayMusic();
+			missionMusicStarted = false;
+
 			hasLost = true;
 			StartCoroutine(ShowLoseMessage());
 			DisableElements();
@@ -131,7 +156,7 @@ public class ForkLiftMission : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("GREAT JOB! \n + 15 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("GREAT JOB! \n + 6000 COINS", textDuration, 50);
 		missionText.gameObject.SetActive(false);
 		yield return new WaitForSeconds(textDuration);
 	}

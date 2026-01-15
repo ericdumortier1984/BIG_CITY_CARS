@@ -41,7 +41,7 @@ public class RelaxTrip : MonoBehaviour
 	private static bool isMedal = false;
 
 	// MUSIC MISSION START
-	private static bool missionMusicStarted = false;
+	private bool missionMusicStarted = false;
 
 	public void BeginRelaxTrip()
 	{
@@ -123,8 +123,8 @@ public class RelaxTrip : MonoBehaviour
 		{
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
-			MainMenu.Instance.AddCoin(15);
-			LevelData.CoinsCollectedInLevel += 15;
+			MainMenu.Instance.AddCoin(3000);
+			LevelData.CoinsCollectedInLevel += 3000;
 
 			SaveData saveData = SaveSystem.LoadGame();
 			saveData.missionCompleted[13] = true;
@@ -164,7 +164,7 @@ public class RelaxTrip : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("THATS A REAL TRIP!  \n + 15 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("THATS A REAL TRIP!  \n + 3000 COINS", textDuration, 50);
 		yield return new WaitForSeconds(textDuration);
 	}
 
