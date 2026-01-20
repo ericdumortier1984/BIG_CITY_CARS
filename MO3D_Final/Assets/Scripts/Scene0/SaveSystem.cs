@@ -11,7 +11,7 @@ public class SaveSystem
     {
         string mJson = JsonUtility.ToJson(mData, true);
         File.WriteAllText(mSavePath, mJson);
-        Debug.Log("Game saved to: " + mSavePath);
+        Debug.Log("GAME SAVE TO: " + mSavePath);
     }
 
 	public static SaveData LoadGame()
@@ -24,7 +24,7 @@ public class SaveSystem
         }
         else
         {
-            Debug.Log("No save file found at: " + mSavePath);
+            Debug.Log("NO SAVE FILE FOUND AT: " + mSavePath);
             return new SaveData();
         }
     }
@@ -34,11 +34,11 @@ public class SaveSystem
 		if (File.Exists(mSavePath))
 		{
 			File.Delete(mSavePath);
-			Debug.Log("Save file deleted: " + mSavePath);
+			Debug.Log("SAVE FILE DELETE: " + mSavePath);
 		}
 		else
 		{
-			Debug.Log("No save file to delete.");
+			Debug.Log("NO SAVE FILE TO DELETE");
 		}
 	}
 }

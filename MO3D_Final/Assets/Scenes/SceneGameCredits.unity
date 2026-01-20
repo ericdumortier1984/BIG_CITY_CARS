@@ -897,71 +897,33 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<size=60><b>BIG CITY CARS CREDITS</b></size>
-
-
-    <size=36><b>Game Studio</b></size>
-
-    EDD
-    Games
-
-
-    <size=36><b>Game Design</b></size>
-
-    Eric Dumortier
-
-
-    <size=36><b>Programming</b></size>
-
-    Eric
-    Dumortier
-
-
-    <size=36><b>Art</b></size>
-
-    Eric Dumortier
-
-
-    <size=36><b>Music</b></size>
-
-    Geoff
-    Harvey
-
-    Serge Quadrado
-
-    5XBeatz
-
-    Psychronic
-
-    Tunetank
-
-    IdoBerg
-
-    freesound_community
-
-    altrusiangracemedia
-
-
-    <size=36><b>Sound
-    Effects</b></size>
-
-    u_3bsnvt0dsu
-
-    u_2gxydaiwcd
-
-    DRAGON-STUDIO
-
-
-
-
-
-    <size=30><i>Thanks
-    for play Big City Cars </size>
-
-'
+  m_text: "<size=60><b>BIG CITY CARS CREDITS</b></size>\n\n<size=36><b>Game Studio</b></size>\nEDD
+    Games\n\n<size=36><b>Game Design</b></size>\nEric Dumortier\n\n<size=36><b>Programming</b></size>\nEric
+    Dumortier\n\n<size=36><b>Art</b></size>\nEric Dumortier\nAb2DBusiness - 3D Simple
+    Building hotel  -\nJustCreate - Cartoon Low Poly City Pack Lite -\nJustCreate
+    - Low Poly FPS Map Lite -\nJustCreate - Low Poly Farm Pack Lite -\nPandazole
+    - Farm Ranch Low Poly Pack-\nPandazole - City Town Low Poly Pack -\nKobra Game
+    Studios - Chainlink Fences  -\nBE DRILL ENTER - Environment Track Lowpoly: Cartoon
+    Props Mobile Free -\nPunk Games - Toon City Pack -\nTheory Digital Games - TDG
+    Italian Ice Cart -\nMarcelo Barrio - Toony Tiny City Demo -\nTarbo Studios -
+    City Traffic Lights Pack [FREE] - Low Poly 3D Art -\nVenCreations - SimplePoly
+    City - Low Poly Assets -\nAwaii Studio - Panoramic Cartoon Skybox -\nUnderhill
+    Labz - Flat Style Vehicles Pack -\nEbru Dogan - LowPoly Water - \n9T5 - 9t5 Low
+    Poly Playground -\nPolygon-Park - Low Poly Forklift -\nEvpo Games - Modular Lowpoly
+    Streets (Free) -\nkarboosx - Low Poly European City Pack -\nHayq Art - Grand
+    Stadium v2.0 -\nSynty Studios - Simple Town Lite - Cartoon Assets -\nStudio Horizon
+    - Simple Generic Buildings - Cartoon Buildings -\nRokay3D - Farm Machinery: Low
+    Poly Tractor and Planter  -\nNeutron Cat - Simple Low Poly Nature Pack -\nF3jry
+    - Sleek essential UI pack -\n\n<size=36><b>Font</b></size>\nVole.wtf - Raybees
+    Regular -\n\n<size=36><b>Music</b></size>\nHitsLab \nGeoff Harvey\nJuan Pablo
+    Morag \nSerge Quadrado\n5XBeatz\nPsychronic\nTunetank\nIdoBerg\nfreesound_community\naltrusiangracemedia\n\n<size=36><b>Sound
+    Effects</b></size>\nu_3bsnvt0dsu\nu_2gxydaiwcd\nDRAGON-STUDIO\n\n<size=36><b>Visual
+    Effects</b></size>\nEric Dumortier\nNamu - Stylized Water Effect Package -\nJean
+    Moreno - Cartoon FX Remaster Free -\n\n<size=30><i>Thanks for play Big City Cars
+    </size>\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 056e6edf5da137e47a07952ec200feba, type: 2}
-  m_sharedMaterial: {fileID: 5289412710555600842, guid: 056e6edf5da137e47a07952ec200feba, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c179aa2dfb12e094db3fa92b5752468d, type: 2}
+  m_sharedMaterial: {fileID: -4337476744168503029, guid: c179aa2dfb12e094db3fa92b5752468d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2719,15 +2681,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Back
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1fcf89e9768b2bc45980d9ee9b0cb307, type: 2}
-  m_sharedMaterial: {fileID: 4693053791651585419, guid: 1fcf89e9768b2bc45980d9ee9b0cb307, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c179aa2dfb12e094db3fa92b5752468d, type: 2}
+  m_sharedMaterial: {fileID: -4337476744168503029, guid: c179aa2dfb12e094db3fa92b5752468d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

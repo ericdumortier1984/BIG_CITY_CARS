@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class CityTour : MonoBehaviour
 {
 	[Header("UI")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private float textDuration;
 	[SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private GameObject instructionPanel;
@@ -58,7 +59,7 @@ public class CityTour : MonoBehaviour
 	private void SetElements()
 	{
 		// INSTRUCTIONS
-		UIMissionManager.Instance.ShowMissionText("LOOK FOR PHOTO SPOTS", textDuration, 40);
+		UIMissionManager.Instance.ShowMissionText("LOOK FOR PHOTO SPOTS", textDuration, 80, font);
 		instructionPanel.SetActive(true);
 		targetPanel.SetActive(true);
 
@@ -184,7 +185,7 @@ public class CityTour : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("NICE PHOTOS! \n + 8500 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("NICE PHOTOS! + 8500 COINS", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 
@@ -200,7 +201,7 @@ public class CityTour : MonoBehaviour
 		currentPhotoController = currentPhotoCamera.GetComponent<PhotoCameraController>();
 		currentPhotoController.EnableControl(true);
 		photoFrame.gameObject.SetActive(true);
-		UIMissionManager.Instance.ShowMissionText("FOCUS AND PRESS SPACE BAR", textDuration, 40);
+		UIMissionManager.Instance.ShowMissionText("FOCUS AND PRESS SPACE BAR", textDuration, 50, font);
 
 		while (!photoTaken)
 		{

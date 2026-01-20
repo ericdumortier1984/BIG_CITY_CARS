@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TooHotTrigger : MonoBehaviour
@@ -8,6 +9,7 @@ public class TooHotTrigger : MonoBehaviour
     public MissionManager missionManager;
 
 	[Header("Settings")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private GameObject tooHot;
 	[SerializeField] private RouteDrawer routeDrawer;
 	[SerializeField] private CinemachineVirtualCamera missionVcam;
@@ -35,11 +37,11 @@ public class TooHotTrigger : MonoBehaviour
 		}
 		else if (other.CompareTag("IACar"))
 		{
-			UIMissionManager.Instance.ShowMissionText("", 1.0f, 50);
+			UIMissionManager.Instance.ShowMissionText("", 1.0f, 50, font);
 		}
 		else
 		{
-			UIMissionManager.Instance.ShowMissionText("ONLY FIRE TRUCK", 1.0F, 50);
+			UIMissionManager.Instance.ShowMissionText("ONLY FIRE TRUCK", 1.0F, 50, font);
 		}
 	}
 }

@@ -17,6 +17,7 @@ public class PackageDelivery : MonoBehaviour
 	[SerializeField] private List<Transform> deliveryLocation;
 
 	[Header("UI")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private float textDuration;
 	[SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private TextMeshProUGUI packageCounterText;
@@ -96,7 +97,7 @@ public class PackageDelivery : MonoBehaviour
 	private void EnableUIElements()
 	{
 		countdownTimer.StartTimer();
-		UIMissionManager.Instance.ShowMissionText("DELIVER ALL PACKAGE", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("DELIVER ALL PACKAGE", textDuration, 80, font);
 		UIMissionManager.Instance.ShowTimer(true);
 		UIMissionManager.Instance.SetPackageCounter(deliveredPackage, totalPackage);
 		InstructionPanel.SetActive(true);
@@ -115,7 +116,7 @@ public class PackageDelivery : MonoBehaviour
 		routeDrawer.gameObject.SetActive(false);
 		InstructionPanel.SetActive(false);
 
-		UIMissionManager.Instance.ShowMissionText("ALL PACKAGE DELIVERED\n + 2000 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("ALL PACKAGE DELIVERED + 2000 COINS", textDuration, 80, font);
 		UIMissionManager.Instance.HideCounter();
 		UIMissionManager.Instance.ShowTimer(false);
 
@@ -149,7 +150,7 @@ public class PackageDelivery : MonoBehaviour
 			AudioManager.Instance.PlayGameplayMusic();
 			missionMusicStarted = false;
 
-			UIMissionManager.Instance.ShowMissionText("TIME UP", textDuration, 50);
+			UIMissionManager.Instance.ShowMissionText("TIME UP", textDuration, 80, font);
 			UIMissionManager.Instance.HideCounter();
 			UIMissionManager.Instance.ShowTimer(false);
 

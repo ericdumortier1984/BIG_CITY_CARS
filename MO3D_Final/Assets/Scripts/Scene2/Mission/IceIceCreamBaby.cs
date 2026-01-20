@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class IceIceCreamBaby : MonoBehaviour
 {
 	[Header("UI")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private float textDuration;
 	[SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private GameObject instructionPanel;
@@ -81,7 +82,7 @@ public class IceIceCreamBaby : MonoBehaviour
 		// INSTRUCTIONS
 		objetiveCameraPlayed = true;
 		StartCoroutine(ShowIntroCamera());
-		UIMissionManager.Instance.ShowMissionText("LOOK FOR ALL ICE CREAM INGREDIENTS", textDuration, 40);
+		UIMissionManager.Instance.ShowMissionText("LOOK FOR ALL ICE CREAM INGREDIENTS", textDuration, 80, font);
 		instructionPanel.SetActive(true);
 		ingredientsPanel.SetActive(true);
 
@@ -153,7 +154,7 @@ public class IceIceCreamBaby : MonoBehaviour
 	private void GoToIceCreamShop()
 	{
 		canFabricate = true;
-		UIMissionManager.Instance.ShowMissionText("GO TO THE ICE CREAM SHOP", textDuration, 40);
+		UIMissionManager.Instance.ShowMissionText("GO TO THE ICE CREAM SHOP", textDuration, 80, font);
 		fabricationSpot.gameObject.SetActive(true);
 		routeDrawer.SetTarget(fabricationSpot);
 	}
@@ -221,7 +222,7 @@ public class IceIceCreamBaby : MonoBehaviour
 		}
 
 		StartCoroutine(ShowDeliverCamera());
-		UIMissionManager.Instance.ShowMissionText("DELIVER THAT ICE CREAM", textDuration, 40);
+		UIMissionManager.Instance.ShowMissionText("DELIVER THAT ICE CREAM", textDuration, 80, font);
 		UIMissionManager.Instance.SetIceCreamCounter(iceCreamIndex, totalIceCream);
 	}
 
@@ -306,13 +307,13 @@ public class IceIceCreamBaby : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("THAT IS REFRESHING! \n + 7000 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("THAT IS REFRESHING! + 7000 COINS", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 
 	private IEnumerator ShowLoseMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("ICE ICE CREAM BABY LOSE!", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("ICE ICE CREAM BABY LOSE!", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 

@@ -9,6 +9,7 @@ public class TaxiRace : MonoBehaviour
 	[SerializeField] private GameObject taxiRacer;
 
 	[Header("UI")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private float textDuration;
 	[SerializeField] private RouteDrawer routeDrawer;
@@ -60,7 +61,7 @@ public class TaxiRace : MonoBehaviour
 
 	private void SpawnTaxiRacer()
 	{
-		UIMissionManager.Instance.ShowMissionText("TAXI RACE", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("TAXI RACE", textDuration, 80, font);
 
 		taxiRacer.SetActive(true);
 		instructionPanel.SetActive(true);
@@ -116,7 +117,7 @@ public class TaxiRace : MonoBehaviour
 			AudioManager.Instance.PlayGameplayMusic();
 			missionMusicStarted = false;
 
-			UIMissionManager.Instance.ShowMissionText("WINNER!!\n + 5000 COINS", textDuration, 50);
+			UIMissionManager.Instance.ShowMissionText("WINNER!! + 5000 COINS", textDuration, 80, font);
 			MainMenu.Instance.AddMedal(1);
 			LevelData.MedalCollectedInLevel += 1;
 			MainMenu.Instance.AddCoin(5000);
@@ -140,7 +141,7 @@ public class TaxiRace : MonoBehaviour
 		AudioManager.Instance.PlayGameplayMusic();
 		missionMusicStarted = false;
 
-		UIMissionManager.Instance.ShowMissionText("TOO SLOWN!!", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("TOO SLOWN!!", textDuration, 80, font);
 		missionManager.EndMission();
 		taxiRacer.SetActive(false);
 		goal.SetActive(false);

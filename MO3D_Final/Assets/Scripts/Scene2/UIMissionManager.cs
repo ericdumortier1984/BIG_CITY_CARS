@@ -11,6 +11,7 @@ public class UIMissionManager : MonoBehaviour
     [Header("UI Text")]
     [SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private TextMeshProUGUI counterText;
+	[SerializeField] private TMP_FontAsset font;
 
 	[Header("Timer Reference")]
 	[SerializeField] private CountdownTimer CountdownTimerInstance;
@@ -23,9 +24,11 @@ public class UIMissionManager : MonoBehaviour
 		Instance = this;
 	}
 
-	public void ShowMissionText(string message, float duration, int fontSize)
+	public void ShowMissionText(string message, float duration, int fontSize, TMP_FontAsset fontAsset)
 	{
 		StopAllCoroutines();
+
+		missionText.alignment = TextAlignmentOptions.Center;
 		missionText.fontSize = fontSize;
 		missionText.text = message;
 		missionText.gameObject.SetActive(true);
@@ -38,11 +41,14 @@ public class UIMissionManager : MonoBehaviour
 		total = totalValue;
 		counterText.gameObject.SetActive(true);
 
-		counterText.fontSize = 36;
+		counterText.font = font;
+		counterText.fontSize = 58;
 		counterText.fontWeight = FontWeight.Regular;
 		counterText.outlineWidth = 0.25f;
 		counterText.outlineColor = new Color32(242, 224, 136, 255);
 		counterText.faceColor = new Color32(242, 224, 136, 255);
+		counterText.alignment = TextAlignmentOptions.Left;
+		counterText.rectTransform.anchoredPosition = new Vector2(120f, 250f);
 
 		UpdateCounter();
 	}
@@ -53,11 +59,13 @@ public class UIMissionManager : MonoBehaviour
 		total = totalValue;
 		counterText.gameObject.SetActive(true);
 
-		counterText.fontSize = 36;
+		counterText.fontSize = 58;
 		counterText.fontWeight = FontWeight.Regular;
 		counterText.outlineWidth = 0.25f;
 		counterText.outlineColor = new Color32(242, 224, 136, 255);
 		counterText.faceColor = new Color32(242, 224, 136, 255);
+		counterText.alignment = TextAlignmentOptions.Left;
+		counterText.rectTransform.anchoredPosition = new Vector2(120f, 250f);
 
 		UpdatePackageCounter();
 	}
@@ -67,11 +75,13 @@ public class UIMissionManager : MonoBehaviour
 		current = currentValue;
 		total = totalValue;
 		counterText.gameObject.SetActive(true);
-		counterText.fontSize = 36;
+		counterText.fontSize = 58;
 		counterText.fontWeight = FontWeight.Regular;
 		counterText.outlineWidth = 0.25f;
 		counterText.outlineColor = new Color32(242, 224, 136, 255);
 		counterText.faceColor = new Color32(242, 224, 136, 255);
+		counterText.alignment = TextAlignmentOptions.Left;
+		counterText.rectTransform.anchoredPosition = new Vector2(120f, 250f);
 
 		UpdatePassengerCounter();
 	}
@@ -82,11 +92,13 @@ public class UIMissionManager : MonoBehaviour
 		total = totalValue;
 		counterText.gameObject.SetActive(true);
 
-		counterText.fontSize = 36;
+		counterText.fontSize = 58;
 		counterText.fontWeight = FontWeight.Regular;
 		counterText.outlineWidth = 0.25f;
 		counterText.outlineColor = new Color32(242, 224, 136, 255);
 		counterText.faceColor = new Color32(242, 224, 136, 255);
+		counterText.alignment = TextAlignmentOptions.Left;
+		counterText.rectTransform.anchoredPosition = new Vector2(120f, 250f);
 
 		UpdateDonutsCounter();
 	}
@@ -97,11 +109,13 @@ public class UIMissionManager : MonoBehaviour
 		total = totalValue;
 		counterText.gameObject.SetActive(true);
 
-		counterText.fontSize = 36;
+		counterText.fontSize = 58;
 		counterText.fontWeight = FontWeight.Regular;
 		counterText.outlineWidth = 0.25f;
 		counterText.outlineColor = new Color32(242, 224, 136, 255);
 		counterText.faceColor = new Color32(242, 224, 136, 255);
+		counterText.alignment = TextAlignmentOptions.Left;
+		counterText.rectTransform.anchoredPosition = new Vector2(120f, 250f);
 
 		UpdateFiresCounter();
 	}
@@ -112,11 +126,13 @@ public class UIMissionManager : MonoBehaviour
 		total = totalValue;
 		counterText.gameObject.SetActive(true);
 
-		counterText.fontSize = 36;
+		counterText.fontSize = 58;
 		counterText.fontWeight = FontWeight.Regular;
 		counterText.outlineWidth = 0.25f;
 		counterText.outlineColor = new Color32(242, 224, 136, 255);
 		counterText.faceColor = new Color32(242, 224, 136, 255);
+		counterText.alignment = TextAlignmentOptions.Left;
+		counterText.rectTransform.anchoredPosition = new Vector2(120f, 250f);
 
 		UpdateProvisionCounter();
 	}
@@ -127,11 +143,13 @@ public class UIMissionManager : MonoBehaviour
 		total = totalValue;
 		counterText.gameObject.SetActive(true);
 
-		counterText.fontSize = 36;
+		counterText.fontSize = 58;
 		counterText.fontWeight = FontWeight.Regular;
 		counterText.outlineWidth = 0.25f;
 		counterText.outlineColor = new Color32(242, 224, 136, 255);
 		counterText.faceColor = new Color32(242, 224, 136, 255);
+		counterText.alignment = TextAlignmentOptions.Left;
+		counterText.rectTransform.anchoredPosition = new Vector2(120f, 250f);
 
 		UpdatePalletsCounter();
 	}
@@ -142,11 +160,13 @@ public class UIMissionManager : MonoBehaviour
 		total = totalValue;
 		counterText.gameObject.SetActive(true);
 
-		counterText.fontSize = 36;
+		counterText.fontSize = 58;
 		counterText.fontWeight = FontWeight.Heavy;    
 		counterText.outlineWidth = 0.25f;           
 		counterText.outlineColor = new Color32(242, 224, 136, 255);
 		counterText.faceColor = new Color32(242, 224, 136, 255);
+		counterText.alignment = TextAlignmentOptions.Left;
+		counterText.rectTransform.anchoredPosition = new Vector2(120f, 250f);
 
 		UpdateCheckpointCounter();
 	}
@@ -157,11 +177,13 @@ public class UIMissionManager : MonoBehaviour
 		total = totalValue;
 		counterText.gameObject.SetActive(true);
 
-		counterText.fontSize = 36;
+		counterText.fontSize = 58;
 		counterText.fontWeight = FontWeight.Heavy;
 		counterText.outlineWidth = 0.25f;
 		counterText.outlineColor = new Color32(242, 224, 136, 255);
 		counterText.faceColor = new Color32(242, 224, 136, 255);
+		counterText.alignment = TextAlignmentOptions.Left;
+		counterText.rectTransform.anchoredPosition = new Vector2(120f, 250f);
 
 		UpdateFlagsCounter();
 	}
@@ -172,11 +194,13 @@ public class UIMissionManager : MonoBehaviour
 		total = totalValue;
 		counterText.gameObject.SetActive(true);
 
-		counterText.fontSize = 36;
+		counterText.fontSize = 58;
 		counterText.fontWeight = FontWeight.Heavy;
 		counterText.outlineWidth = 0.25f;
 		counterText.outlineColor = new Color32(242, 224, 136, 255);
 		counterText.faceColor = new Color32(242, 224, 136, 255);
+		counterText.alignment = TextAlignmentOptions.Left;
+		counterText.rectTransform.anchoredPosition = new Vector2(120f, 250f);
 
 		UpdateAutopartsCounter();
 	}
@@ -187,11 +211,13 @@ public class UIMissionManager : MonoBehaviour
 		total = totalValue;
 		counterText.gameObject.SetActive(true);
 
-		counterText.fontSize = 36;
+		counterText.fontSize = 58;
 		counterText.fontWeight = FontWeight.Heavy;
 		counterText.outlineWidth = 0.25f;
 		counterText.outlineColor = new Color32(242, 224, 136, 255);
 		counterText.faceColor = new Color32(242, 224, 136, 255);
+		counterText.alignment = TextAlignmentOptions.Left;
+		counterText.rectTransform.anchoredPosition = new Vector2(120f, 250f);
 
 		UpdateSuppliesCounter();
 	}
@@ -202,11 +228,13 @@ public class UIMissionManager : MonoBehaviour
 		total = totalValue;
 		counterText.gameObject.SetActive(true);
 
-		counterText.fontSize = 36;
+		counterText.fontSize = 58;
 		counterText.fontWeight = FontWeight.Heavy;
 		counterText.outlineWidth = 0.25f;
 		counterText.outlineColor = new Color32(242, 224, 136, 255);
 		counterText.faceColor = new Color32(242, 224, 136, 255);
+		counterText.alignment = TextAlignmentOptions.Left;
+		counterText.rectTransform.anchoredPosition = new Vector2(120f, 250f);
 
 		UpdateParkingCounter();
 	}
@@ -217,11 +245,13 @@ public class UIMissionManager : MonoBehaviour
 		total = totalValue;
 		counterText.gameObject.SetActive(true);
 
-		counterText.fontSize = 36;
+		counterText.fontSize = 58;
 		counterText.fontWeight = FontWeight.Heavy;
 		counterText.outlineWidth = 0.25f;
 		counterText.outlineColor = new Color32(242, 224, 136, 255);
 		counterText.faceColor = new Color32(242, 224, 136, 255);
+		counterText.alignment = TextAlignmentOptions.Left;
+		counterText.rectTransform.anchoredPosition = new Vector2(120f, 250f);
 
 		UpdateFuelPumpCounter();
 	}
@@ -232,11 +262,13 @@ public class UIMissionManager : MonoBehaviour
 		total = totalValue;
 		counterText.gameObject.SetActive(true);
 
-		counterText.fontSize = 36;
+		counterText.fontSize = 58;
 		counterText.fontWeight = FontWeight.Heavy;
 		counterText.outlineWidth = 0.25f;
 		counterText.outlineColor = new Color32(242, 224, 136, 255);
 		counterText.faceColor = new Color32(242, 224, 136, 255);
+		counterText.alignment = TextAlignmentOptions.Left;
+		counterText.rectTransform.anchoredPosition = new Vector2(120f, 250f);
 
 		UpdateBusStopCounter();
 	}
@@ -247,11 +279,13 @@ public class UIMissionManager : MonoBehaviour
 		total = totalValue;
 		counterText.gameObject.SetActive(true);
 
-		counterText.fontSize = 36;
+		counterText.fontSize = 58;
 		counterText.fontWeight = FontWeight.Heavy;
 		counterText.outlineWidth = 0.25f;
 		counterText.outlineColor = new Color32(242, 224, 136, 255);
 		counterText.faceColor = new Color32(242, 224, 136, 255);
+		counterText.alignment = TextAlignmentOptions.Left;
+		counterText.rectTransform.anchoredPosition = new Vector2(120f, 250f);
 
 		UpdatePhotoCounter();
 	}
@@ -262,11 +296,13 @@ public class UIMissionManager : MonoBehaviour
 		total = totalValue;
 		counterText.gameObject.SetActive(true);
 
-		counterText.fontSize = 36;
+		counterText.fontSize = 58;
 		counterText.fontWeight = FontWeight.Heavy;
 		counterText.outlineWidth = 0.25f;
 		counterText.outlineColor = new Color32(242, 224, 136, 255);
 		counterText.faceColor = new Color32(242, 224, 136, 255);
+		counterText.alignment = TextAlignmentOptions.Left;
+		counterText.rectTransform.anchoredPosition = new Vector2(120f, 250f);
 
 		UpdateAccidentSceneCounter();
 	}
@@ -277,11 +313,13 @@ public class UIMissionManager : MonoBehaviour
 		total = totalValue;
 		counterText.gameObject.SetActive(true);
 
-		counterText.fontSize = 36;
+		counterText.fontSize = 58;
 		counterText.fontWeight = FontWeight.Heavy;
 		counterText.outlineWidth = 0.25f;
 		counterText.outlineColor = new Color32(242, 224, 136, 255);
 		counterText.faceColor = new Color32(242, 224, 136, 255);
+		counterText.alignment = TextAlignmentOptions.Left;
+		counterText.rectTransform.anchoredPosition = new Vector2(120f, 250f);
 
 		UpdateIceCreamCounter();
 	}
@@ -292,11 +330,13 @@ public class UIMissionManager : MonoBehaviour
 		total = totalValue;
 		counterText.gameObject.SetActive(true);
 
-		counterText.fontSize = 36;
+		counterText.fontSize = 58;
 		counterText.fontWeight = FontWeight.Heavy;
 		counterText.outlineWidth = 0.25f;
 		counterText.outlineColor = new Color32(242, 224, 136, 255);
 		counterText.faceColor = new Color32(242, 224, 136, 255);
+		counterText.alignment = TextAlignmentOptions.Left;
+		counterText.rectTransform.anchoredPosition = new Vector2(120f, 250f);
 
 		UpdateMaterialIceCreamCounter();
 	}

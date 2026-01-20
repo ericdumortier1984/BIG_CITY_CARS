@@ -20,6 +20,7 @@ public class StopRobberBank : MonoBehaviour
 	[SerializeField] private List<GameObject> spikes;
 
 	[Header("UI")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private float textDuration;
 	[SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private GameObject InstructionPanel;
@@ -81,7 +82,7 @@ public class StopRobberBank : MonoBehaviour
 		healthTheftFurgon.OnGameObjectDestroyed += WinMission;
 
 		StartCoroutine(NoMoveTheftFurgonCoroutine());
-		UIMissionManager.Instance.ShowMissionText("STOP THE ROBBERY BANK", textDuration, 60);
+		UIMissionManager.Instance.ShowMissionText("STOP THE ROBBERY BANK", textDuration, 80, font);
 		InstructionPanel.SetActive(true);
 		MiniMapInstructionPanel.SetActive(true);
 
@@ -202,14 +203,14 @@ public class StopRobberBank : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("YOU ARE A TOUGH COP! \n + 5250 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("YOU ARE A TOUGH COP! + 5250 COINS", textDuration, 80, font);
 		missionText.gameObject.SetActive(false);
 		yield return new WaitForSeconds(textDuration);
 	}
 
 	private IEnumerator ShowLoseMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("MONEY WAS ROBBED!", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("MONEY WAS ROBBED!", textDuration, 80, font);
 		missionText.gameObject.SetActive(false);
 		yield return new WaitForSeconds(textDuration);
 	}

@@ -15,6 +15,7 @@ public class AlmostFerrari : MonoBehaviour
 	[SerializeField] private Rigidbody playerRb;
 
 	[Header("UI")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private GameObject leaderboardPanel;
 	[SerializeField] private float textDuration;
 	[SerializeField] private TextMeshProUGUI missionText;
@@ -259,7 +260,7 @@ public class AlmostFerrari : MonoBehaviour
 
 			currentLap++;
 			SetLapCounter();
-			UIMissionManager.Instance.ShowMissionText("LAP " + currentLap + " / " + totalLaps, 1.0f, 50);
+			UIMissionManager.Instance.ShowMissionText("LAP " + currentLap + " / " + totalLaps, 1.0f, 50 , font);
 		}
 	}
 
@@ -313,17 +314,17 @@ public class AlmostFerrari : MonoBehaviour
 		playerRb.constraints = RigidbodyConstraints.FreezeAll;
 
 		AudioManager.Instance.PlaySFX(beepCounter);
-		UIMissionManager.Instance.ShowMissionText("READY", 1.0f, 150);
+		UIMissionManager.Instance.ShowMissionText("READY", 1.0f, 150, font);
 		yield return new WaitForSeconds(1.0f);
 
 		AudioManager.Instance.PlaySFX(beepCounter);
-		UIMissionManager.Instance.ShowMissionText("SET", 1.0f, 150);
+		UIMissionManager.Instance.ShowMissionText("SET", 1.0f, 150, font);
 		yield return new WaitForSeconds(1.0f);
 
 		raceLightController.SwitchToGreen();
 
 		AudioManager.Instance.PlaySFX(beepCounter);
-		UIMissionManager.Instance.ShowMissionText("GO!!", 1.0f, 150);
+		UIMissionManager.Instance.ShowMissionText("GO!!", 1.0f, 150, font);
 		yield return new WaitForSeconds(1.0f);
 
 		wheelController.enabled = true;
@@ -343,14 +344,14 @@ public class AlmostFerrari : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("NUMBER ONE! \n + 11500 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("NUMBER ONE! + 11500 COINS", textDuration, 80, font);
 		missionText.gameObject.SetActive(false);
 		yield return new WaitForSeconds(textDuration);
 	}
 
 	private IEnumerator ShowLoseMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("TOO SLOW!", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("TOO SLOW!", textDuration, 80, font);
 		missionText.gameObject.SetActive(false);
 		yield return new WaitForSeconds(textDuration);
 	}

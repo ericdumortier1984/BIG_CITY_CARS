@@ -9,6 +9,7 @@ public class OffRoadAventure : MonoBehaviour
     [SerializeField] private List<GameObject> flags;
 
 	[Header("UI")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private float textDuration;
 	[SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private GameObject instructionPanel;
@@ -49,7 +50,7 @@ public class OffRoadAventure : MonoBehaviour
 	private void SetElements()
 	{
 		// INSTRUCTIONS
-		UIMissionManager.Instance.ShowMissionText("GET THOSE FLAGS", textDuration, 40);
+		UIMissionManager.Instance.ShowMissionText("GET THOSE FLAGS", textDuration, 80, font);
 		instructionPanel.SetActive(true);
 
 		// MUSIC
@@ -145,13 +146,13 @@ public class OffRoadAventure : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("YOUR A BEAST!  \n + 9500 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("YOUR A BEAST! + 9500 COINS", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 
 	private IEnumerator ShowLoseMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("TIME UP!", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("TIME UP!", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 }

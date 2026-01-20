@@ -18,6 +18,7 @@ public class LittleAndFurious : MonoBehaviour
 	[SerializeField] private MissionManager missionManager;
 
 	[Header("UI")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private float textDuration;
 	[SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private GameObject instructionPanel;
@@ -52,7 +53,7 @@ public class LittleAndFurious : MonoBehaviour
 	private void SetElements()
 	{
 		// INSTRUCTIONS
-		UIMissionManager.Instance.ShowMissionText("TAKE THE GROWTH PILLS, YOU ARE GETTING SMALLER", textDuration, 40);
+		UIMissionManager.Instance.ShowMissionText("TAKE THE GROWTH PILLS, YOU ARE GETTING SMALLER", textDuration, 60, font);
 		missionManager.StartCoroutine(DelayInstructionPanel());
 
 		// MUSIC
@@ -174,13 +175,13 @@ public class LittleAndFurious : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("LIKE A MONSTER TRUCK  \n + 1000 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("LIKE A MONSTER TRUCK + 1000 COINS", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 
 	private IEnumerator ShowLoseMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("YOUR VERY TINY", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("YOUR VERY TINY", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 

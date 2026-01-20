@@ -7,7 +7,8 @@ using Cinemachine;
 public class ParkingOdyssey : MonoBehaviour
 {
     [Header("UI")]
-    [SerializeField] private float textDuration;
+	[SerializeField] private TMP_FontAsset font;
+	[SerializeField] private float textDuration;
     [SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private GameObject instructionPanel;
 	[SerializeField] private RouteDrawer routeDrawer;
@@ -47,7 +48,7 @@ public class ParkingOdyssey : MonoBehaviour
     private void SetElements()
     {
 		// INSTRUCTIONS
-		UIMissionManager.Instance.ShowMissionText("PUT THE TRUCK IN REVERSE TO UNLOAD", textDuration, 40);
+		UIMissionManager.Instance.ShowMissionText("PUT THE TRUCK IN REVERSE TO UNLOAD", textDuration, 80, font);
 		instructionPanel.SetActive(true);
 
 		// MUSIC
@@ -111,19 +112,19 @@ public class ParkingOdyssey : MonoBehaviour
 		switch (parkingIndex)
 		{
 			case 0:
-				UIMissionManager.Instance.ShowMissionText("UNLOAD IN SUPERMARKET", textDuration, 50);
+				UIMissionManager.Instance.ShowMissionText("UNLOAD IN SUPERMARKET", textDuration, 50, font);
 				break;
 			case 1:
-				UIMissionManager.Instance.ShowMissionText("NEXT UNLOAD IN STADIUM", textDuration, 50);
+				UIMissionManager.Instance.ShowMissionText("NEXT UNLOAD IN STADIUM", textDuration, 50, font);
 				break;
 			case 2:
-				UIMissionManager.Instance.ShowMissionText("NEXT UNLOAD IN FARM", textDuration, 50);
+				UIMissionManager.Instance.ShowMissionText("NEXT UNLOAD IN FARM", textDuration, 50, font);
 				break;
 			case 3:
-				UIMissionManager.Instance.ShowMissionText("NEXT UNLOAD IN CAMP", textDuration, 50);
+				UIMissionManager.Instance.ShowMissionText("NEXT UNLOAD IN CAMP", textDuration, 50, font);
 				break;
 			case 4:
-				UIMissionManager.Instance.ShowMissionText("NEXT UNLOAD IN WORKER", textDuration, 50);
+				UIMissionManager.Instance.ShowMissionText("NEXT UNLOAD IN WORKER", textDuration, 50, font);
 				break;
 			default:
 				break;
@@ -183,13 +184,13 @@ public class ParkingOdyssey : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("YOUR THE BEST! \n + 4000 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("YOUR THE BEST! + 4000 COINS", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 
 	private IEnumerator ShowLoseMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("KEEP PRACTICE!", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("KEEP PRACTICE!", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 }

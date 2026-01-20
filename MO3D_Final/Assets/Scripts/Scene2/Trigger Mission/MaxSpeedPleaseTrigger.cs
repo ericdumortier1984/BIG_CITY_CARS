@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MaxSpeedPleaseTrigger : MonoBehaviour
@@ -7,6 +8,7 @@ public class MaxSpeedPleaseTrigger : MonoBehaviour
 	public MissionManager missionManager;
 
 	[Header("Settings")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private GameObject maxSpeedPleaseMission;
 	[SerializeField] private Cinemachine.CinemachineVirtualCamera missionVcam;
 	[SerializeField] private int missionIndex;
@@ -32,11 +34,11 @@ public class MaxSpeedPleaseTrigger : MonoBehaviour
 		}
 		else if (other.CompareTag("IACar"))
 		{
-			UIMissionManager.Instance.ShowMissionText("", 1.0f, 50);
+			UIMissionManager.Instance.ShowMissionText("", 1.0f, 50, font);
 		}
 		else
 		{
-			UIMissionManager.Instance.ShowMissionText("ONLY MUSCLE CAR", 1.0F, 50);
+			UIMissionManager.Instance.ShowMissionText("ONLY MUSCLE CAR", 1.0F, 50, font);
 		}
 	}
 }

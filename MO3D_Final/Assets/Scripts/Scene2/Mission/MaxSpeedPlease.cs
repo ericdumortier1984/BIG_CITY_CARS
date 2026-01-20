@@ -15,7 +15,8 @@ public class MaxSpeedPlease : MonoBehaviour
     [SerializeField] private CountdownTimer countdownTimer;
 
     [Header("UI")]
-    [SerializeField] private float textDuration;
+	[SerializeField] private TMP_FontAsset font;
+	[SerializeField] private float textDuration;
     [SerializeField] private TextMeshProUGUI missionText;
     [SerializeField] private GameObject instructionPanel;
 	[SerializeField] private RouteDrawer routeDrawer;
@@ -60,7 +61,7 @@ public class MaxSpeedPlease : MonoBehaviour
 		totalCheckpoint = checkpoints.Count;
 
 		// INSTRUCTIONS
-		UIMissionManager.Instance.ShowMissionText("SPEED UP MAN!", 15, 45);
+		UIMissionManager.Instance.ShowMissionText("SPEED UP MAN!", 15, 50, font);
 		instructionPanel.SetActive(true);
 
 		// MUSIC
@@ -176,14 +177,14 @@ public class MaxSpeedPlease : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("THATS A REAL MUSCLE CAR! \n + 12000 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("THATS A REAL MUSCLE CAR! + 12000 COINS", textDuration, 80, font);
 		missionText.gameObject.SetActive(false);
 		yield return new WaitForSeconds(textDuration);
 	}
 
 	private IEnumerator ShowLoseMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("TOO SLOW!", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("TOO SLOW!", textDuration, 80, font);
 		missionText.gameObject.SetActive(false);
 		yield return new WaitForSeconds(textDuration);
 	}

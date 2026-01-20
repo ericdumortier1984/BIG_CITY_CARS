@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TunningCarTrigger : MonoBehaviour
@@ -8,6 +9,7 @@ public class TunningCarTrigger : MonoBehaviour
 	public MissionManager missionManager;
 
 	[Header("Settings")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private CinemachineVirtualCamera missionVCam;
 	[SerializeField] private int missionIndex;
 
@@ -31,11 +33,11 @@ public class TunningCarTrigger : MonoBehaviour
 		}
 		else if (other.CompareTag("IACar"))
 		{
-			UIMissionManager.Instance.ShowMissionText("", 1.0f, 50);
+			UIMissionManager.Instance.ShowMissionText("", 1.0f, 50, font);
 		}
 		else
 		{
-			UIMissionManager.Instance.ShowMissionText("ONLY TUNNING CAR", 1.0f, 50);
+			UIMissionManager.Instance.ShowMissionText("ONLY TUNNING CAR", 1.0f, 50, font);
 		}
 	}
 }

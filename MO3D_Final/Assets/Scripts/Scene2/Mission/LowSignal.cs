@@ -7,7 +7,8 @@ using TMPro;
 public class LowSignal : MonoBehaviour
 {
     [Header("UI")]
-    [SerializeField] private float textDuration;
+	[SerializeField] private TMP_FontAsset font;
+	[SerializeField] private float textDuration;
     [SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private RouteDrawer routeDrawer;
     [SerializeField] private GameObject instructionPanel;
@@ -51,7 +52,7 @@ public class LowSignal : MonoBehaviour
 		// INSTRUCTIONS
 		Invoke(nameof(StartDistorsionView), 5f);
 		instructionPanel.SetActive(true);
-		UIMissionManager.Instance.ShowMissionText("FIX THOSE TV ANTENNAS", textDuration, 40);
+		UIMissionManager.Instance.ShowMissionText("FIX THOSE TV ANTENNAS", textDuration, 80, font);
 
 		// MUSIC
 		if (!missionMusicStarted)
@@ -175,13 +176,13 @@ public class LowSignal : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("GREAT, GET POPCORN! \n + 2500 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("GREAT, GET POPCORN! + 2500 COINS", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 
 	private IEnumerator ShowLoseMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("FORGET IT, THE NOVEL IS OVER!", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("FORGET IT, THE NOVEL IS OVER!", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 

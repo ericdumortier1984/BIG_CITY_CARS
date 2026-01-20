@@ -10,6 +10,7 @@ public class HarvestMission : MonoBehaviour
 	[SerializeField] private ParticleSystem collectParticle;
 
 	[Header("UI")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private GameObject instructionPanel;
 	[SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private float textDuration;
@@ -42,7 +43,7 @@ public class HarvestMission : MonoBehaviour
 		prefabTotalCount = FindObjectsOfType<HarvestMission>().Length;
 		harvestMapIcon.SetActive(true);
 		instructionPanel.SetActive(true);
-		UIMissionManager.Instance.ShowMissionText("RAISE THE HARVEST", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("RAISE THE HARVEST", textDuration, 80, font);
 	}
 
 	public void OnTriggerEnter(Collider other)
@@ -59,7 +60,7 @@ public class HarvestMission : MonoBehaviour
 			
 			if (prefabCount == prefabTotalCount)
 			{
-				UIMissionManager.Instance.ShowMissionText("ALL HARVEST IS RAISED\n + 6500 COINS", textDuration, 50);
+				UIMissionManager.Instance.ShowMissionText("ALL HARVEST IS RAISED + 6500 COINS", textDuration, 80, font);
 				instructionPanel.SetActive(false);
 
 				AudioManager.Instance.PlaySFX(winSFX);

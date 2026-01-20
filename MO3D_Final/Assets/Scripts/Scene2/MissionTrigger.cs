@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MissionTrigger : MonoBehaviour
@@ -8,6 +9,7 @@ public class MissionTrigger : MonoBehaviour
 	public MissionManager missionManager;
 
 	[Header("Settings")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private CinemachineVirtualCamera missionVCam;
 	[SerializeField] private int missionIndex;
 
@@ -34,7 +36,7 @@ public class MissionTrigger : MonoBehaviour
 		}
 		else
 		{
-			UIMissionManager.Instance.ShowMissionText("ONLY OLD YELLOW PICKUP", 1.0f, 50);
+			UIMissionManager.Instance.ShowMissionText("ONLY OLD YELLOW PICKUP", 1.0f, 50, font);
 		}
 	}
 }

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class RelaxTrip : MonoBehaviour
 {
 	[Header("UI")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private float textDuration;
 	[SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private GameObject instructionPanel;
@@ -51,7 +52,7 @@ public class RelaxTrip : MonoBehaviour
 	private void SetElements()
 	{
 		// INSTRUCTIONS
-		UIMissionManager.Instance.ShowMissionText("GET THE CIGARETTES TO FILL THAT BAR", textDuration, 40);
+		UIMissionManager.Instance.ShowMissionText("GET THE CIGARETTES TO FILL THAT BAR", textDuration, 80, font);
 		missionManager.StartCoroutine(DelayInstructionPanel());
 
 		// MUSIC
@@ -164,13 +165,13 @@ public class RelaxTrip : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("THATS A REAL TRIP!  \n + 3000 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("THATS A REAL TRIP! + 3000 COINS", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 
 	private IEnumerator ShowLoseMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("OH NO I SEE THE REALITY!", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("OH NO I SEE THE REALITY!", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BigTruckWheelController : MonoBehaviour
 {
+	[Header("Sound")]
+	[SerializeField] private AudioClip collectSound;
+
 	[Header("Wheel Colliders")]
 	[SerializeField] private WheelCollider mFrontRight;
 	[SerializeField] private WheelCollider mFrontLeft;
@@ -37,6 +40,21 @@ public class BigTruckWheelController : MonoBehaviour
 	[SerializeField] private float mBreakForce = 0.0f;
 	[SerializeField] private float mMaxTurnAngle = 0.0f;
 	[SerializeField] private Vector3 mCenterOfMass;
+
+	[Header("Crash Settings")]
+	[SerializeField] private float crashForce = 20f;
+	[SerializeField] private float speedLossOnCrash = 1f;
+	[SerializeField] private float upwardCrashForce = 2.5f;
+
+	[Header("Spin Settings")]
+	[SerializeField] private float spinTorque = 8f;
+	[SerializeField] private float minSpinVelocity = 3f;
+	[SerializeField] private float spinDamping = 0.95f;
+
+	[Header("Bounce Settings")]
+	[SerializeField] private float bounceForce = 6f;
+	[SerializeField] private float maxBounceForce = 10f;
+	[SerializeField] private float minBounceSpeed = 2f;
 
 	private float mCurrentAcceleration = 0.0f;
 	private float mCurrentBreakForce = 0.0f;
@@ -84,39 +102,33 @@ public class BigTruckWheelController : MonoBehaviour
 		if (Input.GetKey(KeyCode.Space))
 		{
 			mCurrentBreakForce = mBreakForce;
-			mCarLight.BackLightOn = true; // Encender luces traseras
+			mCarLight.BackLightOn = true; 
 		}
 		else
 		{
 			mCurrentBreakForce = 0.0f;
-			mCarLight.BackLightOn = false; // Apagar luces traseras
+			mCarLight.BackLightOn = false; 
 		}
 
-		// Aplico velocidad a las ruedas delanteras
 		mFrontRight.motorTorque = mCurrentAcceleration;
 		mFrontLeft.motorTorque = mCurrentAcceleration;
 
-		// Aplico freno a todas las ruedas
 		mFrontRight.brakeTorque = mCurrentBreakForce;
 		mFrontLeft.brakeTorque = mCurrentBreakForce;
 		mBackRight.brakeTorque = mCurrentBreakForce;
 		mBackLeft.brakeTorque = mCurrentBreakForce;
 
-		// Giro
 		mCurrentTurnAngle = mMaxTurnAngle * Input.GetAxis("Horizontal");
 		mFrontRight.steerAngle = mCurrentTurnAngle;
 		mFrontLeft.steerAngle = mCurrentTurnAngle;
 	}
 
-	// Metodo para actualizar el movimiento de las ruedas con el mesh
 	void UpdateWheel(WheelCollider mCollider, Transform mTransform)
 	{
-		// Getting el estado del collider
 		Vector3 mPosition;
 		Quaternion mRotation;
 		mCollider.GetWorldPose(out mPosition, out mRotation);
 
-		// Setting el estado del transform
 		mTransform.position = mPosition;
 		mTransform.rotation = mRotation;
 	}
@@ -127,7 +139,6 @@ public class BigTruckWheelController : MonoBehaviour
 		{
 			mBackRightTrailTire.GetComponentInChildren<TrailRenderer>().emitting = true;
 			mBackLeftTrailTire.GetComponentInChildren<TrailRenderer>().emitting = true;
-			//Debug.Log("Drawing trail tire");
 		}
 		else
 		{
@@ -140,17 +151,16 @@ public class BigTruckWheelController : MonoBehaviour
 	{
 		if (other.tag == "ItemWaypoint")
 		{
+			AudioManager.Instance.PlaySFX(collectSound);
 			mItemWaypointController.ItemWaypointCounter();
 			mItemWaypointController.ItemWaypointTextCounter();
 			Destroy(other.gameObject);
-			//Debug.Log("ItemWaypoint Collected");
 		}
 
 		if (other.tag == "ItemFuel")
 		{
 			mCarFuelController.OnfillingFuel();
 			Destroy(other.gameObject);
-			//Debug.Log("ItemFuelCollected");
 		}
 
 		if (other.tag == "Coins")
@@ -158,4 +168,57 @@ public class BigTruckWheelController : MonoBehaviour
 			Destroy(other.gameObject);
 		}
 	}
+
+	private void OnCollisionEnter(Collision collision)
+	{
+		if (!collision.gameObject.CompareTag("IACar")) return;
+
+		Rigidbody otherRb = collision.rigidbody;
+		if (otherRb == null) return;
+
+		ContactPoint[] contacts = new ContactPoint[collision.contactCount];
+		collision.GetContacts(contacts);
+
+		Vector3 avgNormal = Vector3.zero;
+		foreach (var contact in contacts)
+		{
+			avgNormal += contact.normal;
+		}
+
+		avgNormal.Normalize();
+
+		Vector3 impactDirection = -avgNormal;
+
+		// CHOQUE
+		mCarRb.AddForce(impactDirection * crashForce, ForceMode.Impulse);
+		otherRb.AddForce(-impactDirection * crashForce, ForceMode.Impulse);
+
+		mCarRb.velocity *= speedLossOnCrash;
+		otherRb.velocity *= speedLossOnCrash;
+
+		// REBOTE
+		float relativeSpeed = collision.relativeVelocity.magnitude;
+
+		if (relativeSpeed > minBounceSpeed)
+		{
+			Vector3 bounceDir = -avgNormal;
+
+			float bounceAmount = Mathf.Clamp(relativeSpeed * bounceForce, 0f, maxBounceForce);
+
+			mCarRb.AddForce(bounceDir * bounceAmount, ForceMode.Impulse);
+		}
+
+		// TROMPO
+		float impactSpeed = Vector3.Dot(mCarRb.velocity, impactDirection);
+
+		if (Mathf.Abs(impactSpeed) > minSpinVelocity)
+		{
+			float spinDirection = Vector3.Cross(impactDirection, transform.forward).y;
+
+			Vector3 spinTorqueVector = Vector3.up * spinDirection * spinTorque * Mathf.Abs(impactSpeed);
+			mCarRb.AddTorque(spinTorqueVector, ForceMode.Impulse);
+
+		}
+	}
 }
+

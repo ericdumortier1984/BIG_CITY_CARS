@@ -13,6 +13,7 @@ public class HomeShopping : MonoBehaviour
 	[SerializeField] private CountdownTimer countdownTimer;
 
 	[Header("UI")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] float textDuration;
 	[SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private GameObject InstructionPanel;
@@ -55,7 +56,7 @@ public class HomeShopping : MonoBehaviour
 		totalProvision = provisions.Count;
 
 		// INSTRUCTIONS
-		UIMissionManager.Instance.ShowMissionText("GET ALL THE HOME STUFFS", 10, 60);
+		UIMissionManager.Instance.ShowMissionText("GET ALL THE HOME STUFFS", 10, 80, font);
 		InstructionPanel.SetActive(true);
 
 		// MUSIC
@@ -173,14 +174,14 @@ public class HomeShopping : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("ALL HOME STUFF PURCHASED! \n + 1500 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("ALL HOME STUFF PURCHASED! + 1500 COINS", textDuration, 80, font);
 		missionText.gameObject.SetActive(false);
 		yield return new WaitForSeconds(textDuration);
 	}
 
 	private IEnumerator ShowLoseMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("TIME UP!", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("TIME UP!", textDuration, 80, font);
 		missionText.gameObject.SetActive(false);
 		yield return new WaitForSeconds(textDuration);
 	}

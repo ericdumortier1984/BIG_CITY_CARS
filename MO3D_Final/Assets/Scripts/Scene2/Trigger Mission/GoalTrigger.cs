@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GoalTrigger : MonoBehaviour
 {
 	[Header("Settings")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private GameObject triggerMission;
 	private TaxiRace taxiRace;
 
@@ -21,7 +23,7 @@ public class GoalTrigger : MonoBehaviour
 		}
 		else if (other.CompareTag("Taxi") && !taxiRace.IsCheckpointCompleted())
 		{
-			UIMissionManager.Instance.ShowMissionText("YOU MISSED A CHECKPOINT", 2.0f, 50);
+			UIMissionManager.Instance.ShowMissionText("YOU MISSED A CHECKPOINT", 2.0f, 50, font);
 		}
 		else if (other.gameObject == taxiRace.GetTaxiRacer())
 		{

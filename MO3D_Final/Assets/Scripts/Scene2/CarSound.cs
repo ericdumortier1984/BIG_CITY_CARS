@@ -65,9 +65,9 @@ public class CarSound : MonoBehaviour
 
 	private void PlayCarBrakes()
 	{
-		if (Input.GetKey(KeyCode.Space))
+		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			if (currentSpeed > mMinSpeed && currentSpeed < mMaxSpeed)
+			if (currentSpeed > mMinSpeed)
 			{
 				carBrakes.PlayOneShot(carBrakes.clip);
 			}

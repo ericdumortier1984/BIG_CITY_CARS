@@ -24,13 +24,40 @@ public class IAController : MonoBehaviour
 	[SerializeField] private float mDetectRange = 0f;
 
 	[Header("Collision Distances")]
-	[SerializeField] private float stopDistance = 0f;      // Distancia para frenar completamente
-	[SerializeField] private float slowDownDistance = 0f;  // Distancia para empezar a reducir velocidad
+	[SerializeField] private float stopDistance = 0f;    
+	[SerializeField] private float slowDownDistance = 0f; 
 
+	[Header("Crash Settings")]
+	[SerializeField] private float crashForce = 15f;
+	[SerializeField] private float speedLossOnCrash = 0.5f;
+	[SerializeField] private float upwardCrashForce = 1.5f;
+
+	[Header("Spin Settings")]
+	[SerializeField] private float spinTorque = 8f;
+	[SerializeField] private float minSpinVelocity = 3f;
+	[SerializeField] private float spinDamping = 0.95f;
+
+	[Header("Bounce Settings")]
+	[SerializeField] private float bounceForce = 6f;
+	[SerializeField] private float maxBounceForce = 10f;
+	[SerializeField] private float minBounceSpeed = 2f;
+
+	[Header("Crash Stop")]
+	[SerializeField] private float crashStopTime = 1.2f;
+
+	[Header("Crash Sound")]
+	[SerializeField] private AudioClip hitSound;
+	[SerializeField] private AudioClip hornSound;
+
+	// FLOAT
+	private float crashTimer = 0f;
+	
 	// BOOL
 	private bool stoppedByAccident = false;
 	private bool shouldStop = false;
 	private bool isSlowingDown = false;
+	private bool crashed = false;
+
 	public bool isStopped { get; private set; } = false;
 
 	// REFERENCES
@@ -38,16 +65,18 @@ public class IAController : MonoBehaviour
 	private IAController detectedCarAhead;
 	private WayPointIAController mWaypointController;
 	private IntersectionZone mCurrentIntersectionZone;
+	private Rigidbody mCarRb;
 
 	private void Start()
 	{
+		mCarRb = GetComponent<Rigidbody>();
 		mWaypointController = GetComponent<WayPointIAController>();
 		
 		if (mWaypointController != null)
 			mWaypointController.SetSpeed(mNormalSpeed);
 	}
 
-	private void FixedUpdate()
+	private void Update()
 	{
 		if (isStopped && mCurrentIntersectionZone != null && mCurrentIntersectionZone.IsGreenLight())
 		{
@@ -62,8 +91,6 @@ public class IAController : MonoBehaviour
 		UpdateWheel(mBackRight, mBackRightTransform);
 
 		UpdateIACar();
-		//DetectCarAhead();
-		
 	}
 
 	void UpdateWheel(WheelCollider mCollider, Transform mTransform)
@@ -76,8 +103,7 @@ public class IAController : MonoBehaviour
 		mTransform.rotation = mRotation;
 	}
 
-	// En intersecciones
-	public void SlowDown()
+	public void SlowDown() // INTERSECCIONES
 	{
 		shouldStop = true;
 	}
@@ -160,7 +186,7 @@ public class IAController : MonoBehaviour
 
 		if (Physics.Raycast(origin, direction, out hit, mDetectRange))
 		{
-			if (hit.collider.CompareTag("AccidentScene"))
+			if (hit.collider.CompareTag("AccidentScene")) // MISION CALL 911
 			{
 				return true;
 			}
@@ -171,8 +197,21 @@ public class IAController : MonoBehaviour
 
 	private void UpdateIACar()
 	{
-		if (mWaypointController == null)
+		if (crashed)
+		{
+			crashTimer -= Time.deltaTime;
+
+			mWaypointController.SetSpeed(0f);
+
+			if (crashTimer <= 0f)
+			{
+				crashed = false;
+				isStopped = false;
+				mWaypointController.SetSpeed(mNormalSpeed);
+			}
+
 			return;
+		}
 
 		if (mCurrentIntersectionZone != null && mCurrentIntersectionZone.IsRedLight())
 		{
@@ -217,5 +256,66 @@ public class IAController : MonoBehaviour
 		}
 
 		mWaypointController.MoveToWaypoint();
+	}
+
+	private void OnCollisionEnter(Collision collision)
+	{
+		if (crashed) return;
+
+		IPController playerVehicle = collision.gameObject.GetComponent<IPController>();
+
+		if (playerVehicle == null) { return; }
+
+		Rigidbody otherRb = playerVehicle.Rigidbody;
+
+		if (otherRb == null) { return; }
+
+		ContactPoint[] contacts = new ContactPoint[collision.contactCount];
+		collision.GetContacts(contacts);
+
+		Vector3 avgNormal = Vector3.zero;
+		foreach (var contact in contacts)
+		{
+			avgNormal += contact.normal;
+		}
+			
+		avgNormal.Normalize();
+		Vector3 impactDirection = -avgNormal;
+
+		// CHOQUE
+		mCarRb.AddForce(impactDirection * crashForce, ForceMode.Impulse);
+		otherRb.AddForce(-impactDirection * crashForce, ForceMode.Impulse);
+
+		AudioManager.Instance.PlaySFX(hitSound);
+		AudioManager.Instance.PlaySFX(hornSound);
+
+		mCarRb.velocity *= speedLossOnCrash;
+		otherRb.velocity *= speedLossOnCrash;
+
+		// REBOTE
+		float relativeSpeed = collision.relativeVelocity.magnitude;
+
+		if (relativeSpeed > minBounceSpeed)
+		{
+			Vector3 bounceDir = -avgNormal;
+
+			float bounceAmount = Mathf.Clamp(relativeSpeed * bounceForce, 0f, maxBounceForce);
+
+			mCarRb.AddForce(bounceDir * bounceAmount, ForceMode.Impulse);
+		}
+
+		// TROMPO
+		float impactSpeed = Vector3.Dot(mCarRb.velocity, impactDirection);
+
+		if (Mathf.Abs(impactSpeed) > minSpinVelocity)
+		{
+			float spinDir = Vector3.Cross(impactDirection, transform.forward).y;
+			mCarRb.AddTorque(Vector3.up * spinDir * spinTorque,ForceMode.Impulse);
+		}
+
+		crashed = true;
+		crashTimer = crashStopTime;
+		mWaypointController.SetSpeed(0f);
+		isStopped = true;
 	}
 }

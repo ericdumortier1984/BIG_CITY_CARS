@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WheelController : MonoBehaviour
+public class WheelController : MonoBehaviour, IPController
 {
+	[Header("Sound")]
+	[SerializeField] private AudioClip collectSound;
+
 	[Header("Wheel Colliders")]
 	[SerializeField] private WheelCollider mFrontRight;
 	[SerializeField] private WheelCollider mFrontLeft;
@@ -25,6 +28,22 @@ public class WheelController : MonoBehaviour
 	[SerializeField] private float mBreakForce = 0.0f;
 	[SerializeField] private float mMaxTurnAngle = 0.0f;
 	[SerializeField] private float offRoadForce = 0.0f;
+
+	[Header("Crash Settings")]
+	[SerializeField] private float crashForce = 15f;
+	[SerializeField] private float speedLossOnCrash = 0.5f;
+	[SerializeField] private float upwardCrashForce = 1.5f;
+
+	[Header("Spin Settings")]
+	[SerializeField] private float spinTorque = 8f;
+	[SerializeField] private float minSpinVelocity = 3f;
+	[SerializeField] private float spinDamping = 0.95f;
+
+	[Header("Bounce Settings")]
+	[SerializeField] private float bounceForce = 6f;
+	[SerializeField] private float maxBounceForce = 10f;
+	[SerializeField] private float minBounceSpeed = 2f;
+
 	private Vector3 mCenterOfMass;
 
 	private float mCurrentAcceleration = 0.0f;
@@ -37,7 +56,8 @@ public class WheelController : MonoBehaviour
 	private CarFuelController mCarFuelController;
 	private CoinsController mCoinsController;
 
-	public float Acceleration { get => mAcceleration; set => mAcceleration = value; } 
+	public float Acceleration { get => mAcceleration; set => mAcceleration = value; }
+	public Rigidbody Rigidbody => mCarRb;
 
 	private void Start()
 	{
@@ -46,7 +66,7 @@ public class WheelController : MonoBehaviour
 
 		mCarLight = GetComponent<CarLight>();
 
-		mItemWaypointController = FindObjectOfType<ItemWaypointController>(); 
+		mItemWaypointController = FindObjectOfType<ItemWaypointController>();
 		mCarFuelController = FindObjectOfType<CarFuelController>();
 		mCoinsController = FindObjectOfType<CoinsController>();
 	}
@@ -97,7 +117,7 @@ public class WheelController : MonoBehaviour
 
 	private void OffRoadForce()
 	{
-		if (Input.GetAxis("Vertical") > 0 && mCarRb.velocity.magnitude < 5f 
+		if (Input.GetAxis("Vertical") > 0 && mCarRb.velocity.magnitude < 5f
 			&& CompareTag("Off Road"))
 		{
 			mCarRb.AddForce(transform.forward * offRoadForce, ForceMode.Acceleration);
@@ -121,7 +141,7 @@ public class WheelController : MonoBehaviour
 			mBackRightTrailTire.GetComponentInChildren<TrailRenderer>().emitting = true;
 			mBackLeftTrailTire.GetComponentInChildren<TrailRenderer>().emitting = true;
 		}
-		else 
+		else
 		{
 			mBackRightTrailTire.GetComponentInChildren<TrailRenderer>().emitting = false;
 			mBackLeftTrailTire.GetComponentInChildren<TrailRenderer>().emitting = false;
@@ -132,6 +152,7 @@ public class WheelController : MonoBehaviour
 	{
 		if (other.tag == "ItemWaypoint")
 		{
+			AudioManager.Instance.PlaySFX(collectSound);
 			mItemWaypointController.ItemWaypointCounter();
 			mItemWaypointController.ItemWaypointTextCounter();
 			LevelData.WaypointsCollectedInLevel = mItemWaypointController.ItemWaypointCollected; // Actualiza LevelData
@@ -144,9 +165,61 @@ public class WheelController : MonoBehaviour
 			Destroy(other.gameObject);
 		}
 
-		if(other.tag == "Coins")
+		if (other.tag == "Coins")
 		{
 			Destroy(other.gameObject);
+		}
+	}
+
+	private void OnCollisionEnter(Collision collision)
+	{
+		if (!collision.gameObject.CompareTag("IACar")) return;
+
+		Rigidbody otherRb = collision.rigidbody;
+		if (otherRb == null) return;
+
+		ContactPoint[] contacts = new ContactPoint[collision.contactCount];
+		collision.GetContacts(contacts);
+
+		Vector3 avgNormal = Vector3.zero;
+		foreach (var contact in contacts)
+		{
+			avgNormal += contact.normal;
+		}
+			
+		avgNormal.Normalize();
+
+		Vector3 impactDirection = -avgNormal;
+
+		// CHOQUE
+		mCarRb.AddForce(impactDirection * crashForce, ForceMode.Impulse);
+		otherRb.AddForce(-impactDirection * crashForce, ForceMode.Impulse);
+
+		mCarRb.velocity *= speedLossOnCrash;
+		otherRb.velocity *= speedLossOnCrash;
+
+		// REBOTE
+		float relativeSpeed = collision.relativeVelocity.magnitude;
+
+		if (relativeSpeed > minBounceSpeed)
+		{
+			Vector3 bounceDir = -avgNormal;
+
+			float bounceAmount = Mathf.Clamp(relativeSpeed * bounceForce, 0f, maxBounceForce);
+
+			mCarRb.AddForce(bounceDir * bounceAmount, ForceMode.Impulse);
+		}
+
+		// TROMPO
+		float impactSpeed = Vector3.Dot(mCarRb.velocity, impactDirection);
+
+		if (Mathf.Abs(impactSpeed) > minSpinVelocity)
+		{
+			float spinDirection = Vector3.Cross(impactDirection, transform.forward).y;
+
+			Vector3 spinTorqueVector = Vector3.up * spinDirection * spinTorque * Mathf.Abs(impactSpeed);
+			mCarRb.AddTorque(spinTorqueVector, ForceMode.Impulse);
+
 		}
 	}
 }

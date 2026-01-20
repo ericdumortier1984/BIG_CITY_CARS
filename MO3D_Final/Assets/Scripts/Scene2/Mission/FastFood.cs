@@ -18,6 +18,7 @@ public class FastFood : MonoBehaviour
 	[SerializeField] private Texture2D cookingCursor;
 
 	[Header("UI")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private float textDuration;
 	[SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private GameObject instructionPanel;
@@ -66,7 +67,7 @@ public class FastFood : MonoBehaviour
     private void SetElements()
     {
         // INSTRUCTIONS
-        UIMissionManager.Instance.ShowMissionText("GO TO THE STADIUM TO SALE SOME FOOD", textDuration, 40);
+        UIMissionManager.Instance.ShowMissionText("GO TO THE STADIUM TO SALE SOME FOOD", textDuration, 80, font);
         instructionPanel.SetActive(true);
 
 		// MUSIC
@@ -273,13 +274,13 @@ public class FastFood : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("THATS FAST! \n + 9000 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("THATS FAST! + 9000 COINS", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 
 	private IEnumerator ShowLoseMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("TIME UP!", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("TIME UP!", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 }

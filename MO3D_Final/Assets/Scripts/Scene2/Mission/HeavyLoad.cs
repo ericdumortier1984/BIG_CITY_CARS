@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class HeavyLoad : MonoBehaviour
 {
     [Header("UI")]
-    [SerializeField] private float textDuration;
+	[SerializeField] private TMP_FontAsset font;
+	[SerializeField] private float textDuration;
     [SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private GameObject materialPanel;
 	[SerializeField] private GameObject housePanel;
@@ -65,7 +66,7 @@ public class HeavyLoad : MonoBehaviour
     {
         // INSTRUCTIONS
 		introSequence.SetActive(true);
-		UIMissionManager.Instance.ShowMissionText("LOAD IN THIS POINT", textDuration, 40);
+		UIMissionManager.Instance.ShowMissionText("LOAD IN THIS POINT", textDuration, 50, font);
 
 		// MUSIC
 		if (!missionMusicStarted)
@@ -104,7 +105,7 @@ public class HeavyLoad : MonoBehaviour
 			objectiveCameraPlayed = true;
 			StartCoroutine(ShowDeliveryPointCamera());
 
-			UIMissionManager.Instance.ShowMissionText("THE UNLOAD POINT IS IN THE FARM", textDuration, 50);
+			UIMissionManager.Instance.ShowMissionText("THE UNLOAD POINT IS IN THE FARM", textDuration, 50, font);
 		}
 
 		if (materialIndex < materialCheckboxes.Count)
@@ -142,7 +143,7 @@ public class HeavyLoad : MonoBehaviour
 		}
 		else 
 		{
-			UIMissionManager.Instance.ShowMissionText("RETURN FOR NEXT LOAD", textDuration, 50);
+			UIMissionManager.Instance.ShowMissionText("RETURN FOR NEXT LOAD", textDuration, 50, font);
 		}
 	}
 
@@ -200,13 +201,13 @@ public class HeavyLoad : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("CONSTRUCTION COMPLETE! \n + 8000 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("CONSTRUCTION COMPLETE! + 8000 COINS", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 
 	private IEnumerator ShowLoseMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("TOO SLOW!", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("TOO SLOW!", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 

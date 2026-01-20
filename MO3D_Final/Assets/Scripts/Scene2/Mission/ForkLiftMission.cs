@@ -15,6 +15,7 @@ public class ForkLiftMission : MonoBehaviour
 	[SerializeField] private CountdownTimer countdownTimer;
 
 	[Header("UI")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] float textDuration;
 	[SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private GameObject instructionPanel;
@@ -68,7 +69,7 @@ public class ForkLiftMission : MonoBehaviour
 		}
 
 		// INSTRUCTIONS
-		UIMissionManager.Instance.ShowMissionText("LOAD THOSE TRUCKS \n AND LOOK THE KEYS AT INTRUCTIONS", 15, 45);
+		UIMissionManager.Instance.ShowMissionText("LOAD THOSE TRUCKS AND LOOK THE KEYS AT INTRUCTIONS", 15, 50, font);
 		instructionPanel.SetActive(true);
 
 		// TIMER AND COUNTER
@@ -156,14 +157,14 @@ public class ForkLiftMission : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("GREAT JOB! \n + 6000 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("GREAT JOB! + 6000 COINS", textDuration, 80, font);
 		missionText.gameObject.SetActive(false);
 		yield return new WaitForSeconds(textDuration);
 	}
 
 	private IEnumerator ShowLoseMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("TIME UP!", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("TIME UP!", textDuration, 80, font);
 		missionText.gameObject.SetActive(false);
 		yield return new WaitForSeconds(textDuration);
 	}

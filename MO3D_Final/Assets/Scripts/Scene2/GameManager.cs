@@ -67,12 +67,7 @@ public class GameManager : MonoBehaviour
 		Time.timeScale = 0f;
 		Cursor.visible = true;
 		pauseMenu.SetActive(true);
-
-		foreach (GameObject hudGameObject in hudGameObjects)
-		{
-			hudGameObject.SetActive(false);
-		}
-
+		ShowHud();
 		AudioManager.Instance.SetPaused(true);
 	}
 
@@ -83,12 +78,7 @@ public class GameManager : MonoBehaviour
 		Cursor.visible = false;
 		pauseMenu.SetActive(false);
 		inputCanvas.SetActive(false);
-
-		foreach (GameObject hudGameObject in hudGameObjects)
-		{
-			hudGameObject.SetActive(true);
-		}
-
+		ShowHud();
 		AudioManager.Instance.SetPaused(false);
 	}
 
@@ -113,11 +103,9 @@ public class GameManager : MonoBehaviour
 		switch (reason)
 		{
 			case EndGameReason.OutOfFuel:
-				Debug.Log("Out of fuel");
 				break;
 
 			case EndGameReason.AllWaypointsCollected:
-				Debug.Log("All waypoints collected");
 				break;
 		}
 	}
@@ -139,6 +127,25 @@ public class GameManager : MonoBehaviour
 		isInputOpen = true;
 		Time.timeScale = 0f;
 		inputCanvas.SetActive(true);
+		ShowHud();
+	}
+
+	public void CloseGameInput()
+	{
+		isInputOpen = false;
+		inputCanvas.SetActive(false);
+		ShowHud();
+
+	}
+
+	private void ShowHud()
+	{
+		bool showHUD = !isPaused && !isInputOpen;
+
+		foreach (GameObject hud in hudGameObjects)
+		{
+			hud.SetActive(showHUD);
+		}
 	}
 }
 

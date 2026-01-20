@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class HarvestMissionTrigger : MonoBehaviour
@@ -8,6 +9,7 @@ public class HarvestMissionTrigger : MonoBehaviour
 	public MissionManager missionManager;
 
 	[Header("Settings")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private CinemachineVirtualCamera missionVCam;
 	[SerializeField] private GameObject harvestMapPos;
 	[SerializeField] private int missionIndex;
@@ -36,7 +38,7 @@ public class HarvestMissionTrigger : MonoBehaviour
 		}
 		else
 		{
-			UIMissionManager.Instance.ShowMissionText("ONLY TRACTOR", 1.0f, 50);
+			UIMissionManager.Instance.ShowMissionText("ONLY TRACTOR", 1.0f, 50, font);
 		}
 	}
 }

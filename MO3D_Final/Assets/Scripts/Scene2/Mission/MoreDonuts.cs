@@ -12,7 +12,8 @@ public class MoreDonuts : MonoBehaviour
 	[SerializeField] private CountdownTimer countdownTimer;
 
 	[Header("UI")]
-    [SerializeField] float textDuration;
+	[SerializeField] private TMP_FontAsset font;
+	[SerializeField] float textDuration;
 	[SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private GameObject InstructionPanel;
 	[SerializeField] private RouteDrawer routeDrawer;
@@ -56,7 +57,7 @@ public class MoreDonuts : MonoBehaviour
 	private void SetElements()
 	{
 		// INSTRUCTIONS
-		UIMissionManager.Instance.ShowMissionText("COLLECT ALL DONUTS", 10, 70);
+		UIMissionManager.Instance.ShowMissionText("COLLECT ALL DONUTS", 10, 80, font);
 		InstructionPanel.SetActive(true);
 
 		// MUSIC
@@ -102,7 +103,7 @@ public class MoreDonuts : MonoBehaviour
 			isAllDonutsCollected = true;
 			deliveryPoint.SetActive(true);
 			routeDrawer.SetTarget(deliveryPoint.transform);
-			UIMissionManager.Instance.ShowMissionText("DELIVERY POINT IS THE POLICE STATION", 10, 40);
+			UIMissionManager.Instance.ShowMissionText("DELIVERY POINT IS THE POLICE STATION", 10, 50, font);
 		}
 	}
 
@@ -185,14 +186,14 @@ public class MoreDonuts : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("YOU WILL BE DECORATED! \n + 5250 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("YOU WILL BE DECORATED! + 5250 COINS", textDuration, 80, font);
 		missionText.gameObject.SetActive(false);
 		yield return new WaitForSeconds(textDuration);
 	}
 
 	private IEnumerator ShowLoseMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("TIME UP!", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("TIME UP!", textDuration, 80, font);
 		missionText.gameObject.SetActive(false);
 		yield return new WaitForSeconds(textDuration);
 	}

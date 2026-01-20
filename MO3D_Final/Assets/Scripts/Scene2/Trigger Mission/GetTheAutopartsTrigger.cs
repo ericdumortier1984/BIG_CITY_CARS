@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GetTheAutopartsTrigger : MonoBehaviour
@@ -8,6 +9,7 @@ public class GetTheAutopartsTrigger : MonoBehaviour
 	public MissionManager missionManager;
 
 	[Header("Settings")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private GameObject autopartsMission;
 	[SerializeField] private CinemachineVirtualCamera missionVcam;
 	[SerializeField] private int missionIndex;
@@ -33,11 +35,11 @@ public class GetTheAutopartsTrigger : MonoBehaviour
 		}
 		else if (other.CompareTag("IACar"))
 		{
-			UIMissionManager.Instance.ShowMissionText("", 1.0f, 50);
+			UIMissionManager.Instance.ShowMissionText("", 1.0f, 50, font);
 		}
 		else
 		{
-			UIMissionManager.Instance.ShowMissionText("ONLY 4X4 TRUCK", 1.0F, 50);
+			UIMissionManager.Instance.ShowMissionText("ONLY 4X4 TRUCK", 1.0F, 50, font);
 		}
 	}
 }

@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class RedFurgonTrigger : MonoBehaviour
@@ -8,6 +9,7 @@ public class RedFurgonTrigger : MonoBehaviour
     public MissionManager packageDeliveryManager;
 	
 	[Header("Settings")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private CinemachineVirtualCamera missionVCam;
 	[SerializeField] private int missionIndex;
 	[SerializeField] private RouteDrawer routeDrawer;
@@ -33,11 +35,11 @@ public class RedFurgonTrigger : MonoBehaviour
 		}
 		else if (other.CompareTag("IACar"))
 		{
-			UIMissionManager.Instance.ShowMissionText("", 1.0f, 50);
+			UIMissionManager.Instance.ShowMissionText("", 1.0f, 50, font);
 		}
 		else
 		{
-			UIMissionManager.Instance.ShowMissionText("ONLY RED FURGON", 1.0f, 50);
+			UIMissionManager.Instance.ShowMissionText("ONLY RED FURGON", 1.0f, 50, font);
 		}
 	}
 }

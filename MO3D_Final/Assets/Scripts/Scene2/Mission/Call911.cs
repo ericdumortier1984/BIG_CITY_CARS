@@ -6,6 +6,7 @@ using UnityEngine;
 public class Call911 : MonoBehaviour
 {
 	[Header("UI")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private float textDuration;
 	[SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private GameObject instructionPanel;
@@ -55,7 +56,7 @@ public class Call911 : MonoBehaviour
 		// INSTRUCTIONS
 		objetiveCameraPlayed = true;
 		StartCoroutine(ShowIntroCamera());
-		UIMissionManager.Instance.ShowMissionText("GET TO THE ACCIDENT SCENE", textDuration, 40);
+		UIMissionManager.Instance.ShowMissionText("GET TO THE ACCIDENT SCENE", textDuration, 50, font);
 		instructionPanel.SetActive(true);
 
 		// MUSIC
@@ -84,7 +85,7 @@ public class Call911 : MonoBehaviour
 		accidentSceneTriggers[accidentSceneTriggerIndex].SetActive(false);
 		accidentSceneTriggerIndex++;
 		hospitalTarget.gameObject.SetActive(true);
-		UIMissionManager.Instance.ShowMissionText("TAKE THOSE PATIENTS TO THE HOSPITAL", textDuration, 40);
+		UIMissionManager.Instance.ShowMissionText("TAKE THOSE PATIENTS TO THE HOSPITAL", textDuration, 50, font);
 		hospitalTarget.gameObject.SetActive(true);
 		routeDrawer.SetTarget(hospitalTarget);
 
@@ -109,7 +110,7 @@ public class Call911 : MonoBehaviour
 		{
 			UIMissionManager.Instance.SetAccidentSceneCounter(accidentSceneIndex, totalAccidentScenes);
 			accidentsScenes[accidentSceneIndex].SetActive(true);
-			UIMissionManager.Instance.ShowMissionText("NEXT ACCIDENT SCENE", textDuration, 40);
+			UIMissionManager.Instance.ShowMissionText("NEXT ACCIDENT SCENE", textDuration, 50, font);
 			hospitalTarget.gameObject.SetActive(false);
 			routeDrawer.SetTarget(accidentsScenes[accidentSceneIndex].transform);
 		}
@@ -155,7 +156,7 @@ public class Call911 : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("YOUR A GREAT AMBULANCE DRIVER! \n + 4500 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("YOUR A GREAT AMBULANCE DRIVER! + 4500 COINS", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 

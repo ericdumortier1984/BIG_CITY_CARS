@@ -14,6 +14,7 @@ public class GetTheAutoparts : MonoBehaviour
 	[SerializeField] private List<Color> colorAutopartsImages;
 
 	[Header("UI")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private float textDuration;
 	[SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private GameObject instructionPanel;
@@ -54,7 +55,7 @@ public class GetTheAutoparts : MonoBehaviour
     private void SetElements()
     {
         // INSTRUCTIONS
-        UIMissionManager.Instance.ShowMissionText("GET THE AUTOPARTS", textDuration, 40);
+        UIMissionManager.Instance.ShowMissionText("GET THE AUTOPARTS", textDuration, 80, font);
 		instructionPanel.SetActive(true);
 		constructionPanel.SetActive(true);
 
@@ -175,13 +176,13 @@ public class GetTheAutoparts : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("DONE, GO CHECKOUT THE CAR IN THE SERVICE SHOP \n + 11000 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("DONE, GO CHECKOUT THE CAR IN THE SERVICE SHOP + 11000 COINS", textDuration, 50, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 
 	private IEnumerator ShowLoseMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("TIME UP!", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("TIME UP!", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 }

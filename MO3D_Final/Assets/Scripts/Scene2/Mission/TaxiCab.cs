@@ -18,6 +18,7 @@ public class TaxiCab : MonoBehaviour
 	[SerializeField] private List<Transform> dropOffLocation;
 
 	[Header("UI")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private float textDuration;
 	[SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private TextMeshProUGUI passengerCounterText;
@@ -92,7 +93,7 @@ public class TaxiCab : MonoBehaviour
 	{
 		instructionPanel.gameObject.SetActive(true);
 		countdownTimer.StartTimer();
-		UIMissionManager.Instance.ShowMissionText("PASSENGER IS WAITING", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("PASSENGER IS WAITING", textDuration, 50, font);
 		UIMissionManager.Instance.ShowTimer(true);
 		UIMissionManager.Instance.SetPassengerCounter(safePassenger, totalPassenger);
 	}
@@ -213,7 +214,7 @@ public class TaxiCab : MonoBehaviour
 			routeDrawer.SetTarget(dropOffLocation[current]);
 		}
 
-		UIMissionManager.Instance.ShowMissionText("TAKE PASSENGER SAFELY", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("TAKE PASSENGER SAFELY", textDuration, 50, font);
 	}
 
 	public void DropOffPassenger(DropOffPassengerPoint dropOffPoint)
@@ -239,7 +240,7 @@ public class TaxiCab : MonoBehaviour
 		if (passengerIndex < passengerPrefab.Count)
 		{
 			SetElements();
-			UIMissionManager.Instance.ShowMissionText("NEXT PASSENGER IS WAITING", textDuration, 50);
+			UIMissionManager.Instance.ShowMissionText("NEXT PASSENGER IS WAITING", textDuration, 50, font);
 		}
 		else
 		{
@@ -258,7 +259,7 @@ public class TaxiCab : MonoBehaviour
 
 	private IEnumerator ShowTimeUpMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("TIME UP", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("TIME UP", textDuration, 80, font);
 		UIMissionManager.Instance.HideCounter(); 
 		UIMissionManager.Instance.ShowTimer(false);
 
@@ -267,7 +268,7 @@ public class TaxiCab : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("ALL PASSENGER DROPPED OFF\n + 5000 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("ALL PASSENGER DROPPED OFF + 5000 COINS", textDuration, 80, font);
 		UIMissionManager.Instance.HideCounter();
 		UIMissionManager.Instance.ShowTimer(false);
 
@@ -276,7 +277,7 @@ public class TaxiCab : MonoBehaviour
 
 	private IEnumerator ShowStressOutMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("PASSENGER STRESSED OUT", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("PASSENGER STRESSED OUT", textDuration, 80, font);
 		UIMissionManager.Instance.HideCounter();
 		UIMissionManager.Instance.ShowTimer(false);
 

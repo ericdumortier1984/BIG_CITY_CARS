@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class HeavyLoadTrigger : MonoBehaviour
@@ -8,7 +9,8 @@ public class HeavyLoadTrigger : MonoBehaviour
     public MissionManager missionManager;
 
     [Header("Settings")]
-    [SerializeField] private GameObject heavyLoadMission;
+	[SerializeField] private TMP_FontAsset font;
+	[SerializeField] private GameObject heavyLoadMission;
     [SerializeField] private CinemachineVirtualCamera missionVcam;
     [SerializeField] private int missionIndex;
 
@@ -32,11 +34,11 @@ public class HeavyLoadTrigger : MonoBehaviour
 		}
 		else if (other.CompareTag("IACar"))
 		{
-			UIMissionManager.Instance.ShowMissionText("", 1.0f, 50);
+			UIMissionManager.Instance.ShowMissionText("", 1.0f, 50, font);
 		}
 		else
 		{
-			UIMissionManager.Instance.ShowMissionText("ONLY RED TRUCK", 1.0f, 50);
+			UIMissionManager.Instance.ShowMissionText("ONLY RED TRUCK", 1.0f, 50, font);
 		}
 	}
 }

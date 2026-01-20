@@ -7,7 +7,8 @@ using TMPro;
 public class SchoolSucks : MonoBehaviour
 {
     [Header("UI")]
-    [SerializeField] private float textDuration;
+	[SerializeField] private TMP_FontAsset font;
+	[SerializeField] private float textDuration;
     [SerializeField] private TextMeshProUGUI missionText;
     [SerializeField] private GameObject instructionPanel;
 	[SerializeField] private Slider bookSlider;
@@ -72,7 +73,7 @@ public class SchoolSucks : MonoBehaviour
 		// INSTRUCTIONS
 		objetiveCameraPlayed = true;
 		StartCoroutine(ShowIntroCamera());
-		UIMissionManager.Instance.ShowMissionText("PICKUP ALL SCHOOL BOYS", textDuration, 40);
+		UIMissionManager.Instance.ShowMissionText("PICKUP ALL SCHOOL BOYS", textDuration, 50, font);
 		instructionPanel.SetActive(true);
 
 		// MUSIC
@@ -117,7 +118,7 @@ public class SchoolSucks : MonoBehaviour
 
 		if (busStopIndex == 0)
 		{
-			UIMissionManager.Instance.ShowMissionText("DONT LET THROW AWAY ALL BOOKS", textDuration, 40);
+			UIMissionManager.Instance.ShowMissionText("DONT LET THROW AWAY ALL BOOKS", textDuration, 50, font);
 		}
 		SchoolBoySeatPos();
 		busStops[busStopIndex].gameObject.SetActive(false);
@@ -130,7 +131,7 @@ public class SchoolSucks : MonoBehaviour
 		}
 		else
 		{
-			UIMissionManager.Instance.ShowMissionText("GO AHEAD TO SCHOOL", textDuration, 40);
+			UIMissionManager.Instance.ShowMissionText("GO AHEAD TO SCHOOL", textDuration, 50, font);
 			allPickedUp = true;
 			schoolPosition.gameObject.SetActive(true);
 			routeDrawer.SetTarget(schoolPosition);
@@ -259,13 +260,13 @@ public class SchoolSucks : MonoBehaviour
 
     private IEnumerator ShowWinMessage()
     {
-		UIMissionManager.Instance.ShowMissionText("GO STUDY, CHILDRENS! \n + 5500 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("GO STUDY, CHILDRENS! + 5500 COINS", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 
     private IEnumerator ShowLoseMessage()
     {
-		UIMissionManager.Instance.ShowMissionText("THERE IS NO MORE BOOKS!", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("THERE IS NO MORE BOOKS!", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 

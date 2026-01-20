@@ -13,6 +13,7 @@ public class TooHot : MonoBehaviour
 	[SerializeField] private CountdownTimer countdownTimer;
 
 	[Header("UI")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] float textDuration;
 	[SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private GameObject InstructionPanel;
@@ -66,7 +67,7 @@ public class TooHot : MonoBehaviour
 	private void SetElements()
 	{
 		// INSTRUCTIONS
-		UIMissionManager.Instance.ShowMissionText("EXTINGUE FIRES", 10, 70);
+		UIMissionManager.Instance.ShowMissionText("EXTINGUE FIRES", 10, 80, font);
 		InstructionPanel.SetActive(true);
 
 		// MUSIC
@@ -218,14 +219,14 @@ public class TooHot : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("ALL FIRE EXTINGUISHED! \n + 5000 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("ALL FIRE EXTINGUISHED! + 5000 COINS", textDuration, 80, font);
 		missionText.gameObject.SetActive(false);
 		yield return new WaitForSeconds(textDuration);
 	}
 
 	private IEnumerator ShowLoseMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("TIME UP!", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("TIME UP!", textDuration, 80, font);
 		missionText.gameObject.SetActive(false);
 		yield return new WaitForSeconds(textDuration);
 	}

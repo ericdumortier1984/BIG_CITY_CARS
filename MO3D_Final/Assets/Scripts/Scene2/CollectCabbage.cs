@@ -11,6 +11,7 @@ public class CollectCabbage : MonoBehaviour
 	[SerializeField] private float spawnRadius = 0f;
 
 	[Header("UI")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private GameObject instructionPanel;
 	[SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private float textDuration;
@@ -38,7 +39,7 @@ public class CollectCabbage : MonoBehaviour
 		if (spawnCount == 0)
 		{
 			collectParticle.Play();
-			UIMissionManager.Instance.ShowMissionText("COLLECT ALL CABBAGES", textDuration, 50);
+			UIMissionManager.Instance.ShowMissionText("COLLECT ALL CABBAGES", textDuration, 80, font);
 		}
 
 		if (!missionMusicStarted)
@@ -90,7 +91,7 @@ public class CollectCabbage : MonoBehaviour
 		AudioManager.Instance.PlaySFX(winSFX);
 		AudioManager.Instance.PlayGameplayMusic();
 		missionMusicStarted = false;
-		UIMissionManager.Instance.ShowMissionText("ALL CABBAGES COLLECTED\n + 500 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("ALL CABBAGES COLLECTED + 500 COINS", textDuration, 80, font);
 		UIMissionManager.Instance.HideCounter();
 
 		if (!isMedal)

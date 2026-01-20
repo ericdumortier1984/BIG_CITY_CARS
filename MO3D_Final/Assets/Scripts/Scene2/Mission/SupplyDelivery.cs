@@ -7,6 +7,7 @@ using UnityEngine;
 public class SupplyDelivery : MonoBehaviour
 {
 	[Header("UI")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private float textDuration;
 	[SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private GameObject instructionPanel;
@@ -49,7 +50,7 @@ public class SupplyDelivery : MonoBehaviour
 	private void SetElements()
 	{
 		// INSTRUCTIONS
-		UIMissionManager.Instance.ShowMissionText("SUPPLY DELIVERY", textDuration, 40);
+		UIMissionManager.Instance.ShowMissionText("SUPPLY DELIVERY", textDuration, 80, font);
 		instructionPanel.SetActive(true);
 
 		// MUSIC
@@ -110,7 +111,7 @@ public class SupplyDelivery : MonoBehaviour
 	{
 		supplyIndex++;
 		UIMissionManager.Instance.SetSuppliesCounter(supplyIndex, totalSupply);
-		UIMissionManager.Instance.ShowMissionText("GO TO NEXT SUPPLY", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("GO TO NEXT SUPPLY", textDuration, 50, font);
 
 		if (supplyIndex >= totalSupply)
 		{
@@ -127,19 +128,19 @@ public class SupplyDelivery : MonoBehaviour
 		switch (supplyIndex)
 		{
 			case 0:
-				UIMissionManager.Instance.ShowMissionText("UNLOAD THAT CHASIS IN SERVICE CAR", textDuration, 50);
+				UIMissionManager.Instance.ShowMissionText("UNLOAD THAT CHASIS IN SERVICE CAR", textDuration, 50, font);
 				break;
 			case 1:
-				UIMissionManager.Instance.ShowMissionText("UNLOAD THOSE POWER CABS IN POWER PLANT", textDuration, 50);
+				UIMissionManager.Instance.ShowMissionText("UNLOAD THOSE POWER CABS IN POWER PLANT", textDuration, 50, font);
 				break;
 			case 2:
-				UIMissionManager.Instance.ShowMissionText("UNLOAD THOSE ROOF VENTS IN BUILDING COMPLEX", textDuration, 50);
+				UIMissionManager.Instance.ShowMissionText("UNLOAD THOSE ROOF VENTS IN BUILDING COMPLEX", textDuration, 50, font);
 				break;
 			case 3:
-				UIMissionManager.Instance.ShowMissionText("UNLOAD THOSE CABBAGES IN SUPERMARKET", textDuration, 50);
+				UIMissionManager.Instance.ShowMissionText("UNLOAD THOSE CABBAGES IN SUPERMARKET", textDuration, 50, font);
 				break;
 			case 4:
-				UIMissionManager.Instance.ShowMissionText("UNLOAD THOSE CONTROL BOX IN STADIUM", textDuration, 50);
+				UIMissionManager.Instance.ShowMissionText("UNLOAD THOSE CONTROL BOX IN STADIUM", textDuration, 50, font);
 				break;
 			default:
 				break;
@@ -199,13 +200,13 @@ public class SupplyDelivery : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("ALL SUPPLIES DELIVERED! \n + 3500 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("ALL SUPPLIES DELIVERED! + 3500 COINS", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 
 	private IEnumerator ShowLoseMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("TOO SLOW!", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("TOO SLOW!", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 }

@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class StopRobberBankTrigger : MonoBehaviour
@@ -8,7 +9,8 @@ public class StopRobberBankTrigger : MonoBehaviour
     public MissionManager missionManager;
 
     [Header("Settings")]
-    [SerializeField] private CinemachineVirtualCamera missionVcam;
+	[SerializeField] private TMP_FontAsset font;
+	[SerializeField] private CinemachineVirtualCamera missionVcam;
     [SerializeField] private int missionIndex;
 
 	private void Start()
@@ -31,11 +33,11 @@ public class StopRobberBankTrigger : MonoBehaviour
 		}
 		else if (other.CompareTag("IACar"))
 		{
-			UIMissionManager.Instance.ShowMissionText("", 1.0f, 50);
+			UIMissionManager.Instance.ShowMissionText("", 1.0f, 50, font);
 		}
 		else
 		{
-			UIMissionManager.Instance.ShowMissionText("ONLY POLICE CAR", 1.0f, 50);
+			UIMissionManager.Instance.ShowMissionText("ONLY POLICE CAR", 1.0f, 50, font);
 		}
 	}
 }

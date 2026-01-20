@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class FuelUp : MonoBehaviour
 {
 	[Header("UI")]
+	[SerializeField] private TMP_FontAsset font;
 	[SerializeField] private float textDuration;
 	[SerializeField] private TextMeshProUGUI missionText;
 	[SerializeField] private GameObject instructionPanel;
@@ -62,7 +63,7 @@ public class FuelUp : MonoBehaviour
 		// INSTRUCTIONS
 		objectiveCameraPlayed = true;
 		StartCoroutine(ShowIntroCamera());
-		UIMissionManager.Instance.ShowMissionText("GAS STATION NEEDS TO REFUEL", textDuration, 40);
+		UIMissionManager.Instance.ShowMissionText("GAS STATION NEEDS TO REFUEL", textDuration, 50, font);
 		instructionPanel.SetActive(true);
 
 		// MUSIC
@@ -117,7 +118,7 @@ public class FuelUp : MonoBehaviour
 		}
 		else
 		{
-			UIMissionManager.Instance.ShowMissionText("GO TO THE DOWNLOAD POINT", textDuration, 50);
+			UIMissionManager.Instance.ShowMissionText("GO TO THE DOWNLOAD POINT", textDuration, 50, font);
 			gasStationFuelPoint.gameObject.SetActive(true);
 			routeDrawer.SetTarget(gasStationFuelPoint);
 		}
@@ -221,13 +222,13 @@ public class FuelUp : MonoBehaviour
 
 	private IEnumerator ShowWinMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("GAS STATION IS REFUEL! \n + 7500 COINS", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("GAS STATION IS REFUEL! + 7500 COINS", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 
 	private IEnumerator ShowLoseMessage()
 	{
-		UIMissionManager.Instance.ShowMissionText("TOO SLOWN!", textDuration, 50);
+		UIMissionManager.Instance.ShowMissionText("TOO SLOWN!", textDuration, 80, font);
 		yield return new WaitForSeconds(textDuration);
 	}
 

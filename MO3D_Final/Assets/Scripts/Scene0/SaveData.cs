@@ -11,6 +11,8 @@ public class SaveData // Persistente
 	public int totalMission = 24;
 
 	public bool infoGame = false;
+	public bool policeInfoGame = false;
+	public bool taxiInfoGame = false;
 
 	public List<bool> mUnlockedCars = new List<bool>();
 	public List<bool> missionCompleted = new List<bool>();
@@ -20,6 +22,8 @@ public class SaveData // Persistente
 		mCoins = 0;
 		medals = 0;
 		infoGame = false;
+		policeInfoGame = false;
+		taxiInfoGame = false;
 		mUnlockedCars = new List<bool>();
 		missionCompleted = new List<bool>();
 

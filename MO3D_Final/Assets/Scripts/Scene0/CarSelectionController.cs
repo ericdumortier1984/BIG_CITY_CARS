@@ -30,7 +30,6 @@ public class CarSelectionController : MonoBehaviour
 	public Slider mCarAccelerationSlider;
 	public Slider mCarBreakingSlider; 
 	public Slider mCarHandlingSlider; 
-	public GameObject mCarBloquedIcon;
 
 	[Header("Select / Buy Button")]
 	[SerializeField] private Button selectBuyButton;
@@ -117,12 +116,10 @@ public class CarSelectionController : MonoBehaviour
 
 		if (mIsSelectedCarBlocked)
 		{
-			mCarBloquedIcon.SetActive(true);
 			selectBuyButtonText.text = "BUY";
 		}
 		else
 		{
-			mCarBloquedIcon.SetActive(false);
 			mCarPriceText.text = "READY";
 			selectBuyButtonText.text = "SELECT";
 		}
